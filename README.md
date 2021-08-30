@@ -6,7 +6,7 @@
 
 1. [제작 기간 & 참여 인원](#1-제작-기간--참여-인원)
 2. [사용 기술](#2-사용-기술)
-3. [UI / UX 목업](#3-ui-/-ux-목업)
+3. [UI / UX 목업](#3-ui--ux-목업)
 4. [기능 소개](#4-기능-소개)
 
 <br>
@@ -14,8 +14,8 @@
 ## 1. 제작 기간 & 참여 인원
 
 * 2021년 7월 29일 ~ 2021년 9월 28일
-* 팀장 : 윤병우
-* 팀원 : 김은선, 류한성, 정다예, 조성덕, 채호연
+* 팀장 : [윤병우](https://github.com/yoonbung12)
+* 팀원 : [김은선](https://github.com/SunWater8), [류한성](https://github.com/Gamaspin), [정다예](https://github.com/daayeah), [조성덕](https://github.com/seongdeokjo), [채호연](https://github.com/flip1945)
 
 <br>
 
