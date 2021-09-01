@@ -1,3 +1,14 @@
+desc project.member;
+desc project.goods;
+desc project.goods;
+desc project.tour;
+desc project.address;
+desc project.order;
+desc project.payment;
+desc project.review;
+desc project.comment;
+desc project.buynow;
+
 -- 멤버 테이블(member)
 create table project.member(
 midx int not null primary key,
@@ -6,7 +17,7 @@ mname varchar(50) not null,
 mpw varchar(50) not null,
 mphone varchar(30) not null
 );
-desc member;
+
 
 -- 상품 테이블(goods)
 create table project.goods(
@@ -16,7 +27,8 @@ create table project.goods(
     gphoto varchar(45) not null,
     gtext text not null
 );
-desc goods;
+
+
 
 -- 장바구니 테이블(basket)
 create table project.basket(
@@ -27,7 +39,15 @@ gidx int not null,
 foreign key(midx) references project.member(midx),
 foreign key(gidx) references project.goods(gidx)
 );
-desc project.goods;
+
+-- 구매상품 테이블(buynow)
+create table project.buynow(
+gidx int not null,
+oidx int not null,
+count int not null,
+foreign key(gidx) references project.goods(gidx),
+foreign key(oidx) references project.order(oidx)
+);
 
 -- 투어 테이블(tour)
 create table project.tour(
@@ -37,7 +57,6 @@ tcurrent int not null,
 ttotal int not null,
 tprice int not null
 );
-desc project.tour;
 
 -- 주소 테이블(address)
 create table project.address(
@@ -46,7 +65,6 @@ address varchar(255) not null,
 midx int not null,
 foreign key(midx) references project.member(midx)
 );
-desc project.address;
 
 -- 주문 테이블(order)
 create table project.order(
@@ -60,7 +78,7 @@ foreign key(tidx) references project.tour(tidx),
 foreign key(midx) references project.member(midx),
 foreign key(aidx) references project.address(aidx)
 );
-desc project.order;
+
 alter table project.order add  oprice int not null;
 
 -- 결제 테이블(payment)
@@ -73,7 +91,6 @@ pstatus varchar(10) not null,
 oidx int not null,
 foreign key(oidx) references project.order(oidx)
 );
-desc project.payment;
 
 -- 리뷰 테이블(review)
 create table project.review(
@@ -87,7 +104,6 @@ rlikes int,
 pidx int not null,
 foreign key(ridx) references project.payment(pidx)
 );
-desc project.review;
 
 -- 댓글 테이블(comment)
 create table project.comment(
