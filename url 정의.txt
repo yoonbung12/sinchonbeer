@@ -1,0 +1,102 @@
+sinchonbeer.com/shop/1
+
+order pay 
+
+shopService() {
+	orderSerivce();
+	payService();
+}
+
+
+orderService url??? ??? 이름 정의 
+url 정의 해야 겠다
+
+
+패키지 정보
+
+com.bitcamp.sc.member
+com.bitcamp.sc.order
+com.bitcamp.sc.pay
+com.bitcamp.sc.review
+com.bitcamp.sc.tour
+com.bitcamp.sc.shop
+com.bitcamp.sc.basket
+
+
+
+
+Controller 범위 정하기 
+
+Controller ------------------- 정다예 -------------------
+
+sinchonbeer.com (aws 주소):8080/
+sinchonbeer.com (메인 화면)
+sinchonbeer.com/about (어바웃 화면)
+
+sinchonbeer.com/mypage/shop (마이페이지 주문 내역 화면)
+sinchonbeer.com/mypage/tour (마이페이지 투어 예약 관리 화면)
+sinchonbeer.com/mypage/change-info (마이페이지 정보 수정 화면) POST
+sinchonbeer.com/mypage/delete-id (마이페이지 회원 탈퇴 화면) POST
+
+
+Controller ------------------- 김은선 -------------------
+
+sinchonbeer.com/login (로그인 화면) POST
+sinchonbeer.com/logout (로그아웃 화면) POST
+sinchonbeer.com/inquiry (ID / PW 찾기 화면)
+sinchonbeer.com/inquiry/id/success (ID 찾기 성공 화면) POST
+sinchonbeer.com/inquiry/pw/email (pw 찾기 이메일 전송 확인 화면) POST
+sinchonbeer.com/inquiry/pw/input-code (PW 찾기 이메일 전송 후 인증번호 입력 화면) POST
+sinchonbeer.com/inquiry/pw/reset (PW 찾기 PW 재설정 화면) POST
+
+sinchonbeer.com/join/type (회원가입 타입 선택 화면)
+sinchonbeer.com/join/agree (회원가입 약관 동의 화면)
+sinchonbeer.com/join/form (회원가입 폼 화면) POST
+sinchonbeer.com/join/success (회원가입 성공 화면)
+
+
+Controller ------------------- 윤병우 -------------------
+
+sinchonbeer.com/cart (장바구니 화면)
+sinchonbeer.com/shop (상품 구매 화면)
+sinchonbeer.com/shop/1 (김부각)
+sinchonbeer.com/shop/2 (화투)
+sinchonbeer.com/shop/3 (갬귤칩)
+sinchonbeer.com/shop/4 (맥주짠)
+sinchonbeer.com/shop/pay (상품 결제 화면) POST
+sinchonbeer.com/shop/pay?goods=1&cnt=3 (상품 결제 화면 get) POST
+
+
+Controller ------------------- 조성덕 -------------------
+
+sinchonbeer.com/tour (투어 화면)
+sinchonbeer.com/tour/pick-date (투어 날짜 선택 화면)
+sinchonbeer.com/tour/reserve/form (투어 예약 폼 화면) POST
+sinchonbeer.com/tour/reserve/change-info (투어 예약 확인/변경/취소 화면) POST
+sinchonbeer.com/tour/info (투어 안내 화면)
+sinchonbeer.com/tour/notice (투어 공지 화면)
+sinchonbeer.com/tour/notice/1 (명절 휴무 안내)
+sinchonbeer.com/tour/notice/2 (미취학 아동 프로그램 참여 안내)
+sinchonbeer.com/tour/notice/3 (사회적 거리두기 실천 지침)
+sinchonbeer.com/tour/notice/4 (동시 입장 가능 인원 안내)
+sinchonbeer.com/tour/pay (투어 결제 화면) POST
+
+
+Controller ------------------- 류한성 -------------------
+
+sinchonbeer.com/review (리뷰 화면)
+sinchonbeer.com/review/view/1 (리뷰 보기 화면)
+sinchonbeer.com/review/writing (리뷰 작성 화면) POST
+sinchonbeer.com/review/editing/1 (리뷰 수정 화면) POST
+
+
+
+
+
+
+RESTfull api로 설계하고 싶으면
+(행위에 대한 설명은 method로 설정해야 함)
+
+sinchonbeer.com/member/1
+
+명사 + get post put delete
