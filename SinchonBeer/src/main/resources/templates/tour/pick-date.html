@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>예약 날짜,인원 선택</title>
+    <title>예약 날짜+인원 선택</title>
 
 
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -31,14 +31,17 @@
 			<li><a href="/tour/">예약 확인/취소</a></li>
 		</ul>
 	</div>
+	
+	
 	<div id="content_wrap" class="container-fulid totalPage">
 		<div class="keyVisualBox full">
 			<div class="select_box">
 				<div class="keyTd po">
-					<form name="pick">
+					<form action="/tour/reserve/form"  name="pick">
 						<ul>
 							<li>
 								<input type="text" id="datepicker" class="jejuInputBox">
+								<input type="hidden" id="select" name="select">
 								<span id="msg"></span>
 								<span id="result"></span>
 							</li>
@@ -250,7 +253,11 @@
                     $('#result').html(date);
                     // 서버로 전달할 데이터
                     var sub = date.substring(0,10);
+                    $('#select').val(sub);
                     console.log(sub);
+                    
+                    var test = $('#select').val();
+                    console.log(test);
                 
                  	$.ajax({
             			url : '/tour/count',
