@@ -39,16 +39,10 @@ html * {
 	margin: 0px auto;
 }
 
-.col-left, .col-right {
+.col-left, .col-center, .col-right {
 	display: table-cell;
 	vertical-align: middle;
-	width: 390px;
-}
-
-.col-center {
-	display: table-cell;
-	vertical-align: middle;
-	width: 420px;
+	width: 30%;
 }
 
 .logo-fixed {
@@ -68,6 +62,12 @@ html * {
 	list-style: none;
 }
 
+a {
+	display: block;
+	text-decoration: none;
+	cursor: pointer;
+}
+
 .service-menu {
 	display: flex;
 	padding-top: 16px;
@@ -82,6 +82,10 @@ html * {
 
 #header a:hover {
 	color: #bbb;
+}
+
+button {
+	border-radius: 4px;
 }
 
 button:focus {
@@ -193,13 +197,6 @@ button:focus {
 	text-decoration: none;
 }
 
-.beer-image {
-	width: 100%;
-	position: absolute;
-	z-index: 80;
-	top: 0;
-}
-
 #footer {
 	width: 100%;
 	height: 230px;
@@ -284,9 +281,6 @@ button:focus {
 		display: inline-block;
 		width: 23px;
 		height: 19px;
-	}
-	.beer-image {
-		width: 100%;
 	}
 	#footer {
 		height: 100%;
