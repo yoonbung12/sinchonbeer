@@ -1,5 +1,10 @@
 package com.bitcamp.sc.tour.service;
 
-public interface TourService {
+import org.springframework.stereotype.Service;
 
+@Service
+public interface TourService {
+	
+	int selectCount(String date);
+	
 }
