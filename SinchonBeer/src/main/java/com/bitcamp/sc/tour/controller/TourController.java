@@ -1,6 +1,8 @@
 package com.bitcamp.sc.tour.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,8 +46,6 @@ public class TourController {
 			result += "4";
 			System.out.println("결과 :"+result+" : "+idx);
 		}
-		
-		
 		return result;
 	}
 	
@@ -55,5 +55,21 @@ public class TourController {
 		return "tour/pick-date";
 	}
 	
+	// 날짜 , 인원 선택 후 예약 폼으로 이동 --> 로그인 여부 체크 / 날짜,인원,카테고리(투어), 회원 정보가 잘 들어오는지 ?
+	@RequestMapping(value="/tour/reserve/form")
+	public String getForm(
+			@ModelAttribute("select") String date,
+			@ModelAttribute("count") int count,
+			@ModelAttribute("type") String type,
+			Model model
+			) {
+		model.addAttribute("selectDate", date);
+		model.addAttribute("count", count);
+		model.addAttribute("type", type);
+		
+		System.out.println(date+":"+count);
+		return "tour/reservationForm";
+	}
 	
 }
+
