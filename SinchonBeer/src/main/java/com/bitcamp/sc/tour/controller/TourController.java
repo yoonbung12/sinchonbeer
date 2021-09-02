@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.bitcamp.sc.tour.domain.Tour;
 
 @Controller
 public class TourController {
@@ -56,18 +59,22 @@ public class TourController {
 	}
 	
 	// 날짜 , 인원 선택 후 예약 폼으로 이동 --> 로그인 여부 체크 / 날짜,인원,카테고리(투어), 회원 정보가 잘 들어오는지 ?
-	@RequestMapping(value="/tour/reserve/form")
+	@RequestMapping(value="/tour/reserve/form", method = RequestMethod.POST)
+
 	public String getForm(
-			@ModelAttribute("select") String date,
-			@ModelAttribute("count") int count,
-			@ModelAttribute("type") String type,
+//			@ModelAttribute("select") String date,
+//			@ModelAttribute("count") int count,
+//			@ModelAttribute("type") String type,
+			@ModelAttribute("tour") Tour tour,
 			Model model
 			) {
-		model.addAttribute("selectDate", date);
-		model.addAttribute("count", count);
-		model.addAttribute("type", type);
 		
-		System.out.println(date+":"+count);
+//		model.addAttribute("selectDate", date);
+//		model.addAttribute("count", count);
+//		model.addAttribute("type", type);
+		System.out.println(tour);
+		model.addAttribute("tour",tour);
+//		System.out.println(date+":"+count);
 		return "tour/reservationForm";
 	}
 	

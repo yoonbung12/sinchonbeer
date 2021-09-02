@@ -37,11 +37,12 @@
 		<div class="keyVisualBox full">
 			<div class="select_box">
 				<div class="keyTd po">
-					<form action="/tour/reserve/form"  name="pick">
+				<!-- 날짜,인원,1인 가격, 카테고리 객체 바인딩 하기 -->
+					<form th:action="@{/tour/reserve/form}" th:object="${tour}"  name="pick" method="post">
 						<ul>
 							<li>
 								<input type="text" id="datepicker" class="jejuInputBox">
-								<input type="hidden" id="select" name="select">
+								<input type="hidden" id="select" name="selectDate">
 								<span id="msg"></span>
 								<span id="result"></span>
 							</li>
@@ -55,7 +56,10 @@
 								</select>
 							</li>
 							<li><input type="submit" value="예약" class="out"></li>
-							<li><input type="hidden" value="tour" name="type" class="out"></li>
+							<li>
+								<input type="hidden" th:field="*{price}" value="22000" >
+								<input type="hidden" th:field="*{category}" value="tour" >
+							</li>
 						</ul>
 					</form>
 				</div>
