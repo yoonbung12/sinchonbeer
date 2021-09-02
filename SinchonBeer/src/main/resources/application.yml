@@ -5,6 +5,15 @@ spring:
     url: jdbc:mysql://mysql205.c0inhtd4aeqi.ap-northeast-2.rds.amazonaws.com/project?serverTimezone=UTC
     username: bit
     password: bit
+  thymeleaf:
+    prefix: classpath:templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML5
+    cache: false
+    template-resolver-order: 0
+  
+    
        
 mybatis:
   mapper-locations: com/bitcamp/app/member/mapper/**/*.xml
