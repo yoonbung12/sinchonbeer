@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>예약 날짜+인원 선택</title>
+
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/tour/pick-date.css}">
+    
+<!-- <link rel="stylesheet" type="text/css" href="frame/header+nav.css">
+    <link rel="stylesheet" type="text/css" href="frame/footer.css">
+    <link rel="stylesheet" type="text/css" href="frame/sidebar.css"> -->
+    
+
+</head>
+<body>
+	<!-- submenu 영역 -->
+	<div class="submenu_wrap">
+		<ul>
+			<li><a href="/tour/info">투어 안내</a></li>
+			<li><a href="/tour/pick-date">예약</a></li>
+			<li><a href="/tour/notice">투어 공지</a></li>
+		</ul>
+	</div>
+	<div class="detail_menu">
+		<ul>
+			<li><a href="/tour/pick-date" id="selectPage">프로그램 예약</a></li>
+			<li><a href="/tour/">예약 확인/취소</a></li>
+		</ul>
+	</div>
+	
+	
+	<div id="content_wrap" class="container-fulid totalPage">
+		<div class="keyVisualBox full">
+			<div class="select_box">
+				<div class="keyTd po">
+				<!-- 날짜,인원,1인 가격, 카테고리 객체 바인딩 하기 -->
+					<form th:action="@{/tour/reserve/form}" th:object="${tour}"  name="pick" method="post">
+						<ul>
+							<li>
+								<input type="text" id="datepicker" class="jejuInputBox">
+								<input type="hidden" id="select" name="selectDate">
+								<span id="msg"></span>
+								<span id="result"></span>
+							</li>
+							<li>
+								<select id="count" class="out" name="count">
+									<option selected>인원선택</option>
+									<option value="1">1명</option>
+									<option value="2">2명</option>
+									<option value="3">3명</option>
+									<option value="4">4명</option>
+								</select>
+							</li>
+							<li><input type="submit" value="예약" class="out"></li>
+							<li>
+								<input type="hidden" th:field="*{price}" value="22000" >
+								<input type="hidden" th:field="*{category}" value="tour" >
+							</li>
+						</ul>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="img_wrap">
+			<img
+				src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/beerwalk/img_hero_beerwalk_2.jpg">
+		</div>
+		<div class="content_text">
+			<h3>국내 최초 체험형 투어공간</h3>
+			<h1>신촌맥주 양조장 투어</h1>
+		</div>
+		<div class="inline-row"></div>
+		<!-- 사이즈 축소시 밀림 현상 발생 -->
+		<div class="alignBox mAuto mt90 ">
+			<div class="pageLine"></div>
+			<div class="plr">
+				<ul class="columnUl col6">
+					<li class="columnLi">
+						<dl class="columnDl mt90 typeInfo">
+							<dt class="columnDt">금액</dt>
+							<dd class="columnDd">22000원</dd>
+							<dt class="columnDt">체험시간</dt>
+							<dd class="columnDd">40분</dd>
+							<dt class="columnDt">
+								포함사항<sub>(택1)</sub>
+							</dt>
+							<dd class="columnDd">
+								신촌맥주 4종 샘플러<sub>(250ml*4)</sub><br> 또는 스파클링 음료와 신촌맥주 굿즈세트
+							</dd>
+						</dl>
+					</li>
+					<li class="columnLi mt100">
+						<ul class="tableUl">
+							<li class="tableLi col80 verticalMiddle"><img
+								src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/img_icon_calendar_2.png"
+								alt="key visual"></li>
+							<li class="tableLi verticalMiddle">
+								<div class="cyanText">
+									<strong>사전 예약 필수</strong>
+								</div>
+							</li>
+						</ul>
+						<ul class="tableUl mt40">
+							<li class="tableLi col80 verticalMiddle"><img
+								src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/img_icon_age.png">
+							</li>
+							<li class="tableLi verticalMiddle">
+								<div class="cyanText">
+									<strong>만 7세 이상 참여가능</strong>
+								</div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="description_text">
+			<strong class="colorcyan">신촌맥주 양조장 투어란?</strong> <br>
+			<br>신촌맥주 양조장에서는<br> 신촌맥주의 양조가들이 전세계에서 공수한<br> 최첨단 장비로
+			맥주를 양조하는 모습을<br> 직접 관람하실 수 있습니다.<br>
+			<br> 맥주에 관련된 다양한 교육과 체험 활동을<br> 경험하실 수 있습니다.
+		</div>
+		<div class="bgc_gray mt120">
+			<div class="alignBox mAuto plr img1">
+				<img
+					src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/beerwalk/img_info_beerwalk_01.jpg"
+					alt="key visual" class="contentImage">
+			</div>
+		</div>
+		<div class="alignBox mAuto textAlignLeft mt80">
+			<div class="plr">
+				<div class="description_text2">
+					신촌맥주 양조장 투어는 맥주가 만들어지는 과정을<br> 경의선숲길을 걷듯, 오감으로 체험해보는<br>
+					맥주 양조 여행입니다.
+				</div>
+			</div>
+		</div>
+		<div class="alignBox mAuto mt130">
+			<div class="innerBox plr">
+				<img
+					src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/beerwalk/img_info_beerwalk_02.jpg"
+					alt="key visual" class="contentImage">
+			</div>
+		</div>
+		<div class="alignBox mAuto mt30">
+			<div class="innerBox plr">
+				<img
+					src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/beerwalk/img_info_beerwalk_03.jpg"
+					alt="key visual" class="contentImage">
+			</div>
+		</div>
+		<div class="bgc_gray mt120 ">
+			<div class="alignBox mAuto">
+				<div class="innerBox plr">
+					<img
+						src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/beerwalk/img_info_beerwalk_04.jpg"
+						alt="key visual" class="contentImage">
+				</div>
+			</div>
+		</div>
+		<div class="alignBox mAuto textAlignLeft mt80">
+			<div class="plr">
+				<div class="description_text2">
+					맥주의 다양한 원료들을<br> 직접 맛보고 향을 맡아 보세요.
+				</div>
+			</div>
+		</div>
+		<div class="alignBox mAuto textAlignLeft mt130 pb60">
+			<div class="pl100">
+				<ul class="tableUl">
+					<li class="tableLi verticalBottom">
+						<div class="pageDesc">
+							비어 도슨트의 친절한 설명과 함께<br> 맥주를 알아가는 재미에 푹 빠져보세요!
+						</div>
+					</li>
+
+					<li class="tableLi textAlignRight"><img
+						src="https://dsfyc8ahox9m2.cloudfront.net/static/images/reservationRenew/beerwalk/img_info_beerwalk_05.jpg"
+						alt="key visual" class="contentImage"></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- content 영역 끝 -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
+	  <!-- datepicker js  -->
+    <script>
+        $(function () {
+        	$('#count').children('option:not(:first)').hide();	
+            //input을 datepicker로 선언
+            $("#datepicker").datepicker({
+                dateFormat: 'yy-mm-dd (D) ' //달력 날짜 형태
+                , closeText: '닫기'
+                , showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+                , showMonthAfterYear: true // 월- 년 순서가아닌 년도 - 월 순서
+                , changeYear: true //option값 년 선택 가능
+                , changeMonth: true //option값  월 선택 가능                
+                , showOn: 'focus' //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+                // , buttonImage: "https://brewery.jejubeer.co.kr/static/images/reservationRenew/img_icon_calendar.png" //버튼 이미지 경로
+                // , buttonImageOnly: true //버튼 이미지만 깔끔하게 보이게함
+
+                , buttonText: "선택" //버튼 호버 텍스트              
+                , yearSuffix: "년" //달력의 년도 부분 뒤 텍스트
+                , monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'] //달력의 월 부분 텍스트
+                , monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'] //달력의 월 부분 Tooltip
+                , dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'] //달력의 요일 텍스트
+                , dayNamesShort: ['일', '월', '화', '수', '목', '금', '토']
+                , dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'] //달력의 요일 Tooltip
+                , minDate: "-5y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+                , maxDate: "+5y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
+                , beforeShowDay: noBefore
+                , beforeShow: function (input) {
+                   /*  var i_offset = $(input).offset(); //클릭된 input의 위치값 체크
+                    setTimeout(function () {
+                        $('#ui-datepicker-div').css({
+                            'top': i_offset.top + 75,
+                            'bottom': '',
+                            'left': i_offset.left
+                        });      //datepicker의 div의 포지션을 강제로 input 위치에 그리고 좌측은 모바일이여서 작기때문에 무조건 10px에 놓았다.
+                    }) */
+                }
+                , onSelect: function () {
+                    var date = $('#datepicker').val();
+                    console.log(date);
+                   
+                    selectReset();
+                    $('#result').html(date);
+                    // 서버로 전달할 데이터
+                    var sub = date.substring(0,10);
+                    $('#select').val(sub);
+                    console.log(sub);
+                    
+                    var test = $('#select').val();
+                    console.log(test);
+                
+                 	$.ajax({
+            			url : '/tour/count',
+            			type : 'get',
+            			data : {
+            				mid : sub
+            				},
+            			success : function(data){
+            				
+            					console.log(data);
+            					 var num = $('#count option').length;
+            					$('#msg').html('가능인원:'+data);
+            					if(data == 0){
+            						$('#count').prop('disabled','disabled');
+            					}else(data < num)
+            						for(i=num; i>data; i--){
+            							$('#count option:eq('+i+')').hide();
+            						}
+            			},
+            			complete:function(){
+            			}
+            		});              
+                
+                }
+            });
+            
+
+            //초기값을 오늘 날짜로 설정해줘야 합니다.
+            $('#datepicker').datepicker('setDate', '+1D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+            // 인원 선택 알림창
+            $('#submit').submit(function () {
+                if ($('#cnt').val() == 0) {
+                    alert('인원을 선택해주세요');
+                    return false;
+                }
+            });
+        });
+        function selectReset(){
+        	$('#count option').show();
+        		$('#count').attr('disabled',false);
+        }        
+
+        // [다음날 ~ 그 다음달 말일]까지만 선택 가능한 함수
+        function noBefore(date) {
+            // 현재 날짜 가져오기
+           var cur = new Date();
+        //    console.log(cur);
+
+        // 가져온 날짜의 연,월,일 저장
+           var curYear = cur.getFullYear();
+           var curMonth = cur.getMonth();
+           var curDay = cur.getDate();
+           /* console.log(curYear);
+           console.log(curMonth);
+           console.log(curDay); */
+
+        //   그 달의 말일을 구하는 함수 : js 는 0 부터 11 까지로 표현 (0 -> 1월 / 0> 1일)  -> 각각 자리는 year,month,day 
+        // datepicker 에서 보여지는 날짜가 다음날 부터가 기본 값이므로 day 자리에 0이 아닌 1부터 시작 ->해당 월의 마지막 일 정상 출력                      
+           var next = new Date(curYear,curMonth+2,1);
+
+        //    console.log('next='+next);
+
+        /* 
+            if ( date < cur ) {
+                return [false];
+            }
+            if(date >= next){
+                return [false];
+            } */
+            // 현재 날짜 보다 이전이거나 다음달 말일 이후인 경우에는 사용 불가
+             if ( cur >=  date || date >= next  ) {
+                return [false];
+            } 
+           
+                return [true];        
+
+        }
+        
+        const x = window.matchMedia("(min-width: 990px)")
+
+        x.addListener(function (a) {
+            $('#collapsibleNavbar').removeClass('show');
+        });
+    </script>
+	
+	
+	
+	
+</body>
+</html>
