@@ -12,9 +12,9 @@ import com.bitcamp.sc.order.domain.OrderInfo;
 import com.bitcamp.sc.order.repository.OrderDao;
 
 public class JdbcTemplateOrderDao implements OrderDao {
-	
+
 	private final JdbcTemplate template;
-	
+
 	@Autowired
 	public JdbcTemplateOrderDao(DataSource dataSource) {
 		this.template = new JdbcTemplate(dataSource);
@@ -40,17 +40,17 @@ public class JdbcTemplateOrderDao implements OrderDao {
 	public List<OrderInfo> findByCategoryAndMemberIdx(String category, int memberIdx) {
 		return null;
 	}
-	
+
 	private RowMapper<OrderInfo> orderRowMapper() {
 		return (rs, rowNum) -> {
-		OrderInfo orderInfo = new OrderInfo(); // category, price, tourIdx, tourPeople, memberIdx, addressIdx 
-		orderInfo.setCategory(rs.getString("ocategory"));
-		orderInfo.setPrice(rs.getInt("oprice"));
-		orderInfo.setTourIdx(rs.getInt("tidx"));
-		orderInfo.setTourPeople(rs.getInt("tpeople"));
-		orderInfo.setMemberIdx(rs.getInt("midx"));
-		orderInfo.setAddressIdx(rs.getInt("aidx"));
-		return orderInfo;
+			OrderInfo orderInfo = new OrderInfo(); // category, price, tourIdx, tourPeople, memberIdx, addressIdx
+			orderInfo.setCategory(rs.getString("ocategory"));
+			orderInfo.setPrice(rs.getInt("oprice"));
+			orderInfo.setTourIdx(rs.getInt("tidx"));
+			orderInfo.setTourPeople(rs.getInt("tpeople"));
+			orderInfo.setMemberIdx(rs.getInt("midx"));
+			orderInfo.setAddressIdx(rs.getInt("aidx"));
+			return orderInfo;
 		};
 	}
 
