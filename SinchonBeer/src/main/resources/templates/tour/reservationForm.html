@@ -13,7 +13,6 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-
 </head>
 <body>
 		<!-- submenu 영역 -->
@@ -31,15 +30,16 @@
 		</ul>
 	</div>
 
-
 	<!-- Content 영역 -->
 	<div class="my-5 text-center">
 		<h1 class="font-weight-bold">예약하기</h1>
 	</div>
 
 	<div class="container">
-		<form action="">
-		<input type="hidden" value="@{type}" id="type">
+		<form action="#" method="post">
+			<input type="hidden" th:value="${tour.selectDate}" name="selectDate">
+			<input type="hidden" th:value="${tour.count*tour.price}" name="totalPrice">
+			<input type="hidden" th:value="${tour.category}" name="category">
 			<div class="row">
 				<div class="col-lg border mx-2">
 
@@ -47,9 +47,11 @@
 						<dt class="dt-left float-left">프로그램 명</dt>
 						<dd class="dd-right">제주맥주 양조장 투어</dd>
 						<dt class="dt-left float-left">예약일</dt>
-						<dd class="dd-right" th:text="${selectDate}" id="test"></dd>
+						<dd class="dd-right" th:text="${tour.selectDate}" id="appendDate">
+							
+						</dd>
 						<dt class="dt-left float-left">인원</dt>
-						<dd class="dd-right" th:text="${count}" id="count"></dd>
+						<dd class="dd-right" th:text="${tour.count}+명" id="count"></dd>
 						
 					</dl>
 					<hr>
@@ -95,9 +97,7 @@
 						</div>
 					</div>
 					<!-- 나중 구현 영역 끝 -->				
-				
-				
-				
+												
 				</div>
 
 				<div class="col-lg border mx-2">
@@ -186,13 +186,13 @@
 							<h2 class="font-weight-bold">결제 금액</h2>
 						</dt>
 						<dd class="text-right py-2">
-							<h2 class="font-weight-bold" th:text="${count * 22000}+원"></h2>
+							<h2 class="font-weight-bold" th:text="${tour.count *tour.price}+원"></h2>
 						</dd>
 
 						<dt class="float-left pt-3">
-							정상가 <span class="small" th:text="[22000원 + x +${count}+명]"></span>
+							정상가 <span class="small" th:text="${tour.price} +원 + x + ${tour.count} +명"></span>
 						</dt>
-						<dd class="text-right pt-3" th:text="${count * 22000}+원"></dd>
+						<dd class="text-right pt-3" th:text="${tour.count * tour.price}+원"></dd>
 
 						<dt class="pt-3">할인</dt>
 						<dd class="text-right"></dd>
@@ -200,7 +200,8 @@
 
 					<dl class="pt-3 px-3">
 						<dt class="float-left">합계</dt>
-						<dd class="text-right" th:text="${count * 22000}+원"></dd>
+						<dd  class="text-right" th:text="${tour.count * tour.price}+ 원"></dd>
+							
 					</dl>
 
 					<div class="form-check">
@@ -291,6 +292,19 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 		
 	 <script>
+	 // 날짜 선택
+	 var reDate = $('#appendDate').text();
+	// 해당 날짜의 요일을 리턴하는 함수	
+	  function day(reDate){
+           var week=['월','화','수','목','금','토','일'];
+           var dayOfWeek = week[new Date(reDate).getDay()];
+       return dayOfWeek;
+	   }
+	  // 리턴된 요일을 날짜에 append로 추가 
+	  var result = day(reDate);
+	   $('#appendDate').append(' ('+result+')');
+	 
+	 
         // 동의 후 확인 클릭
         $('#modalButton').click(function() {
             console.log('hi')
@@ -298,16 +312,18 @@
             $('#agreementTermsOfUse').prop('checked', true);
         });
      	
-        // th로 가져온 값 확인 하는 테스트
-		var test = $('#test').text();
-		console.log(test);
-		
+     	// 결제 수단 선택 시 약관 동의 버튼 체크 
+        $('.form-check-label').on('click',function(){
+        	if($('.form-check-input:nth-child()').prop);
+        });
+       /* $('.form-check-input')*/		
         // slide button 켜고, 늘렸다 줄일 경우 button close 처리
-        const x = window.matchMedia("(min-width: 990px)")
+        const x = window.matchMedia("(min-width: 990px)");
 
         x.addListener(function(a) {
             $('#collapsibleNavbar').removeClass('show');
         });
+        
     </script>	
 	
 	
