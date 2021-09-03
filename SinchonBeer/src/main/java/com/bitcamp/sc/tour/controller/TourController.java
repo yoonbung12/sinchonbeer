@@ -1,5 +1,7 @@
 package com.bitcamp.sc.tour.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -53,30 +55,45 @@ public class TourController {
 	}
 	
 	// 투어 예약 페이지 이동
-	@RequestMapping(value = "/tour/pick-date")
+	@RequestMapping(value = "/tour/pick-date",method = RequestMethod.GET)
 	public String getPickDate() {
 		return "tour/pick-date";
 	}
 	
 	// 날짜 , 인원 선택 후 예약 폼으로 이동 --> 로그인 여부 체크 / 날짜,인원,카테고리(투어), 회원 정보가 잘 들어오는지 ?
-	@RequestMapping(value="/tour/reserve/form", method = RequestMethod.POST)
-
+	@RequestMapping(value="/tour/reserve/form", method = RequestMethod.GET)
 	public String getForm(
-//			@ModelAttribute("select") String date,
-//			@ModelAttribute("count") int count,
-//			@ModelAttribute("type") String type,
-			@ModelAttribute("tour") Tour tour,
+			@ModelAttribute Tour tour,
 			Model model
 			) {
-		
-//		model.addAttribute("selectDate", date);
-//		model.addAttribute("count", count);
-//		model.addAttribute("type", type);
 		System.out.println(tour);
 		model.addAttribute("tour",tour);
-//		System.out.println(date+":"+count);
+
 		return "tour/reservationForm";
 	}
+	
+	
+	
+	
+	
+	
+	// 투어 예약 변경/확인/취소 페이지 가져오기
+	
+	@RequestMapping(value="/tour/change-info",method=RequestMethod.GET)
+	public String getchangePage() {
+		return "tour/change-info";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
 

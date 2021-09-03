@@ -32,5 +32,8 @@ class SinchonBeerApplicationTests {
 		
 		System.out.println(conn);
 	}
+	
+	
+	
 
 }
