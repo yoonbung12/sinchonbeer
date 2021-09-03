@@ -5,22 +5,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//import org.springframework.stereotype.Repository;
-
 import com.bitcamp.sc.order.domain.OrderInfo;
 import com.bitcamp.sc.order.repository.OrderDao;
 
-//@Repository
 public class MemoryOrderDao implements OrderDao {
 	
 	private static Map<Integer, OrderInfo> store = new HashMap<>();
 	private static int index;
 
 	@Override
-	public int save(OrderInfo orderInfo) {
+	public OrderInfo save(OrderInfo orderInfo) {
 		orderInfo.setIdx(index++);
 		store.put(orderInfo.getIdx(), orderInfo);
-		return 1;
+		return orderInfo;
 	}
 
 	@Override

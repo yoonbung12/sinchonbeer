@@ -1,7 +1,5 @@
 package com.bitcamp.sc.order.repository.impl;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,10 +28,7 @@ class MemoryOrderDaoTest {
 	@Test
 	void 주문등록() {
 		// given
-		LocalDateTime dateTime = LocalDateTime.of(2021, 9, 2, 11, 10); // 년, 월, 일, 시간, 분
-		Timestamp timestamp = Timestamp.valueOf(dateTime);
-		
-		OrderInfo order = new OrderInfo("shop", 1, 2, 1, 22000, 3); // category, tourIdx, memberIdx, addressIdx, price, tourIdx 
+		OrderInfo order = new OrderInfo("shop", 22000, 1, 3, 2, 1); // category, price, tourIdx, tourPeople, memberIdx, addressIdx 
 		
 		// when
 		dao.save(order);
@@ -45,10 +40,7 @@ class MemoryOrderDaoTest {
 	@Test
 	void 주문조회() {
 		// given
-		LocalDateTime dateTime = LocalDateTime.of(2021, 9, 2, 11, 10); // 년, 월, 일, 시간, 분
-		Timestamp timestamp = Timestamp.valueOf(dateTime);
-		
-		OrderInfo order = new OrderInfo("shop", 1, 2, 1, 22000, 3); // category, tourIdx, memberIdx, addressIdx, price, tourIdx 
+		OrderInfo order = new OrderInfo("shop", 22000, 1, 3, 2, 1); // category, price, tourIdx, tourPeople, memberIdx, addressIdx 
 		dao.save(order);
 		
 		// when
@@ -57,17 +49,12 @@ class MemoryOrderDaoTest {
 		
 		// then
 		assertThat(findOrder).isEqualTo(order);
-		System.out.println(order);
-		System.out.println(findOrder);
 	}
 
 	@Test
 	void 주문조회_실패() {
 		// given
-		LocalDateTime dateTime = LocalDateTime.of(2021, 9, 2, 11, 10); // 년, 월, 일, 시간, 분
-		Timestamp timestamp = Timestamp.valueOf(dateTime);
-		
-		OrderInfo order = new OrderInfo("shop", 1, 2, 1, 22000, 3); // category, tourIdx, memberIdx, addressIdx, price, tourIdx 
+		OrderInfo order = new OrderInfo("shop", 22000, 1, 3, 2, 1); // category, price, tourIdx, tourPeople, memberIdx, addressIdx 
 		dao.save(order);
 		
 		// when
@@ -81,17 +68,14 @@ class MemoryOrderDaoTest {
 	@Test
 	void 멤버인덱스로_주문조회() {
 		// given
-		LocalDateTime dateTime = LocalDateTime.of(2021, 9, 2, 11, 10); // 년, 월, 일, 시간, 분
-		Timestamp timestamp = Timestamp.valueOf(dateTime);
-		
-		OrderInfo order1 = new OrderInfo("shop", 1, 2, 1, 22000, 3); // category, tourIdx, memberIdx, addressIdx, price, tourIdx 
-		OrderInfo order2 = new OrderInfo("shop", 1, 2, 1, 22000, 3); // category, tourIdx, memberIdx, addressIdx, price, tourIdx 
+		OrderInfo order1 = new OrderInfo("shop", 22000, 1, 3, 2, 1); // category, price, tourIdx, tourPeople, memberIdx, addressIdx 
+		OrderInfo order2 = new OrderInfo("shop", 22000, 1, 3, 2, 1); // category, price, tourIdx, tourPeople, memberIdx, addressIdx 
 		dao.save(order1);
 		dao.save(order2);
 		
 		// when
 		List<OrderInfo> findOrders = new ArrayList<>();
-		findOrders = dao.findByMemberIdx(10);
+		findOrders = dao.findByMemberIdx(2);
 		
 		// then
 		assertThat(findOrders.get(0)).isEqualTo(order1);
