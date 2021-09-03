@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="OrderMapper">
-	
+
 	<resultMap type="com.bitcamp.sc.order.domain.OrderInfo" id="OrderDomain">
 		<result property="idx" column="oidx"/>
 		<result property="date" column="odate"/>
@@ -13,7 +13,6 @@
 		<result property="price" column="oprice"/>
 		<result property="tourPeople" column="tpeople"/>
 	</resultMap>
-
 
 	<insert id="save" parameterType="com.bitcamp.sc.order.domain.OrderInfo" useGeneratedKeys="true" keyProperty="idx">
 		INSERT INTO orders(ocategory, oprice, tidx, tpeople, midx, aidx) VALUES(#{category}, #{price}, #{tourIdx}, #{tourPeople}, #{memberIdx}, #{addressIdx})
