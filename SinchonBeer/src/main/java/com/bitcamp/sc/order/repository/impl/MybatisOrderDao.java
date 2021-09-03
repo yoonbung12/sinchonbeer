@@ -13,16 +13,16 @@ import com.bitcamp.sc.order.repository.OrderDao;
 
 @Repository
 public class MybatisOrderDao implements OrderDao {
-	
+
 	private static final String NAME_SPACE = "OrderMapper";
-	
+
 	private final SqlSessionTemplate template;
-	
+
 	@Autowired
 	public MybatisOrderDao(SqlSessionTemplate template) {
 		this.template = template;
 	}
-	
+
 	@Override
 	public OrderInfo save(OrderInfo orderInfo) {
 		template.insert(NAME_SPACE + ".save", orderInfo);
