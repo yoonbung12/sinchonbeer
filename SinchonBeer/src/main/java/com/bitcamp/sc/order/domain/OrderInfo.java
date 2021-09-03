@@ -22,7 +22,7 @@ public class OrderInfo {
 	private int tourPeople;
 	private int memberIdx;
 	private int addressIdx;
-	
+
 	public OrderInfo(String category, int price, int tourIdx, int tourPeople, int memberIdx, int addressIdx) {
 		this.category = category;
 		this.price = price;
