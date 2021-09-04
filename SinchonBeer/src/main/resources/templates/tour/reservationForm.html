@@ -34,10 +34,11 @@
 	</div>
 
 	<div class="container">
-		<form action="#" method="post">
+		<form th:action="@{/tour/final}" method="post">
 			<input type="hidden" th:value="${tour.selectDate}" name="selectDate">
-			<input type="hidden" th:value="${tour.count*tour.price}" name="totalPrice">
+			<input type="hidden" th:value="${tour.count*tour.price}" name="price">
 			<input type="hidden" th:value="${tour.category}" name="category">
+			<input type="hidden" th:value="${tour.count}" name="count"> 
 			<div class="row">
 				<div class="col-lg border mx-2">
 

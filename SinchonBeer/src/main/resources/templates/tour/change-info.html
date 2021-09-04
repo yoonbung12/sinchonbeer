@@ -108,6 +108,8 @@
                         </div>
                         <div class="col-12 col-lg-6 border">
                             <input id="check" type="text">
+                            <br>
+                            <span id="count"></span>
                         </div>
                     </div>
                 </div>
@@ -142,7 +144,7 @@
             /* modal 확인/취소 버튼 */
             modalConfirm(function (confirm) {
                 if (confirm) {
-
+					if()
                     $("#result").html($('#check').val());
                 } else {
 
@@ -169,7 +171,7 @@
             // datepicker 관리 js
             //input을 datepicker로 선언
             $("#datepicker").datepicker({
-                dateFormat: 'yy-mm-dd ' //달력 날짜 형태
+                dateFormat: 'yy-mm-dd' //달력 날짜 형태
                 , closeText: '닫기'
                 , showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
                 , showMonthAfterYear: true // 월- 년 순서가아닌 년도 - 월 순서
@@ -203,6 +205,28 @@
                     var date = $('#datepicker').val();
                     console.log(date);
                     $('#check').val(date);
+                    
+                 	$.ajax({
+            			url : '/tour/count',
+            			type : 'get',
+            			data : {
+            				mid : date
+            				},
+            			success : function(data){
+            				 
+            					console.log(data);
+            					         					 		
+            					if(data == 0 ){
+            						$('#count').text('이미 예약이 완료되었습니다.');	
+            					}else{
+            					$('#count').text('가능인원: '+data);            						
+            					}
+            			},
+            			complete:function(){
+            				
+            			}
+            		});   
+                    
                 }
             });
 
@@ -219,10 +243,37 @@
 
         // 현재 날짜 이전의 날짜는 선택 비활성화
         function noBefore(date) {
-            if (date < new Date()) {
-                return [false];
-            }
-            return [true];
+            // 현재 날짜 가져오기
+            var cur = new Date();
+         //    console.log(cur);
+
+         // 가져온 날짜의 연,월,일 저장
+            var curYear = cur.getFullYear();
+            var curMonth = cur.getMonth();
+            var curDay = cur.getDate();
+            /* console.log(curYear);
+            console.log(curMonth);
+            console.log(curDay); */
+
+         //   그 달의 말일을 구하는 함수 : js 는 0 부터 11 까지로 표현 (0 -> 1월 / 0> 1일)  -> 각각 자리는 year,month,day 
+         // datepicker 에서 보여지는 날짜가 다음날 부터가 기본 값이므로 day 자리에 0이 아닌 1부터 시작 ->해당 월의 마지막 일 정상 출력                      
+            var next = new Date(curYear,curMonth+2,1);
+
+         //    console.log('next='+next);
+
+         /* 
+             if ( date < cur ) {
+                 return [false];
+             }
+             if(date >= next){
+                 return [false];
+             } */
+             // 현재 날짜 보다 이전이거나 다음달 말일 이후인 경우에는 사용 불가
+              if ( cur >=  date || date >= next  ) {
+                 return [false];
+             } 
+            
+                 return [true];     
         }
     </script>
 		

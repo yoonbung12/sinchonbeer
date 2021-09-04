@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<th:block th:include="frame/metaheader"></th:block>
+<style>
+</style>
+</head>
+<body>
+	<th:block th:include="frame/header_login"></th:block>
+	<th:block th:include="frame/nav"></th:block>
+	<div class="container">
+		<div class="row">
+			<div class="col text-center">
+
+				<h1>로그인 테스트</h1>
+				<form action="/login" method="post">
+					아이디:<input type="text" id="memail" name="memail"> <br>
+					비밀번호:<input type="password" id="mpw" name="mpw"> <br>
+					<input type="submit" value="로그인" id="btn">
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$(function() {
+			$("form").submit(function(event) {
+				var id = $('#memail').val();
+				var pw = $('#mpw').val();
+				if (id != "" && pw != "") {
+					alert("id :: " + id + ", pw :: " + pw);
+					event.preventDefault();
+					return;
+				}
+				if (id == "") {
+					alert("id를 입력해주세요.");
+					event.preventDefault();
+					return;
+				}
+				if (pw == "") {
+					alert("pw를 입력해주세요.");
+					event.preventDefault();
+					return;
+				}
+			});
+			$('#btn').click(function() {
+				$("form").submit(event);
+			});
+
+		});
+	</script>
+
+
+	<th:block th:include="frame/footer"></th:block>
+</body>
+</html>
