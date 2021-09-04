@@ -30,5 +30,8 @@ class SinchonBeerApplicationTests {
             e.printStackTrace();
         }
 	}
+	
+	
+	
 
 }

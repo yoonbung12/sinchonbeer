@@ -5,6 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+
 public class Tour {
 	private String selectDate;
 	private int count;

@@ -5,14 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>투어 공지</title>
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<th:block th:include="frame/metaheader"></th:block>
 <link rel="stylesheet" th:href="@{/css/tour/tourNotice.css}">
-<!--<link rel="stylesheet" type="text/css" href="frame/header+nav.css">
-    <link rel="stylesheet" type="text/css" href="frame/footer.css">
-    <link rel="stylesheet" type="text/css" href="frame/sidebar.css"> -->
+
 </head>
 <body>
+	<th:block th:include="frame/header_login"></th:block>
+	<th:block th:include="frame/nav"></th:block>
 	<!-- submenu 영역 -->
 	<div class="submenu_wrap">
 		<ul>
@@ -105,6 +104,7 @@
 	</div>
 	<!-- content 영역 끝 -->
 	<div class="inline-row2"></div>
+		<th:block th:include="frame/footer"></th:block>
 	
 	
 	
@@ -115,23 +115,6 @@
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	 <!-- bootstrap cdn 영역 -->
-    <script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	
 	
 	

@@ -6,15 +6,13 @@
 <title>투어 예약 화면</title>
 
 <link rel="stylesheet" th:href="@{/css/tour/reservationForm.css}">
+<th:block th:include="frame/metaheader"></th:block>
 
-<!--<link rel="stylesheet" type="text/css" href="frame/header+nav.css">
-    <link rel="stylesheet" type="text/css" href="frame/footer.css">
-    <link rel="stylesheet" type="text/css" href="frame/sidebar.css"> -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 </head>
 <body>
+	<th:block th:include="frame/header_login"></th:block>
+	<th:block th:include="frame/nav"></th:block>
 		<!-- submenu 영역 -->
 	<div class="submenu_wrap">
 		<ul>
@@ -26,7 +24,7 @@
 	<div class="detail_menu">
 		<ul>
 			<li><a href="/tour/pick-date" id="selectPage">프로그램 예약</a></li>
-			<li><a href="/tour/">예약 확인/취소</a></li>
+			<li><a href="/tour/change-info">예약 확인/취소</a></li>
 		</ul>
 	</div>
 
@@ -219,8 +217,7 @@
 					</div>
 					<div class="small p-3">* 현대카드는 사용하실 수 없습니다. 다른 카드나 실시간 계좌이체를
 						이용해주세요.</div>
-					<button type="submit"
-						class="btn btn-sinchon btn-lg btn-block my-4 font-weight-bold">결제하기</button>
+					<input type="submit"class="btn btn-sinchon btn-lg btn-block my-4 font-weight-bold" value="결제하기">
 				</div>
 
 				<!-- The Modal -->
@@ -274,6 +271,7 @@
 		</form>
 	</div>
 	
+	<th:block th:include="frame/footer"></th:block>
 	
 	
 	
@@ -282,15 +280,6 @@
 	
 	
 	
-	
-	
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-		
 	 <script>
 	 // 날짜 선택
 	 var reDate = $('#appendDate').text();
@@ -318,11 +307,7 @@
         });
        /* $('.form-check-input')*/		
         // slide button 켜고, 늘렸다 줄일 경우 button close 처리
-        const x = window.matchMedia("(min-width: 990px)");
-
-        x.addListener(function(a) {
-            $('#collapsibleNavbar').removeClass('show');
-        });
+       
         
     </script>	
 	

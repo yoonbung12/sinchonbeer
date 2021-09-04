@@ -7,15 +7,12 @@
 
 
 <link rel="stylesheet" th:href="@{/css/tour/tourMain.css}">
-<!--<link rel="stylesheet" type="text/css" href="frame/header+nav.css">
-    <link rel="stylesheet" type="text/css" href="frame/footer.css">
-    <link rel="stylesheet" type="text/css" href="frame/sidebar.css"> -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+<th:block th:include="frame/metaheader"></th:block>
 
 </head>
 <body>
+	<th:block th:include="frame/header_login"></th:block>
+	<th:block th:include="frame/nav"></th:block>
 	<!-- nav-sub 영역 시작 -->
 	<div class="submenu_wrap">
 		<ul>
@@ -56,7 +53,7 @@
 		</div>
 		<div class="inline-row"></div>
 		<div style="text-align: center; margin-bottom: 50px;">
-			<a href="#"><img src="/images/tour_link.png"></a>
+			<a th:href="@{/tour/pick-date}"><img src="/images/tour_link.png"></a>
 			<p>양조장 투어</p>
 			<p>22000원</p>
 		</div>
@@ -149,6 +146,7 @@
 	</div>
 	<div class="inline-row"></div>
 	<!-- content 영역 끝 -->
+	<th:block th:include="frame/footer"></th:block>
 
 
 
@@ -160,14 +158,6 @@
 
 
 
-
-
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
 

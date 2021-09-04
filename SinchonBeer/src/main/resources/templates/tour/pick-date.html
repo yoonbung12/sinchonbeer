@@ -6,17 +6,19 @@
     <title>예약 날짜+인원 선택</title>
 
 
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+
     <link rel="stylesheet" th:href="@{/css/tour/pick-date.css}">
-    
-<!-- <link rel="stylesheet" type="text/css" href="frame/header+nav.css">
-    <link rel="stylesheet" type="text/css" href="frame/footer.css">
-    <link rel="stylesheet" type="text/css" href="frame/sidebar.css"> -->
-    
+    <th:block th:include="frame/metaheader"></th:block>
+   	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+   	
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
 
 </head>
 <body>
+	<th:block th:include="frame/header_login"></th:block>
+	<th:block th:include="frame/nav"></th:block>
 	<!-- submenu 영역 -->
 	<div class="submenu_wrap">
 		<ul>
@@ -28,7 +30,7 @@
 	<div class="detail_menu">
 		<ul>
 			<li><a href="/tour/pick-date" id="selectPage">프로그램 예약</a></li>
-			<li><a href="/tour/">예약 확인/취소</a></li>
+			<li><a href="/tour/change-info">예약 확인/취소</a></li>
 		</ul>
 	</div>
 	
@@ -38,27 +40,29 @@
 			<div class="select_box">
 				<div class="keyTd po">
 				<!-- 날짜,인원,1인 가격, 카테고리 객체 바인딩 하기 -->
-					<form th:action="@{/tour/reserve/form}" th:object="${tour}"  name="pick" method="post">
+				
+					<form th:action="@{/tour/reserve/form}"  method="get" id="submit">
+					
 						<ul>
 							<li>
 								<input type="text" id="datepicker" class="jejuInputBox">
 								<input type="hidden" id="select" name="selectDate">
-								<span id="msg"></span>
-								<span id="result"></span>
+								<input type="text" id="msg" readonly class="text-center border-0" value="잔여석: ">
+								
 							</li>
 							<li>
-								<select id="count" class="out" name="count">
-									<option selected>인원선택</option>
+								<select id="count" class="out" th:name="count">
+									<option value="0">인원선택</option>
 									<option value="1">1명</option>
 									<option value="2">2명</option>
 									<option value="3">3명</option>
 									<option value="4">4명</option>
 								</select>
 							</li>
-							<li><input type="submit" value="예약" class="out"></li>
+							<li><input type="submit" value="예약" class="out" id="btn"></li>
 							<li>
-								<input type="hidden" th:field="*{price}" value="22000" >
-								<input type="hidden" th:field="*{category}" value="tour" >
+						 		<input type="hidden" th:name="price"  value="22000" >
+								<input type="hidden" th:name="category" value="tour" >
 							</li>
 						</ul>
 					</form>
@@ -186,36 +190,18 @@
 		</div>
 	</div>
 	<!-- content 영역 끝 -->
+	<th:block th:include="frame/footer"></th:block>
 	
 	
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	
 	  <!-- datepicker js  -->
     <script>
-        $(function () {
+    
+    $(function()  {
+    	console.log($('#count').val());
         	$('#count').children('option:not(:first)').hide();	
             //input을 datepicker로 선언
             $("#datepicker").datepicker({
@@ -251,10 +237,11 @@
                 }
                 , onSelect: function () {
                     var date = $('#datepicker').val();
+                    $('#msg').val('잔여석:');
                     console.log(date);
                    
-                    selectReset();
-                    $('#result').html(date);
+                   
+                 
                     // 서버로 전달할 데이터
                     var sub = date.substring(0,10);
                     $('#select').val(sub);
@@ -270,10 +257,10 @@
             				mid : sub
             				},
             			success : function(data){
-            				
+            				 selectReset();
             					console.log(data);
-            					 var num = $('#count option').length;
-            					$('#msg').html('가능인원:'+data);
+            					 var num = $('#count option').length;            					 
+            					$('#msg').val($('#msg').val()+data+'명');
             					if(data == 0){
             						$('#count').prop('disabled','disabled');
             					}else(data < num)
@@ -282,6 +269,7 @@
             						}
             			},
             			complete:function(){
+            				
             			}
             		});              
                 
@@ -291,17 +279,34 @@
 
             //초기값을 오늘 날짜로 설정해줘야 합니다.
             $('#datepicker').datepicker('setDate', '+1D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
-            // 인원 선택 알림창
-            $('#submit').submit(function () {
-                if ($('#cnt').val() == 0) {
-                    alert('인원을 선택해주세요');
-                    return false;
-                }
-            });
+          
+            $('#btn').on('click',function(e){
+            	if($('#select').val()==0){
+            		alert('날짜를 선택해주세요');
+            		return false;
+            	}
+            	if( $('#count').val()== 0){
+            		alert('인원을 선택해주세요');
+            		return false;
+            	}
+         		
+        //    	    e.preventDefault(); 
+          //     $('#submit')[0].reset();
+        	console.log($('#count').val());
+            	});
+
+        
+            	
+       
+             $('#count').on('focusOut',function(){
+            	$('#msg').addClass('display_none');
+            }); 
+            
         });
         function selectReset(){
         	$('#count option').show();
-        		$('#count').attr('disabled',false);
+        	$('#count').val('0').prop("selected",true);
+        	$('#count').attr('disabled',false); 
         }        
 
         // [다음날 ~ 그 다음달 말일]까지만 선택 가능한 함수
@@ -340,12 +345,20 @@
 
         }
         
-        const x = window.matchMedia("(min-width: 990px)")
-
-        x.addListener(function (a) {
-            $('#collapsibleNavbar').removeClass('show');
-        });
     </script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
