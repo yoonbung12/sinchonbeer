@@ -1,4 +1,4 @@
-package com.bitcamp.sc.tour.dao;
+package com.bitcamp.sc.tour.repository;
 
 import java.sql.Date;
 
