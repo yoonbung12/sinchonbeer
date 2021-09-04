@@ -3,7 +3,7 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<mapper namespace="com.bitcamp.sc.tour.dao.TourDao" >
+<mapper namespace="TourMapper" >
 	<select id="selectCount" resultType="int">
 		select (ttotal-tcurrent) from tour where tdate = #{date}
 	</select>

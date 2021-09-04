@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bitcamp.sc.tour.domain.Tour;
+import com.bitcamp.sc.tour.domain.TourInfo;
 
 @Controller
 public class TourController {
@@ -63,7 +63,7 @@ public class TourController {
 	// 날짜 , 인원 선택 후 예약 폼으로 이동 --> 로그인 여부 체크 / 날짜,인원,카테고리(투어), 회원 정보가 잘 들어오는지 ?
 	@RequestMapping(value="/tour/reserve/form", method = RequestMethod.GET)
 	public String getForm(
-			@ModelAttribute Tour tour,
+			@ModelAttribute TourInfo tour,
 			Model model
 			) {
 		System.out.println(tour);

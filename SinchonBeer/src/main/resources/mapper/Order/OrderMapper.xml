@@ -17,11 +17,11 @@
 	<insert id="save" parameterType="com.bitcamp.sc.order.domain.OrderInfo" useGeneratedKeys="true" keyProperty="idx">
 		INSERT INTO orders(ocategory, oprice, tidx, tpeople, midx, aidx) VALUES(#{category}, #{price}, #{tourIdx}, #{tourPeople}, #{memberIdx}, #{addressIdx})
 	</insert>
-
+	
 	<select id="findByIdx" resultType="com.bitcamp.sc.order.domain.OrderInfo" resultMap="OrderDomain">
 		SELECT * FROM orders WHERE oidx=#{idx}
 	</select>
-
+	
 	<select id="findByMemberIdx" resultType="com.bitcamp.sc.order.domain.OrderInfo" resultMap="OrderDomain">
 		SELECT * FROM orders WHERE midx=#{memberIdx}
 	</select>
