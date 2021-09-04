@@ -1,3 +1,11 @@
+a:visited{
+	color:black;
+}
+#msg{
+	width:100px;
+	display:inline-block;
+	
+}
 /* 추후 jquery로 코드 수정할 것 */
 #currentPage{
     background-color: #1ecad3;
@@ -5,6 +13,12 @@
 }
 #selectPage{
     color: #1ecad3;
+}
+li{
+	list-style: none;
+}
+.display_none{
+	display: none;
 }
 
 

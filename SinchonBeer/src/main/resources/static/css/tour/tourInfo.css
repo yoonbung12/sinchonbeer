@@ -1,3 +1,7 @@
+a:visited{
+	color:black;
+}
+
 h4{
     display: block;
     margin-block-start: 1.33em;
@@ -124,4 +128,8 @@ div{
 
 .border_b {
     border-bottom: 1px solid #ddd;
+}
+
+.card-link{
+	color: #3d464b;
 }

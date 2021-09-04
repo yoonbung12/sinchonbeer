@@ -3,8 +3,7 @@ package com.bitcamp.sc;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import javax.sql.DataSource;
-
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,12 +11,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class SinchonBeerApplicationTests {
 	
-	private DataSource dataSource;
-	private Connection conn;
+	private SqlSessionFactory sqlSessionFactory;
 
 	@Autowired
-	public SinchonBeerApplicationTests(DataSource dataSource) {
-		this.dataSource = dataSource;
+	public SinchonBeerApplicationTests(SqlSessionFactory sqlSessionFactory) {
+		this.sqlSessionFactory = sqlSessionFactory;
 	}
 
 	@Test
@@ -26,11 +24,14 @@ class SinchonBeerApplicationTests {
 	
 	@Test
 	void DBDriverTest() throws SQLException {
-		System.out.println(dataSource);
-		
-		conn = dataSource.getConnection();
-		
-		System.out.println(conn);
+        try(Connection con = sqlSessionFactory.openSession().getConnection()){
+            System.out.println("커넥션 성공!");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 	}
+	
+	
+	
 
 }
