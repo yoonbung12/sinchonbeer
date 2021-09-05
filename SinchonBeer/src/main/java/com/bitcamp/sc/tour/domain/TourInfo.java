@@ -12,5 +12,8 @@ public class TourInfo {
 	private int count;
 	private int price;
 	private String category;
+	
+	
+	
 
 }
