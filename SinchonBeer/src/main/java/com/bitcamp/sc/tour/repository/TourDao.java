@@ -7,4 +7,13 @@ public interface TourDao {
 	int selectCount(Date date);
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
