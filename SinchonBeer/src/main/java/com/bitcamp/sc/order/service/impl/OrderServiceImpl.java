@@ -13,7 +13,7 @@ import com.bitcamp.sc.order.service.OrderService;
 
 @Service
 public class OrderServiceImpl implements OrderService {
-	
+
 	OrderDao orderDao;
 	MemberService memberService;
 
@@ -26,9 +26,9 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public int createOrder(String type, OrderInfo orderInfo) {
 		orderInfo = orderDao.save(orderInfo);
-		
+
 		validateOrderInfo(type, orderInfo);
-		
+
 		return orderInfo.getIdx();
 	}
 
@@ -41,12 +41,12 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<OrderInfo> getOrdersInfos(String type, String memberId) {
 		LoginInfo loginInfo = memberService.getMember(memberId);
-		
+
 		List<OrderInfo> orderInfos = orderDao.findByCategoryAndMemberIdx(type, loginInfo.getIdx());
-		
+
 		return orderInfos;
 	}
-	
+
 	private void validateOrderInfo(String type, OrderInfo orderInfo) {
 		if (type.equals("tour") || !type.isEmpty()) {
 			validateTourOrder(orderInfo);
@@ -56,14 +56,14 @@ public class OrderServiceImpl implements OrderService {
 			throw new IllegalStateException("주문 정보가 누락됐습니다. 다시 입력해주세요.");
 		}
 	}
-	
+
 	private void validateTourOrder(OrderInfo orderInfo) {
-		if (orderInfo.getCategory().equals("") || orderInfo.getPrice() == 0 || orderInfo.getMemberIdx() == 0 ||
-				orderInfo.getTourIdx() == 0 || orderInfo.getTourPeople() == 0) {
+		if (orderInfo.getCategory().equals("") || orderInfo.getPrice() == 0 || orderInfo.getMemberIdx() == 0
+				|| orderInfo.getTourIdx() == 0 || orderInfo.getTourPeople() == 0) {
 			throw new IllegalStateException("여행 주문 정보가 누락됐습니다. 다시 입력해주세요.");
 		}
 	}
-	
+
 	private void validateShopOrder(OrderInfo orderInfo) {
 		if (orderInfo.getCategory().equals("") || orderInfo.getPrice() == 0 || orderInfo.getMemberIdx() == 0) {
 			throw new IllegalStateException("상품 주문 정보가 누락됐습니다. 다시 입력해주세요.");
