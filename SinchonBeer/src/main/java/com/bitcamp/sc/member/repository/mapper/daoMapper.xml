@@ -4,7 +4,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.bitcamp.sc.member.dao.MemberDao">
+<mapper namespace="com.bitcamp.sc.member.repository.MemberDao">
 
 	<select id="selectByEmailPw"
 		resultType="com.bitcamp.sc.member.domain.Member">
