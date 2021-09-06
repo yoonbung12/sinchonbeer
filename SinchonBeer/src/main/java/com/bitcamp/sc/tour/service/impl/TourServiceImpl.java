@@ -22,5 +22,14 @@ public class TourServiceImpl implements TourService {
 		Date ckDate = Date.valueOf(date);
 		return dao.selectCount(ckDate);
 	}
-
+	
+	
+	
+	
+	// String -> Date
+	public Date changeToDate(String date) {
+		return Date.valueOf(date);
+	}
+	
+	
 }

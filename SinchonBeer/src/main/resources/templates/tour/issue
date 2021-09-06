@@ -1,5 +1,5 @@
-2021-09-05 : demo 프로젝트에서 jdbcTemplateDao 구현 및 테스트  로그인 체크 여부를 위한 authService + session 이용  
-
+2021-09-05 : - demo 프로젝트에서 jdbcTemplateDao 구현 및 테스트  로그인 체크 여부를 위한 authService + session 이용  
+			 - 예약 변경 -> 결제 테이블에서 결제 완료 
 
 
 투어 ::  로그인이 필요한 페이지 : pick-date / change-info 
@@ -17,14 +17,18 @@
 			 							 		tpeople
 			 							 );
 			// 주문 내역 조회 -> 이름,전화번호,총 가격,예약 날짜,인원,카테고리 ,주문 날짜
-			select * from orders where midx =(select midx from member where memail =? and mname=? ) 							 
+			select * from orders where midx =(select midx from member where memail =? and mname=? )
+			
+			// 결제 내역 조회 -> ? 							 
 			
 			// 1.주문 -> 투어 인원 변경? or 2.주문-> 결제 완료 -> 투어 인원 변경?
 			1. 주문 데이터 생성 후 -> update tour set tcurrent = tcurrent+?() where tdate = ?
 			2. 결제 상태 : 결제중 -> 결제 완료 -> update set tcurrent = tcurrent+? where tdate = ?
 			
 			// 투어 예약 변경 + 멤버의 이름,휴대전화 정보 필요 
-			날짜 선택 후 예약 변경 확정 버튼 클릭시 -> update tour set tcurrent = tcurrent - ? where tdate = ?(기존 예약 날짜)
+			날짜 선택 후 예약 변경 확정 버튼 클릭시 -> select * from payment where pstaus = ?('결제완료') 
+												and oidx = (select oidx from orders where )
+										update tour set tcurrent = tcurrent - ? where tdate = ?(기존 예약 날짜)
 										 update tour set tcurrent = tcurrent + ? where tdate = ? (새로 변경 요청한 날짜)
 										 
 			

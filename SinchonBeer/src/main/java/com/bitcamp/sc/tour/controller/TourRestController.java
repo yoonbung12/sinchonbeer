@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bitcamp.sc.tour.domain.TourInfo;
+import com.bitcamp.sc.tour.domain.TourDto;
 import com.bitcamp.sc.tour.service.TourService;
 import com.bitcamp.sc.tour.service.impl.TourServiceImpl;
 

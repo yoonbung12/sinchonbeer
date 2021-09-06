@@ -90,3 +90,6 @@ a:visited{
 .ui-datepicker{
     margin: 0 auto;
 }
+.outline_del > input:focus {
+	outline: none;
+}

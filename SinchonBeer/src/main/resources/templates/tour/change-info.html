@@ -38,8 +38,8 @@
             <div class="col-4">
                 <p>신청자명</p>
             </div>
-            <div class="col-4 text-left">
-                <p>홍길동</p>
+            <div class="col-4 text-left outline_del">
+                <input type="text" value="홍길동"  readonly class="border-0">
             </div>
             <div class="col-4 ">
             </div>
@@ -56,9 +56,9 @@
             <div class="col-4">
                 <p>일시</p>
             </div>
-            <div class="col-4 text-left">
-                <!--모달 취소버튼 클릭시 원래 있던 데이터 값 보여지게 -->
-                <p id="result">2021-09-01</p>
+            <div class="col-4 text-left outline_del">
+                
+                <input type="text" id="result" value="2021-09-01" name="tdate" class="border-0" readonly>
             </div>
             <div class="col-4">
                 <input type="button" value="예약 일시 변경" id="btn-changeDate" class="chDate_input color_input">
@@ -69,16 +69,16 @@
             <div class="col-4">
                 <p>인원</p>
             </div>
-            <div class="col-4 text-left">
-                <p>2명</p>
+            <div class="col-4 text-left outline_del">
+                <input type="text" value="2"  class="border-0" readonly >
             </div>
         </div>
         <div class="row m-3">
             <div class="col-4">
                 <p>휴대폰 번호</p>
             </div>
-            <div class="col-4 text-left">
-                <p>010-1111-2222</p>
+            <div class="col-4 text-left outline_del">
+               <input type="text" value="010-1111-2222" class="border-0" readonly>
             </div>
         </div>
         <div class="inline-row2"></div>
@@ -144,7 +144,7 @@
             /* modal 확인/취소 버튼 */
             modalConfirm(function (confirm) {
                 if (confirm) {
-					if()
+					
                     $("#result").html($('#check').val());
                 } else {
 
@@ -178,9 +178,6 @@
                 , changeYear: true //option값 년 선택 가능
                 , changeMonth: true //option값  월 선택 가능                
                 , showOn: 'focus' //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
-                // , buttonImage: "https://brewery.jejubeer.co.kr/static/images/reservationRenew/img_icon_calendar.png" //버튼 이미지 경로
-                // , buttonImageOnly: true //버튼 이미지만 깔끔하게 보이게함
-
                 , buttonText: "선택" //버튼 호버 텍스트              
                 , yearSuffix: "년" //달력의 년도 부분 뒤 텍스트
                 , monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'] //달력의 월 부분 텍스트
@@ -191,15 +188,8 @@
                 , minDate: "-5y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
                 , maxDate: "+5y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
                 , beforeShowDay: noBefore
-                , beforeShow: function (input) {
-                    var i_offset = $(input).offset(); //클릭된 input의 위치값 체크
-                    setTimeout(function () {
-                        $('#ui-datepicker-div').css({
-                            'top': i_offset.top + 75,
-                            'bottom': '',
-                            'left': i_offset.left
-                        });      //datepicker의 div의 포지션을 강제로 input 위치에 그리고 좌측은 모바일이여서 작기때문에 무조건 10px에 놓았다.
-                    })
+                , beforeShow: function () {
+               
                 }
                 , onSelect: function () {
                     var date = $('#datepicker').val();
@@ -219,13 +209,13 @@
             					if(data == 0 ){
             						$('#count').text('이미 예약이 완료되었습니다.');	
             					}else{
-            					$('#count').text('가능인원: '+data);            						
+            						$('#count').text('가능인원: '+data);            						
             					}
             			},
             			complete:function(){
             				
             			}
-            		});   
+            		});   /* ajax 끝 */
                     
                 }
             });
@@ -245,22 +235,13 @@
         function noBefore(date) {
             // 현재 날짜 가져오기
             var cur = new Date();
-         //    console.log(cur);
-
          // 가져온 날짜의 연,월,일 저장
             var curYear = cur.getFullYear();
             var curMonth = cur.getMonth();
             var curDay = cur.getDate();
-            /* console.log(curYear);
-            console.log(curMonth);
-            console.log(curDay); */
-
          //   그 달의 말일을 구하는 함수 : js 는 0 부터 11 까지로 표현 (0 -> 1월 / 0> 1일)  -> 각각 자리는 year,month,day 
          // datepicker 에서 보여지는 날짜가 다음날 부터가 기본 값이므로 day 자리에 0이 아닌 1부터 시작 ->해당 월의 마지막 일 정상 출력                      
             var next = new Date(curYear,curMonth+2,1);
-
-         //    console.log('next='+next);
-
          /* 
              if ( date < cur ) {
                  return [false];
@@ -271,8 +252,7 @@
              // 현재 날짜 보다 이전이거나 다음달 말일 이후인 경우에는 사용 불가
               if ( cur >=  date || date >= next  ) {
                  return [false];
-             } 
-            
+             }            
                  return [true];     
         }
     </script>
