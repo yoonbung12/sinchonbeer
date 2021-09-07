@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.bitcamp.sc.member.domain.LoginInfo;
 import com.bitcamp.sc.member.domain.Member;
-import com.bitcamp.sc.member.repository.MemberDao;
+import com.bitcamp.sc.member.mapper.MemberDao;
 import com.bitcamp.sc.member.service.MemberService;
 
 @Service
@@ -34,7 +34,7 @@ public class MemberServiceImpl implements MemberService{
 		return loginInfo;
 	}
 
-	
+	//회원가입에 필요한 메소드 - 아이디 중복방지 메소드. 회원 DB에 추가하는 메소드.
 	
 	public boolean login(String email, String pw, String reEmail, HttpSession session, HttpServletResponse response) {
 		
@@ -69,5 +69,11 @@ public class MemberServiceImpl implements MemberService{
 		
 		return loginChk;
 
+	}
+
+	@Override
+	public int joinMember(Member member) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

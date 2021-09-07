@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitcamp.sc.member.repository.MemberDao">
+
+<resultMap type="com.bitcamp.sc.member.domain.Member" id="MemberDomain">
+		<result property="idx" column="midx"/>
+		<result property="email" column="memail"/>
+		<result property="pw" column="mpw"/>
+		<result property="name" column="mname"/>
+		<result property="phone" column="mphone"/>
+	</resultMap>
+
+	<select id="selectByEmailPw"
+		resultType="com.bitcamp.sc.member.domain.Member"
+		resultMap="MemberDomain">
+		select * from member where memail=#{param1} and mpw=#{param2}
+	</select>
+	
+	<select id="selectByEmail"
+		resultType="com.bitcamp.sc.member.domain.Member"
+		resultMap="MemberDomain">
+		select * from member where memail=#{param1}
+	</select>
+	
+	<insert id="insertMember"
+		parameterType="com.bitcamp.sc.member.domain.Member"
+		useGeneratedKeys="true"
+		keyProperty="idx"
+	>
+		insert into project.member (memail, mpw, mname, mphone) 
+		values(#{memail}, #{mpw}, #{mname}, #{mphone})
+	</insert>
+	
+</mapper>
