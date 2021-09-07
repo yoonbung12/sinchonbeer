@@ -32,13 +32,12 @@
 	<div class="my-5 text-center">
 		<h1 class="font-weight-bold">예약하기</h1>
 	</div>
-
 	<div class="container">
 		<form th:action="@{/tour/final}" method="post">
 			<input type="hidden" th:value="${tour.selectDate}" name="selectDate">
-			<input type="hidden" th:value="${tour.count*tour.price}" name="price">
+			<input type="hidden" th:value="${tour.tourPeople*tour.price}" name="price">
 			<input type="hidden" th:value="${tour.category}" name="category">
-			<input type="hidden" th:value="${tour.count}" name="count"> 
+			<input type="hidden" th:value="${tour.tourPeople}" name="tourPeople"> 
 			<div class="row">
 				<div class="col-lg border mx-2">
 
@@ -50,7 +49,7 @@
 							
 						</dd>
 						<dt class="dt-left float-left">인원</dt>
-						<dd class="dd-right" th:text="${tour.count}+명" id="count"></dd>
+						<dd class="dd-right" th:text="${tour.tourPeople}+명" id="count"></dd>
 						
 					</dl>
 					<hr>
@@ -110,7 +109,7 @@
 						<dd class="d-inline-block float-right">
 							<div class="form-check">
 								<label class="form-check-label"> <input type="radio"
-									class="form-check-input" name="agreementPrivacy">동의
+									class="form-check-input ck-btn" name="agreementPrivacy">동의
 								</label>
 							</div>
 						</dd>
@@ -146,7 +145,7 @@
 						<dd class="d-inline-block float-right">
 							<div class="form-check">
 								<label class="form-check-label"> <input type="radio"
-									class="form-check-input" name="agreementRefund">동의
+									class="form-check-input ck-btn" name="agreementRefund">동의
 								</label>
 							</div>
 						</dd>
@@ -161,8 +160,6 @@
 						<dd class="dd-right">결제금액에 대한 취소 수수료없음</dd>
 					</dl>
 
-
-
 					<dl class="mt-5 border-bottom p-3">
 						<dt class="d-inline-block">이용 규정에 대한 동의</dt>
 
@@ -171,12 +168,10 @@
 								data-target="#agreementTermsModal">
 								<div class="form-check">
 									<label class="form-check-label"> <input type="radio"
-										class="form-check-input" id="agreementTermsOfUse"
+										class="form-check-input ck-btn" id="agreementTermsOfUse"
 										name="agreementTermsOfUse">확인 후 동의 
 								</div>
 							</a>
-
-
 						</dd>
 					</dl>
 
@@ -185,13 +180,13 @@
 							<h2 class="font-weight-bold">결제 금액</h2>
 						</dt>
 						<dd class="text-right py-2">
-							<h2 class="font-weight-bold" th:text="${tour.count *tour.price}+원"></h2>
+							<h2 class="font-weight-bold" th:text="${tour.tourPeople*tour.price}+원"></h2>
 						</dd>
 
 						<dt class="float-left pt-3">
-							정상가 <span class="small" th:text="${tour.price} +원 + x + ${tour.count} +명"></span>
+							정상가 <span class="small" th:text="${tour.price} +원 + x + ${tour.tourPeople} +명"></span>
 						</dt>
-						<dd class="text-right pt-3" th:text="${tour.count * tour.price}+원"></dd>
+						<dd class="text-right pt-3" th:text="${tour.tourPeople * tour.price}+원"></dd>
 
 						<dt class="pt-3">할인</dt>
 						<dd class="text-right"></dd>
@@ -199,7 +194,7 @@
 
 					<dl class="pt-3 px-3">
 						<dt class="float-left">합계</dt>
-						<dd  class="text-right" th:text="${tour.count * tour.price}+ 원"></dd>
+						<dd  class="text-right" th:text="${tour.tourPeople * tour.price}+ 원"></dd>
 							
 					</dl>
 
@@ -271,16 +266,10 @@
 			</div>
 		</form>
 	</div>
-	
+	<!-- content 끝  -->
 	<th:block th:include="frame/footer"></th:block>
 	
-	
-	
-	
-	
-	
-	
-	
+
 	 <script>
 	 // 날짜 선택
 	 var reDate = $('#appendDate').text();
@@ -302,12 +291,19 @@
             $('#agreementTermsOfUse').prop('checked', true);
         });
      	
-     	// 결제 수단 선택 시 약관 동의 버튼 체크 
-        $('.form-check-label').on('click',function(){
-        	if($('.form-check-input:nth-child()').prop);
+     	// 결제 수단 선택 시 약관 동의 버튼 체크 여부 확인
+        $('input[name=paymentType]').on('click',function(){
+        	if(!$('input[name=agreementPrivacy]').is(':checked') || 
+        			!$('input[name=agreementTermsOfUse]').is(':checked') ||
+        			!$('input[name=agreementRefund]').is(':checked') ){
+        		alert("동의 버튼을 클릭해주세요.");
+        		$(this).focus();
+        		return false;
+        	}else{
+        		
+        	}
         });
-       /* $('.form-check-input')*/		
-        // slide button 켜고, 늘렸다 줄일 경우 button close 처리
+      
        
         
     </script>	
