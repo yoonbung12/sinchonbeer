@@ -1,5 +1,7 @@
 package com.bitcamp.sc.tour.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +26,19 @@ public class TourRestController {
 		System.out.println(date);
 		return service.selectCount(date);
 	}
-	
+	// 예약 변경 확정 버튼 클릭 처리 -> orders테이블 tidx 수정 -> tour 테이블 날짜 각각 인원 수정
+	@PostMapping("/tour/changeTour")
+	public void changeTour(@RequestParam Map<String,Object> params) {
+		// ajax로 넘겨받은 값
+//		int midx =(Integer) params.get("midx");
+//		System.out.println(midx);
+//		String resDate =(String) params.get("resDate");
+//		String newDate =(String) params.get("newDate");
+		
+		service.changeTourOrder(params);
+		
+		
+	}
 
 	
 

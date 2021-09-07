@@ -1,6 +1,6 @@
 2021-09-05 : - demo 프로젝트에서 jdbcTemplateDao 구현 및 테스트  로그인 체크 여부를 위한 authService + session 이용  
 			 - 예약 변경 -> 결제 테이블에서 결제 완료 
-
+예약 변경시점에 바꾸려는 날짜의 예약이 다 찬다면?
 
 투어 ::  로그인이 필요한 페이지 : pick-date / change-info 
 1. pick-date form에서 데이터 보내고 뒤로가기 클릭시 인원선택란[select]부분이 초기화가 안되고 전에 데이터 그대로 남아있는 문제
