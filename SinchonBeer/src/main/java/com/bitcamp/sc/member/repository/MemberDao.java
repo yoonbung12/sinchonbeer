@@ -1,4 +1,4 @@
-package com.bitcamp.sc.member.mapper;
+package com.bitcamp.sc.member.repository;
 
 import com.bitcamp.sc.member.domain.Member;
 

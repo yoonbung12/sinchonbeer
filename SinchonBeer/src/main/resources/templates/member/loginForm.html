@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>신촌 맥주 : 로그인</title>
+<!-- metaheader 영역 -->
+<link rel="stylesheet" th:href="@{/css/member/loginForm.css}">
+<th:block th:replace="frame/metaheader"></th:block>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<script>
+  $(document).ready(function(){
+	
+	$('#loginForm').submit(function(){
+		if($('#memail').val()==''){
+			alert('아이디를 입력해 주세요.');
+			return false;
+		}
+		if($('#mpw').val()==''){
+			alert('비밀번호를 입력해 주세요.');
+			return false;
+		}
+		$.ajax({
+			url:'/login',
+			type:'post',
+			data:{
+				memail : $('#memail').val(),
+				mpw : $('#mpw').val(),
+			},
+			success : function(data){
+				console.log(data);
+				if(data == false){
+					alert('아이디 혹은 비밀번호를 잘못 입력하셨습니다.');
+					location.reload();
+				}else{
+					alert('로그인 되셨습니다.');
+					history.go(-1);
+					//location.href='/tour';
+				}					
+			},
+			error:function(request, status, error){
+				alert('서버 통신에 문제가 발생했습니다. 다시 실행해주세요.');
+				console.log("code:" + request.status + "\n" + "error:" + error);
+			},
+			
+		}); 
+		
+		
+	});
+	
+});  
+</script>
+
+</head>
+<body>
+
+	<!-- header 영역 -->
+	<th:block th:replace="frame/header_logout"></th:block>
+
+	<!-- nav 영역 -->
+	<th:block th:replace="frame/nav"></th:block>
+
+	<!-- content 영역 ---------------------------------------------------------->
+	<!-- 내가만든 로그인 영역// -->
+	<!-- login 메인 전체 영역 -->
+	<div id="loginMain_wrap">
+		<div class="loginTitle">LOGIN</div>
+		<div id="loginSection">
+			<!-- login 입력양식 -->
+			<form id=loginForm method="post">
+				<div class="form_box margin_top">
+					<input type="email" placeholder="이메일" id="memail" name="memail"
+						"${cookie.reEmail.value}" class="loginLongBox"> 
+					<input type="password" placeholder="비밀번호" name="mpw" id="mpw" class="loginLongBox">
+				</div>
+				<div class="cookie_chk margin_top">
+					<input type="checkbox" id="emailChk" value="on" 
+					${cookie.reEmail ne null? 'checked' : '' }> 
+					<label for="emailChk" >이메일 기억하기</label>
+					<!-- <input type="hidden" name="redirectUri" value="${param.referer}"> -->
+				</div>
+				<div class="margin_top">
+					<input type="submit" value="로그인" class="loginLongBox">
+				</div>
+			</form>
+			<!-- login 이 외의 링크 -->
+			<div id="middle" class="margin_top">
+				<a th:href="@{/join/type}">회원가입</a> 
+				<a href="" class="float_right">이메일/비밀번호 찾기</a>
+			</div>
+			<div class="margin_top">
+				<a href="" class="kakao_start loginLongBox">카카오로 시작하기</a>
+			</div>
+
+		</div>
+	</div>
+	
+
+	<!-- // 로그인 영역 --------------------------------------------------------------->
+
+	<!-- footer 영역 -->
+	<th:block th:replace="frame/footer"></th:block>
+
+</body>
+</html>
