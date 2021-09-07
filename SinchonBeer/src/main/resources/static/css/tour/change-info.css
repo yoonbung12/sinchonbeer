@@ -93,3 +93,13 @@ a:visited{
 .outline_del > input:focus {
 	outline: none;
 }
+.color_text{
+	background-color:#1ecad3;
+	color: white;
+}
+.color-red{
+	color:red;
+}
+.color-blue{
+	color:blue;
+}
