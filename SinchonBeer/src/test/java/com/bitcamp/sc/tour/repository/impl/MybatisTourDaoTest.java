@@ -1,9 +1,12 @@
 package com.bitcamp.sc.tour.repository.impl;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.AfterEach;
@@ -18,15 +21,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bitcamp.sc.member.domain.Member;
 import com.bitcamp.sc.member.repository.MemberDao;
 import com.bitcamp.sc.order.repository.impl.MemoryOrderDao;
+import com.bitcamp.sc.tour.domain.TourOrderInfo;
 
 @SpringBootTest
 public class MybatisTourDaoTest {
 	
 	@Autowired
 	MybatisTourDao dao;
-
-	
-
 	
 	@Test
 	@Transactional
@@ -43,7 +44,6 @@ public class MybatisTourDaoTest {
 		//then
 //		assertNotNull(result, "정상적으로 가져옴");
 		assertEquals(12, result);
-		
 		
 	}
 	
@@ -82,8 +82,17 @@ public class MybatisTourDaoTest {
 		// 바뀌는 예약 날짜
 		String newDate = "2021-09-12";
 		Date nDate = Date.valueOf(newDate);
+		String category = "tour";
 		
-		//select: 주문 테이블에서 투어예약 내역 조회
+		//select: 주문 테이블에서  회원의 투어예약 내역을 조회 화면에 뿌려줌 -> 
+		// 회원이 날짜를 선택 해당 날짜의 가능인원 여부를 비동기 통신으로 가져옴 -> 
+		// 바뀐 날짜가 선택되고 예약 변경 확정 버튼을 누르게 되면 회원번호와 새로운 날짜가 파라미터로 전송 -> 
+		// 주문 테이블에 있는 투어번호키가 새로운 날짜로 update 바뀜 - > 
+		// 동시에 투어에 기존예약 날짜의 인원은 (-) -> 바뀐예약 날짜의 인원은 (+)  
+		List<TourOrderInfo> selectTourOrders = new ArrayList<>();
+		selectTourOrders = dao.getTourOrderByMidx(midx, category);
+		assertThat(selectTourOrders.size()).isEqualTo(1);
+		
 		
 		//update: 주문 테이블 tidx 변경
 		dao.changeDateByMidx(midx, nDate);
@@ -106,8 +115,7 @@ public class MybatisTourDaoTest {
 		
 			
 //		System.out.println(member.getIdx());
-		
-		
+				
 	}
 	
 	
