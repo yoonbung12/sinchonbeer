@@ -1,18 +1,17 @@
 package com.bitcamp.sc.order.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.ArrayList;
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bitcamp.sc.member.domain.Member;
 import com.bitcamp.sc.member.repository.MemberDao;
 import com.bitcamp.sc.member.service.impl.MemberServiceImpl;
 import com.bitcamp.sc.order.domain.OrderInfo;
@@ -25,8 +24,9 @@ class OrderServiceTest {
 	MemberServiceImpl memberService;
 	@Autowired
 	OrderServiceImpl orderService;
-	@Autowired
 	MemberDao memberDao;
+	@Autowired
+	SqlSessionTemplate template;
 	
 	@Test
 	@Transactional
@@ -52,16 +52,34 @@ class OrderServiceTest {
 	}
 	
 	@Test
-	void getMemberTest() {
+	@Transactional
+	@Rollback(true)
+	@DisplayName("주문정보를 잘못 넣으면 주문 생성이 실패된다")
+	void createOrderTestFail() {
 		// given
+		// String category, int price, int tourIdx, int tourPeople, int memberIdx, int addressIdx
+		OrderInfo orderInfo1 = new OrderInfo("tour", 0, 60, 3, 2, 1);
+		OrderInfo orderInfo2 = new OrderInfo("tour", 3000, 0, 3, 2, 1);
+		OrderInfo orderInfo3 = new OrderInfo("tour", 3000, 60, 0, 2, 1);
+		OrderInfo orderInfo4 = new OrderInfo("tour", 3000, 60, 3, 0, 1);
 		
 		// when
-		Member member = memberDao.selectByEmail("cool2");
-		
 		// then
-		
-		System.out.println(member);
+		assertThrows(IllegalStateException.class, () -> {
+			orderService.createOrder("tour", orderInfo1);
+		});
+		assertThrows(DataIntegrityViolationException.class, () -> {
+			orderService.createOrder("tour", orderInfo2);
+		});
+		assertThrows(IllegalStateException.class, () -> {
+			orderService.createOrder("tour", orderInfo3);
+		});
+		assertThrows(DataIntegrityViolationException.class, () -> {
+			orderService.createOrder("tour", orderInfo4);
+		});
 	}
+	
+	
 	
 //	@Test
 //	void getOrderInfoTest() {
