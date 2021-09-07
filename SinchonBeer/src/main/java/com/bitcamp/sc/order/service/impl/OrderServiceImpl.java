@@ -65,7 +65,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	private void validateShopOrder(OrderInfo orderInfo) {
-		if (orderInfo.getCategory().equals("") || orderInfo.getPrice() == 0 || orderInfo.getMemberIdx() == 0) {
+		if (orderInfo.getCategory().equals("") || orderInfo.getPrice() == 0 || orderInfo.getMemberIdx() == 0
+				|| orderInfo.getAddressIdx() == 0) {
 			throw new IllegalStateException("상품 주문 정보가 누락됐습니다. 다시 입력해주세요.");
 		}
 	}
