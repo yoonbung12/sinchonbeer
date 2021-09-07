@@ -21,7 +21,7 @@ mybatis:
       - com/bitcamp/sc/tour/dao/mapper/**/*.xml 
       - mapper/**/*.xml
       
-      - com/bitcamp/sc/member/repository/mapper/**/*.xml
+      - com/bitcamp/sc/member/mapper/*.xml
    
      
 server:
