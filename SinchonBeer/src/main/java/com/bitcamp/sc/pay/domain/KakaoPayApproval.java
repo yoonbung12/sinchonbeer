@@ -1,6 +1,6 @@
 package com.bitcamp.sc.pay.domain;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import lombok.Data;
 
@@ -22,7 +22,7 @@ public class KakaoPayApproval {
 	private int quantity;
 	private int tax_free_amount;
 	private int vat_amount;
-	private Date created_at;
-	private Date approved_at;
+	private Timestamp created_at;
+	private Timestamp approved_at;
 	
 }
