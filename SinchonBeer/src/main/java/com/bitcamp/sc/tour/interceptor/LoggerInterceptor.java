@@ -33,8 +33,8 @@ public class LoggerInterceptor implements HandlerInterceptor {
 			String destUri = request.getRequestURI();
             String destQuery = request.getQueryString();
             String dest = (destQuery == null) ? destUri : destUri+"?"+destQuery;
-         logger.info("destQuery===>"+request.getQueryString());
-         logger.info("dest====>"+dest);
+            logger.info("destQuery===>"+request.getQueryString());
+            logger.info("dest====>"+dest);
             request.getSession().setAttribute("dest", dest);
         
             response.sendRedirect("/login");
@@ -45,20 +45,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
 
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-			String result =(String)request.getAttribute("fail");
-			if(result =="N") {
 				
-			}
-//			Object data = modelAndView.getModel().get("tourOrderList");
-//			if(data != null) {
-//				request.getSession().setAttribute("tourOrderList", data);
-//				response.sendRedirect("/tour/change-info");
-//			}
-		
-		
-		
-		
-		
 		logger.info("==================== END ======================");
 		logger.info("===============================================");
 	}
