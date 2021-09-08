@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<h2>카카오페이 결제가 정상적으로 완료되었습니다.</h2>
+	확인 버튼을 눌려주세요.
+	
+	<button onclick="sucSubmit();">확인</button>
+	
+	<script>
+		function sucSubmit() {
+			window.close();
+		}
+		
+		window.onunload = () => {
+			opener.location.href = "/paySuccess?payIdx=[[${payIdx}]]";
+		}
+	</script>
+
+</body>
+</html>

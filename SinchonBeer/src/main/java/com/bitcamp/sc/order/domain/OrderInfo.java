@@ -2,16 +2,10 @@ package com.bitcamp.sc.order.domain;
 
 import java.sql.Timestamp;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
 public class OrderInfo {
 	private int idx;
