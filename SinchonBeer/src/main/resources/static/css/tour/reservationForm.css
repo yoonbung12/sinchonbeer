@@ -25,11 +25,19 @@ a:visited{
 .submenu_wrap ul a{
     display: block;
     padding: 0 50px;
+    color:black;
 }
 
 .submenu_wrap a:hover{
     background-color: #1ecad3;
     color: white;
+}
+#currentPage{
+    background-color: #1ecad3;
+    color: white;
+}
+#selectPage{
+    color: #1ecad3;
 }
 
 /* submenu의 세부 메뉴 영역 */
@@ -47,6 +55,7 @@ a:visited{
     display: block;
     padding: 0 50px;
     font-size: 14px;
+    color:black;
 }
 
 .detail_menu a:hover{

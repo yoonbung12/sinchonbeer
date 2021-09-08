@@ -19,7 +19,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bitcamp.sc.member.domain.Member;
-import com.bitcamp.sc.member.repository.MemberDao;
 import com.bitcamp.sc.order.repository.impl.MemoryOrderDao;
 import com.bitcamp.sc.tour.domain.TourOrderInfo;
 
