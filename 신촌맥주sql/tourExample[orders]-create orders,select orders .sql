@@ -1,4 +1,7 @@
 select * from orders;
+-- 주문 정보를 가져오는 sql
+select mname,date_format(tdate,'%Y-%m-%d') as tdate,tpeople,mphone from orders natural join member natural join tour where midx = 3 and ocategory='tour';
+
 -- 예약 변경 주문 테이블
 update orders set tidx = (select tidx from tour where tdate = '2021-09-07') where midx =3;
 -- 예약 변경 [기존 날짜]

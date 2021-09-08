@@ -17,7 +17,7 @@
 	<div class="submenu_wrap">
 		<ul>
 			<li><a href="/tour/info">투어 안내</a></li>
-			<li><a href="/tour/pick-date">예약</a></li>
+			<li><a href="/tour/pick-date"  id="currentPage">예약</a></li>
 			<li><a href="/tour/notice">투어 공지</a></li>
 		</ul>
 	</div>
@@ -34,6 +34,7 @@
 	</div>
 	<div class="container">
 		<form th:action="@{/tour/final}" method="post">
+			<input type="hidden" th:value="${session.loginInfo.idx}" name="midx">
 			<input type="hidden" th:value="${tour.selectDate}" name="selectDate">
 			<input type="hidden" th:value="${tour.tourPeople*tour.price}" name="price">
 			<input type="hidden" th:value="${tour.category}" name="category">
@@ -201,13 +202,13 @@
 					<div class="form-check">
 						<div class="pl-3 float-left">
 							<input type="radio" class="form-check-input" name="paymentType"
-								id="paymentTypeCard"> <label for="paymentTypeCard"
+								id="paymentTypeCard" value="card"> <label for="paymentTypeCard"
 								class="form-check-label"> 신용카드 </label>
 						</div>
 
 						<div class="mg-left-50 text-right pr-3">
 							<input type="radio" class="form-check-input" name="paymentType"
-								id="paymentTypeBank"> <label for="paymentTypeBank"
+								id="paymentTypeBank" value="bankTransfer"> <label for="paymentTypeBank"
 								class="form-check-label"> 실시간 계좌이체 </label>
 						</div>
 					</div>
@@ -286,7 +287,7 @@
 	 
         // 동의 후 확인 클릭
         $('#modalButton').click(function() {
-            console.log('hi')
+            
             $('#agreementTermsOfUse').val('Y');
             $('#agreementTermsOfUse').prop('checked', true);
         });
@@ -300,11 +301,11 @@
         		$(this).focus();
         		return false;
         	}else{
-        		
+        	       console.log($('input[name=paymentType]:checked').val());
         	}
         });
       
-       
+
         
     </script>	
 	

@@ -2,7 +2,7 @@
 			 - 예약 변경 -> 결제 테이블에서 결제 완료 
 예약 변경시점에 바꾸려는 날짜의 예약이 다 찬다면?
 
-투어 ::  로그인이 필요한 페이지 : pick-date / change-info 
+투어 ::  로그인이 필요한 페이지 : pick-date / change-info --> interceptor 처리 //  
 1. pick-date form에서 데이터 보내고 뒤로가기 클릭시 인원선택란[select]부분이 초기화가 안되고 전에 데이터 그대로 남아있는 문제
 
 2. orders -> 현재 로그인한 멤버의 정보(loginInfo??)
