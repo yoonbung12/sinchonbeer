@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,13 +67,13 @@ class OrderServiceTest {
 		assertThrows(IllegalStateException.class, () -> {
 			orderService.createOrder("tour", orderInfo1);
 		});
-		assertThrows(DataIntegrityViolationException.class, () -> {
+		assertThrows(IllegalStateException.class, () -> {
 			orderService.createOrder("tour", orderInfo2);
 		});
 		assertThrows(IllegalStateException.class, () -> {
 			orderService.createOrder("tour", orderInfo3);
 		});
-		assertThrows(DataIntegrityViolationException.class, () -> {
+		assertThrows(IllegalStateException.class, () -> {
 			orderService.createOrder("tour", orderInfo4);
 		});
 	}

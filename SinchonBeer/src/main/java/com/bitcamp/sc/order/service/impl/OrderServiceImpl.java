@@ -25,9 +25,9 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public int createOrder(String type, OrderInfo orderInfo) {
-		orderInfo = orderDao.save(orderInfo);
-
 		validateOrderInfo(type, orderInfo);
+		
+		orderInfo = orderDao.save(orderInfo);
 
 		return orderInfo.getIdx();
 	}
@@ -39,12 +39,22 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<OrderInfo> getOrdersInfos(String type, String memberId) {
+	public List<OrderInfo> getOrderInfos(String memberId) {
+		LoginInfo loginInfo = memberService.getMember(memberId);
+
+		List<OrderInfo> orderInfos = orderDao.findByMemberIdx(loginInfo.getIdx());
+
+		return orderInfos;
+	}
+	
+	@Override
+	public List<OrderInfo> getOrderInfosByType(String type, String memberId) {
 		LoginInfo loginInfo = memberService.getMember(memberId);
 
 		List<OrderInfo> orderInfos = orderDao.findByCategoryAndMemberIdx(type, loginInfo.getIdx());
 
 		return orderInfos;
+		
 	}
 
 	private void validateOrderInfo(String type, OrderInfo orderInfo) {
