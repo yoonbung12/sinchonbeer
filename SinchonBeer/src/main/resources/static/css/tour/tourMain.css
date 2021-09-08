@@ -32,6 +32,7 @@ p {
 .submenu_wrap ul a{
     display: block;
     padding: 0 50px;
+    color:black;
 }
 
 .submenu_wrap a:hover{

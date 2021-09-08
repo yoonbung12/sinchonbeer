@@ -11,13 +11,21 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
+	<!-- 투어의 예약 정보가 존재하지 않을 경우 -->
+ 	<div th:if="${#lists.isEmpty(tourOrderList)}">
+		<script>
+			alert('예약 정보가 존재하지 않습니다.\n예약 화면으로 이동합니다.');
+			location.href='/tour/pick-date';
+		</script>
+	</div> 
+
 	<th:block th:include="frame/header_login"></th:block>
 	<th:block th:include="frame/nav"></th:block>
 	<!-- submenu 영역 -->
 	<div class="submenu_wrap">
 		<ul>
 			<li><a href="/tour/info">투어 안내</a></li>
-			<li><a href="/tour/pick-date">예약</a></li>
+			<li><a href="/tour/pick-date" id="currentPage">예약</a></li>
 			<li><a href="/tour/notice">투어 공지</a></li>
 		</ul>
 	</div>
@@ -27,8 +35,12 @@
 			<li><a href="/tour/change-info" id="selectPage">예약 확인/취소</a></li>
 		</ul>
 	</div>
+	
+
+
 	<!-- contetn 영역 -->
-	<div class="container text-center p-2">
+	<div th:unless="${#lists.isEmpty(tourOrderList)}">
+		<div class="container text-center p-2">
 			<div th:each="list : ${tourOrderList}">
 				<div class="row  mt-5 ">
 					<div class="col">
@@ -41,7 +53,9 @@
 						<p>신청자명</p>
 					</div>
 					<div class="col-4 text-left outline_del">
-						<input type="text" th:value="${list.mname}" readonly class="border-0">
+						<input type="text" th:value="${list.mname}" readonly
+							class="border-0">
+						<input type="hidden" id="idx" th:value="${session.loginInfo.idx}">	
 					</div>
 					<div class="col-4 "></div>
 				</div>
@@ -58,8 +72,10 @@
 						<p>일시</p>
 					</div>
 					<div class="col-4 text-left outline_del">
-						<input type="text" id="newDate" th:value="${list.tdate}" name="newDate" class="border-0" readonly>
-						<input type="hidden" id="resDate" th:value="${list.tdate}" name="resDate" >
+						<input type="text" id="newDate" th:value="${list.tdate}"
+							name="newDate" class="border-0" readonly> <input
+							type="hidden" id="resDate" th:value="${list.tdate}"
+							name="resDate">
 					</div>
 					<div class="col-4">
 						<input type="button" value="예약 일시 변경" id="btn-changeDate"
@@ -71,7 +87,8 @@
 						<p>인원</p>
 					</div>
 					<div class="col-4 text-left outline_del">
-						<input type="text" id="tourPeople" th:value="${list.tpeople}" class="border-0" readonly>
+						<input type="text" id="tourPeople" th:value="${list.tpeople}"
+							class="border-0" readonly>
 					</div>
 				</div>
 				<div class="row m-3">
@@ -79,49 +96,54 @@
 						<p>휴대폰 번호</p>
 					</div>
 					<div class="col-4 text-left outline_del">
-						<input type="text" th:value="${list.mphone}" class="border-0" readonly>
+						<input type="text" th:value="${list.mphone}" class="border-0"
+							readonly>
 					</div>
 				</div>
 				<div class="inline-row2"></div>
 				<div class="row ">
 					<div class="col-12 col-sm-6 p-3">
-						<input type="submit" value="예약일시 변경 확정" id="confirmedDateBtn" class="set_input color_input"> 
-					<!-- <input type="hidden" value="tour" name="category" id="category"> -->	
+						<input type="submit" value="예약일시 변경 확정" id="confirmedDateBtn"
+							class="set_input color_input">
+						<!-- <input type="hidden" value="tour" name="category" id="category"> -->
 					</div>
 					<div class="col-12 col-sm-6 p-3">
-						<input type="submit" value="예약 취소" id="cancleBtn" class="set_input color_cancle">
+						<input type="submit" value="예약 취소" id="cancleBtn"
+							class="set_input color_cancle">
 					</div>
 				</div>
 			</div>
-	</div>
-	<!-- content 영역 끝 -->
+		</div>
+		<!-- content 영역 끝 -->
 
-	<!-- modal control -->
-	<div class="modal fade" tabindex="-1" role="dialog"
-		aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">날짜 변경</h4>
-				</div>
-				<div class="modal-body">
-					<div class="row text-center">
-						<div class=" col-12 col-lg-6 border">
-							<div id="datepicker"></div>
-						</div>
-						<div class="col-12 col-lg-6 border ">
-							<input id="check" type="text" class="mt-5 text-center"> <br> 
-							<span id="count"></span> <br>
-							<p>
-								*예약을 변경하시려면 변경을 원하시는 <br> 날짜를 선택하여 주시고,<br> 변경버튼 클릭 뒤 
-								<span class="color_text">예약일시 변경 확정</span> 버튼을<br> 클릭하셔야 변경이 완료됩니다.
-							</p>
+		<!-- modal control -->
+		<div class="modal fade" tabindex="-1" role="dialog"
+			aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">날짜 변경</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row text-center">
+							<div class=" col-12 col-lg-6 border">
+								<div id="datepicker"></div>
+							</div>
+							<div class="col-12 col-lg-6 border ">
+								<input id="check" type="text" class="mt-5 text-center">
+								<br> <span id="count"></span> <br>
+								<p>
+									*예약을 변경하시려면 변경을 원하시는 <br> 날짜를 선택하여 주시고,<br> 변경버튼 클릭 뒤
+									<span class="color_text">예약일시 변경 확정</span> 버튼을<br> 클릭하셔야
+									변경이 완료됩니다.
+								</p>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" id="modal-btn-si">변경</button>
-					<button type="button" class="btn btn-warning" id="modal-btn-no">변경취소</button>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" id="modal-btn-si">변경</button>
+						<button type="button" class="btn btn-warning" id="modal-btn-no">변경취소</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -130,17 +152,33 @@
 
 	<script>
 		$(function() {
+			console.log($('#idx').val());
+			/* 	 // 날짜 선택
+				 var reDate = $('#newDate').text();
+				// 해당 날짜의 요일을 리턴하는 함수	
+				  function day(reDate){
+			           var week=['월','화','수','목','금','토','일'];
+			           var dayOfWeek = week[new Date(reDate).getDay()];
+			       return dayOfWeek;
+				   }
+				  // 리턴된 요일을 날짜에 append로 추가 
+				  var result = day(reDate);
+				   $('#newDate').append(' ('+result+')'); */
+
 			/* modal 관리 js */
 			var modalConfirm = function(callback) {
 
-				$("#btn-changeDate").on("click", function() {
-					$("#mi-modal").modal('show');
-					$("#datepicker").datepicker("setDate",'+1D' );
-					var c= 	$("#datepicker").datepicker("setDate",'+1D' ).val();
-					console.log(c);	
-					$('#count').text('');
-					
-				});
+				$("#btn-changeDate").on(
+						"click",
+						function() {
+							$("#mi-modal").modal('show');
+							$("#datepicker").datepicker("setDate", '+1D');
+							var c = $("#datepicker").datepicker("setDate",
+									'+1D').val();
+							console.log(c);
+							$('#count').text('');
+
+						});
 
 				$("#modal-btn-si").on("click", function() {
 					callback(true);
@@ -166,43 +204,41 @@
 			$('#confirmedDateBtn').on('click', function() {
 				if (confirm('변경된 예약일로 바꾸시겠습니까?') == true) {
 					// 새로운 날짜 선택을 하지 않았을 경우
-					if($('#newDate').val() == $('#resDate').val()){
+					if ($('#newDate').val() == $('#resDate').val()) {
 						alert('변경된 내역이 없습니다.');
 						return false;
-					}else{
-						
-					// 변경된 날짜	
-					var newDate = $('#newDate').val();
-					// 현재 날짜
-					var resDate = $('#resDate').val();
-					// 임의 midx -> 나중에 수정
-					var midx = 3;
-					// 
-					$.ajax({
-						url : '/tour/changeTour',
-						type : 'post',
-						data : {
-							"newDate" : newDate,
-							"resDate" : resDate,
-							"midx" : midx
-						},
-						success : function(data) {
+					} else {
 
-						//	console.log(data);
-							alert('예약이 변경되었습니다.');
-						// 현재 페이지 다시로드	
-							location.reload();
-							
-						},
-						complete : function() {
+						// 변경된 날짜	
+						var newDate = $('#newDate').val();
 
-						}
-					}); /* ajax 끝 */
+						// 현재 날짜
+						var resDate = $('#resDate').val();
+						// 임의 midx -> 나중에 수정
+						var midx = $('#idx').val();
+						// 
+						$.ajax({
+							url : '/tour/changeTour',
+							type : 'post',
+							data : {
+								"newDate" : newDate,
+								"resDate" : resDate,
+								"midx" : midx
+							},
+							success : function(data) {
+
+								//	console.log(data);
+								alert('예약이 변경되었습니다.');
+								// 현재 페이지 다시로드	
+								location.reload();
+
+							},
+							complete : function() {
+
+							}
+						}); /* ajax 끝 */
 					}
-					
-					
-					
-					
+
 				} else {
 					location.reload();
 					return false;
@@ -259,11 +295,11 @@
 						,
 						beforeShowDay : noBefore,
 						beforeShow : function() {
-							
+
 						},
 						onSelect : function() {
 							var date = $('#datepicker').val();
-							
+
 							console.log(date);
 							$('#check').val(date);
 
@@ -276,13 +312,15 @@
 								success : function(data) {
 									var tpeople = $('#tourPeople').val();
 									console.log(data);
-									if(data == 0 || tpeople > data){
+									if (data == 0 || tpeople > data) {
 										$('#count').text('예약이 완료되었습니다.');
-										  $("#modal-btn-si").attr("disabled", true);
-									}
-									 else {
+										// 예약 가능인원이 0 이거나 현재 예약한 인원보다 적게 남았을 경우 선택창 비활성화
+										$("#modal-btn-si").attr("disabled",
+												true);
+									} else {
 										$('#count').text('가능인원: ' + data);
-										$("#modal-btn-si").attr("disabled", false);
+										$("#modal-btn-si").attr("disabled",
+												false);
 									}
 								},
 								complete : function() {
@@ -295,12 +333,12 @@
 
 			//초기값을 오늘 날짜로 설정해줘야 합니다.
 			//$('#datepicker').datepicker('setDate', '+1D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
-			
+
 		});
-		function noSelectCountZero(data){
-			
-				return [ false ];
-			
+		function noSelectCountZero(data) {
+
+			return [ false ];
+
 		}
 
 		// 현재 날짜 이전의 날짜는 선택 비활성화

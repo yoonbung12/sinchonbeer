@@ -36,7 +36,6 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	public int joinMember(Member member) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 }
