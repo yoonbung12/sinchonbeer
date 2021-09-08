@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.bitcamp.sc.member.repository.MemberDao">
 
-<resultMap type="com.bitcamp.sc.member.domain.Member" id="MemberDomain">
+	<resultMap type="com.bitcamp.sc.member.domain.Member" id="MemberDomain">
 		<result property="idx" column="midx"/>
 		<result property="email" column="memail"/>
 		<result property="pw" column="mpw"/>
