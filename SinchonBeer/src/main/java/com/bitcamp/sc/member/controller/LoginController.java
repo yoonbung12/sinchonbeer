@@ -32,18 +32,23 @@ public class LoginController {
 	}
 	// 원래
 	@RequestMapping(method = RequestMethod.POST)
-	public   boolean login(
+	@ResponseBody
+	public Object login(
 			@RequestParam("memail") String email, 
 			@RequestParam("mpw") String pw,
-			//@RequestParam(value = "redirectUri", required = false) String redirectUri, 
+			@RequestParam(value = "redirectUri", required = false) String redirectUri, 
 			@RequestParam(value = "reEmail", required = false) String reEmail, 
 			HttpSession session, //로그인 정보에 대한 session
 			HttpServletResponse response, //쿠키를 받기위한 response
 			Model model
 			) {
 		System.out.println(email+": "+pw);
+		//model.addAttribute();
+		
 		//사용자가 입력한 정보를 서비스에서 처리하고 결과 받아오기
-		return loginService.login(email, pw, reEmail, session, response);
+		Boolean loginChk = loginService.login(email, pw, reEmail, session, response);
+		
+		return model;
 	}
 	
 	
