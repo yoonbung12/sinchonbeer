@@ -13,6 +13,4 @@ public interface TourService {
 	// 주문에 투어 예약 정보 변경
 	void changeTourOrder(Map<String,Object> params);
 
-
-
 }

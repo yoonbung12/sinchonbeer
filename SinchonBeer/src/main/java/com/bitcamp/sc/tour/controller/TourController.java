@@ -93,7 +93,7 @@ public class TourController {
 	// 주문 테이블로 넘기기 위한 객체 맵핑 테스트 -> 성공
 	@RequestMapping(value="/final",method = RequestMethod.POST)
 	public String getFinal(@ModelAttribute TourDto tour,
-							@RequestParam("paymentType") String pway,
+							@RequestParam("pType") String pway,
 							Model model) {
 		
 		System.out.println(tour);
