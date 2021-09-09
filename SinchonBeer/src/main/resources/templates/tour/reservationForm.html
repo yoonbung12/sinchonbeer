@@ -7,8 +7,6 @@
 
 <link rel="stylesheet" th:href="@{/css/tour/reservationForm.css}">
 <th:block th:include="frame/metaheader"></th:block>
-
-
 </head>
 <body>
 	<th:block th:include="frame/header_login"></th:block>
@@ -34,7 +32,7 @@
 	</div>
 	<div class="container">
 		<form th:action="@{/tour/final}" method="post" id="payForm">
-			<input type="hidden" th:value="${session.loginInfo.idx}" name="midx">
+			<input type="hidden" th:value="${session.loginInfo.idx}" name="midx" id="midx">
 			<input type="hidden" th:value="${tour.selectDate}" name="selectDate">
 			<input type="hidden" th:value="${tour.tourPeople*tour.price}" name="price">
 			<input type="hidden" th:value="${tour.category}" name="category">
@@ -43,7 +41,6 @@
 		</form>	
 			<div class="row">
 				<div class="col-lg border mx-2">
-
 					<dl class="my-5">
 						<dt class="dt-left float-left">프로그램 명</dt>
 						<dd class="dd-right">제주맥주 양조장 투어</dd>
@@ -56,7 +53,7 @@
 						
 					</dl>
 					<hr>
-					<!-- 인증, 이메일 부분은 나중에 지금 x  -->	
+					
 					<div class="form-group my-5 pb-3">
 						<label for="username" class="control-label required">신청자명</label>
 						<input type="text" class="form-control form-control-lg" id="username">
@@ -65,9 +62,7 @@
 					<label for="userphone" class="control-label required">핸드폰 번호</label>
 					<div class="input-group mb-5 pb-3">
 						<!--인증 번호 발송   -->
-						<form action="/sendMessage" method="post" id="messageForm">
 							<input type="text" class="form-control form-control-lg" name="phoneNumber" id="userphone">
-						</form>	
 						<div class="input-group-append">
 							<button class="btn btn-sinchon" id="submitMessage">인증번호 발송</button>
 						</div>
@@ -76,11 +71,9 @@
 					<label for="certnum" class="control-label required">인증 번호</label>
 					<!-- 전송받은 인증번호 입력란  -->
 					<div class="input-group mb-5 pb-3">
-						<form action="/verifyCode" id="checkNum">
-							<input type="text" name="verifyCode" class="form-control form-control-lg" id="certnum">
-						</form>		
+							<input type="text" name="verifyCode" class="form-control form-control-lg" id="verifyNum">
 						<div class="input-group-append">
-							<button class="btn btn-secondary" id="submitNum">확인</button>
+							<button class="btn btn-secondary" id="checkNum">확인</button>
 						</div>
 					</div>
 
@@ -98,11 +91,8 @@
 						<div class="input-group-append">
 							<button class="btn btn-sinchon">쿠폰 추가</button>
 						</div>
-					</div>
-					<!-- 나중 구현 영역 끝 -->				
-												
+					</div>													
 				</div>
-
 				<div class="col-lg border mx-2">
 					<dl class="my-5 border-bottom p-3">
 						<dt class="d-inline-block">
@@ -268,33 +258,89 @@
 					</div>
 				</div>
 
-			</div>
-		
+			</div>		
 	</div>
 	<!-- content 끝  -->
 	<th:block th:include="frame/footer"></th:block>
 	
-
 	 <script>
 	 $(function(){
+		 let midx = $('#midx').val();
+			// 정규식 : 숫자만 가능 11자리		 
+		//	var regexp = /^[0-9]{11}*$/	
+		// 숫자만 입력가능한 input
+		 $("input:text[name=phoneNumber]").keyup(function(e) {
+		 reg = /[^0-9]/gi;
+		         v = $(this).val();
+		         if (reg.test(v)) {
+		             $(this).val(v.replace(reg, ''));
+		             $(this).focus();
+		         }
+		 });
+	 
 		 // 문자 인증 : 이름,이메일은 세션에 저장된 loginInfo를 통해 가져옴 ->
 		 // 휴대전화는 직접 입력 (db 멤버 휴대전화 번호와 비교할지?) ->
-		 // 인증번호 전송 버튼 : 입력된 휴대 전화 번호로 6자리 난수 전송 -> ajax url:'/sendMessage type:'post' ->
-		 // 받은 번호로 밑에 박스에 인증번호 입력 -> 확인 버튼 클릭 : ajax url:'/verifyCode type: get' ->
+		 // 인증번호 전송 버튼 : 입력된 휴대 전화 번호로 6자리 난수 전송 -> ajax url:'/sendMessage type:'get' ->
+		 // 전송한 인증번호와 사용자가 입력한 인증번호가 같은지 검증 -> 
 		 // 일치 : alert(인증 확인) 
 		 // 불일치 : alert('인증번호가 일치 하지 않습니다. 다시 입력해주세요.') location.reload()? 
 				 
 		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
+		 $('#submitMessage').on('click',function(){
+			 let phone = $('#userphone').val();
+			
+			 console.log(phone);
+			 $.ajax({
+				 url : '/verifyMyPhone',
+				 type : 'get',
+				 data : {
+					 phone : phone					
+				 },
+				 success : function(result){
+					 if(result == 'N'){
+						 alert('등록된 번호가 아닙니다. \n 다시 시도해주세요.');
+						 return false;
+					 }
+					 
+					 $.ajax({
+						 url : '/sendMessage',
+						 type : 'get',
+						 data : {
+							 phone : phone
+						 	},
+						 success : function(res){
+							 console.log(res);
+							 $('#checkNum').on('click',function(){
+								 if(res == $('#verifyNum').val()){
+									 alert('인증 성공! \n 휴대폰 인증이  정상적으로 완료되었습니다.');
+									 // 확인 박스 상태 변경
+									 $('#verifyNum').val('');
+									 $('#checkNum').attr('disabled','disabled');
+									
+								 }else{
+									 alert('인증오류 \n 인증번호가 올바르지 않습니다.\n 다시 인증해주세요.');
+									 location.reload();
+								 }
+							 });
+						 },
+						 error : function(res){
+							 // 에러 처리
+						 }
+					 });
+					 
+					 
+				 },
+				 
+				 error : function(){
+					 // 에러 처리
+				 }
+
+				 
+			 });
+			 
+					 
+		 });
+		 		 
 		 var payHow = $('#payHow').val();
 		 console.log(payHow);
 		 var reDate = $('#appendDate').text();
@@ -328,9 +374,7 @@
 				      	      console.log($('#payHow').val());
 				      	      
 				      		}
-				      	});
-		     	
-		     	
+				      	});		     	
 		    // 결제수단 체크 확인 후 orders로 보내기 위한 form 
 		     	$('#paySubmit').on('click',function(){
 		     		if($('#payHow').val()==''){
@@ -341,18 +385,8 @@
 		     		$('#payForm').submit();
 		     	});
 	 });
-	
-
-      
-
-        
+   
     </script>	
-	
-	
-	
-	
-	
-	
-	
+
 </body>
 </html>

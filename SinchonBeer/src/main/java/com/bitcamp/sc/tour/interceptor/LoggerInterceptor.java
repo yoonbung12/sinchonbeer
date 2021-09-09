@@ -30,14 +30,18 @@ public class LoggerInterceptor implements HandlerInterceptor {
 		if(info !=null) {
 			return true;
 		}else {
+
 			String destUri = request.getRequestURI();
             String destQuery = request.getQueryString();
             String dest = (destQuery == null) ? destUri : destUri+"?"+destQuery;
             logger.info("destQuery===>"+request.getQueryString());
             logger.info("dest====>"+dest);
             request.getSession().setAttribute("dest", dest);
-        
             response.sendRedirect("/login");
+			
+				 
+			
+         
             return false;
 		}
 		
