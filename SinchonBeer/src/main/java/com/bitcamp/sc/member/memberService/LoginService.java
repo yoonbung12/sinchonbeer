@@ -33,6 +33,10 @@ public class LoginService {
 			session.setAttribute("loginInfo", member.toLoginInfo());
 			loginChk = true;
 		}
+		
+		
+		
+		
 		//이메일 기억하기 쿠키
 		if(reEmail != null && reEmail.length() > 0) {
 			//기억하기 체크하면 쿠키에 저장

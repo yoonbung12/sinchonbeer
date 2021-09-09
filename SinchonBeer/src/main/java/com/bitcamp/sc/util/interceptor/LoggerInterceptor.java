@@ -1,4 +1,4 @@
-package com.bitcamp.sc.tour.interceptor;
+package com.bitcamp.sc.util.interceptor;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,16 +31,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
 			return true;
 		}else {
 
-			String destUri = request.getRequestURI();
-            String destQuery = request.getQueryString();
-            String dest = (destQuery == null) ? destUri : destUri+"?"+destQuery;
-            logger.info("destQuery===>"+request.getQueryString());
-            logger.info("dest====>"+dest);
-            request.getSession().setAttribute("dest", dest);
             response.sendRedirect("/login");
-			
-				 
-			
          
             return false;
 		}
