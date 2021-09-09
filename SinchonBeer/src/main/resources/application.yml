@@ -17,8 +17,6 @@ spring:
        
 mybatis:
   mapper-locations: 
-      - com/bitcamp/app/member/mapper/**/*.xml
-      - com/bitcamp/sc/tour/dao/mapper/**/*.xml 
       - mapper/**/*.xml  
       - com/bitcamp/sc/member/mapper/**/*.xml
 
