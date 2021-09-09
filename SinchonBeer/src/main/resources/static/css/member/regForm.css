@@ -1,0 +1,88 @@
+@charset "UTF-8";
+/* 전체 영역 */
+*{
+    margin:0;
+    padding:0;
+}
+*::selection{
+    background-color: #1ecad3;
+    color:white;
+}
+.margin_bottom{
+    margin-bottom:25px;
+}
+#main_wrap{
+    width:400px;
+    margin:0 auto;
+}
+/* 회원가입 타이틀 공통 ----------------------------------------------*/
+.title{
+    margin-top:40px;
+    text-align:center;
+    color:#1ecad3;
+    font-size:2.2rem;
+    font-weight:bold;
+}
+/* 제목 아래 작은 문구 부분 */
+.small_text{
+    font-size:14px;
+    text-align: center;
+    height:40px;
+    margin:5px 0 20px 0;
+}
+/* ----------------------------------------------------------------- */
+/* 아이디와 비밀번호 */
+label{
+    display: block;
+    font-size: 13.5px;
+    margin:10px 0;
+}
+/* 가입하기 버튼 제외한 input박스 */
+#main_wrap input:not(.submit_btn){
+    width:388px;
+    height:40px;
+    padding-left:10px;
+    /* margin:0 auto; */
+    /* margin:5px 0 20px 0; */
+}
+input:focus:not(.submit_btn){
+    outline:none;
+}
+
+/* 붙어있는 박스-아이디/비번, 주소 */
+.idpwForm_box, .address_box{
+    border:1px solid #ccc;
+}
+.idpwForm_box input, .address_box input{
+    border:none;
+}
+.idpwForm_box input[type=pw], .address_box>.box{
+    border-top:1px solid #ccc;
+}
+/* 이름, 연락처 */
+#username, #phone{
+    border:1px solid #ccc;
+
+}
+.submit_btn{
+    width:400px;
+    height:40px;
+    background-color: #1ecad3;
+    color:white;
+    font-size: 12.5px;
+    cursor: pointer;
+    border:none;
+    margin:15px 0;
+}
+
+/* 라벨의 아이콘 */
+.icon_orange{
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    background: #f25656;
+    border-radius: 50%;
+    margin-left: 5px;
+    vertical-align: 2px;
+}
+

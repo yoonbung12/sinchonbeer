@@ -4,6 +4,7 @@ import com.bitcamp.sc.member.domain.LoginInfo;
 import com.bitcamp.sc.member.domain.Member;
 
 public interface MemberService {
+	
 	LoginInfo getMember(String memail); 
 	//회원가입
 	int joinMember(Member member);
