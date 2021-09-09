@@ -21,49 +21,18 @@ public class LoginController {
 
 	@Autowired
 	LoginService loginService;
-
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping( method = RequestMethod.GET)
 	public String loginForm(
 			//로그인 성공시 되돌아 갈 이전 페이지
-			//@RequestHeader(value = "referer", required = false) String redirectUri, 
-			//Model model
+			@RequestHeader(value = "referer", required = false) String redirectUri, 
+			Model model
 			) {
-		//model.addAttribute("redirectUri", redirectUri);
+		model.addAttribute("redirectUri", redirectUri);
 		return "/member/loginForm";
 	}
 	// 원래
-//	@RequestMapping(method = RequestMethod.POST)
-//	@ResponseBody
-//	public  boolean login(
-//			@RequestParam("memail") String email, 
-//			@RequestParam("mpw") String pw,
-//			//@RequestParam(value = "redirectUri", required = false) String redirectUri, 
-//			@RequestParam(value = "reEmail", required = false) String reEmail, 
-//			HttpSession session, //로그인 정보에 대한 session
-//			HttpServletResponse response, //쿠키를 받기위한 response
-//			Model model
-//			) {
-//		System.out.println(email+": "+pw);
-//		//사용자가 입력한 정보를 서비스에서 처리하고 결과 받아오기
-//		boolean loginChk = loginService.login(email, pw, reEmail, session, response);
-//	
-////		model.addAttribute("loginChk", loginChk);
-////		System.out.println(loginChk);
-//		//String view/* = "/login" */;
-//		
-//		//로그인 성공시 이전페이지 이력이 있다면 그 페이지로 되돌아가기.
-////		if(redirectUri != null && loginChk) {
-////			view = "redirect : "+redirectUri;
-////		}else {
-////			view = "/member/login";
-////		}
-//
-//		return loginChk;
-//	}
-//	
-	
 	@RequestMapping(method = RequestMethod.POST)
-	public  String login(
+	public   boolean login(
 			@RequestParam("memail") String email, 
 			@RequestParam("mpw") String pw,
 			//@RequestParam(value = "redirectUri", required = false) String redirectUri, 
@@ -74,17 +43,9 @@ public class LoginController {
 			) {
 		System.out.println(email+": "+pw);
 		//사용자가 입력한 정보를 서비스에서 처리하고 결과 받아오기
-		boolean loginChk = loginService.login(email, pw, reEmail, session, response);
-		if(loginChk) {
-		 String dest = (String)session.getAttribute("dest");
-         String redirect = (dest == null) ? "/tour" : dest;
-         return "redirect:"+redirect;
-		}
-		System.out.println("로그인 실패");
-		
-		return "redirect:/login";
-
+		return loginService.login(email, pw, reEmail, session, response);
 	}
+	
 	
 	
 	

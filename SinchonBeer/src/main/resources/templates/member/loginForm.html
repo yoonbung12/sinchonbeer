@@ -30,8 +30,14 @@
 			success : function(data){
 				console.log(data);
 				
+				if(data == true){
+					alert('로그인 성공');
+					console.log($('#referer').val());
+					location.href=$('#referer').val(); 
+				}else{
 					alert('로그인 실패');
-					location.reload();
+					
+				}
 								
 			},
 			error:function(request, status, error){
@@ -73,7 +79,7 @@
 					<input type="checkbox" id="emailChk" value="on" 
 					${cookie.reEmail ne null? 'checked' : '' }> 
 					<label for="emailChk" >이메일 기억하기</label>
-					<!-- <input type="hidden" name="redirectUri" value="${param.referer}"> -->
+					<input type="text" name="redirectUri" th:value="${redirectUri}" id="referer">
 				</div>
 				<div class="margin_top">
 					<input type="submit" value="로그인" class="loginLongBox">
