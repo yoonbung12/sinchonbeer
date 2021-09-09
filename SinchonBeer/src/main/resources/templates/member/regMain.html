@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>신촌 맥주 : 회원가입</title>
+<!-- metaheader 영역 -->
+<link rel="stylesheet" th:href="@{/css/member/regMain.css}">
+<th:block th:replace="frame/metaheader"></th:block>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+
+	<!-- header 영역 -->
+	<th:block th:replace="frame/header_logout"></th:block>
+
+	<!-- nav 영역 -->
+	<th:block th:replace="frame/nav"></th:block>
+
+	<!-- content 영역 ---------------------------------------------------------->
+    <!-- 내가만든 회원가입 영역// -->
+     <!-- 회원가입 메인 전체 영역 -->
+     <div id="main_wrap">
+        <h1>JOIN</h1>
+        <div class="small_text"><P>안녕하세요 제주맥주입니다.</P></div>
+        <p class="button regBut "><a th:href="@{/join/agree}">ID/PW 회원가입</a></p>
+        <hr>
+        <p class="button regKa"><a href="">카카오로 시작하기</a></p>
+    </div>
+
+    <!-- // 회원가입 영역 --------------------------------------------------------------->
+
+	<!-- footer 영역 -->
+	<th:block th:replace="frame/footer"></th:block>
+
+</body>
+</html>
