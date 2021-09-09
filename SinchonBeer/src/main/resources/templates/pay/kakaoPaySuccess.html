@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>kakaoPaySuccess</h1>
+	
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+		document.location = "/kakaoPayComplete?payIdx=[[${payIdx}]]";
+	/*]]>*/
+	</script>
+	
+	
+
+</body>
+</html>
