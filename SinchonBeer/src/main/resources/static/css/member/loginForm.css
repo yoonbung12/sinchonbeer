@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /* 전체 영역 */
 *{
     margin:0;
@@ -79,7 +78,7 @@
     cursor: pointer;
 }
 /*로그인 쿠키 체크박스 */
-#idChk{
+#emailChk{
     width:15px;
     height:15px;
 }
