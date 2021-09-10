@@ -37,9 +37,12 @@ public class TourServiceImpl implements TourService {
 		Date resDate = Date.valueOf((String) params.get("resDate"));
 		Date newDate = Date.valueOf((String) params.get("newDate"));
 
-		dao.changeDateByMidx(midx, newDate);	
-		dao.addTourPeople(midx, newDate);
-		dao.subTourPeople(midx, resDate);
+		int result = dao.changeDateByMidx(midx, newDate);
+		if(result == 1) {
+			dao.addTourPeople(midx, newDate);
+			dao.subTourPeople(midx, resDate);
+		}
+		
 	}
 
 	
