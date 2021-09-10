@@ -70,7 +70,7 @@ $(document).ready(function () {
             name.addClass('red_outline');
             return false;
         } else { //이름의 한글입력 제한
-            var nameExp = /^[가-힣a-zA-]+$/;
+            var nameExp = /^[가-힣a-zA-Z]+$/;
             if (!nameExp.test($(name).val().trim())) {
                 $('#username+div.msg').html('<p>이름을 올바르게 입력해주세요.</p>');
                 $('#username+div.msg').css('display', 'block');
