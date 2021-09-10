@@ -3,11 +3,10 @@ package com.bitcamp.sc.member.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.bitcamp.sc.member.domain.MemberRegRequest;
+import com.bitcamp.sc.member.domain.RegRequest;
 import com.bitcamp.sc.member.memberService.MemberRegService;
 
 @Controller
@@ -33,18 +32,13 @@ public class MemberRegController {
 	//회원가입 성공/실패 화면
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String reg(
-			@ModelAttribute("regRequest") MemberRegRequest regRequest,
-			Model model
+			//@ModelAttribute("regRequest") MemberRegRequest regRequest,
+			RegRequest regRequest
 			) {
 		int result = regService.regMember(regRequest);
-		model.addAttribute("result", result);
+		//model.addAttribute("result", result);
 		
-		String view = "/reg";
-//		if(result == 1) {
-//			//회원가입 성공하면 로그인 페이지로 이동하기
-//			view = "redirect:/login";
-//		}
-		return view;
+		return "/member/reg";
 	}
 	
 }
