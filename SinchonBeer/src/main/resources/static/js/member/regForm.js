@@ -42,7 +42,7 @@ $(document).ready(function () {
             return false;
         }
         else {
-            var pwExp = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[~!@#$%^&*<>?]).{8,30}$/i;
+            var pwExp = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[~!@#$%^&*<>?]).{8,30}$/i;
             if//비밀번호의 입력양식 제한
                 (!pwExp.test($(pw).val().trim())) {
                 $('#repw+div.msg').html('<p>영어, 숫자, 특수기호 모두를 포함해서 8~30자리 입력해 주세요.</p>')
