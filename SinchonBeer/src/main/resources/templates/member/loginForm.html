@@ -44,8 +44,13 @@
 						// uri 정보 + result : boolean 
 						if (data.result == true) {
 							alert('로그인 성공');
-							// 
-							location.href = data.refererUri;
+							//로그인 성공했지만 이전페이지가 없다면 메인페이지로 이동하기.
+							if (allData[2] == null) {
+								console.log('redirect uri가 없어');
+								location.href = '/';
+							} else {
+								location.href = data.refererUri;
+							}
 						} else {
 							alert('로그인 실패');
 							allData[2] = data.refererUri;
