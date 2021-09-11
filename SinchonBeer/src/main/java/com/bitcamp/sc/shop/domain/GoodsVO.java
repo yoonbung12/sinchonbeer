@@ -20,5 +20,10 @@ public class GoodsVO {
 	private String photo; //상품이미지
 	private String text; // 상품 상세 설명
 	
-	
+	public GoodsVO(String gname, int price, String photo, String text) {
+		this.gname = gname;
+		this.price = price;
+		this.photo = photo;
+		this.text = text;
+	}
 }
