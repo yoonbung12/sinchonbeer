@@ -4,14 +4,14 @@ var element_wrap;
 $(document).ready(function () {
 
     //script(1) submit : 주소를 제외하고 빈칸 없이 입력해야만 회원가입이 넘어감. -------------------------------------
-
+/*
     var email = $('#email');
     var pw = $('#pw');
     var repw = $('#repw');
     var name = $('#username');
     var phone = $('#phone');
 
-    $('#regInputForm').submit(function () {
+    $('#submitBtn').on('click',function () {
 
         //이메일 공백일 경우 메시지 출력
         if (email.val().trim().length < 1) {
@@ -41,14 +41,14 @@ $(document).ready(function () {
 
             return false;
         }
-        else {
-            var pwExp = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[~!@#$%^&*<>?]).{8,30}$/i;
-            if//비밀번호의 입력양식 제한
-                (!pwExp.test($(pw).val().trim())) {
+        else {  //비밀번호의 입력양식 제한
+            var pwExp = /^(?=.*[a-zA-Z])((?=.*\d)(?=.*\W)).{8,20}$/;
+            if (!pwExp.test($(pw).val().trim())) {
                 $('#repw+div.msg').html('<p>영어, 숫자, 특수기호 모두를 포함해서 8~30자리 입력해 주세요.</p>')
                 $('#repw+div.msg').css('display', 'block');
                 pw.addClass('red_outline');
                 repw.addClass('red_under_outline');
+                console.log(pw.val());
                 return false;
             }
         }
@@ -79,6 +79,7 @@ $(document).ready(function () {
                 
             }
         }
+        
         if (phone.val().trim().length < 1) {
             $('#phone+div.msg').html('<p>필수항목입니다.</p>');
             $('#phone+div.msg').css('display', 'block');
@@ -126,12 +127,38 @@ $(document).ready(function () {
         $('#phone+div.msg').html('');
         phone.removeClass('red_outline')
     });
-
+*/
     // script (2) 아이디 중복 체크----------------------------------------------------------------
-    //$.ajax()
 
+/*$('#email').focusout(function() {
 
+			$.ajax({
+				url : '/emailCheck',
+				type : 'post',
+				contentType: 'application/json; charset=UTF-8',
+				data : {"memail" : $(this).val()},
+				success : function(data) {
+					console.log(data);
+					// data : Y / N
+					console.log('data success 접근 성공');
+					if (data == 'N') {
+						console.log('중복되었음');
+						$('#email + div.msg').html('<p>중복된 이메일입니다.</p>');
+			            $('#email + div.msg').css('display', 'block');
+			            $('#email').addClass('red_outline');
+			            return false;
+					}else{
+						console.log('중복되지 않았음');
+						
+					}
+				},
+				error : function(request, status, error) {
+					alert('서버 통신에 문제가 발생했습니다. 다시 실행해주세요.');
+				},
+			});
 
+		});
+*/
 
 
     // script (3) 카카오 주소 api ---------------------------------------------------------------

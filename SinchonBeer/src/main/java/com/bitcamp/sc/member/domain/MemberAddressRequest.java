@@ -1,14 +1,10 @@
 package com.bitcamp.sc.member.domain;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
 public class MemberAddressRequest {
 
@@ -17,6 +13,7 @@ public class MemberAddressRequest {
 	private String address2;
 	
 	public MemberAddress toMemberAddress() {
-		return new MemberAddress(0,0,this.postcode, this.address1, this.address2);
+		System.out.println("toMemberAddress() 메소드 진입 성공");
+		return new MemberAddress(0,0, postcode, address1, address2);
 	}
 }

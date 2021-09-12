@@ -2,7 +2,6 @@ package com.bitcamp.sc.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,18 +26,27 @@ public class MemberRegController {
 	//회원가입 폼
 	@RequestMapping(value="/join", method=RequestMethod.GET)
 	public String regForm() {
+		System.out.println("get 방식 진입 성공");
 		return "member/regForm";
 	}
 	//회원가입 성공/실패 화면
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String reg(
 			//@ModelAttribute("regRequest") MemberRegRequest regRequest,
+			//RegRequest regRequest
 			RegRequest regRequest
+			
 			) {
+		System.out.println("post 방식 진입 성공");
 		int result = regService.regMember(regRequest);
-		//model.addAttribute("result", result);
+		System.out.println("[controller]DB insert성공 했다면 1 반환, 못했다면 0 반환"+result);
 		
 		return "/member/reg";
 	}
+	
+//	@RequestMapping(value="/join/success", method=RequestMethod.GET)
+//	public String regSuccess() {
+//		return "/member/reg";
+//	}
 	
 }
