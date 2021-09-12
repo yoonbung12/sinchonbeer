@@ -13,4 +13,7 @@ public interface GoodsDao {
 	// 02.상품삭제
 	public void deleteGoods(int idx);
 	
+	// 03.상품정보
+	public GoodsVO findIdx(int idx);
+	
 }
