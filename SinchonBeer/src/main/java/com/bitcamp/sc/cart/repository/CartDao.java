@@ -10,7 +10,7 @@ public interface CartDao {
 	public CartVO insertCart(CartVO vo);
 	
 	// 2.장바구니 리스트
-	public List<CartVO> listCart(String memberIdx); // 멤버번호로
+	public List<CartVO> listCart(int memberIdx); // 멤버번호로
 	
 	// 3.장바구니 삭제
 	public void deleteCart(int idx);
