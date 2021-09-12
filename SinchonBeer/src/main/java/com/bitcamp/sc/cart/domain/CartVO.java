@@ -18,4 +18,11 @@ public class CartVO {
 	private int memberIdx; // 멤버 번호
 	private int goodsIdx; // 상품 번호
 	
+	
+	public CartVO(int count, int memberIdx, int goodsIdx) {
+		this.count = count;
+		this.memberIdx = memberIdx;
+		this.goodsIdx = goodsIdx;
+	}
+	
 }
