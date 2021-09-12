@@ -343,6 +343,7 @@
 		 		 
 		 var payHow = $('#payHow').val();
 		 console.log(payHow);
+		 
 		 var reDate = $('#appendDate').text();
 			// 해당 날짜의 요일을 리턴하는 함수	
 			  function day(reDate){
@@ -360,7 +361,7 @@
 		            $('#agreementTermsOfUse').prop('checked', true);
 		        });
 		     	
-		     	// 결제 수단 선택 시 약관 동의 버튼 체크 여부 확인
+		    // 결제 수단 선택 시 약관 동의 버튼 체크 여부 확인
 					$('input[name=paymentType]').on('click',function(){
 				      	if(!$('input[name=agreementPrivacy]').is(':checked') || 
 				      			!$('input[name=agreementTermsOfUse]').is(':checked') ||
@@ -375,6 +376,9 @@
 				      	      
 				      		}
 				      	});		     	
+		    // 
+		    
+		    
 		    // 결제수단 체크 확인 후 orders로 보내기 위한 form 
 		     	$('#paySubmit').on('click',function(){
 		     		if($('#payHow').val()==''){
