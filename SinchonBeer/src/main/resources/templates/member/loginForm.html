@@ -33,40 +33,41 @@
 			"redirectUri" : $('#referer').val()
 		};
 
-		$
-				.ajax({
-					url : '/login',
-					type : 'post',
-					contentType : "application/json",
-					data : JSON.stringify(allData),
-					success : function(data) {
-						console.log(data);
-						// uri 정보 + result : boolean 
-						if (data.result == true) {
-							alert('로그인 성공');
-							//로그인 성공했지만 이전페이지가 없다면 메인페이지로 이동하기.
-							if (allData[2] == null) {
-								console.log('redirect uri가 없어');
-								location.href = '/';
-							} else {
-								location.href = data.refererUri;
-							}
-						} else {
-							alert('로그인 실패');
-							allData[2] = data.refererUri;
-							$('#memail').val('');
-							$('#mpw').val('');
-							return false;
-						}
+		$.ajax({
+			url : '/login',
+			type : 'post',
+			contentType : "application/json",
+			data : JSON.stringify(allData),
+			success : function(data) {
+				console.log(data);
+				// uri 정보 + result : boolean 
+				if (data.result == true) {
+					alert('로그인 성공' + " " + allData.redirectUri);
+					
+					//로그인 성공했지만 이전페이지가 없거나 회원가입 성공한 페이지가 이전 페이지라면,  메인페이지로 이동하기.
+					//if (allData[2] == null || allData[2].substring(allData[2].length-5, allData[2].length) == '/join' ) {
+					if (allData.redirectUri == "" || allData.redirectUri == null || allData.redirectUri == undefined) {
+						console.log('redirect uri가 없어');
+						location.href = '/';
+					} else {
+						location.href = data.refererUri;
+					}
+				} else {
+					alert('로그인 실패');
+					allData.redirectUri = data.refererUri;
+					$('#memail').val('');
+					$('#mpw').val('');
+					return false;
+				}
 
-					},
-					error : function(request, status, error) {
-						alert('서버 통신에 문제가 발생했습니다. 다시 실행해주세요.');
-						console.log("code:" + request.status + "\n" + "error:"
-								+ error);
-					},
+			},
+			error : function(request, status, error) {
+				alert('서버 통신에 문제가 발생했습니다. 다시 실행해주세요.');
+				console.log("code:" + request.status + "\n" + "error:"
+						+ error);
+			},
 
-				});
+		});
 	}
 </script>
 
