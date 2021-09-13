@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="com.bitcamp.sc.member.domain.Member"
 		resultMap="MemberDomain"
 		>
-		select * from member where memail=#{param1} and mpw=#{param2}
+		select * from member where memail=#{email} and mpw=#{pw}
 	</select>
 	
 	<select id="selectByEmail"
