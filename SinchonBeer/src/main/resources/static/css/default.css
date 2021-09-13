@@ -15,11 +15,6 @@ html * {
 	letter-spacing: -0.5px;
 }
 
-body {
-	font-size: 20px;
-	color: #3d464b;
-}
-
 .btn-sinchon, .btn-sinchon:hover {
 	color: white;
 	background-color: #1ecad3;
