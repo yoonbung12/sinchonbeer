@@ -20,5 +20,10 @@
 	<delete id="deleteGoods" parameterType="com.bitcamp.sc.shop.domain.GoodsVO">
 		DELETE FROM goods WHERE gidx= #{idx}
 	</delete>
+	
+	<!-- 상품 찾기 -->
+	<select id="findIdx" resultType="com.bitcamp.sc.shop.domain.GoodsVO" resultMap="GoodsDomain">
+		SELECT * FROM goods where gidx= #{idx}
+	</select>
 
 </mapper>
