@@ -42,10 +42,11 @@
 				console.log(data);
 				// uri 정보 + result : boolean 
 				if (data.result == true) {
-					alert('로그인 성공');
+					alert('로그인 성공' + " " + allData.redirectUri);
+					
 					//로그인 성공했지만 이전페이지가 없거나 회원가입 성공한 페이지가 이전 페이지라면,  메인페이지로 이동하기.
 					//if (allData[2] == null || allData[2].substring(allData[2].length-5, allData[2].length) == '/join' ) {
-					if (allData[2] == '') {
+					if (allData.redirectUri == "" || allData.redirectUri == null || allData.redirectUri == undefined) {
 						console.log('redirect uri가 없어');
 						location.href = '/';
 					} else {
@@ -53,7 +54,7 @@
 					}
 				} else {
 					alert('로그인 실패');
-					allData[2] = data.refererUri;
+					allData.redirectUri = data.refererUri;
 					$('#memail').val('');
 					$('#mpw').val('');
 					return false;

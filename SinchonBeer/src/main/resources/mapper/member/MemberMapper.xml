@@ -6,43 +6,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.bitcamp.sc.member.repository.MemberDao">
 
-	<!-- <resultMap type="com.bitcamp.sc.member.domain.Member" id="MemberDomain">
+	<resultMap type="com.bitcamp.sc.member.domain.Member" id="MemberDomain">
 		<result property="idx" column="midx"/>
 		<result property="email" column="memail"/>
 		<result property="pw" column="mpw"/>
 		<result property="name" column="mname"/>
 		<result property="phone" column="mphone"/>
-	</resultMap> -->
+	</resultMap> 
 	
 	
 
 	<select id="selectByEmailPw"
 		resultType="com.bitcamp.sc.member.domain.Member"
+		resultMap="MemberDomain"
 		>
-		<!-- resultMap="MemberDomain" -->
 		select * from member where memail=#{param1} and mpw=#{param2}
 	</select>
 	
 	<select id="selectByEmail"
 		resultType="com.bitcamp.sc.member.domain.Member"
-		
+		resultMap="MemberDomain"
 		>
-		<!-- resultMap="MemberDomain" -->
 		select * from member where memail=#{param1}
 	</select>
 	
 	<insert id="insertMember"
 		parameterType="com.bitcamp.sc.member.domain.Member"
 		useGeneratedKeys="true"
-		keyProperty="midx"
+		keyProperty="idx"
 	>
 		insert into member (memail, mpw, mname, mphone) 
-		values(#{memail}, #{mpw}, #{mname}, #{mphone})
+		values(#{email}, #{pw}, #{name}, #{phone})
 	</insert>
 	
 	<select id="selectByEmail2"
 		resultType="int"
 		>
-		select count(*) from member where memail=#{memail}
+		select count(*) from member where memail=#{email}
 	</select>
 </mapper>

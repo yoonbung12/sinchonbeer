@@ -13,15 +13,15 @@ import lombok.ToString;
 @AllArgsConstructor
 public class Member {
 
-	private int midx;
-	private String memail;
-	private String mpw;
-	private String mname;
-	private String mphone;
+	private int idx;
+	private String email;
+	private String pw;
+	private String name;
+	private String phone;
 
 	
 	public LoginInfo toLoginInfo() {
-		return new LoginInfo(this.midx, this.memail, this.mname, this.mphone);
+		return new LoginInfo(this.idx, this.email, this.name, this.phone);
 	}
 	
 }
