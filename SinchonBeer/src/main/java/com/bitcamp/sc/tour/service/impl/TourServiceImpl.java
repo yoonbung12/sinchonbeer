@@ -19,12 +19,19 @@ public class TourServiceImpl implements TourService {
 	public TourServiceImpl(MybatisTourDao dao) {
 		this.dao = dao;
 	}
-	
+	// 투어 가능 인원 가져오기
 	@Override
 	public int selectCount(String date) {
 		Date ckDate = Date.valueOf(date);
 		return dao.selectCount(ckDate);
 	}
+	
+	@Override
+	public int getTidxByTdate(String tdate) {
+		Date ckDate = Date.valueOf(tdate);
+		return dao.getTidxbyTdate(ckDate);
+	}
+	
 	// 투어 주문 정보 가져오기
 	public List<TourOrderInfo> getTourOrder(int midx,String category){
 		return dao.getTourOrderByMidx(midx, category);
@@ -51,5 +58,7 @@ public class TourServiceImpl implements TourService {
 	public Date changeToDate(String date) {
 		return Date.valueOf(date);
 	}
+
+
 	
 }
