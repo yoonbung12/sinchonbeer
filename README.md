@@ -33,7 +33,7 @@
 * Tomcat
 * MySQL
 * MyBatis
-* JSP
+* Thymeleaf
 * Ajax
 * AWS(Amazone Web Service) 배포
 
