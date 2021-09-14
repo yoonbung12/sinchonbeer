@@ -23,12 +23,15 @@ import com.bitcamp.sc.tour.service.TourService;
 import com.bitcamp.sc.tour.service.impl.TourAuthPhoneNumberService;
 import com.bitcamp.sc.tour.service.impl.TourServiceImpl;
 
+import lombok.AllArgsConstructor;
+
 @RestController
+@AllArgsConstructor
 public class TourRestController {
 
-	@Autowired
+
 	TourService service;
-	@Autowired
+	
 	TourAuthPhoneNumberService authNumberService;
 
 	@GetMapping("/tour/count")
