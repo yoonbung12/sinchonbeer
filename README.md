@@ -33,7 +33,7 @@
 * Tomcat
 * MySQL
 * MyBatis
-* JSP
+* Thymeleaf
 * Ajax
 * AWS(Amazone Web Service) 배포
 
@@ -58,3 +58,4 @@ ovenapp을 사용해 UI / UX 목업을 제작
 * 상품 및 투어 리뷰
 
 <br>
+
