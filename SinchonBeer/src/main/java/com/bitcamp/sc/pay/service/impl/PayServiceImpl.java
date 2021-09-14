@@ -61,12 +61,12 @@ public class PayServiceImpl implements PayService {
 
 	public PayInfo approvalToPayInfo(KakaoPayApproval approval) {
 		PayInfo payInfo = PayInfo.builder()
-								.price(approval.getAmount().getTotal())
-								.date(approval.getApproved_at())
-								.way("kakaopay")
-								.status("complete")
-								.orderIdx(Integer.parseInt(approval.getPartner_order_id()))
-								.build();
+								 .price(approval.getAmount().getTotal())
+								 .date(approval.getApproved_at())
+								 .way("kakaopay")
+								 .status("complete")
+								 .orderIdx(Integer.parseInt(approval.getPartner_order_id()))
+								 .build();
 		return payInfo;
 	}
 
