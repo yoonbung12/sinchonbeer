@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bitcamp.sc.member.domain.LoginInfo;
 import com.bitcamp.sc.member.service.MemberService;
 import com.bitcamp.sc.order.domain.OrderInfo;
 import com.bitcamp.sc.order.repository.OrderDao;
@@ -39,19 +38,15 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<OrderInfo> getOrderInfos(String memberId) {
-		LoginInfo loginInfo = memberService.getMember(memberId);
-
-		List<OrderInfo> orderInfos = orderDao.findByMemberIdx(loginInfo.getIdx());
+	public List<OrderInfo> getOrderInfos(int memberIdx) {
+		List<OrderInfo> orderInfos = orderDao.findByMemberIdx(memberIdx);
 
 		return orderInfos;
 	}
 	
 	@Override
-	public List<OrderInfo> getOrderInfosByType(String type, String memberId) {
-		LoginInfo loginInfo = memberService.getMember(memberId);
-
-		List<OrderInfo> orderInfos = orderDao.findByCategoryAndMemberIdx(type, loginInfo.getIdx());
+	public List<OrderInfo> getOrderInfosByType(String type, int memberIdx) {
+		List<OrderInfo> orderInfos = orderDao.findByCategoryAndMemberIdx(type, memberIdx);
 
 		return orderInfos;
 		
