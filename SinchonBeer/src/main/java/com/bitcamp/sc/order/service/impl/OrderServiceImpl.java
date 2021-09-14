@@ -25,7 +25,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public int createOrder(String type, OrderInfo orderInfo) {
 		validateOrderInfo(type, orderInfo);
-		
+
 		orderInfo = orderDao.save(orderInfo);
 
 		return orderInfo.getIdx();
@@ -43,13 +43,12 @@ public class OrderServiceImpl implements OrderService {
 
 		return orderInfos;
 	}
-	
+
 	@Override
 	public List<OrderInfo> getOrderInfosByType(String type, int memberIdx) {
 		List<OrderInfo> orderInfos = orderDao.findByCategoryAndMemberIdx(type, memberIdx);
 
 		return orderInfos;
-		
 	}
 
 	private void validateOrderInfo(String type, OrderInfo orderInfo) {
