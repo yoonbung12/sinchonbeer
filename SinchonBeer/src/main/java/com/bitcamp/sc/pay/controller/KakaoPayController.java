@@ -15,6 +15,7 @@ import com.bitcamp.sc.pay.domain.PayInfo;
 import com.bitcamp.sc.pay.service.impl.PayServiceImpl;
 import com.bitcamp.sc.pay.service.impl.type.KakaoPay;
 import com.bitcamp.sc.tour.domain.TourDto;
+import com.bitcamp.sc.tour.service.TourService;
 
 import lombok.extern.java.Log;
 
@@ -25,12 +26,14 @@ public class KakaoPayController {
 	private KakaoPay kakaoPay;
 	private PayServiceImpl payService;
 	private OrderService orderService;
+	private TourService tourService;
 	
 	@Autowired
-	public KakaoPayController(KakaoPay kakaoPay, PayServiceImpl payService, OrderService orderService) {
+	public KakaoPayController(KakaoPay kakaoPay, PayServiceImpl payService, OrderService orderService, TourService tourService) {
 		this.kakaoPay = kakaoPay;
 		this.payService = payService;
 		this.orderService = orderService;
+		this.tourService = tourService;
 	}
 	
 	@GetMapping("/kakaoPay")
@@ -48,7 +51,7 @@ public class KakaoPayController {
 		OrderInfo orderInfo = OrderInfo.builder()
 									   .category("tour")
 									   .price(tour.getPrice())
-									   .tourIdx(60) // 테스트용 하드 코딩
+									   .tourIdx(tourService.getTidxByTdate(tour.getSelectDate()))
 									   .tourPeople(tour.getTourPeople())
 									   .memberIdx(tour.getMidx())
 									   .build();
@@ -74,6 +77,10 @@ public class KakaoPayController {
 		log.info(payInfo.toString());
 		model.addAttribute("payIdx", payInfo.getIdx());
 		
+		if (orderInfo.getCategory().equals("tour")) {
+			tourService.addTourPeopleByDate(orderInfo.getTourPeople(), tourService.getTourDateByTidx(orderInfo.getTourIdx()));
+		}
+		
 		return "pay/kakaoPaySuccess";
 	}
 	
@@ -90,7 +97,14 @@ public class KakaoPayController {
 		
 		model.addAttribute("payInfo", payInfo);
 		model.addAttribute("orderInfo", orderInfo);
-		
-		return "pay/paySuccess";
+
+		return selectPaySuccessPageByType(orderInfo.getCategory());
+	}
+	
+	private String selectPaySuccessPageByType(String type) {
+		if (type.equals("tour")) {
+			return "pay/tourPaySuccess";
+		}
+		return "pay/shopPaySuccess";
 	}
 }

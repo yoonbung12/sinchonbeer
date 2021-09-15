@@ -1,27 +1,21 @@
 package com.bitcamp.sc.tour.controller;
 
-import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.sc.member.domain.LoginInfo;
-import com.bitcamp.sc.tour.domain.TourDto;
+import com.bitcamp.sc.tour.domain.ChangeTourDto;
 import com.bitcamp.sc.tour.service.TourService;
 import com.bitcamp.sc.tour.service.impl.TourAuthPhoneNumberService;
-import com.bitcamp.sc.tour.service.impl.TourServiceImpl;
 
 import lombok.AllArgsConstructor;
 
@@ -42,8 +36,9 @@ public class TourRestController {
 
 	// 예약 변경 확정 버튼 클릭 처리 -> orders테이블 tidx 수정 -> tour 테이블 날짜 각각 인원 수정
 	@PostMapping("/tour/changeTour")
-	public void changeTour(@RequestParam Map<String, Object> params) {
-		service.changeTourOrder(params);
+	public void changeTour(@ModelAttribute("changeTour") ChangeTourDto changeDto) {
+		System.out.println(changeDto);
+		service.changeTourOrder(changeDto);
 	}
 	
 	// db 휴대전화번호와 일치여부 
