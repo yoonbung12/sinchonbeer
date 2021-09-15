@@ -255,35 +255,27 @@
 									var test = $('#select').val();
 									console.log(test);
 
-									$
-											.ajax({
-												url : '/tour/count',
-												type : 'get',
-												data : {
-													mid : sub
+									$.ajax({
+											url : '/tour/count',
+											type : 'get',
+											data : {
+												mid : sub
 												},
-												success : function(data) {
-													selectReset();
-													console.log(data);
-													var num = $('#count option').length;
-													$('#msg').val(
-															$('#msg').val()
-																	+ data
-																	+ '명');
+											success : function(data) {
+												selectReset();
+												console.log(data);
+												var num = $('#count option').length;
+												$('#msg').val(
+													$('#msg').val()+ data+ '명');
 													// 가능인원이 0인 경우
-													if (data == 0) {
-														$('#count').prop(
-																'disabled',
-																'disabled');
+													if(data == 0) {
+														$('#count').prop('disabled','disabled');
 														// 가능인원이  최대 선택인원4명 보다 작은경우 남은인원까지만 선택가능	
-													} else
-														(data < num)
-													for (i = num; i > data; i--) {
-														$(
-																'#count option:eq('
-																		+ i
-																		+ ')')
-																.hide();
+													} 
+													if(data < num){
+														for (i = num; i > data; i--) {
+															$('#count option:eq('+ i+ ')').hide();
+																}
 													}
 												},
 												error : function() {

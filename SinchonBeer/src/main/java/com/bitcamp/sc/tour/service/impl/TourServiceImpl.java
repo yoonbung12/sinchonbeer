@@ -40,6 +40,19 @@ public class TourServiceImpl implements TourService {
 		return dao.addTourPeople(tourPeople, ckDate);
 	}
 	
+	// 투어 : 결제 취소시 예약 날짜 인원 감소 
+	@Override
+	public int subTourPeopleByDate(int tourPeople, String tdate) {
+		Date ckDate = Date.valueOf(tdate);	
+		return dao.subTourPeople(tourPeople, ckDate);
+	}
+	
+	// 결제 : 투어 날짜로 투어 번호 가져오기
+	@Override
+	public String getTourDateByTidx(int tidx) {
+		return dao.getTourDateByTidx(tidx);
+	}
+	
 	
 	// 투어 주문 정보 가져오기
 	public List<TourOrderInfo> getTourOrder(int midx,String category){
@@ -65,6 +78,8 @@ public class TourServiceImpl implements TourService {
 	public Date changeToDate(String date) {
 		return Date.valueOf(date);
 	}
+	
+	
 	
 
 

@@ -14,6 +14,11 @@
 		select tidx from tour where tdate=#{tdate}
 	</select>
 	
+	<!-- 투어 번호로 투어 날짜 값 가져오기 -->
+	<select id="getTourDateByTidx" resultType="String" >
+		select date_format(tdate,'%Y-%m-%d') as tdate from tour where tidx=#{tidx}
+	</select>
+	
 	<!-- 예약 완료, 예약 변경 시  : 현재인원 추가 -->
 	<update id="addTourPeople">
 			<!-- update tour set tcurrent = tcurrent + (select tpeople from orders where midx = #{midx}) where tdate = #{tdate} -->

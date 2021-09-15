@@ -102,6 +102,23 @@ public class MybatisTourDaoTest {
 		
 		
 	}
+	@Test
+	@Transactional
+	@Rollback(true)
+	void 투어날짜확인하기ByTidx() {
+
+		int idx = 23;
+	String expectedDate = "2021-09-25";	
+	String tdate =	dao.getTourDateByTidx(idx);
+		
+	assertEquals(expectedDate, tdate, "투어 번호로 투어 날짜 가져오기");	
+		
+			
+				
+	}
+	
+	
+	
 	// memberdao 테스트 ---> null....
 	@Test
 	@Transactional
@@ -116,6 +133,8 @@ public class MybatisTourDaoTest {
 //		System.out.println(member.getIdx());
 				
 	}
+	
+	
 	
 	
 	
