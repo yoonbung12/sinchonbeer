@@ -54,9 +54,27 @@ public class MybatisGoodsDaoTest {
 //		dao.insertGoods(vo);
 		
 		
-		int idx=5;
+		int idx=2;
 		
 		dao.deleteGoods(idx);
+		
+		
+	}
+	
+	@Test
+	@Transactional
+	@Rollback(true)
+	void 상품조회() {
+		
+		GoodsVO vo = new GoodsVO("김부각" ,12100,"김부각 사진", "맛있는 김부각 입니다.");
+		
+		dao.insertGoods(vo);
+		
+		GoodsVO findVo;
+		findVo = dao.findIdx(vo.getIdx());
+		
+		assertThat(findVo.getGname()).isEqualTo(vo.getGname());
+		assertThat(findVo.getPrice()).isEqualTo(vo.getPrice());
 		
 		
 	}
