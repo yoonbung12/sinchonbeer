@@ -1,0 +1,91 @@
+package com.bitcamp.sc.member.controller;
+
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.bitcamp.sc.member.memberService.EmailCheckService;
+import com.bitcamp.sc.member.memberService.PwCheckService;
+
+@Controller
+public class FindAccountController {
+
+	//아이디 찾기 서비스
+	@Autowired
+	private EmailCheckService emailCheckService;
+	
+	//비밀번호 찾기 서비스
+	@Autowired
+	private PwCheckService pwCheckService;
+	//이메일과 비밀번호 찾기 첫번째 화면
+	@RequestMapping(value="/inquiry", method=RequestMethod.GET)
+	public String findAccount() {
+		return "member/findEmailPwForm";
+	}
+	
+//	ajax에서 아이디 찾기 (요청)매핑
+	@RequestMapping(value="/inquiry/email", method=RequestMethod.POST)
+	@ResponseBody
+	public String findEmailByNamePhone(
+			@RequestBody Map<String,Object> params
+			) {
+
+		System.out.println("아이디 찾기 test");
+		System.out.println(params);
+		System.out.println(params.get("name"));
+		System.out.println(params.get("phone"));
+		String emailSearch = emailCheckService.emailSearch((String)params.get("name"), (String)params.get("phone"));
+		
+		System.out.println("컨트롤러에서 DB 갔다 온 emailSearch? : "+emailSearch);
+		
+		return emailSearch;
+	}
+	
+
+//	// url 매핑 
+	@RequestMapping("/test")
+	public String getTest() {
+		// 비밀번호 테스트
+		
+		return "member/findPwContinue";	
+		}
+	
+	
+	//ajax에서 비밀번호 찾기 (요청) 매핑
+	@RequestMapping(value="/inquiry/pw", method=RequestMethod.POST)
+	@ResponseBody
+	public String findEmailByNameEmail(
+			@RequestBody Map<String,Object> params
+			) {
+
+		System.out.println("비밀번호 찾기 test");
+		System.out.println(params);
+		System.out.println(params.get("name"));
+		System.out.println(params.get("email"));
+		String pwSearch = pwCheckService.pwSearch((String)params.get("name"), (String)params.get("email"));
+		
+		System.out.println("컨트롤러에서 DB 갔다 온 pwSearch? : "+pwSearch);
+		
+		return pwSearch;
+	}
+	
+//	//비밀번호 찾기 두 번째 단계 - 이메일 인증 보내고 인증번호 입력 받는 화면
+//	@RequestMapping(value="/inquiry/pw/input-code", method=RequestMethod.POST)
+	@RequestMapping(value="/inquiry/pw/input-code")
+	public String findPw2() {
+		return "member/findPwAuth";
+	}
+//	
+//	//비밀번호 찾기 세 번째 단계 - 비밀번호 재설정하기
+//	@RequestMapping(value="/inquiry/pw/reset", method=RequestMethod.POST)
+	@RequestMapping(value="/inquiry/pw/reset")
+	public String findPw3() {
+		return "member/findPwSetting";
+	}
+	
+}

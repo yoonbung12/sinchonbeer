@@ -44,4 +44,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		>
 		select count(*) from member where memail=#{email}
 	</select>
+	<!-- 이메일 찾기 -->
+	<select id="emailSearch"
+		resultType="com.bitcamp.sc.member.domain.Member"
+		resultMap="MemberDomain"
+		>
+		select memail from member where mname=#{param1} and mphone=#{param2}	
+	</select>
+
+	<!-- 비밀번호 찾기 -->
+	<select id="pwSearch"
+		resultType="com.bitcamp.sc.member.domain.Member"
+		resultMap="MemberDomain"
+		>
+		select memail from member where mname=#{param1} and memail=#{param2}	
+	</select>
 </mapper>

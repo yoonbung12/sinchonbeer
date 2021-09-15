@@ -41,8 +41,8 @@ public class LoginController {
 			@RequestBody Map<String,Object> params, 
 			@RequestParam(value = "reEmail", required = false) String reEmail, 
 			HttpSession session, //로그인 정보에 대한 session
-			HttpServletResponse response, //쿠키를 받기위한 response
-			Model model 
+			HttpServletResponse response //쿠키를 받기위한 response
+			//Model model 
 			) {
 		System.out.println(params);
 		System.out.println(params.get("memail")+": "+params.get("mpw"));

@@ -19,4 +19,10 @@ public interface MemberDao {
 	//회원 주소 입력
 	@Insert("insert into address (midx, postcode, address1, address2) values(#{midx}, #{postcode}, #{address1}, #{address2})")
 	int insertAddress(MemberAddress memberAddress);
+	
+	//이메일 찾기 (멤버 객체)
+	public Member emailSearch(String name, String phone);
+
+	//비밀번호 찾기 (멤버 객체)
+	public Member pwSearch(String name, String email);
 }

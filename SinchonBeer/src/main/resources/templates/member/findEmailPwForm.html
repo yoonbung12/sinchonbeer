@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>신촌 맥주 : 회원가입</title>
+<!-- metaheader 영역 -->
+<link rel="stylesheet" th:href="@{/css/member/findEmailPwForm.css}">
+<th:block th:replace="frame/metaheader"></th:block>
+<!-- // 내가만든 영역 시작(1) ---------------------------------------------------------------------------------------->
+<script>
+	$(document).ready(function() {
+		$('#profile-tab').on('click', function() {
+
+			$('.id_tab').addClass('display_none');
+			$('.pw_tab').removeClass('display_none');
+		});
+
+		$('#home-tab').on('click', function() {
+			// id/pw찾기 탭 소개글
+			$('.id_tab').removeClass('display_none');
+			$('.pw_tab').addClass('display_none');
+
+		});
+		/*  // spring에서 수정할 예정(지금은 예시로 만들어 봄)
+		 $('#chkok').on('click', function () {
+		     if ($('#email').val().length < 1) {
+		         alert('이메일을 입력해주세요');
+		     } else {
+		         $('#pwms').removeClass('display_none');
+		         $('#pwin').addClass('display_none');
+		     }
+		 });
+		 // spring에서 수정할 예정(지금은 예시로 만들어 봄)
+		 $('#chkok').on('click', function () {
+		     if ($('#email').val().length < 1) {
+		         alert('이메일을 입력해주세요');
+		     } else {
+		         $('#pwms').removeClass('display_none');
+		         $('#pwin').addClass('display_none');
+		     }
+		 }); */
+	});
+</script>
+<!-- // 내가만든 영역 끝(1)---------------------------------------------------------------------------------------->
+
+</head>
+<body>
+
+	<!-- header 영역 -->
+	<th:block th:replace="frame/header"></th:block>
+
+	<!-- nav 영역 -->
+	<th:block th:replace="frame/nav"></th:block>
+
+	<!-- content 영역 ---------------------------------------------------------->
+	<!-- 내가만든 영역 시작(2)// --------------------------------------------------------------------------->
+
+	<div class="wrap_main ">
+		<h1>이메일/비밀번호 찾기</h1>
+		<p class="id_tab ">
+			이메일이 기억나지 않으세요? <br>본인인증을 통해 이메일을 확인하실 수 있어요!
+		</p>
+		<p class="pw_tab display_none">
+			비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!
+		</p>
+
+		<ul class=" nav nav-tabs nav-fill mx-6" id="myTab" role="tablist">
+			<li class="nav-item" role="presentation"><a
+				class="nav-link active " id="home-tab" data-toggle="tab"
+				href="#home" role="tab" aria-controls="home" aria-selected="true">이메일
+					찾기</a></li>
+			<li class="nav-item" role="presentation"><a class="nav-link"
+				id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+				aria-controls="profile" aria-selected="false">비밀번호 초기화</a></li>
+		</ul>
+
+		<div class="tab-content mt-1" id="myTabContent">
+			<div class=" tab-pane fade show active" id="home" role="tabpanel"
+				aria-labelledby="home-tab">
+				<!-- 아이디찾기 입력 양식 -->
+				<!-- <form id="emailSearch"> -->
+					<div class="inner-tab">
+
+						<div id="id " class="id_tab">
+							<div class="label_space">
+								<label for="username">이름</label>
+							</div>
+							<input type="text" id="username" placeholder="이름을 입력해 주세요."
+								>
+
+							<div class="label_space">
+								<label for="phone">휴대폰 번호</label>
+							</div>
+							<input type="text" id="phone"
+								placeholder="휴대폰 번호를 입력해 주세요. ( - 제외)">
+						</div>
+
+					</div>
+					<!-- 여기에 넣은 id="chkok" 는 지금 실행해보려고 예시로 넣은 것. spring에서 없애거나 수정할 예정 -->
+					<input type="submit" value="확인" class="chkok" id="emailSearch">
+			<!-- </form> -->
+
+				<script>
+				$(document).ready(function() {
+					/* $('#emailSearch').submit(function() { */
+					$('#emailSearch').on('click',function() { 
+						var name = $('#username').val();
+						var phone = $('#phone').val();
+						console.log(name+':'+phone);
+						$.ajax({
+							url : '/inquiry/email',
+							type : 'post',
+							contentType: 'application/json',
+							data : JSON.stringify({
+								"name" : name,
+								"phone" : phone
+							}),
+							success : function(data){
+								if(data.trim() != ''){
+									console.log(data);
+									alert('찾기 성공');
+									//이메일 찾기 성공 창 보이게 하는 jQuery 입력하기
+									
+								}else{
+									alert('일치하는 이메일 정보가 없습니다. 다시 입력해 주세요.')
+								
+								}
+							}
+						
+
+						});
+					});
+				});
+				</script>
+
+			</div>
+			<div class="tab-pane fade" id="profile" role="tabpanel"
+				aria-labelledby="profile-tab">
+				<div id="pwin" class="">
+					
+						<div class="inner-tab ">
+							<div id="pw" class="pw_tab">
+								<div class="label_space">
+									<label for="name">이름</label>
+								</div>
+								<input type="text" id="name" placeholder="이름을 입력해 주세요"
+									name="mname">
+								<div class="label_space">
+									<label for="email">이메일</label>
+								</div>
+								<input type="email" id="email" placeholder="이메일을 입력해 주세요"
+									name="memail">
+							</div>
+						</div>
+						<input type="submit" value="확인" class="chkok" id="pwSearch">
+					
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+	<script>
+	$(document).ready(function() {
+		$('#pwSearch').on('click',function() { 
+			var name = $('#name').val();
+			var email = $('#email').val();
+			console.log(name+':'+email);
+			$.ajax({
+				url : '/inquiry/pw',
+				type : 'post',
+				contentType: 'application/json',
+				data : JSON.stringify({
+					"name" : name,
+					"email" : email
+				}),
+				success : function(data){
+					if(data.trim() != ''){
+						console.log(data);
+						alert('찾기 성공');
+						//비밀번호 찾기 성공 창 보이게 하는 jQuery 입력하기
+						//	location.href='/test';
+					}else{
+						alert('일치하는 이메일 정보가 없습니다. 다시 입력해 주세요.')
+					
+					}
+				}
+			
+
+			});
+		});
+	});
+	</script>
+	<!-- // 내가만든 영역 끝 (2) ---------------------------------------------------------------------------------------->
+
+
+	<!-- footer 영역 -->
+	<th:block th:replace="frame/footer"></th:block>
+
+</body>
+</html>
