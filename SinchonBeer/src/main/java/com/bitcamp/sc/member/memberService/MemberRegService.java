@@ -14,10 +14,14 @@ public class MemberRegService {
 
 	@Autowired
 	private SqlSessionTemplate template;
+	
+	//스프링에서 제공하는 암호화 방식
+	//@Autowired
+	//private BCryptPasswordEncoder cryptPasswordEncoder; 
+		
 
 	private MemberDao memberDao;
 
-//	public int regMember(RegRequest regRequest) {
 	public int regMember(RegRequest regRequest) {
 
 		int resultCnt = 0;
@@ -47,6 +51,13 @@ public class MemberRegService {
 			}
 			System.out.println("주소까지 회원가입에 입력 resultCnt :" + resultCnt);
 
+			
+			//암호화 처리하기
+//			String securityPw = cryptPasswordEncoder.encode(member.getPw());
+//			System.out.println(securityPw);
+//			System.out.println(cryptPasswordEncoder.matches(member.getPw(), securityPw)); // 비밀번호를 rowdata로 받았을 경우
+			
+			
 		return resultCnt;
 	}
 }

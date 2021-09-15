@@ -90,14 +90,12 @@
 			<!-- login 입력양식 -->
 			<form id="loginForm">
 				<div class="form_box margin_top">
-					<input type="email" placeholder="이메일" id="memail"
-						class="loginLongBox"> <input type="password"
-						placeholder="비밀번호" id="mpw" class="loginLongBox">
+					<input type="email" placeholder="이메일" id="memail" class="loginLongBox" th:value="${cookie}"> 
+					<input type="password" placeholder="비밀번호" id="mpw" class="loginLongBox">
 				</div>
 				<div class="cookie_chk margin_top">
-					<input type="checkbox" id="emailChk" value="on"> <label
-						for="emailChk">이메일 기억하기</label> <input type="text"
-						th:value="${redirectUri}" id="referer">
+					<input type="checkbox" id="emailChk" value="on" [[${cookie.reEmail ne null ? 'checked' : ''}]]> 
+					<label for="emailChk" >이메일 기억하기</label> <input type="text" th:value="${redirectUri}" id="referer">
 				</div>
 
 				<div class="margin_top">
