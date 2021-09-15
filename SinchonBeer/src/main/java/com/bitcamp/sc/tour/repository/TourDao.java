@@ -12,9 +12,9 @@ public interface TourDao {
 	int getTidxbyTdate(Date date);
 	
 	// 새로운 예약, 예약 변경
-	int addTourPeople(int midx,Date newDate);
+	int addTourPeople(int tourPeople,Date newDate);
 	// 예약 취소, 예약 변경
-	int subTourPeople(int midx,Date currentDate);
+	int subTourPeople(int tourPeople,Date currentDate);
 	
 	// 
 	int changeDateByMidx(int midx,Date newDate);
