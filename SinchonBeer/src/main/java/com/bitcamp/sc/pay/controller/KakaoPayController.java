@@ -84,6 +84,14 @@ public class KakaoPayController {
 		return "pay/kakaoPaySuccess";
 	}
 	
+	@GetMapping("/kakaoPayCancel")
+	public String kakaoPayCancel(@RequestParam("orderIdx") int orderIdx, Model model) {
+		if (orderService.getOrderInfo(orderIdx) != null) {
+			orderService.deleteOrder(orderIdx);
+		}
+		return "pay/kakaoPayCancel";
+	}
+	
 	@GetMapping("/kakaoPayComplete")
 	public String kakaoPayComplete(@RequestParam("payIdx") String payIdx, Model model) {
 		model.addAttribute("payIdx", payIdx);
