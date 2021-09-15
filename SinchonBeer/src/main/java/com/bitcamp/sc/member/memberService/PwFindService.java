@@ -8,22 +8,21 @@ import com.bitcamp.sc.member.domain.Member;
 import com.bitcamp.sc.member.repository.MemberDao;
 
 @Service
-public class EmailCheckService {
+public class PwFindService {
 
 	@Autowired
 	private SqlSessionTemplate template;
 	
 	private MemberDao memberDao;
-
 	
-	public String emailSearch(String name, String phone) {
+	public String pwSearch(String name, String email) {
 		String resultEmail = null;
 		
 		memberDao = template.getMapper(MemberDao.class);
-		System.out.println("[email check service ] dao mapper 생성");
+		System.out.println("[pw check service ] dao mapper 생성");
 		
 		try {
-		Member member = memberDao.emailSearch(name, phone);
+		Member member = memberDao.pwSearch(name, email);
 		System.out.println("member 객체 : "+member);
 		
 		resultEmail = member.getEmail();
@@ -33,6 +32,4 @@ public class EmailCheckService {
 		}
 		return resultEmail;
 	}
-	
-	
 }
