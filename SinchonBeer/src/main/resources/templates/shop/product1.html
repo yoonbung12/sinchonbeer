@@ -76,7 +76,21 @@
                     <div class="edge_color">
                         <td>수량</td>
                         <hr >
-                        <form id="form1"  name='form1' action="/shop/shop_payment"  method='get'>  <!--  -->
+                        										<!--shop_payment  -->
+                        <form id="form1"  name='form1' action="/shop/FinalTest"  method='get'>  <!--  -->
+                        	
+                        	<!-- test -->
+                        	<input type="hidden" th:value="${session.loginInfo.idx}" name="memberIdx" id="memberIdx">
+                        	<input type="hidden" th:value="${goods.count}" name="count" >
+                        	<input type="hidden" th:value="${goods.goodsIdx}" name="goodsIdx">
+			                        	
+                        	
+                        	<input type="hidden" th:value="${goods.category}" name="category">
+                        	<input type="hidden" th:value="${goods.Price * goods.count}" name="price">
+                        	
+                        	
+                        	<!-- test 끝-->
+                        	
                         	
 							<input name="gphotoname" type="hidden" value="gimbugag">	
                         	<input name="gname" type="hidden" value="신촌에서 만난 김부각">                        
@@ -98,6 +112,7 @@
 		
 		                    </div>	                
                         </form>
+                        <input type="hidden" th:value="${session.loginInfo == null ? 'Y' : 'N'}" id="login">
                         
                     </div>
                     
