@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>gim</title>
     
-    <th:block th:include="frame/metaheader"></th:block>
+ 
     <link rel="stylesheet" href="/css/shop/product.css" >
-
+	   <th:block th:include="frame/metaheader"></th:block>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -76,7 +76,21 @@
                     <div class="edge_color">
                         <td>수량</td>
                         <hr >
+                        										<!--shop_payment  -->
                         <form id="form1"  name='form1' action="/shop/shop_payment"  method='get'>  <!--  -->
+                        	
+                        	<!-- test -->
+                         	<input type="hidden" th:value="${session.loginInfo.idx}" >
+                        	<input type="hidden" th:value="${goods.count}" name="count" >
+                        	<input type="hidden" th:value="${goods.goodsIdx}" name="goodsIdx">
+			                        	
+                        	
+                        	<input type="hidden" th:value="${goods.category}" name="category">
+                        	<input type="hidden" th:value="${goods.Price * goods.count}" name="price">
+                        	
+                        	
+                        	<!-- test 끝-->
+                        	
                         	
 							<input name="gphotoname" type="hidden" value="gimbugag">	
                         	<input name="gname" type="hidden" value="신촌에서 만난 김부각">                        
@@ -98,6 +112,7 @@
 		
 		                    </div>	                
                         </form>
+                        <input type="hidden" th:value="${session.loginInfo == null ? 'Y' : 'N'}" id="login">
                         
                     </div>
                     
