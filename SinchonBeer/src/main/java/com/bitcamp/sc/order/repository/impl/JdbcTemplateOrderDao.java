@@ -43,13 +43,14 @@ public class JdbcTemplateOrderDao implements OrderDao {
 
 	private RowMapper<OrderInfo> orderRowMapper() {
 		return (rs, rowNum) -> {
-			OrderInfo orderInfo = new OrderInfo(); // category, price, tourIdx, tourPeople, memberIdx, addressIdx
-			orderInfo.setCategory(rs.getString("ocategory"));
-			orderInfo.setPrice(rs.getInt("oprice"));
-			orderInfo.setTourIdx(rs.getInt("tidx"));
-			orderInfo.setTourPeople(rs.getInt("tpeople"));
-			orderInfo.setMemberIdx(rs.getInt("midx"));
-			orderInfo.setAddressIdx(rs.getInt("aidx"));
+			OrderInfo orderInfo = OrderInfo.builder()// category, price, tourIdx, tourPeople, memberIdx, addressIdx
+										   .category(rs.getString("ocategory"))
+										   .price(rs.getInt("oprice"))
+										   .tourIdx(rs.getInt("tidx"))
+										   .tourPeople(rs.getInt("tpeople"))
+										   .memberIdx(rs.getInt("midx"))
+										   .addressIdx(rs.getInt("aidx"))
+										   .build();
 			return orderInfo;
 		};
 	}

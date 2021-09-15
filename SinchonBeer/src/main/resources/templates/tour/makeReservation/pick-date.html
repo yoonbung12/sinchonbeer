@@ -50,7 +50,7 @@
 							</li>
 							<li>
 								<select id="count" class="out" th:name="tourPeople">
-									<option value="0">인원선택</option>
+									<option value="0" selected>인원선택</option>
 									<option value="1">1명</option>
 									<option value="2">2명</option>
 									<option value="3">3명</option>
@@ -313,11 +313,15 @@
 				}
 				
 			});
+			
+			$("select").each(function () {
+			    $(this).val($(this).find('option[selected]').val());
+			});
 
 		});
 		function selectReset() {
 			$('#count option').show();
-			$('#count').val('0').prop("selected", true);
+			//$('#count').val('0').prop("selected", true);
 			$('#count').attr('disabled', false);
 		}
 
@@ -346,6 +350,7 @@
 			}
 			return [ true ];
 		}
+		
 	</script>
 
 
