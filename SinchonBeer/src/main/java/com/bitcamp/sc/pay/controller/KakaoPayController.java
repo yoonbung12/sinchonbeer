@@ -51,7 +51,7 @@ public class KakaoPayController {
 		OrderInfo orderInfo = OrderInfo.builder()
 									   .category("tour")
 									   .price(tour.getPrice())
-									   .tourIdx(tourService.getTidxByTdate(tour.getSelectDate())) // 테스트용 하드 코딩
+									   .tourIdx(tourService.getTidxByTdate(tour.getSelectDate()))
 									   .tourPeople(tour.getTourPeople())
 									   .memberIdx(tour.getMidx())
 									   .build();
@@ -78,7 +78,7 @@ public class KakaoPayController {
 		model.addAttribute("payIdx", payInfo.getIdx());
 		
 		if (orderInfo.getCategory().equals("tour")) {
-			// tcurrent 추가
+			tourService.addTourPeopleByDate(orderInfo.getTourPeople(), tourService.getTourDateByTidx(orderInfo.getTourIdx()));
 		}
 		
 		return "pay/kakaoPaySuccess";
