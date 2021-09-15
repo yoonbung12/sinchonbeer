@@ -13,6 +13,8 @@ public interface TourService {
 	int getTidxByTdate(String tdate);
 	// 투어예약 : 주문+결제 완료
 	int addTourPeopleByDate(int tourPeople,String tdate);
+	// 투어예약 취소
+	int subTourPeopleByDate(int tourPeople,String tdate);
 	
 	//////////////////////////////////////////////////////////
 	
