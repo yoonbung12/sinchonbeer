@@ -197,7 +197,7 @@
 					<div class="pl-3 float-left">
 						<input type="radio" class="form-check-input" name="paymentType"
 							id="paymentTypeKakaoPay" value="kakaoPay"> <label for="paymentTypeKakaoPay"
-							class="form-check-label"> 카카오 페이 </label>
+							class="form-check-label"> 카카오페이 </label>
 					</div>
 
 					<div class="mg-left-50 text-right pr-3">
@@ -377,7 +377,7 @@
 	function frmSubmit() {
 		window.name = "opner_win";
 		var myForm = document.payForm;
-		var myWin = window.open("about:blank", "kakaoPayWin", "status=yes, scrollbars=yes, width=420, height=500, left=300, top=100, , resizable=yes");
+		var myWin = window.open("about:blank", "kakaoPayWin", "status=yes, scrollbars=yes, width=420, height=500, left=300, top=100");
 		myForm.method = "post";
 		myForm.target = "kakaoPayWin";
 		myForm.action = "/kakaoPay/tour";
