@@ -78,7 +78,7 @@
 			<div class=" tab-pane fade show active" id="home" role="tabpanel"
 				aria-labelledby="home-tab">
 				<!-- 아이디찾기 입력 양식 -->
-	
+				<!-- <form id="emailSearch"> -->
 					<div class="inner-tab">
 
 						<div id="id " class="id_tab">
@@ -97,12 +97,13 @@
 
 					</div>
 					<!-- 여기에 넣은 id="chkok" 는 지금 실행해보려고 예시로 넣은 것. spring에서 없애거나 수정할 예정 -->
-					<input type="submit" value="확인" class="chkok" id="emailSubmit">
-			
+					<input type="submit" value="확인" class="chkok" id="emailSearch">
+			<!-- </form> -->
 
 				<script>
 				$(document).ready(function() {
-					$('#emailSubmit').on('click',function() {
+					/* $('#emailSearch').submit(function() { */
+					$('#emailSearch').on('click',function() { 
 						var name = $('#username').val();
 						var phone = $('#phone').val();
 						console.log(name+':'+phone);
@@ -115,12 +116,14 @@
 								"phone" : phone
 							}),
 							success : function(data){
-								console.log(data);
-								if(data){
-									 location.href='/test?'
-									 // 저장된 이메일 -> map.email
-								}else{
+								if(data.trim() != ''){
+									console.log(data);
+									alert('찾기 성공');
+									//이메일 찾기 성공 창 보이게 하는 jQuery 입력하기
 									
+								}else{
+									alert('일치하는 이메일 정보가 없습니다. 다시 입력해 주세요.')
+								
 								}
 							}
 						
@@ -134,9 +137,14 @@
 			<div class="tab-pane fade" id="profile" role="tabpanel"
 				aria-labelledby="profile-tab">
 				<div id="pwin" class="">
-					<form method="post">
+					
 						<div class="inner-tab ">
 							<div id="pw" class="pw_tab">
+								<div class="label_space">
+									<label for="name">이름</label>
+								</div>
+								<input type="text" id="name" placeholder="이름을 입력해 주세요"
+									name="mname">
 								<div class="label_space">
 									<label for="email">이메일</label>
 								</div>
@@ -144,13 +152,45 @@
 									name="memail">
 							</div>
 						</div>
-						<input type="submit" value="확인" class="chkok">
-					</form>
+						<input type="submit" value="확인" class="chkok" id="pwSearch">
+					
 				</div>
 
 			</div>
 		</div>
 	</div>
+	
+	<script>
+	$(document).ready(function() {
+		$('#pwSearch').on('click',function() { 
+			var name = $('#name').val();
+			var email = $('#email').val();
+			console.log(name+':'+email);
+			$.ajax({
+				url : '/inquiry/pw',
+				type : 'post',
+				contentType: 'application/json',
+				data : JSON.stringify({
+					"name" : name,
+					"email" : email
+				}),
+				success : function(data){
+					if(data.trim() != ''){
+						console.log(data);
+						alert('찾기 성공');
+						//비밀번호 찾기 성공 창 보이게 하는 jQuery 입력하기
+						//	location.href='/test';
+					}else{
+						alert('일치하는 이메일 정보가 없습니다. 다시 입력해 주세요.')
+					
+					}
+				}
+			
+
+			});
+		});
+	});
+	</script>
 	<!-- // 내가만든 영역 끝 (2) ---------------------------------------------------------------------------------------->
 
 
