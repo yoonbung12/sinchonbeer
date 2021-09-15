@@ -36,19 +36,23 @@ public class MybatisTourDao implements TourDao {
 
 	// 새로운 예약, 예약 변경시 바뀌는 날짜
 	@Override
-	public int addTourPeople(int midx, Date newDate) {
+	public int addTourPeople(int tourPeople, Date newDate) {
+		System.out.println("인원 더하기");
 		Map<String, Object> params = new HashMap<>();
-		params.put("midx", midx);
+		params.put("tourPeople", tourPeople);
 		params.put("tdate", newDate);
 		return template.update(NAME_SPACE + ".addTourPeople", params);
 	}
 
 	// 예약 취소 , 예약 변경시 기존 날짜
 	@Override
-	public int subTourPeople(int midx, Date currnetDate) {
+	public int subTourPeople(int tourPeople, Date currnetDate) {
+		System.out.println("인원 감소");
 		Map<String, Object> params = new HashMap<>();
-		params.put("midx", midx);
+		System.out.println(tourPeople+" : "+currnetDate);
+		params.put("tourPeople", tourPeople);
 		params.put("tdate", currnetDate);
+		
 		return template.update(NAME_SPACE + ".subTourPeople", params);
 
 	}
@@ -68,6 +72,7 @@ public class MybatisTourDao implements TourDao {
 		params.put("midx", midx);
 		params.put("tdate", newDate);
 		return template.update(NAME_SPACE + ".changeDateByMidx", params);
+		
 	}
 
 	
