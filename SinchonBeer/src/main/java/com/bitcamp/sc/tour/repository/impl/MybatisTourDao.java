@@ -75,6 +75,10 @@ public class MybatisTourDao implements TourDao {
 		
 	}
 
+	public String getTourDateByTidx(int tidx) {
+		return template.selectOne(NAME_SPACE+".getTourDateByTidx",tidx);
+	}
+
 	
 
 	//
