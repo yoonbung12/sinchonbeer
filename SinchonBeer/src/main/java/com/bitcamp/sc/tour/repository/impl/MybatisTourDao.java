@@ -27,6 +27,12 @@ public class MybatisTourDao implements TourDao {
 	public int selectCount(Date date) {
 		return template.selectOne(NAME_SPACE + ".selectCount", date);
 	}
+	
+	// 투어 예약 날짜로 투어 번호 가져오기
+	@Override
+	public int getTidxbyTdate(Date date) {
+		return template.selectOne(NAME_SPACE+".getTidxByTdate",date);
+	}
 
 	// 새로운 예약, 예약 변경시 바뀌는 날짜
 	@Override
@@ -63,6 +69,8 @@ public class MybatisTourDao implements TourDao {
 		params.put("tdate", newDate);
 		return template.update(NAME_SPACE + ".changeDateByMidx", params);
 	}
+
+	
 
 	//
 
