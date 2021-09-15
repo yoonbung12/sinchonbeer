@@ -47,4 +47,9 @@ public class MybatisOrderDao implements OrderDao {
 		return template.selectList(NAME_SPACE + ".findByCategoryAndMemberIdx", param);
 	}
 
+	@Override
+	public int deleteByIdx(int idx) {
+		return template.delete(NAME_SPACE + ".deleteByIdx", idx);
+	}
+
 }
