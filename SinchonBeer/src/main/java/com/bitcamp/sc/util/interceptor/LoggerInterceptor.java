@@ -16,7 +16,7 @@ import com.bitcamp.sc.member.domain.LoginInfo;
 public class LoggerInterceptor implements HandlerInterceptor {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	public List<String> loginEssential = Arrays.asList("/tour/reserve/form","/tour/change-info");
+	public List<String> loginEssential = Arrays.asList("/tour/reserve/form","/tour/change-info","/shop/shop_payment");
 
 	public List<String> loginInessential = Arrays.asList("/tour/","/tour/info","/tour/notice","/tour/notice/{idx}","/tour/pick-date");
 
