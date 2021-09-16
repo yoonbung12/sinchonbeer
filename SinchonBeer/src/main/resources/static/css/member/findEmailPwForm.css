@@ -54,7 +54,7 @@ li.nav-item>a:hover{
 }
 
 /* input박스들 모두에게 적용 */
-#id input[type=submit], #pw input[type=submit], .chkok{
+#id input[type=submit], #pw input[type=submit], .chkok, .result_box input[type=button], .result_box input[type=submit]{
     width:200px;
     height:44px;
     border: none;
@@ -62,8 +62,21 @@ li.nav-item>a:hover{
     color:white;
     display:block;
     cursor: pointer;
-    margin: 40px auto 0 auto;
+    margin: 40px auto;
+}
 
+/* 주요 내용을 포함하는 박스 */
+.result_box{
+    width:370px;
+    margin: 0 auto;
+    border:1px solid rgb(212, 212, 212);
+    border-radius: 6.5%;
+    padding:10px 25px;
+
+}
+/* 박스안의 a태그에 마우스를 갖다 댔을 때 효과 */
+.result_box a:hover{
+    text-decoration: none;  
 }
 
 /* submit 버튼의 효과 */
@@ -77,6 +90,9 @@ li.nav-item>a:hover{
 
 .display_none {
     display: none;
+}
+.display_block{
+    display:block;
 }
 
 .font-mint {
