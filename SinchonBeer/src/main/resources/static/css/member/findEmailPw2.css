@@ -66,7 +66,12 @@
 }
 
 /* findPwSetting 해당 */
-.label_font{
-    font-size: 14px;
-    margin-right:10px;
+.width_400px{
+	width:300px;
+	height:23px;
+	marthin:0 auto;
+}
+.width_400px::placeholder{
+	color:#ccc;
+	font-size:13.5px;
 }
