@@ -90,14 +90,12 @@
 			<!-- login 입력양식 -->
 			<form id="loginForm">
 				<div class="form_box margin_top">
-					<input type="email" placeholder="이메일" id="memail"
-						class="loginLongBox"> <input type="password"
-						placeholder="비밀번호" id="mpw" class="loginLongBox">
+					<input type="email" placeholder="이메일" id="memail" class="loginLongBox" th:value="${cookie}"> 
+					<input type="password" placeholder="비밀번호" id="mpw" class="loginLongBox">
 				</div>
 				<div class="cookie_chk margin_top">
-					<input type="checkbox" id="emailChk" value="on"> <label
-						for="emailChk">이메일 기억하기</label> <input type="text"
-						th:value="${redirectUri}" id="referer">
+					<input type="checkbox" id="emailChk" value="on" [[${cookie.reEmail ne null ? 'checked' : ''}]]> 
+					<label for="emailChk" >이메일 기억하기</label> <input type="text" th:value="${redirectUri}" id="referer">
 				</div>
 
 				<div class="margin_top">
@@ -106,7 +104,7 @@
 			</form>
 			<!-- login 이 외의 링크 -->
 			<div id="middle" class="margin_top">
-				<a th:href="@{/join/type}">회원가입</a> <a href="" class="float_right">이메일/비밀번호찾기</a>
+				<a th:href="@{/join/type}">회원가입</a> <a th:href="@{/inquiry}" class="float_right">이메일/비밀번호찾기</a>
 			</div>
 			<div class="margin_top">
 				<a href="" class="kakao_start loginLongBox">카카오로 시작하기</a>

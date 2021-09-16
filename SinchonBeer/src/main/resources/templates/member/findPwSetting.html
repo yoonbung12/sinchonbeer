@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>신촌 맥주 : 회원가입</title>
+<!-- metaheader 영역 -->
+<link rel="stylesheet" th:href="@{/css/member/findEmailPw2.css}">
+<th:block th:replace="frame/metaheader"></th:block>
+</head>
+<body>
+
+	<!-- header 영역 -->
+	<th:block th:replace="frame/header"></th:block>
+
+	<!-- nav 영역 -->
+	<th:block th:replace="frame/nav"></th:block>
+
+	<!-- content 영역 ---------------------------------------------------------->
+    <!-- 내가만든 영역// --------------------------------------------------------------------------->
+
+    <div class="wrap_main ">
+        <h1>비밀번호 찾기</h1>
+        <p class="id_tab ">비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!</p>
+        <div class="result_box">
+            <p >비밀번호를 새로 입력해 주세요.</p>
+            <form method="post">
+                <table>
+                    <tr>
+                        <td class="border-1"><input type="text" class="border_none width_400px" placeholder="새로운 비밀번호"id="newPw"></td>
+                    </tr>
+                    <tr>
+                        <td class="border-1"><input type="text" class="border_none width_400px" placeholder="새로운 비밀번호 확인" id="reNewPw"></td>
+                    </tr>
+                </table>
+                <!-- 비밀번호 재설정이 성공하면 로그인 페이지로 넘기기 -->
+                <input type="submit" value="확인">
+
+            </form>
+        </div>
+    </div>
+    <!-- // 내가만든 영역 ---------------------------------------------------------------------------------------->
+
+	<!-- footer 영역 -->
+	<th:block th:replace="frame/footer"></th:block>
+
+</body>
+</html>
