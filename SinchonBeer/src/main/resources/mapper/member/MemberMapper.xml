@@ -12,17 +12,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="pw" column="mpw"/>
 		<result property="name" column="mname"/>
 		<result property="phone" column="mphone"/>
-	</resultMap>
+	</resultMap> 
+	
+	
 
 	<select id="selectByEmailPw"
 		resultType="com.bitcamp.sc.member.domain.Member"
-		resultMap="MemberDomain">
-		select * from member where memail=#{param1} and mpw=#{param2}
+		resultMap="MemberDomain"
+		>
+		select * from member where memail=#{email} and mpw=#{pw}
 	</select>
 	
 	<select id="selectByEmail"
 		resultType="com.bitcamp.sc.member.domain.Member"
-		resultMap="MemberDomain">
+		resultMap="MemberDomain"
+		>
 		select * from member where memail=#{param1}
 	</select>
 	
@@ -31,8 +35,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		useGeneratedKeys="true"
 		keyProperty="idx"
 	>
-		insert into project.member (memail, mpw, mname, mphone) 
-		values(#{memail}, #{mpw}, #{mname}, #{mphone})
+		insert into member (memail, mpw, mname, mphone) 
+		values(#{email}, #{pw}, #{name}, #{phone})
 	</insert>
 	
+	<select id="selectByEmail2"
+		resultType="int"
+		>
+		select count(*) from member where memail=#{email}
+	</select>
+	<!-- 이메일 찾기 -->
+	<select id="emailSearch"
+		resultType="com.bitcamp.sc.member.domain.Member"
+		resultMap="MemberDomain"
+		>
+		select memail from member where mname=#{param1} and mphone=#{param2}	
+	</select>
+
+	<!-- 비밀번호 찾기 -->
+	<select id="pwSearch"
+		resultType="com.bitcamp.sc.member.domain.Member"
+		resultMap="MemberDomain"
+		>
+		select memail from member where mname=#{param1} and memail=#{param2}	
+	</select>
 </mapper>

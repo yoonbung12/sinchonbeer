@@ -15,7 +15,7 @@ public class LogoutController {
 	@RequestMapping(value="/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		//로그인 세션이 있다면 세션을 끊고 메인페이지로 보내주기.
+		//로그인 세션이 있다면 세션을 끊고 메인페이지로 보내주기 - 나중에 메인페이지로 경로 수정해주기
 		return "/member/loginForm";
 	}
 }

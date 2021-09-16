@@ -13,6 +13,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import com.bitcamp.sc.order.domain.OrderInfo;
 import com.bitcamp.sc.pay.domain.KakaoPayApproval;
 import com.bitcamp.sc.pay.domain.KakaoPayReady;
 
@@ -24,7 +25,7 @@ public class KakaoPay {
 	private KakaoPayReady kakaoPayReady;
 	private KakaoPayApproval kakaoPayApproval;
 	
-	public String kakaoPayReady() {
+	public String kakaoPayReady(OrderInfo orderInfo) {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
@@ -35,13 +36,13 @@ public class KakaoPay {
 		
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 		params.add("cid", "TC0ONETIME");
-        params.add("partner_order_id", "9");
-        params.add("partner_user_id", "gorany");
-        params.add("item_name", "갤럭시S9");
+        params.add("partner_order_id", Integer.toString(orderInfo.getIdx()));
+        params.add("partner_user_id", "신촌 맥주");
+        params.add("item_name", orderInfo.getCategory());
         params.add("quantity", "1");
-        params.add("total_amount", "2100");
+        params.add("total_amount", Integer.toString(orderInfo.getPrice()));
         params.add("tax_free_amount", "100");
-        params.add("approval_url", HOST + "kakaoPaySuccess");
+        params.add("approval_url", HOST + "kakaoPaySuccess?orderIdx=" + orderInfo.getIdx());
         params.add("cancel_url", HOST + "kakaoPayCancel");
         params.add("fail_url", HOST + "kakaoPaySuccessFail");
 		
@@ -60,7 +61,7 @@ public class KakaoPay {
 		return "/pay";
 	}
 	
-	public KakaoPayApproval kakaoPayInfo(String pg_token) {
+	public KakaoPayApproval kakaoPayInfo(String pg_token, OrderInfo orderInfo) {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
@@ -72,10 +73,10 @@ public class KakaoPay {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 		params.add("cid", "TC0ONETIME");
 		params.add("tid", kakaoPayReady.getTid());
-        params.add("partner_order_id", "9");
-        params.add("partner_user_id", "gorany");
+        params.add("partner_order_id", Integer.toString(orderInfo.getIdx()));
+        params.add("partner_user_id", "신촌 맥주");
         params.add("pg_token", pg_token);
-        params.add("total_amount", "2100");
+        params.add("total_amount", Integer.toString(orderInfo.getPrice()));
 		
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
         

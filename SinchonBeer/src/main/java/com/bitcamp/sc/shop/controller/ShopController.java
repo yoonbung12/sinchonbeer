@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitcamp.sc.cart.domain.GoodsToCart;
 
+
 @Controller
 public class ShopController {
 
@@ -70,7 +71,7 @@ public class ShopController {
 	// Test
 	@RequestMapping(value="/shop/FinalTest", method = RequestMethod.GET)
 	public String getTest(
-			@ModelAttribute GoodsToCart goods,
+
 			@RequestParam("pType") String pway,
 			Model model
 			

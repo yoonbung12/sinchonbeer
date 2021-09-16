@@ -26,7 +26,7 @@ img {
 	height: auto;
 	width: 100%;
 	display: inline-block;
-	background-image: url('../images/complete.png');
+	/*background-image: url('../images/complete.png');*/
 	background-size: 100%;
 }
 
@@ -56,7 +56,7 @@ img {
 	/* <<< */
 }
 
-a {
+#message+a {
 	text-decoration: none;
 }
 </style>
@@ -65,7 +65,7 @@ a {
 <body>
 
 	<!-- header 영역 -->
-	<th:block th:replace="frame/header_logout"></th:block>
+	<th:block th:replace="frame/header"></th:block>
 
 	<!-- nav 영역 -->
 	<th:block th:replace="frame/nav"></th:block>
@@ -74,7 +74,8 @@ a {
 	<!-- 내가만든 회원가입 성공 영역// -->
 	<div id="regConfirmArea">
 		<div>
-			<img th:src="@{/image/member/complete.png}">
+			<img th:src="@{/images/member/complete.png}"/>
+			<!-- <img src="images/member/complete.png"> -->
 		</div>
 		<div id="message">
 			<h2>
@@ -83,7 +84,7 @@ a {
 			<br>
 			<p>지금 신촌맥주를 탐험해 보세요!</p>
 		</div>
-		<a th:href="@{/member/loginForm}"><button>로그인</button></a>
+		<a th:href="@{/login}"><button>로그인</button></a>
 	</div>
 
 	<!-- // 회원가입 폼 영역 --------------------------------------------------------------->
@@ -93,3 +94,8 @@ a {
 
 </body>
 </html>
+
+12
+14
+15
+17

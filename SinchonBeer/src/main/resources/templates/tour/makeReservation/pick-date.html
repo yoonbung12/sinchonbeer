@@ -14,7 +14,7 @@
 
 </head>
 <body>
-	<th:block th:include="frame/header_login"></th:block>
+	<th:block th:include="frame/header"></th:block>
 	<th:block th:include="frame/nav"></th:block>
 	<!-- submenu 영역 -->
 	<div class="submenu_wrap">
@@ -50,7 +50,7 @@
 							</li>
 							<li>
 								<select id="count" class="out" th:name="tourPeople">
-									<option value="0">인원선택</option>
+									<option value="0" selected>인원선택</option>
 									<option value="1">1명</option>
 									<option value="2">2명</option>
 									<option value="3">3명</option>
@@ -255,35 +255,27 @@
 									var test = $('#select').val();
 									console.log(test);
 
-									$
-											.ajax({
-												url : '/tour/count',
-												type : 'get',
-												data : {
-													mid : sub
+									$.ajax({
+											url : '/tour/count',
+											type : 'get',
+											data : {
+												mid : sub
 												},
-												success : function(data) {
-													selectReset();
-													console.log(data);
-													var num = $('#count option').length;
-													$('#msg').val(
-															$('#msg').val()
-																	+ data
-																	+ '명');
+											success : function(data) {
+												selectReset();
+												console.log(data);
+												var num = $('#count option').length;
+												$('#msg').val(
+													$('#msg').val()+ data+ '명');
 													// 가능인원이 0인 경우
-													if (data == 0) {
-														$('#count').prop(
-																'disabled',
-																'disabled');
+													if(data == 0) {
+														$('#count').prop('disabled','disabled');
 														// 가능인원이  최대 선택인원4명 보다 작은경우 남은인원까지만 선택가능	
-													} else
-														(data < num)
-													for (i = num; i > data; i--) {
-														$(
-																'#count option:eq('
-																		+ i
-																		+ ')')
-																.hide();
+													} 
+													if(data < num){
+														for (i = num; i > data; i--) {
+															$('#count option:eq('+ i+ ')').hide();
+																}
 													}
 												},
 												error : function() {
@@ -313,11 +305,15 @@
 				}
 				
 			});
+			
+			$("select").each(function () {
+			    $(this).val($(this).find('option[selected]').val());
+			});
 
 		});
 		function selectReset() {
 			$('#count option').show();
-			$('#count').val('0').prop("selected", true);
+			//$('#count').val('0').prop("selected", true);
 			$('#count').attr('disabled', false);
 		}
 
@@ -346,6 +342,7 @@
 			}
 			return [ true ];
 		}
+		
 	</script>
 
 
