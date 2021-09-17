@@ -81,6 +81,8 @@ public class KakaoPayController {
 			tourService.addTourPeopleByDate(orderInfo.getTourPeople(), tourService.getTourDateByTidx(orderInfo.getTourIdx()));
 		}
 		
+		orderService.confirmOrder(orderInfo.getIdx());
+		
 		return "pay/kakaoPaySuccess";
 	}
 	
