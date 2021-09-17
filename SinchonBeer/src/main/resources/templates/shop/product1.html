@@ -9,6 +9,7 @@
  
     <link rel="stylesheet" href="/css/shop/product.css" >
 
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -76,26 +77,19 @@
                     <div class="edge_color">
                         <td>수량</td>
                         <hr >
+                        
                         										<!--shop_payment  -->
-                        <form id="form1"  name='form1' action="/shop/shop_payment"  method='get'>  <!--  -->
+                        <form id="form1"  name='form1' action="/shop/shop_payment"  method='get'>  
                         	
-                        	<!-- test -->
-                         	<input type="hidden" th:value="${session.loginInfo.idx}" >
-                        	<input type="hidden" th:value="${goods.count}" name="count" >
-                        	<input type="hidden" th:value="${goods.goodsIdx}" name="goodsIdx">
-			                        	
-                        	
-                        	<input type="hidden" th:value="${goods.category}" name="category">
-                        	<input type="hidden" th:value="${goods.Price * goods.count}" name="price">
-                        	
-                        	
-                        	<!-- test 끝-->
-                        	
+ 						<th:block th:unless="${session.loginInfo == null}">
+                        	<input type="hidden" th:value="${session.loginInfo.idx}" name="midx"> 
+                        </th:block> 
+
                         	
 							<input name="gphotoname" type="hidden" value="gimbugag">	
                         	<input name="gname" type="hidden" value="신촌에서 만난 김부각">                        
                             <input name="gprice" type="hidden" id="price" value="12100">
-                            <input name="gidx" type="hidden" id="idx" value="1">
+                            <input name="gidx" type="hidden" id="gidx" value="1">
                             <input  type="button"  class="count_btn1" value="+" id="plus"  >    
                             <input name="amount" type="text"  class="amount_number"     value="1" id ="amount" >   
                             <input type="button"  class="count_btn2" value="-" id="minus" > 
@@ -107,7 +101,7 @@
                             </div>
 		                    <div class="row">
 		                            <input type="submit" id="BuyNow" value="BuyNow"   class="button_form1" style="color: #fff; background-color: #5ae5ec;">	<!-- formation="/shop/shop_payment" -->
-		                            <input type="submit" id="basket" value="Basket" formaction="/cart/cart" class="button_form2"  style="color: #5ae5ec; background-color: #fff;">	
+		                            <input type="submit" id="basket" value="Basket" formaction="/basket/basket" class="button_form2"  style="color: #5ae5ec; background-color: #fff;">	
 		                         
 		
 		                    </div>	                
