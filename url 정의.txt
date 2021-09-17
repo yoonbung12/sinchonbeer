@@ -43,8 +43,8 @@ Controller ------------------- 김은선 -------------------
 
 sinchonbeer.com/login (로그인 화면) POST
 sinchonbeer.com/logout (로그아웃 화면) POST
-sinchonbeer.com/inquiry (ID / PW 찾기 화면)
-sinchonbeer.com/inquiry/id/success (ID 찾기 성공 화면) POST
+sinchonbeer.com/inquiry (Email / PW 찾기 화면)
+sinchonbeer.com/inquiry/email/success (Email 찾기 성공 화면) POST
 sinchonbeer.com/inquiry/pw/email (pw 찾기 이메일 전송 확인 화면) POST
 sinchonbeer.com/inquiry/pw/input-code (PW 찾기 이메일 전송 후 인증번호 입력 화면) POST
 sinchonbeer.com/inquiry/pw/reset (PW 찾기 PW 재설정 화면) POST
