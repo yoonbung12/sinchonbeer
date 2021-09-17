@@ -13,13 +13,13 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- CSS files -->
-    <link rel="stylesheet" type="text/css" href="/css/main_logout.css">
-<!-- <script
+<!--     <link rel="stylesheet" type="text/css" href="/css/main_logout.css"> -->
+ <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
 
 <style>
         body {
@@ -139,6 +139,8 @@
 	<th:block th:include="frame/header"></th:block>
 	<th:block th:include="frame/nav"></th:block>
 
+		
+
     <!-- Content 영역 -->
     <div class="my-5 text-center">
         <h2 class="font-weight-bold">
@@ -147,8 +149,7 @@
     </div>
 
     <div class="container">
-    <input type="text" th:value="${session.loginInfo.idx}">
-        <form action="">
+        <form action="pay/kakaoPay" method="post">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="tip-off">
@@ -181,13 +182,17 @@
                         <h6>주문자 정보</h6>
                         <div class="position-relative">
                             <div class="text-15 mb-1">
-                                채호연
+                            <!-- 이부분 부터 바꿔나가야함 -->
+                                <span th:text="${session.loginInfo.name}" ></span>
+                                <!-- 채호연 -->
                             </div>
                             <div class="text-14 text-gray font-weight-bold mb-1">
-                                01050954426
+                               	<span th:text="${session.loginInfo.phone}" ></span>
+                                <!-- 01050954426 -->
                             </div>
                             <div class="text-14 text-gray font-weight-bold mb-1">
-                                coghdus1016@naver.com
+                                <span th:text="${session.loginInfo.email}" ></span>
+                                <!-- coghdus1016@naver.com -->
                             </div>
 
                             <a onclick="void(0);" href="javascript:"class="btn-sinchon btn btn-sm-padding text-13 btn_top_right" id="btn-orderer-edit" role="button">
@@ -196,75 +201,6 @@
                         </div>
                     </div>
 
-                    <div class="tip-off">
-                        <h6>배송 정보</h6>
-
-                        <div>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input">
-                                    <span class="small">
-                                        주문자 정보와 동일
-                                    </span>
-                                </label>
-                            </div>
-
-                            <div class="row">
-                                <div class="col pr-1 mt-2">
-                                    <input type="text" class="form-control" id="delvname" placeholder="수령인" name="delvName">
-                                </div>
-
-                                <div class="col pl-1 mt-2">
-                                    <input type="tel" class="form-control" id="delvcall" placeholder="연락처" name="delvCall">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-3 mt-2">
-                                    <input type="tel" class="form-control bg-white" placeholder="우편번호" name="delvAddressCode" value="18342" readonly>
-                                </div>
-
-                                <div class="col-3 btn-tools mt-2">
-                                    <a href="" class="text-13 text-center d-block btn">주소찾기</a>
-                                </div>
-
-                                <div class="col-12 mt-2">
-                                    <input type="text" class="form-control bg-white" name="delvAddress" value="경기 화성시 융건로 99 (기안동, 기안마을풍성신미주아파트)" readonly>
-                                </div>
-
-                                <div class="col-12 mt-2">
-                                    <input type="text" class="form-control" name="delvAddressDetail" value="116동 302호">
-                                </div>
-                            </div>
-
-                            <div class="form-check mt-2">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input">
-                                    <span class="small">
-                                        배송지 목록에 추가
-                                    </span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="row mt-4">
-                            <div class="col-12">
-                                <p class="text-13">
-                                    배송메모
-                                </p>
-
-                                <div class="form-group">
-                                    <select name="delvMemo" id="delvMemo" class="form-control text-14">
-                                        <option value>배송메모를 선택해 주세요.</option>
-                                        <option value="배송 전에 미리 연락 바랍니다.">배송 전에 미리 연락 바랍니다.</option>
-                                        <option value="부재시 경비실에 맡겨주세요.">부재시 경비실에 맡겨주세요.</option>
-                                        <option value="부재시 전화나 문자를 남겨주세요.">부재시 전화나 문자를 남겨주세요.</option>
-                                        <option value="직접입력">직접입력</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="tip-off">
                         <h6>쿠폰</h6>
@@ -356,8 +292,9 @@
 
     <!-- Footer 영역 -->
         <th:block th:include="frame/footer"></th:block>
-    
-    <script>
+
+	<script>
+
         $("#payAllCheck").click(function () {
             $(".check").prop('checked', $(this).prop('checked'));
         });
@@ -366,8 +303,14 @@
 
         x.addListener(function(a) {
             $('#collapsibleNavbar').removeClass('show');
-        });
+        });   
+    	
     </script>
+    
+
+	
+
+    
     <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
