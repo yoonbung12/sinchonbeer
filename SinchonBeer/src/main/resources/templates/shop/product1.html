@@ -79,8 +79,9 @@
                         										<!--shop_payment  -->
                         <form id="form1"  name='form1' action="/shop/shop_payment"  method='get'>  
                         	
-
-	                      	<input type="hidden" th:value="${session.loginInfo.idx}" name="midx" id="midx">
+ 						<th:block th:unless="${session.loginInfo == null}">
+                        	<input type="hidden" th:value="${session.loginInfo.idx}" name="midx"> 
+                        </th:block> 
 
                         	
 							<input name="gphotoname" type="hidden" value="gimbugag">	
@@ -98,7 +99,7 @@
                             </div>
 		                    <div class="row">
 		                            <input type="submit" id="BuyNow" value="BuyNow"   class="button_form1" style="color: #fff; background-color: #5ae5ec;">	<!-- formation="/shop/shop_payment" -->
-		                            <input type="submit" id="basket" value="Basket" formaction="/cart/cart" class="button_form2"  style="color: #5ae5ec; background-color: #fff;">	
+		                            <input type="submit" id="basket" value="Basket" formaction="/basket/basket" class="button_form2"  style="color: #5ae5ec; background-color: #fff;">	
 		                         
 		
 		                    </div>	                
