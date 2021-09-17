@@ -80,4 +80,9 @@ public class OrderServiceImpl implements OrderService {
 		}
 	}
 
+	@Override
+	public int confirmOrder(int idx) {
+		return orderDao.updateStatus("confirmed", idx);
+	}
+
 }
