@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitcamp.sc.member.service.MemberService;
-import com.bitcamp.sc.shop.domain.GoodsToBasket;
-import com.bitcamp.sc.shop.domain.GoodsToBuyNow;
+
 import com.bitcamp.sc.shop.service.ShopService;
 
 	
@@ -50,7 +49,7 @@ public class ShopController {
 	public String getBuyNow(	
 			
 			
-			@ModelAttribute GoodsToBuyNow buynow,
+//			@ModelAttribute GoodsToBuyNow buynow,
 			
 			@RequestParam("gphotoname") String gphotoname,
 			@RequestParam("gname") String gname,
@@ -61,7 +60,7 @@ public class ShopController {
 			Model model
 			) {
 			
-			model.addAttribute("buynow", buynow);
+//			model.addAttribute("buynow", buynow);
 			
 			model.addAttribute("gphotoname", gphotoname);
 			model.addAttribute("gname", gname);
@@ -78,27 +77,27 @@ public class ShopController {
 		
 	}
 	
-	// Test
-	@RequestMapping(value="/shop/FinalTest", method = RequestMethod.GET)
-	public String getFinal(
-
-			
-			@ModelAttribute GoodsToBuyNow buynow,
-			
-			
-
-			
-			
-			Model model
-			
-			
-			) {
-		System.out.println(buynow);
-		
-		model.addAttribute("buynow", buynow);
-		
-		return "/shop/FinalTest";
-	}
+//	// Test
+//	@RequestMapping(value="/shop/FinalTest", method = RequestMethod.GET)
+//	public String getFinal(
+//
+//			
+//			@ModelAttribute GoodsToBuyNow buynow,
+//			
+//			
+//
+//			
+//			
+//			Model model
+//			
+//			
+//			) {
+//		System.out.println(buynow);
+//		
+//		model.addAttribute("buynow", buynow);
+//		
+//		return "/shop/FinalTest";
+//	}
 	
 	
 }
