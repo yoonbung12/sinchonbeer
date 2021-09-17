@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +20,10 @@ import com.bitcamp.sc.member.service.MemberService;
 import com.bitcamp.sc.shop.service.ShopService;
 
 	
+import org.springframework.web.servlet.ModelAndView;
+
+import com.bitcamp.sc.shop.domain.GoodsToCart;
+
 
 
 @Controller
@@ -102,3 +108,17 @@ public class ShopController {
 	
 	
 }
+	
+
+	
+	
+
+	
+
+	
+	
+	
+
+	
+
+
