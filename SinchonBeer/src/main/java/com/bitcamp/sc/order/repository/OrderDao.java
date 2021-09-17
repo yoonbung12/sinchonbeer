@@ -11,5 +11,6 @@ public interface OrderDao {
 	public List<OrderInfo> findByMemberIdx(int memberIdx);
 	public List<OrderInfo> findByCategoryAndMemberIdx(String category, int memberIdx);
 	public int deleteByIdx(int idx);
+	public int updateStatus(String status, int idx);
 	
 }

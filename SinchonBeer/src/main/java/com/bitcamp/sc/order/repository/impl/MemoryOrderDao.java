@@ -56,4 +56,9 @@ public class MemoryOrderDao implements OrderDao {
 	public int deleteByIdx(int idx) {
 		return 0;
 	}
+
+	@Override
+	public int updateStatus(String status, int idx) {
+		return 0;
+	}
 }

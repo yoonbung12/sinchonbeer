@@ -33,5 +33,9 @@
 	<delete id="deleteByIdx">
 		DELETE FROM orders WHERE oidx=#{idx}
 	</delete>
+	
+	<update id="updateStatus">
+		UPDATE orders SET ostatus=#{status} WHERE oidx=#{idx}
+	</update>
 
 </mapper>

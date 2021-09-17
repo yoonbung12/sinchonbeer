@@ -52,4 +52,12 @@ public class MybatisOrderDao implements OrderDao {
 		return template.delete(NAME_SPACE + ".deleteByIdx", idx);
 	}
 
+	@Override
+	public int updateStatus(String status, int idx) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("status", status);
+		param.put("idx", idx);
+		return template.update(NAME_SPACE + ".updateStatus", param);
+	}
+
 }
