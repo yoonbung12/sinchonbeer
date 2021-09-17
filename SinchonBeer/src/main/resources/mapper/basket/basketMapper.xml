@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="CartMapper">
-	<resultMap type="com.bitcamp.sc.cart.domain.CartVO" id="CartDomain">
+<mapper namespace="BasketMapper">
+	<resultMap type="com.bitcamp.sc.basket.domain.BasketVO" id="BasketDomain">
 		<result property="idx" column="bidx"/>
 		<result property="count" column="bcount"/>
 		<result property="memberIdx" column="midx"/>
@@ -9,22 +9,22 @@
 	</resultMap>
 
 	<!-- 01.장바구니 추가 -->
-	<insert id="insertCart" parameterType="com.bitcamp.sc.cart.domain.CartVO" useGeneratedKeys="true" keyProperty="idx">
+	<insert id="insertBasket" parameterType="com.bitcamp.sc.basket.domain.BasketVO" useGeneratedKeys="true" keyProperty="idx">
 		INSERT INTO basket(bcount, midx, gidx) VALUES( #{count}, #{memberIdx}, #{goodsIdx})
 	</insert>
 
 	<!-- 02.장바구니 리스트 -->
-	<select id="listCart" resultType="com.bitcamp.sc.cart.domain.CartVO">
+	<select id="listBasket" resultType="com.bitcamp.sc.basket.domain.BasketVO">
 		SELECT * FROM basket WHERE midx= #{memberIdx}
 	</select>
 	
 	<!-- 03. 장바구니 삭제 -->
-	<delete id="deleteCart" >
+	<delete id="deleteBasket" >
 		DELETE FROM basket where bidx = #{idx}
 	</delete>
 	
 	<!-- 04. 장바구니 수정 -->
-	<update id="modifyCart" >
+	<update id="modifyBasket" >
 		UPDATE basket SET bcount = #{count}
 		where midx= #{memberIdx} AND gidx= #{goodsIdx}
 	</update>
@@ -40,13 +40,13 @@
 	</select>
 	
 	<!-- 06.장바구니 상품확인 -->
-	<select id="countCart" resultType="int">
+	<select id="countBasket" resultType="int">
 		SELECT COUNT(*) FROM basket
 		WHERE midx=#{memberIdx} AND gidx = #{goodsIdx}
 	</select>
 	
 	<!-- 07.장바구니에 기존의 상품이 존재하면 수정 -->
-	<update id="updateCart">
+	<update id="updateBasket">
 		UPDATE basket SET count = count + #{count}
 		WHERE midx = #{memberIdx} AND gidx=#{goodsIdx}
 	</update>
