@@ -8,9 +8,11 @@ import com.bitcamp.sc.shop.domain.GoodsVO;
 import com.bitcamp.sc.shop.repository.GoodsDao;
 
 @Repository
-public class MybatisGoodsDao implements GoodsDao {
 
-	private static final String NAME_SPACE = "GoodsMapper";
+
+public class MybatisGoodsDao implements GoodsDao{
+
+	private static final String NAME_SPACE="GoodsMapper";
 	
 	private final SqlSessionTemplate template;
 	
@@ -19,6 +21,7 @@ public class MybatisGoodsDao implements GoodsDao {
 		this.template = template;
 	}
 	
+
 	// 1.상품추가
 	@Override
 	public GoodsVO insertGoods(GoodsVO vo) {
@@ -46,4 +49,5 @@ public class MybatisGoodsDao implements GoodsDao {
 	
 
 	
+
 }

@@ -15,14 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitcamp.sc.member.service.MemberService;
-//import com.bitcamp.sc.shop.domain.GoodsToBasket;
-//import com.bitcamp.sc.shop.domain.GoodsToBuyNow;
+
+import com.bitcamp.sc.shop.domain.GoodsToBuyNow;
 import com.bitcamp.sc.shop.service.ShopService;
 
 	
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bitcamp.sc.shop.domain.GoodsToCart;
 
 
 
@@ -56,7 +55,7 @@ public class ShopController {
 	public String getBuyNow(	
 			
 			
-//			@ModelAttribute GoodsToBuyNow buynow,
+			@ModelAttribute GoodsToBuyNow buynow,
 			
 			@RequestParam("gphotoname") String gphotoname,
 			@RequestParam("gname") String gname,
@@ -67,7 +66,7 @@ public class ShopController {
 			Model model
 			) {
 			
-//			model.addAttribute("buynow", buynow);
+			model.addAttribute("buynow", buynow);
 			
 			model.addAttribute("gphotoname", gphotoname);
 			model.addAttribute("gname", gname);
