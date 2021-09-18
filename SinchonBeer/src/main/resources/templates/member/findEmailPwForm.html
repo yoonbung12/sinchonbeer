@@ -179,10 +179,33 @@
 						id="authNum"></td>
 				</tr>
 			</table>
-			<input type="submit" value="확인" id="pwAuthBtn">
+			<input type="submit" value="확인" id="codeBtn">
 		</div>
 
 	</div>
+	
+	<!-------------------------------------------------------------------------------------------------------->
+	<!---// 비밀번호 찾기 (3) 비밀번호 재설정----------------------------------------------------------------------------------------------------->
+	<div class="wrap_main display_none" id="newPwSettingContent">
+        <h1>비밀번호 찾기</h1>
+        <p class="id_tab ">비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!</p>
+        <div class="result_box">
+            <p >비밀번호를 새로 입력해 주세요.</p>
+            <form method="post">
+                <table>
+                    <tr>
+                        <td class="border-1"><input type="text" class="border_none width_400px" placeholder="새로운 비밀번호"id="newPw"></td>
+                    </tr>
+                    <tr>
+                        <td class="border-1"><input type="text" class="border_none width_400px" placeholder="새로운 비밀번호 확인" id="reNewPw"></td>
+                    </tr>
+                </table>
+                <!-- 비밀번호 재설정이 성공하면 로그인 페이지로 넘기기 -->
+                <input type="submit" value="확인">
+
+            </form>
+        </div>
+    </div>
 	<!-------------------------------------------------------------------------------------------------------->
 	<script>
 		var epc = $('#emailPwFindFormContent');
@@ -249,7 +272,7 @@
 			});
 			
 		});
-		
+		// 비밀번호 찾기(1) 1차 성공 화면
 		//'계속'을 누르면 ajax로 인증메일을 보내고  메일 보냈는지 여부를 데이터로 받기
 		$('#pwContinueBtn').on('click', function() {
 			
@@ -270,8 +293,14 @@
 					//인증번호를 입력하는 다음창이 나오게 하기.
 					if(data=='Y'){
 						alert('성공');
+						//현재 페이지가 들어가고
+						$('#pwContinueContent').addClass('display_none');
+						//pwInputCodeContent 영역이 나옴
+						$('#pwInputCodeContent').removeClass('display_none');
+						
 					}else{
 						alert('실패');
+						return false;
 					}
 				
 				}
@@ -280,6 +309,41 @@
 			
 		});
 		
+		
+		$('#codeBtn').on('click', function() {
+			
+			var inquiryEmail = $('#inquiryPw').html();
+			var pcc = $('#pwContinueContent');
+			var pic = $('#pwInputCodeContent');
+			var inputNum = $('#authNum').val();
+			
+			console.log(inquiryEmail);
+			
+			$.ajax({
+				url : '/inquiry/pw/input-code',
+				type : 'post',
+				contentType : 'application/json',
+				data : JSON.stringify({
+					"userEmail" : inquiryEmail,
+					"inputNum" : inputNum
+				}),
+				success : function(data) {
+					console.log(data);
+					//인증번호를 입력하는 다음창이 나오게 하기.
+					if(data=='Y'){
+						//alert('성공');
+						$('#pwInputCodeContent').addClass('display_none');
+						$('newPwSettingContent').removeClass('display_none');
+					}else if(data=='N'){
+						alert('실패! 다시 입력해 주세요.');
+						return false;
+					}
+				
+				}
+
+			});
+			
+		});
 		
 		
 		

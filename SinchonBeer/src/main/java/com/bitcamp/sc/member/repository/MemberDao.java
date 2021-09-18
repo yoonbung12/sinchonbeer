@@ -1,6 +1,7 @@
 package com.bitcamp.sc.member.repository;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 
 import com.bitcamp.sc.member.domain.Member;
 import com.bitcamp.sc.member.domain.MemberAddress;
@@ -30,6 +31,6 @@ public interface MemberDao {
 	int updateCode(String code, String email);
 	
 	//비밀번호 찾기 - 인증번호 조회하기.
-	Member selectCode(String code, String email);
+	Member selectCode(String email);
 	
 }

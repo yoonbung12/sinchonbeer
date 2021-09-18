@@ -79,6 +79,37 @@ li.nav-item>a:hover{
     text-decoration: none;  
 }
 
+/* fintPwAuth.html해당 */
+.border-1{
+    border:1px solid rgb(212, 212, 212);
+    font-size: 14.5px;
+    padding:10px;
+    font-size:14px;
+}
+.border-1>label{
+    margin:0 !important;
+}
+/* 인증번호 입력하는 input의 border 효과 없애기 */
+.border_none{
+    border:none;
+}
+/* 인증번호 입력하는 input의 테두리 효과 없애기 */
+.border-1 input:focus{
+    outline:none;
+}
+
+/* findPwSetting 해당 */
+.width_400px{
+	width:300px;
+	height:23px;
+	marthin:0 auto;
+}
+.width_400px::placeholder{
+	color:#ccc;
+	font-size:13.5px;
+}
+
+
 /* submit 버튼의 효과 */
 .chkok:focus{
 	outline:none;

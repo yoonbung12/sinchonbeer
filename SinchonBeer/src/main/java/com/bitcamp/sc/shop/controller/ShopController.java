@@ -69,20 +69,20 @@ public class ShopController {
 //	}
 	
 	// Test
-	@RequestMapping(value="/shop/FinalTest", method = RequestMethod.GET)
-	public String getTest(
-
-			@RequestParam("pType") String pway,
-			Model model
-			
-			
-			) {
-		System.out.println(goods);
-		
-		model.addAttribute("goods", goods);
-		model.addAttribute("pway", pway);
-		return "/shop/FinalTest";
-	}
+//	@RequestMapping(value="/shop/FinalTest", method = RequestMethod.GET)
+//	public String getTest(
+//
+//			@RequestParam("pType") String pway,
+//			Model model
+//			
+//			
+//			) {
+//		System.out.println(goods);
+//		
+//		model.addAttribute("goods", goods);
+//		model.addAttribute("pway", pway);
+//		return "/shop/FinalTest";
+//	}
 	
 	
 }

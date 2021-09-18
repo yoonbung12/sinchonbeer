@@ -69,9 +69,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!-- 비밀번호 찾기 중 인증번호 일치하는지 체크-->
-	<select id="selectCodeByCode"
+	<select id="selectCode"
+		resultType="com.bitcamp.sc.member.domain.Member"
 		resultMap="MemberDomain"
 		>
-		select mcode from member where mcode=#{code} and memail=#{email}
+		select mcode from member where memail=#{memail}
 	</select>
 </mapper>
