@@ -53,11 +53,14 @@
 
 </head>
 <body>
-<!-- 	<th:block th:include="frame/header로 바꿔야함"></th:block> -->
+
 
 	<th:block th:include="frame/header"></th:block>
 	<th:block th:include="frame/nav"></th:block>
-	
+	<!-- 세션 정보가 없을때 -> modal창 -->
+	<th:block th:if="${session.loginInfo == null }">
+		<input type="hidden" th:value="Y" id="check">
+	</th:block>	
 	
     <div class="container">
             
@@ -73,7 +76,9 @@
                         <td>수량</td>
                         <hr >
                         <form  name='form1' action="/shop/shop_payment"  method='get'>
-                        
+                        <th:block th:unless="${session.loginInfo == null}">
+                        	<input type="hidden" th:value="${session.loginInfo.idx}" name="midx"> 
+                        </th:block>                       
 							<input name="gphotoname" type="hidden" value="citrus">                        
                         	<input name="gname" type="hidden" value="제주를 담은 감귤칩">                        
                             <input name="gprice" type="hidden" id="price" value="11000">
