@@ -6,43 +6,6 @@
 <!-- metaheader 영역 -->
 <link rel="stylesheet" th:href="@{/css/member/findEmailPwForm.css}">
 <th:block th:replace="frame/metaheader"></th:block>
-<!-- // 내가만든 영역 시작(1) ---------------------------------------------------------------------------------------->
-<script>
-	$(document).ready(function() {
-		$('#profile-tab').on('click', function() {
-
-			$('.id_tab').addClass('display_none');
-			$('.pw_tab').removeClass('display_none');
-		});
-
-		$('#home-tab').on('click', function() {
-			// id/pw찾기 탭 소개글
-			$('.id_tab').removeClass('display_none');
-			$('.pw_tab').addClass('display_none');
-
-		});
-		/*  // spring에서 수정할 예정(지금은 예시로 만들어 봄)
-		 $('#chkok').on('click', function () {
-		     if ($('#email').val().length < 1) {
-		         alert('이메일을 입력해주세요');
-		     } else {
-		         $('#pwms').removeClass('display_none');
-		         $('#pwin').addClass('display_none');
-		     }
-		 });
-		 // spring에서 수정할 예정(지금은 예시로 만들어 봄)
-		 $('#chkok').on('click', function () {
-		     if ($('#email').val().length < 1) {
-		         alert('이메일을 입력해주세요');
-		     } else {
-		         $('#pwms').removeClass('display_none');
-		         $('#pwin').addClass('display_none');
-		     }
-		 }); */
-	});
-</script>
-<!-- // 내가만든 영역 끝(1)---------------------------------------------------------------------------------------->
-
 </head>
 <body>
 
@@ -53,7 +16,7 @@
 	<th:block th:replace="frame/nav"></th:block>
 
 	<!-- content 영역 ---------------------------------------------------------->
-	<!-- 내가만든 영역 시작(2)// --------------------------------------------------------------------------->
+	<!-- 내가만든 영역 시작// --------------------------------------------------------------------------->
 
 	<div class="wrap_main " id="emailPwFindFormContent">
 		<h1>이메일/비밀번호 찾기</h1>
@@ -83,12 +46,12 @@
 
 					<div id="id " class="id_tab">
 						<div class="label_space">
-							<label for="username">이름</label>
+							<label for="username" class="display_none">이름</label>
 						</div>
 						<input type="text" id="username" placeholder="이름을 입력해 주세요.">
 
 						<div class="label_space">
-							<label for="phone">휴대폰 번호</label>
+							<label for="phone" class="display_none">휴대폰 번호</label>
 						</div>
 						<input type="text" id="phone"
 							placeholder="휴대폰 번호를 입력해 주세요. ( - 제외)">
@@ -194,39 +157,58 @@
 		<div class="result_box">
 			<p>비밀번호를 새로 입력해 주세요.</p>
 			<!-- <form method="post"> -->
-				<table>
-					<tr>
-						<td class="border-1"><input type="text"
-							class="border_none width_400px" placeholder="새로운 비밀번호" id="newPw"></td>
-					</tr>
-					<tr>
-						<td class="border-1"><input type="text"
-							class="border_none width_400px" placeholder="새로운 비밀번호 확인"
-							id="reNewPw"></td>
-					</tr>
-				</table>
-				<!-- 비밀번호 재설정이 성공하면 로그인 페이지로 넘기기 -->
-				<input type="submit" value="확인" id="pwResetBtn">
+			<table>
+				<tr>
+					<td class="border-1"><input type="text"
+						class="border_none width_400px" placeholder="새로운 비밀번호" id="newPw"></td>
+				</tr>
+				<tr>
+					<td class="border-1"><input type="text"
+						class="border_none width_400px" placeholder="새로운 비밀번호 확인"
+						id="reNewPw"></td>
+				</tr>
+			</table>
+			<!-- 비밀번호 재설정이 성공하면 로그인 페이지로 넘기기 -->
+			<input type="submit" value="확인" id="pwResetBtn">
 
 			<!-- </form> -->
 		</div>
 	</div>
 	<!-------------------------------------------------------------------------------------------------------->
 	<!------//비밀번호 찾기 (3) 성공 화면 -------------------------------------------------------------------------------->
-	
+
 	<div class="wrap_main display_none" id="pwSuccessContent">
 		<h1>비밀번호 찾기</h1>
-        <p class="id_tab ">비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!</p>
+		<p class="id_tab ">
+			비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!
+		</p>
 		<div class="result_box">
-			<p>
-				비밀번호 재설정이 완료되었습니다.
-			</p>
+			<p>비밀번호 재설정이 완료되었습니다.</p>
 			<a th:href="@{/login}"><input type="button" value="로그인"></a>
 		</div>
 
 	</div>
-	
+
 	<!-------------------------------------------------------------------------------------------------------->
+	<script>
+		$(document).ready(function() {
+			$('#profile-tab').on('click', function() {
+
+				$('.id_tab').addClass('display_none');
+				$('.pw_tab').removeClass('display_none');
+			});
+
+			$('#home-tab').on('click', function() {
+				// id/pw찾기 탭 소개글
+				$('.id_tab').removeClass('display_none');
+				$('.pw_tab').addClass('display_none');
+
+			});
+		});
+	</script>
+	<!-- ----------------------------------------------------------------------------------------------->
+
+
 	<script>
 		var epc = $('#emailPwFindFormContent');
 		var ec = $('#emailSuccessContent');
@@ -395,10 +377,9 @@
 			});
 
 		});
-
 	</script>
 
-	<!-- // 내가만든 영역 끝 (2) ---------------------------------------------------------------------------------------->
+	<!-- // 내가만든 영역 끝 ---------------------------------------------------------------------------------------->
 
 
 	<!-- footer 영역 -->

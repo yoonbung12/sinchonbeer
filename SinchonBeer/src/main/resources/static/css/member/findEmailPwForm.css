@@ -1,3 +1,6 @@
+/* 타이틀 폰트 적용 */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&display=swap');
+
 /* 전체를 감싼 영역 */
 .wrap_main {
     width: 490px;
@@ -5,9 +8,9 @@
 }
 /* '아이디/비밀번호 찾기' 제목 문구 */
 .wrap_main h1{
-    text-align: center;
+	font-family: 'IBM Plex Sans KR', sans-serif;
     font-size:28px;
-    font-weight:bold;
+    text-align: center;
     margin-bottom:20px;
     
 }
@@ -43,14 +46,14 @@ li.nav-item>a:hover{
 
 /* input 박스를 클릭해야만 비로소 보이는 태그 */
 .label_space{
-    width:80px;
     height:20px;
-    display:block;
-    margin:30px 0 5px 10px ;
+    margin:40px 0 8px  ; 
+    
 }
 .inner-tab label{
     font-size:14px;
-    color:white;
+    margin-left:70px;
+    color:#aaa; 
 }
 
 /* input박스들 모두에게 적용 */

@@ -1,3 +1,6 @@
+/* JOIN 타이틀에 적용시킬 폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@800&family=Roboto:wght@900&display=swap');
+
 /* 전체 영역 */
 *{
     margin:0;
@@ -26,7 +29,9 @@ div{
     margin:50px auto;
     /* border:1px solid rgb(204, 18, 18); */
 }
-h1{
+.font_set{
+	font-family: 'Kanit', sans-serif;
+    font-size: 48px;
     margin-top:40px;
     text-align:center;
     color:#1ecad3;
