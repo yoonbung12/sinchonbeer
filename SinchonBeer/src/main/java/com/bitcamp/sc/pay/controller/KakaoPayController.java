@@ -14,6 +14,7 @@ import com.bitcamp.sc.pay.domain.KakaoPayApproval;
 import com.bitcamp.sc.pay.domain.PayInfo;
 import com.bitcamp.sc.pay.service.impl.PayServiceImpl;
 import com.bitcamp.sc.pay.service.impl.type.KakaoPay;
+import com.bitcamp.sc.shop.domain.ShopDto;
 import com.bitcamp.sc.tour.domain.TourDto;
 import com.bitcamp.sc.tour.service.TourService;
 
@@ -42,7 +43,7 @@ public class KakaoPayController {
 	}
 	
 	@PostMapping("/kakaoPay/tour")
-	public String kakaoPayPost(
+	public String kakaoPayTour(
 			@ModelAttribute TourDto tour,
 			@RequestParam("pType") String pway,
 			Model model
@@ -57,6 +58,26 @@ public class KakaoPayController {
 									   .build();
 		
 		orderService.createOrder("tour", orderInfo);
+			
+		return "redirect:" + kakaoPay.kakaoPayReady(orderInfo);
+	}
+	
+	@PostMapping("/kakaoPay/shop")
+	public String kakaoPayShop(
+			@ModelAttribute ShopDto shop,
+			Model model
+			) {
+		
+		OrderInfo orderInfo = OrderInfo.builder()
+									   .category("shop")
+									   .price(shop.getPrice())
+									   .memberIdx(shop.getMidx()) // 주소 추가
+									   .build();
+		
+		
+		log.info(orderInfo.toString());
+		
+//		orderService.createOrder("tour", orderInfo);
 			
 		return "redirect:" + kakaoPay.kakaoPayReady(orderInfo);
 	}
