@@ -28,7 +28,7 @@ public class AuthNumberService {
 		System.out.println("사용자가 입력한 인증번호 : "+inputNum);
 		String memberCode = member.getCode();
 		
-		if(memberCode ==inputNum) {
+		if(memberCode.equals(inputNum)) {
 			result=true;
 		}
 		System.out.println("일치한다면 true 반환 : "+ result);
