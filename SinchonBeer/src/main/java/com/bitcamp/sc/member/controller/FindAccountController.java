@@ -73,19 +73,21 @@ public class FindAccountController {
 	}
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
-//	//비밀번호 찾기 두 번째 단계 - 이메일 인증 보내고 인증번호 입력 받는 화면
-//	@RequestMapping(value="/inquiry/pw/input-code", method=RequestMethod.POST)
-	@RequestMapping(value = "/inquiry/pw/input-code")
-	public String findPw2() {
-		return "member/findPwAuth";
-	}
-
-//	
-//	//비밀번호 찾기 세 번째 단계 - 비밀번호 재설정하기
-//	@RequestMapping(value="/inquiry/pw/reset", method=RequestMethod.POST)
-	@RequestMapping(value = "/inquiry/pw/reset")
-	public String findPw3() {
-		return "member/findPwSetting";
-	}
-
+////	//비밀번호 찾기 두 번째 단계 - 이메일 인증 보내고 인증번호 입력 받는 화면
+////	@RequestMapping(value="/inquiry/pw/input-code", method=RequestMethod.POST)
+//	@RequestMapping(value = "/inquiry/pw/input-code")
+//	public String findPw2() {
+//		return "member/findPwAuth";
+//	}
+//
+////	
+////	//비밀번호 찾기 세 번째 단계 - 비밀번호 재설정하기
+////	@RequestMapping(value="/inquiry/pw/reset", method=RequestMethod.POST)
+//	@RequestMapping(value = "/inquiry/pw/reset")
+//	public String findPw3() {
+//		return "member/findPwSetting";
+//	}
+//
 }
+
+
