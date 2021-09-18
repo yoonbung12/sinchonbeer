@@ -58,11 +58,12 @@
 <body>
    
    <!-- header -->
-<!-- 	<th:block th:include="frame/header로 바꿧"></th:block> -->
 
 	<th:block th:include="frame/header"></th:block>
 	<th:block th:include="frame/nav"></th:block>   
-	
+	<th:block th:if="${session.loginInfo == null}">
+		<input type="hidden" th:value="Y" id="check">
+	</th:block>	
 	
     <div class="container">
             
@@ -78,7 +79,9 @@
                         <td>수량</td>
                         <hr >
                         <form  name='form1' action="/shop/shop_payment"  method='get'>
-                        
+                        <th:block th:unless="${session.loginInfo == null}">
+                        	<input type="hidden" th:value="${session.loginInfo.idx}" name="midx"> 
+                        </th:block>                       
 							<input name="gphotoname" type="hidden" value="playingCard">                        
                         	<input name="gname" type="hidden" value="조약돌 화투">
                             <input name="gprice" type="hidden" id="price" value="8800">
