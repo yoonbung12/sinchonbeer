@@ -32,8 +32,8 @@ public class MailSenderService {
 		 
 		Boolean result=true;
 		
-		String AuthNum = randomNum();
-		System.out.println("[메일service에서 ] 만들어진 인증번호 : "+AuthNum);
+		String authNum = randomNum();
+		System.out.println("[메일service에서 ] 만들어진 인증번호 : "+authNum);
 		MimeMessage message = sender.createMimeMessage();
 		//MimeMessage에는 메일 내용이 들어가게 됨. 제목, 내용, 발신, 수신, 첨부
 		try {
@@ -42,7 +42,7 @@ public class MailSenderService {
 			message.setSubject("인증번호를 보내드립니다.", "UTF-8");
 
 			// 메일 내용 컨텐츠 html
-			String html = "<h1>인증번호 : <span>"+ randomNum() +"</span></h1>";
+			String html = "<h1>인증번호 : <span>"+ authNum +"</span></h1>";
 			//html += "<a href=\"https://www.naver.com\">네이버로 갈까요?!!!</a>";
 
 			// message에 내용 적용
@@ -60,7 +60,7 @@ public class MailSenderService {
 			
 			//인증번호를 db에 저장하기.
 			memberDao = template.getMapper(MemberDao.class);
-			 memberDao.updateCode(AuthNum, userEmail);
+			 memberDao.updateCode(authNum, userEmail);
 			
 		} catch (MessagingException e) {
 			result=false;
