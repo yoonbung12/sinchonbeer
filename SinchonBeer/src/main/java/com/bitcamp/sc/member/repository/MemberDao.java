@@ -33,4 +33,7 @@ public interface MemberDao {
 	//비밀번호 찾기 - 인증번호 조회하기.
 	Member selectCode(String email);
 	
+	//비밀번호 찾기 - 비밀번호 재설정
+	int updatePw(String email, String pw);
+	
 }

@@ -75,4 +75,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		>
 		select mcode from member where memail=#{memail}
 	</select>
+	
+	<update id="updatePw"
+		parameterType="com.bitcamp.sc.member.domain.Member"
+		>
+		update member set mpw = #{pw} where memail=#{email}
+	</update>
+	
+	
+	
 </mapper>

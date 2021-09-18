@@ -183,36 +183,56 @@
 		</div>
 
 	</div>
-	
+
 	<!-------------------------------------------------------------------------------------------------------->
 	<!---// 비밀번호 찾기 (3) 비밀번호 재설정----------------------------------------------------------------------------------------------------->
-	<div class="wrap_main display_none" id="newPwSettingContent">
-        <h1>비밀번호 찾기</h1>
-        <p class="id_tab ">비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!</p>
-        <div class="result_box">
-            <p >비밀번호를 새로 입력해 주세요.</p>
-            <form method="post">
-                <table>
-                    <tr>
-                        <td class="border-1"><input type="text" class="border_none width_400px" placeholder="새로운 비밀번호"id="newPw"></td>
-                    </tr>
-                    <tr>
-                        <td class="border-1"><input type="text" class="border_none width_400px" placeholder="새로운 비밀번호 확인" id="reNewPw"></td>
-                    </tr>
-                </table>
-                <!-- 비밀번호 재설정이 성공하면 로그인 페이지로 넘기기 -->
-                <input type="submit" value="확인">
+	<div class="wrap_main display_none" id="pwResetContent">
+		<h1>비밀번호 찾기</h1>
+		<p class="id_tab ">
+			비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!
+		</p>
+		<div class="result_box">
+			<p>비밀번호를 새로 입력해 주세요.</p>
+			<!-- <form method="post"> -->
+				<table>
+					<tr>
+						<td class="border-1"><input type="text"
+							class="border_none width_400px" placeholder="새로운 비밀번호" id="newPw"></td>
+					</tr>
+					<tr>
+						<td class="border-1"><input type="text"
+							class="border_none width_400px" placeholder="새로운 비밀번호 확인"
+							id="reNewPw"></td>
+					</tr>
+				</table>
+				<!-- 비밀번호 재설정이 성공하면 로그인 페이지로 넘기기 -->
+				<input type="submit" value="확인" id="pwResetBtn">
 
-            </form>
-        </div>
-    </div>
+			<!-- </form> -->
+		</div>
+	</div>
+	<!-------------------------------------------------------------------------------------------------------->
+	<!------//비밀번호 찾기 (3) 성공 화면 -------------------------------------------------------------------------------->
+	
+	<div class="wrap_main display_none" id="pwSuccessContent">
+		<h1>비밀번호 찾기</h1>
+        <p class="id_tab ">비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!</p>
+		<div class="result_box">
+			<p>
+				비밀번호 재설정이 완료되었습니다.
+			</p>
+			<a th:href="@{/login}"><input type="button" value="로그인"></a>
+		</div>
+
+	</div>
+	
 	<!-------------------------------------------------------------------------------------------------------->
 	<script>
 		var epc = $('#emailPwFindFormContent');
 		var ec = $('#emailSuccessContent');
 		var pc = $('#pwContinueContent');
-		 //ec,pc 위에 이 스크립트가 있을 때에는 왜 작동이 안되었을까?
-			/* $('#emailSearch').submit(function() { */
+		//ec,pc 위에 이 스크립트가 있을 때에는 왜 작동이 안되었을까?
+		/* $('#emailSearch').submit(function() { */
 		$('#emailSearch').on('click', function() {
 			var name = $('#username').val();
 			var phone = $('#phone').val();
@@ -241,7 +261,7 @@
 
 			});
 		});
-	
+
 		$('#pwSearch').on('click', function() {
 			var name = $('#name').val();
 			var email = $('#email').val();
@@ -262,7 +282,7 @@
 						epc.addClass('display_none');
 						pc.removeClass('display_none');
 						$('#inquiryPw').html(data);
-						
+
 					} else {
 						alert('일치하는 이메일 정보가 없습니다. 다시 입력해 주세요.')
 
@@ -270,17 +290,17 @@
 				}
 
 			});
-			
+
 		});
 		// 비밀번호 찾기(1) 1차 성공 화면
 		//'계속'을 누르면 ajax로 인증메일을 보내고  메일 보냈는지 여부를 데이터로 받기
 		$('#pwContinueBtn').on('click', function() {
-			
+
 			var inquiryEmail = $('#inquiryPw').html();
 			var pwInputCode = $('#pwInputCodeContent');
-			
+
 			console.log(inquiryEmail);
-			
+
 			$.ajax({
 				url : '/inquiry/pw/auth',
 				type : 'post',
@@ -291,34 +311,33 @@
 				success : function(data) {
 					console.log(data);
 					//인증번호를 입력하는 다음창이 나오게 하기.
-					if(data=='Y'){
+					if (data == 'Y') {
 						alert('성공');
 						//현재 페이지가 들어가고
 						$('#pwContinueContent').addClass('display_none');
 						//pwInputCodeContent 영역이 나옴
 						$('#pwInputCodeContent').removeClass('display_none');
-						
-					}else{
+
+					} else {
 						alert('실패');
 						return false;
 					}
-				
+
 				}
 
 			});
-			
+
 		});
-		
-		
+
 		$('#codeBtn').on('click', function() {
-			
+
 			var inquiryEmail = $('#inquiryPw').html();
 			var pcc = $('#pwContinueContent');
 			var pic = $('#pwInputCodeContent');
 			var inputNum = $('#authNum').val();
-			
+
 			console.log(inquiryEmail);
-			
+
 			$.ajax({
 				url : '/inquiry/pw/input-code',
 				type : 'post',
@@ -330,33 +349,53 @@
 				success : function(data) {
 					console.log(data);
 					//인증번호를 입력하는 다음창이 나오게 하기.
-					if(data=='Y'){
+					if (data == 'Y') {
 						//alert('성공');
 						$('#pwInputCodeContent').addClass('display_none');
-						$('#newPwSettingContent').removeClass('display_none');
-					}else if(data=='N'){
+						$('#pwResetContent').removeClass('display_none');
+					} else if (data == 'N') {
 						alert('실패! 다시 입력해 주세요.');
 						return false;
 					}
-				
+
 				}
 
 			});
-			
+
 		});
-		
-		
-		
-		/* if (data.trim() != '') {
-			alert('')
-			epc.addClass('display_none');
-			pwInputCode.removeClass('display_none');
-			
-		} else if(data.trim() == ''){
-			alert('인증번호를 입력해주세요.')
-		}else{
-			alert('인증번호가 일치하지 않습니다.')
-		} */
+
+		$('#pwResetBtn').on('click', function() {
+
+			var inquiryEmail = $('#inquiryPw').html();
+
+			console.log(inquiryEmail);
+
+			$.ajax({
+				url : '/inquiry/pw/reset',
+				type : 'post',
+				contentType : 'application/json',
+				data : JSON.stringify({
+					"userEmail" : inquiryEmail,
+					"userPw" : $('#newPw').val()
+				}),
+				success : function(data) {
+					console.log(data);
+					//db에 새 비밀번호 저장이 완료되었다면 y 반환.
+					if (data == 'Y') {
+						//alert('성공');
+						$('#pwResetContent').addClass('display_none');
+						$('#pwSuccessContent').removeClass('display_none');
+					} else if (data == 'N') {
+						alert('실패! 다시 입력해 주세요.');
+						return false;
+					}
+
+				}
+
+			});
+
+		});
+
 	</script>
 
 	<!-- // 내가만든 영역 끝 (2) ---------------------------------------------------------------------------------------->
