@@ -110,4 +110,8 @@ label{
     width:130px;
     color:white;
     background-color:  #1ecad3;
+    
+}
+.agree_buttons>a:hover{
+	text-decoration:none;
 }

@@ -26,6 +26,9 @@
 	<!-- 내가만든 영역// --------------------------------------------------------------------------->
 	<script>
 		$(document).ready(function() {
+			
+			
+			// 전체 동의 체크박스 누르면 모든 체크박스에 체크 되도록 하기.
 			$('#checkAll').change(function() {
 				if (this.checked) {
 					$('#checkItem input[type=checkbox]').prop('checked', true);
@@ -33,6 +36,18 @@
 					$('#checkItem input[type=checkbox]').prop('checked', false);
 				}
 			});
+			
+			
+			//필수 항목에 체크 되어야만 다음 페이지로 넘어갈 수 있게 하기.
+			var required1 = $('#requiredChk1');
+            var required2 = $('#requiredChk2');
+            $('#accept_agree').on('click',function(){
+               if((required1.is(':checked')  && required2.is(':checked'))==false){
+            //    if(((required1, required2).is(':checked'))==false){    -두 개의 선택자를 선택할 수는 있어도 두 개 모두 false일 떄 false라는 결과가 나오지는 않음.
+                   alert('필수 항목에 동의를 해주세요.');
+                   return false;
+                }
+            });
 		});
 	</script>
 	<div id="main_wrap">
@@ -49,9 +64,9 @@
 		<div id="checkItem">
 
 			<div>
-				<input type="checkbox" id=chkbox1>
+				<input type="checkbox" id="requiredChk1">
 				<!-- <p class="with_chk">이용약관 동의 (필수)</p> -->
-				<label for="chkbox">이용약관 동의 <em class="text_red">(필수)</em>
+				<label for="requiredChk2">이용약관 동의 <em class="text_red">(필수)</em>
 
 				</label>
 			</div>
@@ -74,7 +89,7 @@
 			</div>
 
 			<div>
-				<input type="checkbox" id="chkbox2"> <label for="chkbox2">개인정보
+				<input type="checkbox" id="requiredChk2"> <label for="requiredChk2">개인정보
 					수집 및 이용 <em class="text_red">(필수)</em>
 				</label>
 			</div>
