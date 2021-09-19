@@ -57,9 +57,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	private void validateOrderInfo(String type, OrderInfo orderInfo) {
-		if (type.equals("tour") || !type.isEmpty()) {
+		if (!type.isEmpty() && type.equals("tour")) {
 			validateTourOrder(orderInfo);
-		} else if (type.equals("shop") || !type.isEmpty()) {
+		} else if (!type.isEmpty() && type.equals("shop")) {
 			validateShopOrder(orderInfo);
 		} else {
 			throw new IllegalStateException("주문 정보가 누락됐습니다. 다시 입력해주세요.");
