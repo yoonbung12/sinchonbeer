@@ -124,4 +124,20 @@ label{
 }
 
 
+/* 로그인 입력 잘못 되었을 때 메시지 띄우기 */
+.display_none{
+	display:none;
+}
+#loginForm div.msg{
+	color:red;
+}
+.msg{
+	font-size:13.5px;
+}
+.msg_space{
+	height:40px;
+	padding:13px;
+}
+
+
 
