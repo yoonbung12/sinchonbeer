@@ -9,45 +9,36 @@
 <link rel="stylesheet" th:href="@{/css/member/loginForm.css}">
 
 <script>
-	//메시지 나오는 영역
 	var msg = $('#loginForm div.msg'); //이거 적용이 안됨.
-	//border 효과 처리
-	//var 
 
 	$(document).ready(function() {
 
-			$('#loginForm').submit(function(event) {
-				if ($('#memail').val() == '') {
-					//alert('아이디를 입력해 주세요.');
-					$('#loginForm div.msg').removeClass('display_none');
-					$('#loginForm div.msg').html('이메일을 입력해 주세요');
-					$('.form_box').css('border-color', 'red');
-					//return false;
-				}else if ($('#mpw').val() == '') {
-					//alert('비밀번호를 입력해 주세요.');
-					$('#loginForm div.msg').removeClass('display_none');
-					$('#loginForm div.msg').html('비밀번호를 입력해 주세요');
-					$('.form_box').css('border-color', 'red');
-					//return false;
-				}
-				console.log($('#memail').val() + ':' + $('#mpw').val());
-				event.preventDefault();
+		$('#loginForm').submit(function(event) {
+			if ($('#memail').val() == '') {
+				$('#loginForm div.msg').removeClass('display_none');
+				$('#loginForm div.msg').html('이메일을 입력해 주세요');
+				$('.form_box').css('border-color', 'red');
+				//return false;
+			}else if ($('#mpw').val() == '') {
+				$('#loginForm div.msg').removeClass('display_none');
+				$('#loginForm div.msg').html('비밀번호를 입력해 주세요');
+				$('.form_box').css('border-color', 'red');
+				//return false;
+			}
+			console.log($('#memail').val() + ':' + $('#mpw').val());
+			event.preventDefault();
 
-				ajax_login();
+			ajax_login();
 
-			});
-		
+		});
+	
 
-			//이메일input을 누르면 메시지 효과 사라지게 하기.(메시지, border 빨간색)
-			//비밀번호input을   ..//
-			$('#memail, #mpw').focus(function() {
-				$('#loginForm div.msg').addClass('display_none');
-				$('.form_box').css('border-color', '#ddd');
-			});
-			/* $('#mpw').focus(function(){
-				msg.addClass('display_none');
-				$('.form_box').attr('border-color', '#ddd');
-			}); */
+		//이메일input을 누르면 메시지 효과 사라지게 하기.(메시지, border 빨간색)
+		//비밀번호input을   ..//
+		$('#memail, #mpw').focus(function() {
+			$('#loginForm div.msg').addClass('display_none');
+			$('.form_box').css('border-color', '#ddd');
+		});
 	});
 	
 	

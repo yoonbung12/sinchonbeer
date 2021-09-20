@@ -24,13 +24,10 @@
 	<th:block th:replace="frame/nav"></th:block>
 
 	<!-- content 영역 ---------------------------------------------------------->
-    <!-- 내가만든 회원가입 영역 시작// -------------------------------------------------------------->
 
     <div id="main_wrap">
-        <!-- 회원가입 타이틀 공통--------------------------------- -->
         <div class="join_title">JOIN</div>
         <div class="small_text">안녕하세요 신촌맥주입니다.</div>
-        <!-- 회원가입 타이틀 공통--------------------------------- -->
         <form id="regInputForm" method="post">
             <div class="every_box">
                 <div class="email_input margin_bottom">
@@ -100,8 +97,7 @@ var element_wrap;
 
 $(document).ready(function () {
 
-    //script(1) submit : 주소를 제외하고 빈칸 없이 입력해야만 회원가입이 넘어감. -------------------------------------
-
+    //script(1) submit : 주소를 제외하고 빈칸 없이 입력해야만 회원가입이 넘어감. 
     var email = $('#email');
     var pw = $('#pw');
     var repw = $('#repw');

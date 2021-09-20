@@ -15,9 +15,8 @@
 	<!-- nav 영역 -->
 	<th:block th:replace="frame/nav"></th:block>
 
-	<!-- content 영역 ---------------------------------------------------------->
-	<!-- 내가만든 영역 시작// --------------------------------------------------------------------------->
-
+	<!-- content 영역 --------------------------------------------------------------------->
+	<!-- html(1). 이메일/비밀번호 찾기 form 메인  -사용자 요청:/inquiry, FindAccountController 와 연결. -->
 	<div class="wrap_main " id="emailPwFindFormContent">
 		<h1>이메일/비밀번호 찾기</h1>
 		<p class="id_tab ">
@@ -40,10 +39,7 @@
 		<div class="tab-content mt-1" id="myTabContent">
 			<div class=" tab-pane fade show active" id="home" role="tabpanel"
 				aria-labelledby="home-tab">
-				<!-- 아이디찾기 입력 양식 -->
-				<!-- <form id="emailSearch"> -->
 				<div class="inner-tab">
-
 					<div id="id " class="id_tab">
 						<div class="label_space">
 							<label for="username" id="name_label">이름</label>
@@ -58,9 +54,7 @@
 					</div>
 
 				</div>
-				<!-- 여기에 넣은 id="chkok" 는 지금 실행해보려고 예시로 넣은 것. spring에서 없애거나 수정할 예정 -->
-				<input type="submit" value="확인" class="chkok" id="emailSearch">
-				<!-- </form> -->
+				<input type="submit" value="확인"  id="emailSearch">
 
 			</div>
 			<div class="tab-pane fade" id="profile" role="tabpanel"
@@ -89,13 +83,10 @@
 		</div>
 	</div>
 
-
-
-	<!--여기부터 // 아이디 찾기 성공 화면 전환  --------------------------------------------------------------------------->
-
+	<!-- html(2). 이메일 찾기 성공 -사용자 요청:  /inquiry/pw,  FindAccountController 와 연결. -->
 	<div class="wrap_main display_none" id="emailSuccessContent">
 		<h1>이메일 찾기</h1>
-		<p class="id_tab ">
+		<p class="pw_tab ">
 			이메일이 기억나지 않으세요? <br>본인인증을 통해 이메일을 확인하실 수 있어요!
 		</p>
 		<div class="result_box">
@@ -106,11 +97,10 @@
 		</div>
 
 	</div>
-	<!-------------------------------------------------------------------------------------------------------->
-	<!-- // 비밀번호 찾기(1) 1차 성공 화면------------------------------------------------------------------------------->
+	<!-- html(3). 비밀번호 찾기. 인증번호 발송여부 묻기 - 사용자 요청: /inquiry/pw/auth,  MailSenderController와 연결. -->
 	<div class="wrap_main display_none" id="pwContinueContent">
-		<h1>비밀번호 찾기</h1>
-		<p class="id_tab ">
+		<h1>비밀번호 재설정</h1>
+		<p class="pw_tab ">
 			비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!
 		</p>
 		<div class="result_box">
@@ -119,17 +109,14 @@
 				진행하시겠습니까? <br>
 				<br> <span id="inquiryPw"></span>
 			</p>
-			<!-- <form method="post"> -->
-			<input type="submit" value="계속" id="pwContinueBtn">
-			<!-- <a th:href="@{/inquiry/pw/input-code}"><input type="submit" value="계속"></a> -->
-			<!-- </form> -->
+			<input type="submit" value="계속" id="pwContinueBtn" data-toggle="modal" data-target="#staticBackdrop">
 		</div>
 
 	</div>
-	<!---// 비밀번호 찾기 (2) 이메일 계정 확인 ----------------------------------------------------------------------------------------------------->
+	<!-- html(4). 비밀번호 찾기. 인증번호 입력 - 사용자 요청: /inquiry/pw/input-code,  AuthNumberController 와 연결. -->
 	<div class="wrap_main display_none" id="pwInputCodeContent">
-		<h1>비밀번호 찾기</h1>
-		<p class="id_tab ">
+		<h1>비밀번호 재설정</h1>
+		<p class="pw_tab ">
 			비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!
 		</p>
 		<div class="result_box">
@@ -148,21 +135,18 @@
 
 	</div>
 
-	<!-------------------------------------------------------------------------------------------------------->
-	<!---// 비밀번호 찾기 (3) 비밀번호 재설정----------------------------------------------------------------------------------------------------->
+	<!-- html(5). 비밀번호 찾기. 인증번호 재설정 form - 사용자 요청: /inquiry/pw/reset,  PwResetController 와 연결. -->
 	<div class="wrap_main display_none" id="pwResetContent">
-		<h1>비밀번호 찾기</h1>
-		<p class="id_tab ">
+		<h1>비밀번호 재설정</h1>
+		<p class="pw_tab ">
 			비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!
 		</p>
 		<div class="result_box">
 			<p>비밀번호를 새로 입력해 주세요.</p>
-			<!-- <form method="post"> -->
 			<table class="pwInput">
 				<tr>
-					<td class="border-1" id="newPwInput">
-						<input type="text" class="border_none width_400px" placeholder="새로운 비밀번호" id="newPw">
-					</td>
+					<td class="border-1" id="newPwInput"><input type="text"
+						class="border_none width_400px" placeholder="새로운 비밀번호" id="newPw"></td>
 				</tr>
 				<tr>
 					<td class="border-1" id="reNewPwInput"><input type="text"
@@ -171,18 +155,13 @@
 				</tr>
 			</table>
 			<div class="newPwMsg"></div>
-			<!-- 비밀번호 재설정이 성공하면 로그인 페이지로 넘기기 -->
 			<input type="submit" value="확인" id="pwResetBtn">
-
-			<!-- </form> -->
 		</div>
 	</div>
-	<!-------------------------------------------------------------------------------------------------------->
-	<!------//비밀번호 찾기 (3) 성공 화면 -------------------------------------------------------------------------------->
-
+	<!-- html(6). 비밀번호 찾기 성공 화면 - 사용자 요청: 따로 없음,  ajax로 처리하여 연결. -->
 	<div class="wrap_main display_none" id="pwSuccessContent">
 		<h1>비밀번호 찾기</h1>
-		<p class="id_tab ">
+		<p class="pw_tab ">
 			비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!
 		</p>
 		<div class="result_box">
@@ -193,23 +172,21 @@
 	</div>
 
 	<!-------------------------------------------------------------------------------------------------------->
+	<!-- script(1). (html1)이메일/비밀번호 찾기 메인화면에서 탭으로 클릭하여 화면전환시키기 -->
 	<script>
-		$(document).ready(function() {
 			$('#profile-tab').on('click', function() {
-
 				$('.id_tab').addClass('display_none');
 				$('.pw_tab').removeClass('display_none');
 			});
 
 			$('#home-tab').on('click', function() {
-				// id/pw찾기 탭 소개글
 				$('.id_tab').removeClass('display_none');
 				$('.pw_tab').addClass('display_none');
 
 			});
-		});
 	</script>
 	<!-- ----------------------------------------------------------------------------------------------->
+	<!-- script(2). (html1)이메일/비밀번호 찾기 메인화면에서 input의 label에 대한 효과.  -->
 	<script>
 	    //〓〓 focus In  〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓
 		//이름input박스를 누르면 label 이름이 fadein 되고
@@ -244,18 +221,15 @@
 		//[비밀번호 찾기 - 이메일]
 	    
 	</script>
-
-
-	<!-- ----------------------------------------------------------------------------------------------->
-	<!-- ----------------------------------------------------------------------------------------------->
-
+	
+	<!-- script(3) (html1)이메일/비밀번호 찾기 메인화면에서 이메일찾기 form에 대한 ajax. 성공 시 html1과 html2를 이어줌. -->
 
 	<script>
 		var epc = $('#emailPwFindFormContent');
 		var ec = $('#emailSuccessContent');
 		var pc = $('#pwContinueContent');
-		//ec,pc 위에 이 스크립트가 있을 때에는 왜 작동이 안되었을까?
-		/* $('#emailSearch').submit(function() { */
+		
+		/* $('#emailSearch').submit(function() { *///ec,pc 위에 이 스크립트가 있을 때에는 왜 작동이 안되었을까?
 		$('#emailSearch').on('click', function() {
 			var name = $('#username').val();
 			var phone = $('#phone').val();
@@ -271,8 +245,6 @@
 				success : function(data) {
 					if (data.trim() != '') {
 						console.log(data);
-						//alert('찾기 성공');
-						//이메일 찾기 성공 창 보이게 하는 jQuery 입력하기
 						epc.addClass('display_none');
 						ec.removeClass('display_none');
 						$('#inquiryEmail').html(data);
@@ -284,7 +256,7 @@
 
 			});
 		});
-
+		<!-- script(4) (html1)이메일/비밀번호 찾기 메인화면에서 비밀번호 찾기 form에 대한 ajax. 성공 시 html1에서 html3으로 이어줌. -->
 		$('#pwSearch').on('click', function() {
 			var name = $('#name').val();
 			var email = $('#email').val();
@@ -300,8 +272,6 @@
 				success : function(data) {
 					if (data.trim() != '') {
 						console.log(data);
-						//비밀번호 찾기 성공 창 보이게 하는 jQuery 입력하기
-						//	location.href='/test';
 						epc.addClass('display_none');
 						pc.removeClass('display_none');
 						$('#inquiryPw').html(data);
@@ -315,6 +285,7 @@
 			});
 
 		});
+		<!-- script(5) (html3)비밀번호 찾기화면에서 비밀번호 찾기 form에 대한 ajax. 성공 시 html1에서 html3으로 이어줌. -->
 		// 비밀번호 찾기(1) 1차 성공 화면
 		//'계속'을 누르면 ajax로 인증메일을 보내고  메일 보냈는지 여부를 데이터로 받기
 		$('#pwContinueBtn').on('click', function() {
@@ -322,7 +293,15 @@
 			//인증번호가 전송 중일 때 화면
 			$('#pwContinueBtn').val('전송 중...');
 			$('#pwContinueBtn').attr('disabled',true);
-			
+			//$('#pwContinueBtn').addClass('.sending'); --이거 왜 적용이 안되는거지?
+            $('#pwContinueBtn').css({
+                backgroundColor: 'white',
+                border: '1px solid #1ecad3',
+                cursor: 'progress',
+                color: '#1ecad3',
+                'font-weight': 'bold'
+
+            });
 			
 			var inquiryEmail = $('#inquiryPw').html();
 			var pwInputCode = $('#pwInputCodeContent');
@@ -379,10 +358,11 @@
 					//인증번호를 입력하는 다음창이 나오게 하기.
 					if (data == 'Y') {
 						//alert('성공');
+						alert('인증되었습니다.');
 						$('#pwInputCodeContent').addClass('display_none');
 						$('#pwResetContent').removeClass('display_none');
 					} else if (data == 'N') {
-						alert('실패! 다시 입력해 주세요.');
+						alert('잘못 입력하셨습니다. 다시 입력해 주세요.');
 						return false;
 					}
 
@@ -391,9 +371,53 @@
 			});
 
 		});
+	</script>
 
+	<script>
 		$('#pwResetBtn').on('click', function() {
 
+			//비밀번호 재설정 정규식
+			
+			//확인 버튼 눌렀을 때
+			//1. 비밀번호 input이 빈칸일 경우 메시지 띄우고 빨간색 border 주기// '새로운 비밀번호를 입력해 주세요.'
+			//2. 비밀번호 확인 input이 빈칸일 경우 ...//					'새로운 비밀번호를 다시 한 번 입력해 주세요.'
+			//3. 두 input이 일치하지 않을 경우 ....//						'비밀번호가 일치하지 않습니다.'
+			//4. 비밀번호 정규식에 맞추어서 입력하지 않을 경우 ...//				'~~하게 입력해 주세요.'
+			//5. input을 눌렀을 경우 메시지와 border 빨간색이 없어짐.			
+
+			var pwExp = /^(?=.*[a-zA-Z])((?=.*\d)(?=.*\W)).{8,20}$/;
+			//$('#pwResetBtn').on('click', function () {
+			
+			    if ($('#newPw').val() == '') {
+			        $('#newPwInput').css('border-color', 'red');
+			        $('.newPwMsg').html('새로운 비밀번호를 입력해 주세요.');
+			        return false;
+			    } else if (!pwExp.test($('#newPw').val().trim())) {
+			        $('.newPwMsg').html('영어, 숫자, 특수기호 모두를 포함해서 8~30자리 입력해 주세요.');
+			        
+			        $('#newPwInput').css('border-color', 'red');
+			        return false;
+			
+			    }
+			    if ($('#reNewPw').val() == '') {
+			        $('.newPwMsg').html('새로운 비밀번호를 한 번 더 입력해 주세요.');
+			
+			        $('#newPwInput').css('border-color', '#ddd');
+			        $('#newPwInput').css('border-bottom-color', 'red');
+			        $('#reNewPwInput').css('border-color', 'red');
+			        return false;
+			    }
+			    if ($('#newPw').val().trim() != $('#reNewPw').val().trim()) {
+			
+			        $('.newPwMsg').html('비밀번호가 일치하지 않습니다.');
+			        $('#newPwInput').css('border-color', 'red');
+			        $('#reNewPwInput').css('border-color', 'red');
+			        return false;
+			    }
+			
+			//});
+			
+			//ajax 시작
 			var inquiryEmail = $('#inquiryPw').html();
 
 			console.log(inquiryEmail);
@@ -423,6 +447,22 @@
 			});
 
 		});
+		
+		//5. input을 눌렀을 경우 메시지와 border 빨간색이 없어짐.	
+		$('#newPw').focus(function () {
+		    $('.newPwMsg').html('');
+		    $('#newPwInput').css('border-color', '#ddd');
+		    $('#reNewPwInput').css('border-color', '#ddd');
+		});
+		$('#reNewPw').focus(function () {
+		    $('.newPwMsg').html('');
+		    $('#newPwInput').css('border-color', '#ddd');
+		    $('#reNewPwInput').css('border-color', '#ddd');
+		});
+	
+		
+		
+		
 	</script>
 
 	<!-- // 내가만든 영역 끝 ---------------------------------------------------------------------------------------->
