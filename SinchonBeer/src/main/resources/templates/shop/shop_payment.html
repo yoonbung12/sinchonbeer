@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -7,21 +7,8 @@
     <title>신촌맥주 양조장 투어 예약</title>
 
     <th:block th:include="frame/metaheader"></th:block>
-    <!-- meta_haeder -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- CSS files -->
-<!--     <link rel="stylesheet" type="text/css" href="/css/main_logout.css"> -->
- <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
 
-<style>
+	<style>
         body {
             background-color: #f3f3f3;
         }
@@ -134,22 +121,24 @@
 
 <body>
     <!-- Header 영역 -->
-<!-- 	<th:block th:include="frame/header로 바꿧"></th:block> -->
-
 	<th:block th:include="frame/header"></th:block>
 	<th:block th:include="frame/nav"></th:block>
-
-		
-
+	
+	
     <!-- Content 영역 -->
     <div class="my-5 text-center">
         <h2 class="font-weight-bold">
-            결제하기
+			결제하기
         </h2>
     </div>
 
     <div class="container">
-        <form action="pay/kakaoPay" method="post">
+        <form id="payForm" name="payForm">
+			<input type="hidden" th:value="${session.loginInfo.idx}" name="midx" id="midx">
+			<input type="hidden" th:value="${gname}" name="name">
+			<input type="hidden" th:value="${amount}" name="amount">
+			<input type="hidden" th:value="${amount * gprice}" name="price">
+			
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="tip-off">
@@ -182,21 +171,17 @@
                         <h6>주문자 정보</h6>
                         <div class="position-relative">
                             <div class="text-15 mb-1">
-                            <!-- 이부분 부터 바꿔나가야함 -->
                                 <span th:text="${session.loginInfo.name}" ></span>
-                                <!-- 채호연 -->
                             </div>
                             <div class="text-14 text-gray font-weight-bold mb-1">
                                	<span th:text="${session.loginInfo.phone}" ></span>
-                                <!-- 01050954426 -->
                             </div>
                             <div class="text-14 text-gray font-weight-bold mb-1">
                                 <span th:text="${session.loginInfo.email}" ></span>
-                                <!-- coghdus1016@naver.com -->
                             </div>
 
                             <a onclick="void(0);" href="javascript:"class="btn-sinchon btn btn-sm-padding text-13 btn_top_right" id="btn-orderer-edit" role="button">
-                                수정
+								수정
                             </a>
                         </div>
                     </div>
@@ -214,7 +199,7 @@
 
                             <div class="col-4">
                                 <a href="javascript:"class="btn-sinchon btn-coupon btn text-13" id="btn-orderer-edit" role="button">
-                                    쿠폰적용
+									쿠폰적용
                                 </a>
                             </div>
 
@@ -256,16 +241,16 @@
                         <div class="row payTypeWrap mb-3">
                             <div class="col-6">
                                 <div class="form-check">
-                                    <label class="form-check-label text-14" for="card">
-                                        <input type="radio" name="payType" id="card" value="card" class="form-check-input">신용카드
+                                    <label class="form-check-label text-14" for="kakaopay">
+                                        <input type="radio" name="payType" id="kakaopay" value="kakaopay" class="form-check-input">카카오페이
                                     </label>
                                 </div>
                             </div>
-
+                            
                             <div class="col-6">
                                 <div class="form-check">
-                                    <label class="form-check-label text-14" for="kakaopay">
-                                        <input type="radio" name="payType" id="kakaopay" value="kakaopay" class="form-check-input">카카오페이
+                                    <label class="form-check-label text-14" for="card">
+                                        <input type="radio" name="payType" id="card" value="card" class="form-check-input">신용카드
                                     </label>
                                 </div>
                             </div>
@@ -284,7 +269,7 @@
                             </label>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-block btn-pay text-16 font-weight-bold">결제하기</button>
+					<a href="javascript:void(0);" onclick="frmSubmit();" id="paySubmit" class="btn btn-lg btn-block btn-pay text-16 font-weight-bold">결제하기</a>
                 </div>
             </div>
         </form>
@@ -294,23 +279,20 @@
         <th:block th:include="frame/footer"></th:block>
 
 	<script>
+		function frmSubmit() {
+			window.name = "opner_win";
+			var myForm = document.payForm;
+			var myWin = window.open("about:blank", "kakaoPayWin", "status=yes, scrollbars=yes, width=440, height=500, left=300, top=100");
+			myForm.method = "post";
+			myForm.target = "kakaoPayWin";
+			myForm.action = "/kakaoPay/shop";
+			myForm.submit();
+		}
 
         $("#payAllCheck").click(function () {
             $(".check").prop('checked', $(this).prop('checked'));
         });
-
-        const x = window.matchMedia("(min-width: 990px)")
-
-        x.addListener(function(a) {
-            $('#collapsibleNavbar').removeClass('show');
-        });   
     	
     </script>
-    
-
-	
-
-    
-    <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -37,13 +37,13 @@ public class KakaoPay {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 		params.add("cid", "TC0ONETIME");
         params.add("partner_order_id", Integer.toString(orderInfo.getIdx()));
-        params.add("partner_user_id", "신촌 맥주");
+        params.add("partner_user_id", Integer.toString(orderInfo.getMemberIdx()));
         params.add("item_name", orderInfo.getCategory());
         params.add("quantity", "1");
         params.add("total_amount", Integer.toString(orderInfo.getPrice()));
         params.add("tax_free_amount", "100");
         params.add("approval_url", HOST + "kakaoPaySuccess?orderIdx=" + orderInfo.getIdx());
-        params.add("cancel_url", HOST + "kakaoPayCancel");
+        params.add("cancel_url", HOST + "kakaoPayCancel?orderIdx=" + orderInfo.getIdx());
         params.add("fail_url", HOST + "kakaoPaySuccessFail");
 		
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
@@ -74,7 +74,7 @@ public class KakaoPay {
 		params.add("cid", "TC0ONETIME");
 		params.add("tid", kakaoPayReady.getTid());
         params.add("partner_order_id", Integer.toString(orderInfo.getIdx()));
-        params.add("partner_user_id", "신촌 맥주");
+        params.add("partner_user_id", Integer.toString(orderInfo.getMemberIdx()));
         params.add("pg_token", pg_token);
         params.add("total_amount", Integer.toString(orderInfo.getPrice()));
 		

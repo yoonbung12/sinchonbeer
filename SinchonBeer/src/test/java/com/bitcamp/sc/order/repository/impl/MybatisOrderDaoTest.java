@@ -95,7 +95,7 @@ class MybatisOrderDaoTest {
 		findOrders = dao.findByMemberIdx(3);
 
 		// then
-		assertThat(findOrders.size()).isEqualTo(2);
+		assertThat(findOrders.size()).isEqualTo(3);
 	}
 
 	@Test

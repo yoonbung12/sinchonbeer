@@ -9,7 +9,7 @@ import com.bitcamp.sc.order.domain.OrderInfo;
 import com.bitcamp.sc.order.repository.OrderDao;
 
 public class MemoryOrderDao implements OrderDao {
-	
+
 	private static Map<Integer, OrderInfo> store = new HashMap<>();
 	private static int index;
 
@@ -46,10 +46,19 @@ public class MemoryOrderDao implements OrderDao {
 		}
 		return orderInfos;
 	}
-	
+
 	public void clearStore() {
 		store.clear();
 		index = 0;
 	}
 
+	@Override
+	public int deleteByIdx(int idx) {
+		return 0;
+	}
+
+	@Override
+	public int updateStatus(String status, int idx) {
+		return 0;
+	}
 }
