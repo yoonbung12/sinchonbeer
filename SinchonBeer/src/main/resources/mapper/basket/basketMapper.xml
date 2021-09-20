@@ -11,7 +11,7 @@
 		<result property="gprice" column="gprice"/>
 	</resultMap>
 	<!--  00. 장바구니 gidx 존재여부 -->
-	<select id="checkBasket" resultType="int">
+	<select id="checkBasket" resultType="Integer">
 		select gidx from basket where gidx = #{gidx} and midx = #{midx}
 	</select>
 	<!-- 01.장바구니 추가 -->

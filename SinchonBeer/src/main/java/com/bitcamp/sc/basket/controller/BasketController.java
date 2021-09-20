@@ -50,7 +50,7 @@ public class BasketController {
 		return "basket/basket";
 	}
 	// 장바구니 목록생성
-	@RequestMapping(value = "/basket",method = RequestMethod.POST )
+	@RequestMapping(value = "/basket",method = RequestMethod.GET )  //원래는POST로 받을것
 	public String getBasket(BasketDto bDto) {
 		logger.info(bDto.toString());
 		
