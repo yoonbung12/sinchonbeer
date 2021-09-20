@@ -95,7 +95,7 @@
 
 	<div class="wrap_main display_none" id="emailSuccessContent">
 		<h1>이메일 찾기</h1>
-		<p class="pw_tab ">
+		<p class="id_tab ">
 			이메일이 기억나지 않으세요? <br>본인인증을 통해 이메일을 확인하실 수 있어요!
 		</p>
 		<div class="result_box">
@@ -109,8 +109,8 @@
 	<!-------------------------------------------------------------------------------------------------------->
 	<!-- // 비밀번호 찾기(1) 1차 성공 화면------------------------------------------------------------------------------->
 	<div class="wrap_main display_none" id="pwContinueContent">
-		<h1>비밀번호 재설정</h1>
-		<p class="pw_tab ">
+		<h1>비밀번호 찾기</h1>
+		<p class="id_tab ">
 			비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!
 		</p>
 		<div class="result_box">
@@ -120,7 +120,7 @@
 				<br> <span id="inquiryPw"></span>
 			</p>
 			<!-- <form method="post"> -->
-			<input type="submit" value="계속" id="pwContinueBtn" data-toggle="modal" data-target="#staticBackdrop">
+			<input type="submit" value="계속" id="pwContinueBtn">
 			<!-- <a th:href="@{/inquiry/pw/input-code}"><input type="submit" value="계속"></a> -->
 			<!-- </form> -->
 		</div>
@@ -128,8 +128,8 @@
 	</div>
 	<!---// 비밀번호 찾기 (2) 이메일 계정 확인 ----------------------------------------------------------------------------------------------------->
 	<div class="wrap_main display_none" id="pwInputCodeContent">
-		<h1>비밀번호 재설정</h1>
-		<p class="pw_tab ">
+		<h1>비밀번호 찾기</h1>
+		<p class="id_tab ">
 			비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!
 		</p>
 		<div class="result_box">
@@ -151,8 +151,8 @@
 	<!-------------------------------------------------------------------------------------------------------->
 	<!---// 비밀번호 찾기 (3) 비밀번호 재설정----------------------------------------------------------------------------------------------------->
 	<div class="wrap_main display_none" id="pwResetContent">
-		<h1>비밀번호 재설정</h1>
-		<p class="pw_tab ">
+		<h1>비밀번호 찾기</h1>
+		<p class="id_tab ">
 			비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!
 		</p>
 		<div class="result_box">
@@ -160,8 +160,9 @@
 			<!-- <form method="post"> -->
 			<table class="pwInput">
 				<tr>
-					<td class="border-1" id="newPwInput"><input type="text"
-						class="border_none width_400px" placeholder="새로운 비밀번호" id="newPw"></td>
+					<td class="border-1" id="newPwInput">
+						<input type="text" class="border_none width_400px" placeholder="새로운 비밀번호" id="newPw">
+					</td>
 				</tr>
 				<tr>
 					<td class="border-1" id="reNewPwInput"><input type="text"
@@ -181,7 +182,7 @@
 
 	<div class="wrap_main display_none" id="pwSuccessContent">
 		<h1>비밀번호 찾기</h1>
-		<p class="pw_tab ">
+		<p class="id_tab ">
 			비밀번호가 기억나지 않으세요? <br>이메일 인증을 통해 비밀번호를 재설정하실 수 있어요!
 		</p>
 		<div class="result_box">
@@ -378,11 +379,10 @@
 					//인증번호를 입력하는 다음창이 나오게 하기.
 					if (data == 'Y') {
 						//alert('성공');
-						alert('인증되었습니다.');
 						$('#pwInputCodeContent').addClass('display_none');
 						$('#pwResetContent').removeClass('display_none');
 					} else if (data == 'N') {
-						alert('잘못 입력하셨습니다. 다시 입력해 주세요.');
+						alert('실패! 다시 입력해 주세요.');
 						return false;
 					}
 
@@ -391,53 +391,9 @@
 			});
 
 		});
-	</script>
 
-	<script>
 		$('#pwResetBtn').on('click', function() {
 
-			//비밀번호 재설정 정규식
-			
-			//확인 버튼 눌렀을 때
-			//1. 비밀번호 input이 빈칸일 경우 메시지 띄우고 빨간색 border 주기// '새로운 비밀번호를 입력해 주세요.'
-			//2. 비밀번호 확인 input이 빈칸일 경우 ...//					'새로운 비밀번호를 다시 한 번 입력해 주세요.'
-			//3. 두 input이 일치하지 않을 경우 ....//						'비밀번호가 일치하지 않습니다.'
-			//4. 비밀번호 정규식에 맞추어서 입력하지 않을 경우 ...//				'~~하게 입력해 주세요.'
-			//5. input을 눌렀을 경우 메시지와 border 빨간색이 없어짐.			
-
-			var pwExp = /^(?=.*[a-zA-Z])((?=.*\d)(?=.*\W)).{8,20}$/;
-			//$('#pwResetBtn').on('click', function () {
-			
-			    if ($('#newPw').val() == '') {
-			        $('#newPwInput').css('border-color', 'red');
-			        $('.newPwMsg').html('새로운 비밀번호를 입력해 주세요.');
-			        return false;
-			    } else if (!pwExp.test($('#newPw').val().trim())) {
-			        $('.newPwMsg').html('영어, 숫자, 특수기호 모두를 포함해서 8~30자리 입력해 주세요.');
-			        
-			        $('#newPwInput').css('border-color', 'red');
-			        return false;
-			
-			    }
-			    if ($('#reNewPw').val() == '') {
-			        $('.newPwMsg').html('새로운 비밀번호를 한 번 더 입력해 주세요.');
-			
-			        $('#newPwInput').css('border-color', '#ddd');
-			        $('#newPwInput').css('border-bottom-color', 'red');
-			        $('#reNewPwInput').css('border-color', 'red');
-			        return false;
-			    }
-			    if ($('#newPw').val().trim() != $('#reNewPw').val().trim()) {
-			
-			        $('.newPwMsg').html('비밀번호가 일치하지 않습니다.');
-			        $('#newPwInput').css('border-color', 'red');
-			        $('#reNewPwInput').css('border-color', 'red');
-			        return false;
-			    }
-			
-			//});
-			
-			//ajax 시작
 			var inquiryEmail = $('#inquiryPw').html();
 
 			console.log(inquiryEmail);
@@ -467,22 +423,6 @@
 			});
 
 		});
-		
-		//5. input을 눌렀을 경우 메시지와 border 빨간색이 없어짐.	
-		$('#newPw').focus(function () {
-		    $('.newPwMsg').html('');
-		    $('#newPwInput').css('border-color', '#ddd');
-		    $('#reNewPwInput').css('border-color', '#ddd');
-		});
-		$('#reNewPw').focus(function () {
-		    $('.newPwMsg').html('');
-		    $('#newPwInput').css('border-color', '#ddd');
-		    $('#reNewPwInput').css('border-color', '#ddd');
-		});
-	
-		
-		
-		
 	</script>
 
 	<!-- // 내가만든 영역 끝 ---------------------------------------------------------------------------------------->

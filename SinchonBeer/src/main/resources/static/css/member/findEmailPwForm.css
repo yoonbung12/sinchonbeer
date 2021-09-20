@@ -53,10 +53,10 @@ li.nav-item>a:hover{
 .inner-tab label{
     font-size:14px;
     margin-left:70px;
-    color:#aaa; 
+    color:white; 
 }
 
-/* input박스들 모두에게 적용 */
+/* submit input박스들 모두에게 적용 */
 #id input[type=submit], #pw input[type=submit], .chkok, .result_box input[type=button], .result_box input[type=submit]{
     width:200px;
     height:44px;
@@ -67,7 +67,11 @@ li.nav-item>a:hover{
     cursor: pointer;
     margin: 40px auto;
 }
-
+/* 사용자가 입력하는 input 의 placeholder 글자 효과 */
+#myTabContent input[type=text]::placeholder, #myTabContent input[type=email]::placeholder{
+	color:#bbb;
+	font-size:14.5px;
+}
 /* 주요 내용을 포함하는 박스 */
 .result_box{
     width:370px;
@@ -141,3 +145,17 @@ li.nav-item>a:hover{
     color: #1ecad3 !important;
     font-weight: bold;
 }
+
+/* 비번/이메일 찾기에서 사용자가 입력한 이메일 주소 */
+#inquiryPw, #inquiryEmail{
+	font-weight:bold;
+}
+
+/* 비밀번호 재설정에서 입력 박스 효과 */
+.newPwMsg{
+	color:red;
+	font-size:13px;
+	margin:10px;
+	height:20px;
+}
+
