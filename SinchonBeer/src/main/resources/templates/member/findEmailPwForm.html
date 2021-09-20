@@ -321,7 +321,15 @@
 			//인증번호가 전송 중일 때 화면
 			$('#pwContinueBtn').val('전송 중...');
 			$('#pwContinueBtn').attr('disabled',true);
-			
+			//$('#pwContinueBtn').addClass('.sending'); --이거 왜 적용이 안되는거지?
+            $('#pwContinueBtn').css({
+                backgroundColor: 'white',
+                border: '1px solid #1ecad3',
+                cursor: 'progress',
+                color: '#1ecad3',
+                'font-weight': 'bold'
+
+            });
 			
 			var inquiryEmail = $('#inquiryPw').html();
 			var pwInputCode = $('#pwInputCodeContent');

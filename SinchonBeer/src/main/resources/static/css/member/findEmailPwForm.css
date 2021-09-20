@@ -86,6 +86,15 @@ li.nav-item>a:hover{
     text-decoration: none;  
 }
 
+/* 전송 중일 때 버튼 디자인 */
+/* .sending{
+	background-color:white !important;
+	border:1px solid #1ecad3 !important;
+	cursor:progress !important;
+    color:#1ecad3 !important;
+    font-weight:bold;
+} */
+
 /* fintPwAuth.html해당 */
 .border-1{
     border:1px solid rgb(212, 212, 212);
