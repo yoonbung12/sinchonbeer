@@ -8,11 +8,12 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.bitcamp.sc.basket.domain.BasketDto;
 import com.bitcamp.sc.basket.domain.BasketVo;
 import com.bitcamp.sc.basket.repository.BasketDao;
-
+@Repository
 public class MybatisBasketDao implements BasketDao {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -28,6 +29,7 @@ public class MybatisBasketDao implements BasketDao {
 	
 	@Override
 	public int createBasket(BasketDto bDto) {
+		logger.info("장바구니 mybatis 진입"+bDto.toString());
 		return template.insert(NAME_SPACE+".insertBasket", bDto);
 	}
 
@@ -60,10 +62,15 @@ public class MybatisBasketDao implements BasketDao {
 
 	@Override
 	public int checkBasket(int gidx, int midx) {
+		logger.info("check mybatis 진입");
+		logger.info(gidx+":"+midx);
 		Map<String,Object> params = new HashMap<>();
 		params.put("gidx", gidx);
 		params.put("midx", midx);
-		return template.selectOne(NAME_SPACE+".checkBasket", params);
+		logger.info(String.valueOf(params.get("midx")));
+		//  	변수
+		Integer test=template.selectOne(NAME_SPACE+".checkBasket", params);
+		return (test == null) ? 0 : test;
 	}
 
 	@Override
