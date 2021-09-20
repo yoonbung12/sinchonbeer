@@ -16,12 +16,12 @@ public class OrderInfo {
 	private Timestamp date;
 	private String category;
 	private int price;
-	private int tourIdx;
-	private int tourPeople;
+	private Integer tourIdx;
+	private Integer tourPeople;
 	private int memberIdx;
 	private Integer addressIdx;
 
-	public OrderInfo(String category, int price, int tourIdx, int tourPeople, int memberIdx, Integer addressIdx) {
+	public OrderInfo(String category, int price, Integer tourIdx, Integer tourPeople, int memberIdx, Integer addressIdx) {
 		this.category = category;
 		this.price = price;
 		this.tourIdx = tourIdx;

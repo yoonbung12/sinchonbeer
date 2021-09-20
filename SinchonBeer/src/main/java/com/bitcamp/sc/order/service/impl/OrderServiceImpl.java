@@ -50,11 +50,16 @@ public class OrderServiceImpl implements OrderService {
 
 		return orderInfos;
 	}
+	
+	@Override
+	public int deleteOrder(int idx) {
+		return orderDao.deleteByIdx(idx);
+	}
 
 	private void validateOrderInfo(String type, OrderInfo orderInfo) {
-		if (type.equals("tour") || !type.isEmpty()) {
+		if (!type.isEmpty() && type.equals("tour")) {
 			validateTourOrder(orderInfo);
-		} else if (type.equals("shop") || !type.isEmpty()) {
+		} else if (!type.isEmpty() && type.equals("shop")) {
 			validateShopOrder(orderInfo);
 		} else {
 			throw new IllegalStateException("주문 정보가 누락됐습니다. 다시 입력해주세요.");
@@ -73,6 +78,11 @@ public class OrderServiceImpl implements OrderService {
 				|| orderInfo.getAddressIdx() == 0) {
 			throw new IllegalStateException("상품 주문 정보가 누락됐습니다. 다시 입력해주세요.");
 		}
+	}
+
+	@Override
+	public int confirmOrder(int idx) {
+		return orderDao.updateStatus("confirmed", idx);
 	}
 
 }
