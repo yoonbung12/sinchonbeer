@@ -27,7 +27,6 @@ div{
     width:400px;
     height:1000px;
     margin:50px auto;
-    /* border:1px solid rgb(204, 18, 18); */
 }
 .font_set{
 	font-family: 'Kanit', sans-serif;
@@ -35,12 +34,10 @@ div{
     margin-top:40px;
     text-align:center;
     color:#1ecad3;
-    /* border:1px solid rgb(110, 15, 15); */
 }
 /* 제목 아래 작은 문구 부분 */
 .small_text{
     font-size:14px;
-    /* border:1px solid rgb(110, 15, 15); */
     text-align: center;
     height:40px;
     margin:5px 0 20px 0;

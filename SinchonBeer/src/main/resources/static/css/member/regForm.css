@@ -53,7 +53,6 @@ label{
     width:398px;
     height:40px;
     padding-left:10px;
-    /* border:1px solid orange; */
 }
 /* 가입하기 버튼을 제외한 input박스의 placeholder 글자 속성 */
     .every_box input::placeholder{
@@ -70,7 +69,6 @@ label{
 /* 붙어있는 박스-아이디/비번, 주소 */
 .couple_box input{
     width:400px;
-    /* border:1px solid #ccc; */
 }
 /* 이름, 연락처 */
 #username, #phone{
@@ -102,11 +100,9 @@ label{
 
 /* 메시지 나올 때  */
 .red_round{
-    /* display:none; */
     display:block;
 }
 .email_input{
-    /* height:74px; */
     margin:15px auto;
 }
 
@@ -127,7 +123,3 @@ div.msg{
     border:1px solid #f25656 !important;
     border-top: 1px solid #ccc !important;
 }
-
-/* .display_none{
-	display:none;
-} */

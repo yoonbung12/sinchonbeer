@@ -22,7 +22,6 @@ public class MailSenderController {
 	
 	//메일 보내는 controller
 	public String mailSend(@RequestBody Map<String, Object> param) {
-		//public String mailSend(@RequestBody String userEmail) {
 		
 		System.out.println("test 메일 보내기");
 		System.out.println(param);
