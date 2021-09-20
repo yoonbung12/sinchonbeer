@@ -27,6 +27,7 @@ public class BasketServiceImpl implements BasketService {
 	// 장바구니 생성
 	@Override
 	public void saveBasket(BasketDto bDto) {
+		logger.info("dto 값 서비스 진입"+bDto.toString());
 		int avaiableBasket = bDao.checkBasket(bDto.getGidx(), bDto.getMidx());
 		if(avaiableBasket > 0) {
 			logger.info("이미 장바구니에 값이 존재합니다.");
@@ -86,5 +87,8 @@ public class BasketServiceImpl implements BasketService {
 		
 		return bDao.changeBasketAmount(bDto);
 	}
+
+
+	
 
 }
