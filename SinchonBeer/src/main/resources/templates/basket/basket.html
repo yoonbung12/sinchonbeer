@@ -172,6 +172,20 @@
 			
 		});		
  	</script>
+ 	<!-- ------------------------ -->
+ 	<!-- <script>
+ 		/*  선택 박스 제어 */
+		var toggleCheckCartItem = function(){
+				var $cartItemCheckbox = $container.find('._cartItemCheckbox');
+				var $cartItemCheckboxSeleted = $container.find('._cartItemCheckbox:checked');
+				$cart_list_wrap.find('._all_check').prop('checked', ($cartItemCheckbox.length == $cartItemCheckboxSeleted.length));
+				CartItemChanged();
+			}; 	
+ 	
+ 		
+ 		
+ 	</script> -->
+ 	<!-- ----------------------------- -->
 </head>
 <body>
 	<th:block th:include="frame/header"></th:block>
@@ -232,7 +246,7 @@
                         <td >
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="checkRow"  class="_cartItemCheckbox"  checked="checked">
+                                    <input type="checkbox" name="checkRow"  class="_cartItemCheckbox"  checked="checked" onclick="">
                                 </label>
                             </div>
                         </td>
@@ -251,7 +265,7 @@
                                 <sapn class="hidden-lg">상품개수</sapn>
                                 <em class="hidden-lg">총</em>
                                 <!-- 상품 수량 -->
-                                <input type="text" th:value="${list.bcount}" class="border-0 high" th:id="count+${list.gidx}">
+                                <input type="text" id="amount" th:value="${list.bcount}" class="border-0 high" th:id="count+${list.gidx}">
                                  
                                 <em class="hidden-lg"></em>
                             </div>
@@ -315,7 +329,7 @@
                         </td>
                         <td class="pay-number">
                             <p class="cart-price">
-                                 <span th:text="${total}"></span>
+                                 <span id="eachSum" name="eachSum" th:text="${total}"></span>      <!--테스트한 부분 -->
                                  <span>원</span>
                             </p>
                         </td>
@@ -339,7 +353,7 @@
                         <td class="amount-text-brand" style="font-size: 20px; font-weight: 600; color: #5ae5ec;">
                         	<form style="display: inline-block;" th:object="${order}">
                         	
-							 <span th:text="${total}"></span>
+							 <span id="totalsum" th:text="${total}"></span>
 							</form> 
 							<span>원</span>                  
                         </td>
