@@ -1,33 +1,18 @@
 package com.bitcamp.sc.tour.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import com.bitcamp.sc.member.domain.LoginInfo;
 import com.bitcamp.sc.tour.domain.TourDto;
-import com.bitcamp.sc.tour.domain.TourOrderInfo;
-import com.bitcamp.sc.tour.service.TourService;
 
 @Controller
+
 @RequestMapping("/tour")
 public class TourController {
-
-//	TestMemberServiceImpl service;
-
-	@Autowired
-	TourService service;
-
+	
 	// 투어 메인 페이지
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getTour() {
@@ -72,37 +57,5 @@ public class TourController {
 		return "tour/makeReservation/reservationForm";
 	}
 
-	// 주문 테이블로 넘기기 위한 객체 맵핑 테스트 -> 성공
-	@RequestMapping(value = "/final", method = RequestMethod.POST)
-	public String getFinal(
-			@ModelAttribute TourDto tour,
-			@RequestParam("pType") String pway,
-			Model model
-			) {
-
-		System.out.println(tour);
-
-		model.addAttribute("tour", tour);
-		model.addAttribute("pway", pway);
-		return "tour/testFinal";
-	}
-
-	// 투어 예약 변경/확인/취소 페이지 가져오기
-	@RequestMapping(value = "/change-info", method = RequestMethod.GET)
-	public String getchangePage(Model model, HttpServletRequest req) {
-
-		HttpSession session = req.getSession();
-		LoginInfo login = (LoginInfo) session.getAttribute("loginInfo");
-
-		// 로그인 상태가 아닐 경우 예약 페이지로 이동
-		String category = "tour";
-		// 로그인된 회원 중 예약 내역일 없을 경우도 예약 페이지로 이동
-		List<TourOrderInfo> list = service.getTourOrder(login.getIdx(), category);
-
-		// 로그인 상태이고 예약 정보가 있다면 모델에 저장
-		model.addAttribute("tourOrderList", list);
-		System.out.println(list);
-		return "tour/changeReservation/change-info";
-	}
 
 }
