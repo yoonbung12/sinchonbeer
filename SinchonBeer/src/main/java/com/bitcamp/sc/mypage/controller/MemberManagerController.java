@@ -30,10 +30,6 @@ public class MemberManagerController {
 
 		model.addAttribute("memberInfoList", memberInfo);
 
-		System.out.println("회원 정보 : " + memberInfo);
-		System.out.println("회원 정보 : " + login);
-		System.out.println("회원 정보 : " + login.getIdx());
-		
 		return "mypage/change-info";
 	}
 

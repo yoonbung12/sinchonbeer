@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bitcamp.sc.cart.domain.CartVO;
-import com.bitcamp.sc.cart.repository.CartDao;
 import com.bitcamp.sc.mypage.service.MypageService;
 import com.bitcamp.sc.pay.domain.PayInfo;
 import com.bitcamp.sc.pay.repository.PayDao;
