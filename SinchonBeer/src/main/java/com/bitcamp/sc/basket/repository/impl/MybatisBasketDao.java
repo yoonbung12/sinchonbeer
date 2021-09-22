@@ -67,10 +67,16 @@ public class MybatisBasketDao implements BasketDao {
 		Map<String,Object> params = new HashMap<>();
 		params.put("gidx", gidx);
 		params.put("midx", midx);
-		logger.info(String.valueOf(params.get("midx")));
-		//  	변수
+		
 		Integer test=template.selectOne(NAME_SPACE+".checkBasket", params);
-		return (test == null) ? 0 : test;
+		logger.info("test : " + test);
+		int result = (test == null) ? 0 : test;
+		logger.info("result int 변환 : " + result); 
+		return result;
+//		logger.info(String.valueOf(params.get("midx")));
+		//  	변수
+
+//		return (test == null) ? 0 : test;
 	}
 
 	@Override

@@ -1,3 +1,4 @@
+   
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
@@ -31,6 +32,14 @@
  
 
  	<script th:inline="javascript">
+ 		
+
+ 		
+ 		
+ 		
+ 		
+ 		
+ 	
  		// 전체 선택
  		function checkAll(){
  			if($("#th_checkAll").is(':checked')){
@@ -116,12 +125,41 @@
  			});
  		}
  		
-		$(document).ready(function(){
+ 		// 상품 총가격
+ 		function getTotalPrice() {
+ 			var gprice_list = $('._cartItemCheckbox');
+			var totalPrice = 0;
+			for (var i = 0; i < gprice_list.length; i++) {
+				if (gprice_list[i].checked) {
+					totalPrice += Number(gprice_list[i].value);
+				}
+			}
+			
+			$('#totalPrice').text(totalPrice);
+ 		}
+ 		// 결제 금액
+ 		function getPayPrice(){
+ 			var gprice_list = $('._cartItemCheckbox');
+ 			var payPrice = 0;
+ 			for(var i= 0; i < gprice_list.length; i++){
+ 				if(gprice_list[i].checked){
+ 					payPrice += Number(gprice_list[i].value);
+ 				}
+ 			}
+ 			$('#payPrice').text(payPrice);
+ 		}
+ 		
+		$(document).ready(function(){			
+			getTotalPrice();
+			getPayPrice();
 			
 			
-			/* 장바구니 수량 변경 */
-		
-			
+			$('.check').change(function() {
+				getTotalPrice();
+			});
+			$('.check').change(function(){
+				getPayPrice();
+			});
 			
 			let midx = $('#midx').val();
 			let gidx = $('#gidx').val();
@@ -169,23 +207,53 @@
 			});
 			
 			
+			/* 선택된 상품 삭제 */
+			$('#deleteGoodsByPicking').on('click',function(){
+			// 체크된 radio 박스를 담을 배열 선언 	
+			let check_list = [];	
+		
+			let check2 = $('input[name=checkRow]:checked' );
+			/* 선택된 값이 없을 경우 return */
+			if(check2.length < 1){
+				alert('선택된 값이 없습니다.');
+				return false;
+			}
+			$.each(check2,function(index,item){
+				// next() 선택된 raido 박스의  형제 선택자(gidx) 
+				check_list.push($(this).next().val());
+							
+			})
+				console.log(check_list);
+			// 멤버 번호와 , gidx 값 객체 저장
+			let object = {
+				"midx" : midx,
+				"gidxList" : check_list
+			}
+			console.log(object);
+			console.log(object.gidxList);
+			$.ajax({
+				url : '/deleteBasketByPicking',
+				type : 'post',
+				data : object,
+				success : function(data){
+					if(data > 0 ){
+						alert('삭제 성공');
+						location.reload();
+					}
+				},
+				error : function(request, status, error){
+					console.log("AJAX_ERROR");
+				} 
+			});
+				
+			
+			});
+			
+			
+
 			
 		});		
  	</script>
- 	<!-- ------------------------ -->
- 	<!-- <script>
- 		/*  선택 박스 제어 */
-		var toggleCheckCartItem = function(){
-				var $cartItemCheckbox = $container.find('._cartItemCheckbox');
-				var $cartItemCheckboxSeleted = $container.find('._cartItemCheckbox:checked');
-				$cart_list_wrap.find('._all_check').prop('checked', ($cartItemCheckbox.length == $cartItemCheckboxSeleted.length));
-				CartItemChanged();
-			}; 	
- 	
- 		
- 		
- 	</script> -->
- 	<!-- ----------------------------- -->
 </head>
 <body>
 	<th:block th:include="frame/header"></th:block>
@@ -246,7 +314,8 @@
                         <td >
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="checkRow"  class="_cartItemCheckbox"  checked="checked" onclick="">
+                                    <input type="checkbox" name="checkRow"  class="_cartItemCheckbox check"  checked th:value="${list.gprice}">
+                                    <input type="hidden" th:value="${list.gidx}" id="gidx">
                                 </label>
                             </div>
                         </td>
@@ -265,7 +334,7 @@
                                 <sapn class="hidden-lg">상품개수</sapn>
                                 <em class="hidden-lg">총</em>
                                 <!-- 상품 수량 -->
-                                <input type="text" id="amount" th:value="${list.bcount}" class="border-0 high" th:id="count+${list.gidx}">
+                                <input type="text" th:value="${list.bcount}" class="border-0 high" th:id="count+${list.gidx}">
                                  
                                 <em class="hidden-lg"></em>
                             </div>
@@ -276,8 +345,7 @@
                                 <span class="cart-btn"></span>
                                 <button class="btn" data-toggle="modal" name="changeButton"
                                 		data-target="#myModal" th:attrappend="data-target=${list.gidx}"
-                                		th:onclick="|button(${list.gidx})|"             		                              	                              		
-                          		>변경
+                                		th:onclick="|button(${list.gidx})|" >변경
                                 </button>
                                 <div   class="modal"  th:id="myModal+${list.gidx}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 									<div class="modal-dialog modal-sm" role="document">
@@ -314,7 +382,7 @@
                         	<div >택배</div>
                         </td>
                         <td class="price">
-                        <!--총 가격 -->
+                        <!-- 테이블 한행당 상품 가격 -->
                         <span  th:text="${list.gprice}"></span>
                         <span>원</span>                        
                         </td>                       
@@ -322,6 +390,8 @@
                         	<input type="button" value="삭제" class="deleteRow">           
                         </td>                     
                     </tr>
+                    
+                    <!-- 체크된 상품총 가격 -->
                     <tr class="payment-info">
                         <td colspan="5"></td>
                         <td class="pay-txt">
@@ -329,7 +399,7 @@
                         </td>
                         <td class="pay-number">
                             <p class="cart-price">
-                                 <span id="eachSum" name="eachSum" th:text="${total}"></span>      <!--테스트한 부분 -->
+                                 <span id="totalPrice"></span>
                                  <span>원</span>
                             </p>
                         </td>
@@ -343,19 +413,22 @@
                     <tr>
                         <td class="cart-btn" colspan="5">
                             <!-- 자바스크립트 -->
-                            <a href="javascript:;" class="btn" onclick="deleteGoods">선택상품 삭제</a>
+                            <button  class="btn" id="deleteGoodsByPicking">선택상품 삭제</button>
                             <button id="removeAll" >전체 상품 삭제</button>
                             
                         </td>
+                        
+                        <!-- 상품 결제 금액 -->
                          <td class="amout-txt">
                             <span>결제금액</span>
                         </td>
                         <td class="amount-text-brand" style="font-size: 20px; font-weight: 600; color: #5ae5ec;">
                         	<form style="display: inline-block;" th:object="${order}">
-                        	
-							 <span id="totalsum" th:text="${total}"></span>
+
+                        	 <span id="payPrice">원</span> 
+
 							</form> 
-							<span>원</span>                  
+							                  
                         </td>
                         <td></td>
                       	<td></td>
