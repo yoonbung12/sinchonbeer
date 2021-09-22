@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitcamp.sc.basket.domain.BasketDto;
 import com.bitcamp.sc.basket.domain.BasketVo;
@@ -59,4 +60,22 @@ public class BasketController {
 		}
 		return "redirect:/basket/cart";
 	}
+	
+	// 장바구니 목록넘기기 테스트
+	@RequestMapping(value = "/basket/finalTest", method = RequestMethod.GET)
+	public String getTestPage(
+			
+			@RequestParam("payPrice") int payPrice,
+			
+			
+			Model model
+			
+			
+			) {
+			
+			model.addAttribute("payPrice", payPrice);
+			return "basket/finalTest";
+	}
+	
+	
 }
