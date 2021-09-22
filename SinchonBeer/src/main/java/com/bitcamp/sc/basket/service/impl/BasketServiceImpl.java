@@ -88,6 +88,18 @@ public class BasketServiceImpl implements BasketService {
 		return bDao.changeBasketAmount(bDto);
 	}
 
+	// 장바구니 선택한 품목 삭제
+	@Override
+	public int getDeleteRowByGidx(List<Integer> gidxList, int midx) {
+		int result = 0;
+		for(int i = 0; i < gidxList.size(); i++ ) {
+			result += bDao.deleteRowByGidx((int)gidxList.get(i), midx);
+			logger.info("gidx반복 횟수" + 1);
+		}
+		logger.info("result 값" + result);
+		return result;
+	}
+
 
 	
 

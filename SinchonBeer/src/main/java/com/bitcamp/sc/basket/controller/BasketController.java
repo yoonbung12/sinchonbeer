@@ -22,43 +22,41 @@ import com.bitcamp.sc.member.domain.LoginInfo;
 @RequestMapping("/basket")
 public class BasketController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	private BasketService service;
-	
+	private BasketService basketService;
+
 	@Autowired
-	public BasketController(BasketService service) {
-		this.service = service;
+	public BasketController(BasketService basketService) {
+		this.basketService = basketService;
 	}
+
 	// 장바구니 조회 및 총 금액 가져오기
-	@RequestMapping(value = "/cart",method = RequestMethod.GET )
-	public String getBasketPage(HttpServletRequest req,Model model) {
+	@RequestMapping(value = "/cart", method = RequestMethod.GET)
+	public String getBasketPage(HttpServletRequest req, Model model) {
 		HttpSession session = req.getSession();
 		LoginInfo loginInfo = (LoginInfo) session.getAttribute("loginInfo");
-		if(loginInfo != null) {
-			List<BasketVo> list = service.getList(loginInfo.getIdx());
-			model.addAttribute("list",list);
-			int total = service.getTotalPayByMidx(loginInfo.getIdx());
-			
-				model.addAttribute("total",total);
-			
-			
-			
-			
-			logger.info( model.getAttribute("list").toString());
+		if (loginInfo != null) {
+			List<BasketVo> list = basketService.getList(loginInfo.getIdx());
+			model.addAttribute("list", list);
+			int total = basketService.getTotalPayByMidx(loginInfo.getIdx());
+
+			model.addAttribute("total", total);
+
+			logger.info(model.getAttribute("list").toString());
 		}
-		
-		
+
 		return "basket/basket";
 	}
+
 	// 장바구니 목록생성
-	@RequestMapping(value = "/basket",method = RequestMethod.GET )  //원래는POST로 받을것
+	@RequestMapping(value = "/basket", method = RequestMethod.GET) // 원래는POST로 받을것
 	public String getBasket(BasketDto bDto) {
 		logger.info(bDto.toString());
-		
-		// 장바구니 목록을 만들고 
-		if(bDto != null) {
-			
-			service.saveBasket(bDto);		
-		}	
+
+		// 장바구니 목록을 만들고
+		if (bDto != null) {
+
+			basketService.saveBasket(bDto);
+		}
 		return "redirect:/basket/cart";
 	}
 }
