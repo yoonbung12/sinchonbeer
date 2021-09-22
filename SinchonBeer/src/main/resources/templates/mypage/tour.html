@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>마이페이지 예약 내역</title>
+
+<link rel="stylesheet" th:href="@{/css/mypage/tour.css}">
+<th:block th:replace="frame/metaheader"></th:block>
+
+</head>
+<body>
+	<div th:if="${#lists.isEmpty(tourOrderList)}">
+		<script>
+			alert('예약 정보가 존재하지 않습니다.\n예약 화면으로 이동합니다.');
+			location.href = '/tour/pick-date';
+		</script>
+	</div>
+
+	<th:block th:replace="frame/header"></th:block>
+	<th:block th:replace="frame/nav"></th:block>
+
+	<div class="mt-5 text-center pb-5">
+		<p class="text-center text-48 text-sinchon mb-0">MY PAGE</p>
+		<p class="text-center text-14">안녕하세요 신촌맥주입니다.</p>
+	</div>
+
+	<div id="scrollableNavBar">
+		<div class="row justify-content-between mb-5 pb-3">
+			<div class="col text-center text-14">
+				<a th:href="@{shop}" class="link-unstyle">주문 내역</a>
+			</div>
+			<div class="col text-center text-14">
+				<a th:href="@{tour}" class="link-unstyle">
+				<span class="pb-1 border-bottom border-sinchon text-sinchon">예약 내역</span></a>
+			</div>
+			<div class="col text-center text-14">
+				<a th:href="@{change-info}" class="link-unstyle">정보 수정</a>
+			</div>
+			<div class="col text-center text-14">
+				<a th:href="@{delete-id}" class="link-unstyle">회원 탈퇴</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<p class="text-center text-32 mb-5">투어 예약 내역</p>
+		<div class="row justify-content-center">
+			<div class="col-lg-2" id="sideBar">
+				<ul class="text-14 list-unstyled">
+					<li class="mb-4"><a th:href="@{shop}" class="link-unstyle">주문 내역</a></li>
+					<li class="mb-4"><a th:href="@{tour}" class="link-unstyle">
+						<span class="pb-1 border-bottom border-sinchon text-sinchon">예약 내역</span></a>
+					</li>
+					<li class="mb-4"><a th:href="@{change-info}" class="link-unstyle">정보 수정</a></li>
+					<li class="mb-4"><a th:href="@{delete-id}" class="link-unstyle">회원 탈퇴</a></li>
+				</ul>
+			</div>
+
+			<div class="col-lg-8 pb-5">
+				<div class="row justify-content-center">
+					<div th:unless="${#lists.isEmpty(tourOrderList)}">
+						<table class="text-16" id="rezList">
+							<th:block th:each="tourInfo : ${tourOrderList}">
+								<tr>
+									<th scope="row">프로그램</th>
+									<td>신촌맥주 양조장 투어</td>
+								</tr>
+								<tr>
+									<th scope="row">예약일</th>
+									<td><input type="text" th:value="${tourInfo.tdate}" class="border-0" readonly></td>
+								</tr>
+									<tr>
+									<th scope="row">인원</th>
+									<td><input type="text" th:value="${tourInfo.tpeople} + 명" class="border-0" readonly></td>
+								</tr>
+								<tr>
+									<th scope="row">신청자</th>
+									<td><input type="text" th:value="${tourInfo.mname}" class="border-0" readonly>
+								</tr>
+							</th:block>
+							<th:block th:each="payInfo : ${payInfoList}">
+								<tr>
+									<th scope="row">예약 번호</th>
+									<td><input type="text" th:value="${payInfo.orderIdx}" class="border-0" readonly></td>
+								</tr>
+								<tr>
+									<th scope="row">결제 정보</th>
+									<td><input type="text" th:value="${payInfo.way}" class="border-0" readonly></td>
+								</tr>
+								<tr>
+									<th scope="row">결제 금액</th>
+									<td><input type="text" th:value="${payInfo.price}" class="border-0" readonly></td>
+								</tr>
+							</th:block>
+						</table>
+						<button class="btn btn-sinchon" id="rezChangeBtn">
+							<a th:href="@{/tour/change-info}" class="link-unstyle">예약일 변경</a>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
+	</div>
+
+	<th:block th:replace="frame/footer"></th:block>
+</body>
+</html>
