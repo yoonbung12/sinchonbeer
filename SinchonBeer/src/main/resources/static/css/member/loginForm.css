@@ -1,3 +1,6 @@
+/* 로그인 타이틀에 적용할 폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@800&family=Roboto:wght@900&display=swap');
+
 /* 전체 영역 */
 *{
     margin:0;
@@ -21,16 +24,15 @@
 }
 /* login 제목 */
 .loginTitle{
-    font-size: 2.4rem;
-    font-weight:bold;
+	font-family: 'Kanit', sans-serif;
+    font-size: 48px;
     margin-top:40px;
     text-align:center;
     color:#1ecad3;
 }
 /* login 제목 아래 모든 부분 */
 #loginSection{
-    /* border:1px solid cadetblue; */
-    padding:70px;
+    padding:30px 70px;
 }
 /* 박스로된 모든 부분(입력, 버튼) */
 .loginLongBox{
@@ -118,6 +120,22 @@ label{
 }
 .float_right{
     float:right;
+}
+
+
+/* 로그인 입력 잘못 되었을 때 메시지 띄우기 */
+.display_none{
+	display:none;
+}
+#loginForm div.msg{
+	color:red;
+}
+.msg{
+	font-size:13.5px;
+}
+.msg_space{
+	height:40px;
+	padding:13px;
 }
 
 

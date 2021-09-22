@@ -171,6 +171,7 @@
 
 	</div>
 
+	<!-------------------------------------------------------------------------------------------------------->
 	<!-- script(1). (html1)이메일/비밀번호 찾기 메인화면에서 탭으로 클릭하여 화면전환시키기 -->
 	<script>
 			$('#profile-tab').on('click', function() {
@@ -184,6 +185,7 @@
 
 			});
 	</script>
+	<!-- ----------------------------------------------------------------------------------------------->
 	<!-- script(2). (html1)이메일/비밀번호 찾기 메인화면에서 input의 label에 대한 효과.  -->
 	<script>
 	    //〓〓 focus In  〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓
@@ -283,10 +285,12 @@
 			});
 
 		});
-		
-		<!-- script(5~6) (html3)이메일로 인증보낼지 여부 묻는 비밀번호 찾기화면-->
+		<!-- script(5) (html3)비밀번호 찾기화면에서 비밀번호 찾기 form에 대한 ajax. 성공 시 html1에서 html3으로 이어줌. -->
+		// 비밀번호 찾기(1) 1차 성공 화면
+		//'계속'을 누르면 ajax로 인증메일을 보내고  메일 보냈는지 여부를 데이터로 받기
 		$('#pwContinueBtn').on('click', function() {
-            <!-- script(5) 인증번호가 전송 중일 때 버튼의 달라지는 효과.  -->
+
+			//인증번호가 전송 중일 때 화면
 			$('#pwContinueBtn').val('전송 중...');
 			$('#pwContinueBtn').attr('disabled',true);
 			//$('#pwContinueBtn').addClass('.sending'); --이거 왜 적용이 안되는거지?
@@ -296,15 +300,14 @@
                 cursor: 'progress',
                 color: '#1ecad3',
                 'font-weight': 'bold'
+
             });
 			
-            <!-- script(6) (html3)비밀번호 찾기화면에서 찾은 이메일주소로 인증번호 보내는 진행 계속할 것인지 묻는 것에 대한 ajax. 성공 시 htm3에서 html4으로 이어줌. -->
-         	 //'계속'을 누르면 ajax로 인증메일을 보내고  메일 보냈는지 여부를 데이터로 받기
 			var inquiryEmail = $('#inquiryPw').html();
 			var pwInputCode = $('#pwInputCodeContent');
 
 			console.log(inquiryEmail);
-	
+
 			$.ajax({
 				url : '/inquiry/pw/auth',
 				type : 'post',
@@ -332,7 +335,7 @@
 			});
 
 		});
-		 <!-- script(7) (html4)비밀번호 찾기화면에서 인증번호 입력하여 인증 성공하면 비밀번호 재설정하는 페이지로 보내주는 ajax. 성공 시 htm4에서 html5으로 이어줌. -->
+
 		$('#codeBtn').on('click', function() {
 
 			var inquiryEmail = $('#inquiryPw').html();
@@ -369,48 +372,51 @@
 
 		});
 	</script>
-	
-	<!-- script(8~9) (html5)비밀번호 재설정form 화면 -->
+
 	<script>
 		$('#pwResetBtn').on('click', function() {
-			<!-- script(8) 비밀번호 재설정 form의 정규식과 제한 설정해 두기. -->
-			//확인 버튼 눌렀을 때 비밀번호 재설정 form에 대한 반응
-			//1. 비밀번호 input이 빈칸일 경우 메시지 띄우고 빨간색 border 주기//  '새로운 비밀번호를 입력해 주세요.'
+
+			//비밀번호 재설정 정규식
+			
+			//확인 버튼 눌렀을 때
+			//1. 비밀번호 input이 빈칸일 경우 메시지 띄우고 빨간색 border 주기// '새로운 비밀번호를 입력해 주세요.'
 			//2. 비밀번호 확인 input이 빈칸일 경우 ...//					'새로운 비밀번호를 다시 한 번 입력해 주세요.'
 			//3. 두 input이 일치하지 않을 경우 ....//						'비밀번호가 일치하지 않습니다.'
 			//4. 비밀번호 정규식에 맞추어서 입력하지 않을 경우 ...//				'~~하게 입력해 주세요.'
 			//5. input을 눌렀을 경우 메시지와 border 빨간색이 없어짐.			
 
 			var pwExp = /^(?=.*[a-zA-Z])((?=.*\d)(?=.*\W)).{8,20}$/;
-			//비밀번호 입력이 안되어 있을 경우
-		    if ($('#newPw').val() == '') {
-		        $('#newPwInput').css('border-color', 'red');
-		        $('.newPwMsg').html('새로운 비밀번호를 입력해 주세요.');
-		        return false;
-		    //비밀번호 입력 정규식
-		    } else if (!pwExp.test($('#newPw').val().trim())) {
-		        $('.newPwMsg').html('영어, 숫자, 특수기호 모두를 포함해서 8~30자리 입력해 주세요.');
-		        $('#newPwInput').css('border-color', 'red');
-		        return false;
-		    }
-			//비밀번호 확인 입력이 안되어 있을 경우
-		    if ($('#reNewPw').val() == '') {
-		        $('.newPwMsg').html('새로운 비밀번호를 한 번 더 입력해 주세요.');
-		
-		        $('#newPwInput').css('border-color', '#ddd');
-		        $('#newPwInput').css('border-bottom-color', 'red');
-		        $('#reNewPwInput').css('border-color', 'red');
-		        return false;
-		    }
-			//비밀번호 두 개가 일치하지 않을 경우
-		    if ($('#newPw').val().trim() != $('#reNewPw').val().trim()) {
-		        $('.newPwMsg').html('비밀번호가 일치하지 않습니다.');
-		        $('#newPwInput').css('border-color', 'red');
-		        $('#reNewPwInput').css('border-color', 'red');
-		        return false;
-		    }
+			//$('#pwResetBtn').on('click', function () {
 			
-			<!-- script(9). 재설정 form에서 입력한 비밀번호가 db에 잘 저장되도록 하는 ajax. html5에서 html6으로 이어줌. -->
+			    if ($('#newPw').val() == '') {
+			        $('#newPwInput').css('border-color', 'red');
+			        $('.newPwMsg').html('새로운 비밀번호를 입력해 주세요.');
+			        return false;
+			    } else if (!pwExp.test($('#newPw').val().trim())) {
+			        $('.newPwMsg').html('영어, 숫자, 특수기호 모두를 포함해서 8~30자리 입력해 주세요.');
+			        
+			        $('#newPwInput').css('border-color', 'red');
+			        return false;
+			
+			    }
+			    if ($('#reNewPw').val() == '') {
+			        $('.newPwMsg').html('새로운 비밀번호를 한 번 더 입력해 주세요.');
+			
+			        $('#newPwInput').css('border-color', '#ddd');
+			        $('#newPwInput').css('border-bottom-color', 'red');
+			        $('#reNewPwInput').css('border-color', 'red');
+			        return false;
+			    }
+			    if ($('#newPw').val().trim() != $('#reNewPw').val().trim()) {
+			
+			        $('.newPwMsg').html('비밀번호가 일치하지 않습니다.');
+			        $('#newPwInput').css('border-color', 'red');
+			        $('#reNewPwInput').css('border-color', 'red');
+			        return false;
+			    }
+			
+			//});
+			
 			//ajax 시작
 			var inquiryEmail = $('#inquiryPw').html();
 
@@ -428,6 +434,7 @@
 					console.log(data);
 					//db에 새 비밀번호 저장이 완료되었다면 y 반환.
 					if (data == 'Y') {
+						//alert('성공');
 						$('#pwResetContent').addClass('display_none');
 						$('#pwSuccessContent').removeClass('display_none');
 					} else if (data == 'N') {
@@ -441,7 +448,7 @@
 
 		});
 		
-		//input을 눌렀을 경우 메시지 초기화.	
+		//5. input을 눌렀을 경우 메시지와 border 빨간색이 없어짐.	
 		$('#newPw').focus(function () {
 		    $('.newPwMsg').html('');
 		    $('#newPwInput').css('border-color', '#ddd');
@@ -452,9 +459,14 @@
 		    $('#newPwInput').css('border-color', '#ddd');
 		    $('#reNewPwInput').css('border-color', '#ddd');
 		});
+	
+		
+		
+		
 	</script>
 
-	<!-- content 영역 끝 ---------------------------------------------------------------------------------------->
+	<!-- // 내가만든 영역 끝 ---------------------------------------------------------------------------------------->
+
 
 	<!-- footer 영역 -->
 	<th:block th:replace="frame/footer"></th:block>

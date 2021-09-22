@@ -34,7 +34,6 @@ public class LoginController {
 		model.addAttribute("redirectUri", redirectUri);
 		return "/member/loginForm";
 	}
-	// 원래
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> login(
@@ -48,7 +47,6 @@ public class LoginController {
 		System.out.println(params.get("memail")+": "+params.get("mpw"));
 		System.out.println(params.get("redirectUri"));
 		Map<String,Object> map = new HashMap<>();
-		//model.addAttribute();
 		map.put("refererUri", (String)params.get("redirectUri"));
 		
 		//사용자가 입력한 정보를 서비스에서 처리하고 결과 받아오기

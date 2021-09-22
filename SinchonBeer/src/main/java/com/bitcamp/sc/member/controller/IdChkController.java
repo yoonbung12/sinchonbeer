@@ -19,7 +19,6 @@ public class IdChkController {
 	@ResponseBody
 	public String idcheck(
 			@RequestBody String email
-//			@RequestParam("email") String email
 			) {
 		email = email.replace("%40", "@");
 		System.out.println(email);
