@@ -61,6 +61,7 @@ public class BasketController {
 		return "redirect:/basket/cart";
 	}
 	
+	
 	// 장바구니 목록넘기기 테스트
 	@RequestMapping(value = "/basket/finalTest", method = RequestMethod.GET)
 	public String getTestPage(
