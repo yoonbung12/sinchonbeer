@@ -19,10 +19,21 @@ html * {
 	background-color: #aaa;
 }
 
-.btn-sinchon, .btn-sinchon:hover {
+.btn-sinchon {
 	color: white;
 	background-color: #1ecad3;
 	border-color: #1ecad3;
+}
+
+.btn-sinchon:hover {
+	color: white !important;
+	background-color: #14bec7;
+	border-color: #14bec7;
+}
+
+.link-unstyle, .link-unstyle:link, .link-unstyle:hover {
+	color: inherit;
+	text-decoration: inherit;
 }
 
 .text-13 {
@@ -63,6 +74,7 @@ html * {
 
 .text-48 {
 	font-size: 48px;
+	font-weight: 900;
 }
 
 .text-light-gray {
@@ -168,7 +180,7 @@ button:focus {
 }
 
 .rez-btn-icon {
-	width: 113px;
+	width: 90px;
 	height: 30px;
 	font-size: 14px;
 	display: inline-block;
