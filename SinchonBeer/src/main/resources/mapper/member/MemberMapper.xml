@@ -12,6 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="pw" column="mpw"/>
 		<result property="name" column="mname"/>
 		<result property="phone" column="mphone"/>
+		<result property="code" column="mcode"/>
 	</resultMap> 
 	
 	
@@ -59,4 +60,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		>
 		select memail from member where mname=#{param1} and memail=#{param2}	
 	</select>
+	
+	<!-- 비밀번호 찾기 중 인증번호 저장하기 -->
+	<update id="updateCode"
+		parameterType="String"
+		>
+		update member set mcode=#{code} where memail=#{email}
+	</update>
+	
+	<!-- 비밀번호 찾기 중 인증번호 일치하는지 체크-->
+	<select id="selectCode"
+		resultType="com.bitcamp.sc.member.domain.Member"
+		resultMap="MemberDomain"
+		>
+		select mcode from member where memail=#{memail}
+	</select>
+	
+	<update id="updatePw"
+		parameterType="com.bitcamp.sc.member.domain.Member"
+		>
+		update member set mpw = #{pw} where memail=#{email}
+	</update>
+	
+	
+	
 </mapper>

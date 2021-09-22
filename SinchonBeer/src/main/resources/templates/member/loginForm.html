@@ -9,15 +9,21 @@
 <link rel="stylesheet" th:href="@{/css/member/loginForm.css}">
 
 <script>
+	var msg = $('#loginForm div.msg'); //이거 적용이 안됨.
+
 	$(document).ready(function() {
+
 		$('#loginForm').submit(function(event) {
 			if ($('#memail').val() == '') {
-				alert('아이디를 입력해 주세요.');
-				return false;
-			}
-			if ($('#mpw').val() == '') {
-				alert('비밀번호를 입력해 주세요.');
-				return false;
+				$('#loginForm div.msg').removeClass('display_none');
+				$('#loginForm div.msg').html('이메일을 입력해 주세요');
+				$('.form_box').css('border-color', 'red');
+				//return false;
+			}else if ($('#mpw').val() == '') {
+				$('#loginForm div.msg').removeClass('display_none');
+				$('#loginForm div.msg').html('비밀번호를 입력해 주세요');
+				$('.form_box').css('border-color', 'red');
+				//return false;
 			}
 			console.log($('#memail').val() + ':' + $('#mpw').val());
 			event.preventDefault();
@@ -25,7 +31,17 @@
 			ajax_login();
 
 		});
+	
+
+		//이메일input을 누르면 메시지 효과 사라지게 하기.(메시지, border 빨간색)
+		//비밀번호input을   ..//
+		$('#memail, #mpw').focus(function() {
+			$('#loginForm div.msg').addClass('display_none');
+			$('.form_box').css('border-color', '#ddd');
+		});
 	});
+	
+	
 	function ajax_login() {
 
 		var allData = {
@@ -44,20 +60,25 @@
 				// uri 정보 + result : boolean 
 				if (data.result == true) {
 					alert('로그인 성공' + " " + allData.redirectUri);
-					
+
 					//로그인 성공했지만 이전페이지가 없거나 회원가입 성공한 페이지가 이전 페이지라면,  메인페이지로 이동하기.
 					//if (allData[2] == null || allData[2].substring(allData[2].length-5, allData[2].length) == '/join' ) {
-					if (allData.redirectUri == "" || allData.redirectUri == null || allData.redirectUri == undefined) {
+					if (allData.redirectUri == ""
+							|| allData.redirectUri == null
+							|| allData.redirectUri == undefined) {
 						console.log('redirect uri가 없어');
 						location.href = '/';
 					} else {
 						location.href = data.refererUri;
 					}
-				} else {
-					alert('로그인 실패');
+				} else if($('#memail').val() != ''&& $('#mpw').val() != ''){
+					//alert('아이디 또는 비밀번호가 잘못 입력 되었습니다.');
+					$('#loginForm div.msg').removeClass('display_none');
+					$('#loginForm div.msg').html( '아이디 또는 비밀번호가 잘못 입력 되었습니다.');
+					$('.form_box').css('border-color', 'red');
 					allData.redirectUri = data.refererUri;
-					$('#memail').val('');
-					$('#mpw').val('');
+					//$('#memail').val('');
+					//$('#mpw').val('');
 					return false;
 				}
 
@@ -90,12 +111,17 @@
 			<!-- login 입력양식 -->
 			<form id="loginForm">
 				<div class="form_box margin_top">
-					<input type="email" placeholder="이메일" id="memail" class="loginLongBox" th:value="${cookie}"> 
-					<input type="password" placeholder="비밀번호" id="mpw" class="loginLongBox">
+					<input type="email" placeholder="이메일" id="memail"
+						class="loginLongBox" th:value="${cookie}"> <input
+						type="password" placeholder="비밀번호" id="mpw" class="loginLongBox">
+				</div>
+				<div class="msg_space">
+					<div class="msg display_none"></div>
 				</div>
 				<div class="cookie_chk margin_top">
-					<input type="checkbox" id="emailChk" value="on" [[${cookie.reEmail ne null ? 'checked' : ''}]]> 
-					<label for="emailChk" >이메일 기억하기</label> <input type="text" th:value="${redirectUri}" id="referer">
+					<input type="checkbox" id="emailChk" value="on" [[${cookie.reEmail
+						ne null ? 'checked' : ''}]]> <label for="emailChk">이메일
+						기억하기</label> <input type="text" th:value="${redirectUri}" id="referer">
 				</div>
 
 				<div class="margin_top">
@@ -104,7 +130,8 @@
 			</form>
 			<!-- login 이 외의 링크 -->
 			<div id="middle" class="margin_top">
-				<a th:href="@{/join/type}">회원가입</a> <a th:href="@{/inquiry}" class="float_right">이메일/비밀번호찾기</a>
+				<a th:href="@{/join/type}">회원가입</a> <a th:href="@{/inquiry}"
+					class="float_right">이메일/비밀번호찾기</a>
 			</div>
 			<div class="margin_top">
 				<a href="" class="kakao_start loginLongBox">카카오로 시작하기</a>

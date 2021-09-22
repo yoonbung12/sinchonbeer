@@ -1,3 +1,6 @@
+/* JOIN 타이틀에 적용시킬 폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@800&family=Roboto:wght@900&display=swap');
+
 /* 전체 영역 */
 *{
     margin:0;
@@ -18,11 +21,11 @@
 }
 /* 회원가입 타이틀 공통 ----------------------------------------------*/
 .join_title{
+	font-family: 'Kanit', sans-serif;
+    font-size: 48px;
     margin-top:40px;
     text-align:center;
     color:#1ecad3;
-    font-size:2.2rem;
-    font-weight:bold;
 }
 /* 제목 아래 작은 문구 부분 */
 .small_text{
@@ -50,7 +53,6 @@ label{
     width:398px;
     height:40px;
     padding-left:10px;
-    /* border:1px solid orange; */
 }
 /* 가입하기 버튼을 제외한 input박스의 placeholder 글자 속성 */
     .every_box input::placeholder{
@@ -67,7 +69,6 @@ label{
 /* 붙어있는 박스-아이디/비번, 주소 */
 .couple_box input{
     width:400px;
-    /* border:1px solid #ccc; */
 }
 /* 이름, 연락처 */
 #username, #phone{
@@ -99,11 +100,9 @@ label{
 
 /* 메시지 나올 때  */
 .red_round{
-    /* display:none; */
     display:block;
 }
 .email_input{
-    /* height:74px; */
     margin:15px auto;
 }
 

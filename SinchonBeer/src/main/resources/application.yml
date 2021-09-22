@@ -13,6 +13,18 @@ spring:
     mode: HTML5
     cache: false
     template-resolver-order: 0
+    
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: watersun326@gmail.com
+    password: bytobvyzijfppxyy
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true 
        
 mybatis:
   mapper-locations: 

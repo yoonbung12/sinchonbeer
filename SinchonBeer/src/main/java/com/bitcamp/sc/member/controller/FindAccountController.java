@@ -30,7 +30,7 @@ public class FindAccountController {
 		return "member/findEmailPwForm";
 	}
 
-//--- (1) 아이디 찾기 시작 ------------------------------------------------------------------------------------------------------------------------------------------
+//--- (1) 아이디 찾기 시작
 	//ajax에서 아이디 찾기 (요청)매핑
 	@RequestMapping(value = "/inquiry/email", method = RequestMethod.POST)
 	@ResponseBody
@@ -47,14 +47,7 @@ public class FindAccountController {
 		return emailSearch;
 	}
 	
-//---------------------------------------------------------------------------------------------------------------------------------------------
-//--- (2) 비밀번호 찾기 시작 ------------------------------------------------------------------------------------------------------------------------------------------
-
-	// url 매핑 - 비밀번호 테스트 
-	@RequestMapping("/test")
-	public String getTest() {
-		return "member/findPwContinue";
-	}
+//--- (2) 비밀번호 찾기 시작 
 
 	// ajax에서 비밀번호 찾기 (요청) 매핑
 	@RequestMapping(value = "/inquiry/pw", method = RequestMethod.POST)
@@ -72,20 +65,6 @@ public class FindAccountController {
 		return pwSearch;
 	}
 
-//---------------------------------------------------------------------------------------------------------------------------------------------
-//	//비밀번호 찾기 두 번째 단계 - 이메일 인증 보내고 인증번호 입력 받는 화면
-//	@RequestMapping(value="/inquiry/pw/input-code", method=RequestMethod.POST)
-	@RequestMapping(value = "/inquiry/pw/input-code")
-	public String findPw2() {
-		return "member/findPwAuth";
-	}
-
-//	
-//	//비밀번호 찾기 세 번째 단계 - 비밀번호 재설정하기
-//	@RequestMapping(value="/inquiry/pw/reset", method=RequestMethod.POST)
-	@RequestMapping(value = "/inquiry/pw/reset")
-	public String findPw3() {
-		return "member/findPwSetting";
-	}
-
 }
+
+

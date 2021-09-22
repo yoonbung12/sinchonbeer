@@ -18,6 +18,6 @@ public class MemberRegRequest {
 	
 	
 	public Member toMember() {
-		return new Member(0,this.email, this.pw, this.name, this.phone);
+		return new Member(0,this.email, this.pw, this.name, this.phone, null);
 	}
 }

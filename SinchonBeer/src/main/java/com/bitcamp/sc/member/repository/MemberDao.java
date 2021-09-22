@@ -1,6 +1,7 @@
 package com.bitcamp.sc.member.repository;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 
 import com.bitcamp.sc.member.domain.Member;
 import com.bitcamp.sc.member.domain.MemberAddress;
@@ -21,8 +22,18 @@ public interface MemberDao {
 	int insertAddress(MemberAddress memberAddress);
 	
 	//이메일 찾기 (멤버 객체)
-	public Member emailSearch(String name, String phone);
+	Member emailSearch(String name, String phone);
 
 	//비밀번호 찾기 (멤버 객체)
-	public Member pwSearch(String name, String email);
+	Member pwSearch(String name, String email);
+	
+	//비밀번호 찾기 - 인증번호 저장하기.
+	int updateCode(String code, String email);
+	
+	//비밀번호 찾기 - 인증번호 조회하기.
+	Member selectCode(String email);
+	
+	//비밀번호 찾기 - 비밀번호 재설정
+	int updatePw(String email, String pw);
+	
 }

@@ -16,4 +16,9 @@ public interface GoodsDao {
 	// 03.상품정보
 	public GoodsVO findIdx(int idx);
 	
+
+
+
+	
+	
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,7 +43,7 @@
 			<div class="col-lg border mx-2">
 				<dl class="my-5">
 					<dt class="dt-left float-left">프로그램 명</dt>
-					<dd class="dd-right">제주맥주 양조장 투어</dd>
+					<dd class="dd-right">신촌맥주 양조장 투어</dd>
 					<dt class="dt-left float-left">예약일</dt>
 					<dd class="dd-right" th:text="${tour.selectDate}" id="appendDate">
 						
@@ -114,10 +114,10 @@
 					당사는 개인정보보호법(법률 제 10465호) 등 관련법령에 의거하여, 정보주체로부터 개인정보를 수집함에 있어, 아래
 					내용을 안내하고 있습니다.<br> 정보주체가 되는 이용자께서는 아래 내용을 자세히 읽어보신 후에 동의여부를
 					결정하여 주시기 바랍니다.<br> <br> <br> 1. 개인정보의 수집 및 이용 목적<br>
-					제주맥주는 “개인정보 보호법”에 따라 수집한 개인정보를 다음의 목적을 위해 활용합니다. 제주맥주 양조장 내 진행
-					프로그램 예약, 제주맥주 주최 프로그램/행사 예약, 예약 조회, 고객 문의 게시글 등록, 신청자와의 연락, 개인 맞춤형
+					신촌맥주는 “개인정보 보호법”에 따라 수집한 개인정보를 다음의 목적을 위해 활용합니다. 신촌맥주 양조장 내 진행
+					프로그램 예약, 신촌맥주 주최 프로그램/행사 예약, 예약 조회, 고객 문의 게시글 등록, 신청자와의 연락, 개인 맞춤형
 					광고 및 마케팅 활용, 제공을 위해 개인정보를 수집, 이용합니다.<br> <br> <br>
-					2. 수집하는 개인정보의 항목<br> 제주맥주는 제 1조에 명기된 이용 목적을 위해 아래와 같은 개인정보를
+					2. 수집하는 개인정보의 항목<br> 신촌맥주는 제 1조에 명기된 이용 목적을 위해 아래와 같은 개인정보를
 					수집하고 있습니다.<br> <br> 수집항목<br> 필수 : 신청자명, 연락처, 이메일
 					주소, 방문 희망인원, 방문 희망일시<br> 수집방법 : 홈페이지 (고객 집적 입력)<br> <br>
 					<br> 3. 개인정보의 보유 및 이용기간<br> 개인정보의 수집 및 이용목적이 달성되면 지체 없이
@@ -127,10 +127,10 @@
 					개인정보는 파기<br> <br> <br> 4. 수집한 개인정보의 위탁<br> 서비스
 					향상 및 효율적인 개인정보 관리를 위하여 외부에 위탁하여 처리하고 있으며, 관계법령에 따라 위탁 계약 시 개인정보가
 					안전하게 관리될 수 있도록 규정하고 있습니다. 개인정보취급 수탁자와 그 업무의 내용은 다음과 같습니다.<br>
-					<br> [수탁자 : 수탁범위]<br> 제주맥주(주), (주)네이티브바이너리 : 전산시스템의 구축 및
+					<br> [수탁자 : 수탁범위]<br> 신촌맥주(주), (주)네이티브바이너리 : 전산시스템의 구축 및
 					유지보수<br> <br> <br> 이용자 개인정보보호를 위하여 수집된 개인정보는 암호화되어
 					처리됩니다.<br> 고객께서는 본 안내에 따른 개인정보 수집에 대하여 거부를 하실 수 있는 권리가 있습니다.<br>
-					단, 개인정보 수집에 대하여 동의를 하지 않으실 경우에는, 제주맥주에서 주최하는 프로그램에 신청이 이루어지지 않음에
+					단, 개인정보 수집에 대하여 동의를 하지 않으실 경우에는, 신촌맥주에서 주최하는 프로그램에 신청이 이루어지지 않음에
 					따라 당사의 개인정보 처리 요구 서비스를 이용하실 수 없습니다.<br> <br>
 				</div>
 
@@ -218,7 +218,7 @@
 						<!-- Modal Header -->
 						<div class="modal-header d-block">
 							<h4 class="modal-title text-22 font-weight-bold">잠깐!</h4>
-							<p class="text-22 m-0">제주맥주 양조장의 이용 규정을 확인하고,</p>
+							<p class="text-22 m-0">신촌맥주 양조장의 이용 규정을 확인하고,</p>
 							<p class="text-22 m-0">결제해주세요.</p>
 						</div>
 
@@ -377,7 +377,7 @@
 	function frmSubmit() {
 		window.name = "opner_win";
 		var myForm = document.payForm;
-		var myWin = window.open("about:blank", "kakaoPayWin", "status=yes, scrollbars=yes, width=420, height=500, left=300, top=100");
+		var myWin = window.open("about:blank", "kakaoPayWin", "status=yes, scrollbars=yes, width=440, height=500, left=300, top=100");
 		myForm.method = "post";
 		myForm.target = "kakaoPayWin";
 		myForm.action = "/kakaoPay/tour";

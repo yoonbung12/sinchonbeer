@@ -29,5 +29,13 @@
 	<select id="findByCategoryAndMemberIdx" resultType="com.bitcamp.sc.order.domain.OrderInfo" resultMap="OrderDomain">
 		SELECT * FROM orders WHERE ocategory=#{category} and midx=#{memberIdx}
 	</select>
+	
+	<delete id="deleteByIdx">
+		DELETE FROM orders WHERE oidx=#{idx}
+	</delete>
+	
+	<update id="updateStatus">
+		UPDATE orders SET ostatus=#{status} WHERE oidx=#{idx}
+	</update>
 
 </mapper>
