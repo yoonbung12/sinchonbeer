@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,14 +14,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.bitcamp.sc.cart.domain.GoodsToCart;
+import com.bitcamp.sc.member.service.MemberService;
+
+import com.bitcamp.sc.shop.domain.GoodsToBuyNow;
+import com.bitcamp.sc.shop.service.ShopService;
+
+	
+import org.springframework.web.servlet.ModelAndView;
+
+
 
 
 @Controller
 public class ShopController {
 
-//	@Autowired
-//	ShopService service;
+	@Autowired
+	MemberService	memberService;
 	
 	// shop메인 페이지
 	@RequestMapping(value="/shop", method = RequestMethod.GET)
@@ -41,48 +51,69 @@ public class ShopController {
 	 // BuyNow 페이지로 가기
 	 // @RequestParam("name 이름") 타입지정 변수명
 	
-//	@RequestMapping(value="/shop/shop_payment", method = RequestMethod.GET)
-//	public String getBuyNow(	
-//			
-//			@RequestParam("gphotoname") String gphotoname,
-//			@RequestParam("gname") String gname,
-//			@RequestParam("gidx") int gidx,
-//			@RequestParam("gprice") int gprice,
-//			@RequestParam("amount") int amount,
-//			
-//			Model model
-//			) {
-//			
-//			model.addAttribute("gphotoname", gphotoname);
-//			model.addAttribute("gname", gname);
-//			model.addAttribute("gidx", gidx);
-//			model.addAttribute("gprice",gprice);
-//			model.addAttribute("amount", amount);
-//			
-//			System.out.println("입력한 gname : " + gname);
-//			System.out.println("입력한 idx : " + gidx);
-//			System.out.println("입력한 gprice : " + gprice);
-//			System.out.println("입력한 amount : " + amount);
-//			
-//			return "shop/shop_payment";
-//		
-//	}
+	@RequestMapping(value="/shop/shop_payment", method = RequestMethod.GET)
+	public String getBuyNow(	
+			
+			
+			@ModelAttribute GoodsToBuyNow buynow,
+			
+			@RequestParam("gphotoname") String gphotoname,
+			@RequestParam("gname") String gname,
+			@RequestParam("gidx") int gidx,
+			@RequestParam("gprice") int gprice,
+			@RequestParam("amount") int amount,
+			
+			Model model
+			) {
+			
+			model.addAttribute("buynow", buynow);
+			
+			model.addAttribute("gphotoname", gphotoname);
+			model.addAttribute("gname", gname);
+			model.addAttribute("gidx", gidx);
+			model.addAttribute("gprice",gprice);
+			model.addAttribute("amount", amount);
+			
+			System.out.println("입력한 gname : " + gname);
+			System.out.println("입력한 idx : " + gidx);
+			System.out.println("입력한 gprice : " + gprice);
+			System.out.println("입력한 amount : " + amount);
+			
+			return "shop/shop_payment";
+		
+	}
 	
-	// Test
+//	// Test
 //	@RequestMapping(value="/shop/FinalTest", method = RequestMethod.GET)
-//	public String getTest(
+//	public String getFinal(
 //
-//			@RequestParam("pType") String pway,
+//			
+////			@ModelAttribute GoodsToBuyNow buynow,
+//			
+//			
+//
+//			
+//			
 //			Model model
 //			
 //			
 //			) {
-//		System.out.println(goods);
+//		System.out.println(buynow);
 //		
-//		model.addAttribute("goods", goods);
-//		model.addAttribute("pway", pway);
+//		model.addAttribute("buynow", buynow);
+//		
 //		return "/shop/FinalTest";
 //	}
 	
 	
-}
+	
+
+	
+
+	
+	
+	
+
+	
+
+
