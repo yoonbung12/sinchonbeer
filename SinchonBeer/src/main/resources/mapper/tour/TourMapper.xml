@@ -50,7 +50,7 @@
 	<select id="getTourOrderByMidx" resultType="com.bitcamp.sc.tour.domain.TourOrderInfo">
 		select mname,date_format(tdate,'%Y-%m-%d') as tdate,tpeople,mphone 
 		from orders natural join member natural join tour 
-		where midx = #{midx} and ocategory=#{ocategory} and ostatus='comfirmed' 
+		where midx = #{midx} and ocategory=#{ocategory} and ostatus='confirmed' 
 	</select>
 	
 	

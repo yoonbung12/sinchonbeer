@@ -1,4 +1,4 @@
-package com.bitcamp.sc.tour.service.impl;
+package com.bitcamp.sc.tour.service;
 
 import java.util.HashMap;
 

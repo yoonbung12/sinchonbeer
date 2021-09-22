@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bitcamp.sc.member.domain.LoginInfo;
 import com.bitcamp.sc.tour.service.AvailablePeopleService;
-import com.bitcamp.sc.tour.service.impl.TourAuthPhoneNumberService;
+import com.bitcamp.sc.tour.service.TourAuthPhoneNumberService;
 
 import lombok.AllArgsConstructor;
 
