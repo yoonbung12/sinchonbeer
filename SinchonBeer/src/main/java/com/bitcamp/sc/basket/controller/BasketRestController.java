@@ -17,16 +17,16 @@ import com.bitcamp.sc.basket.service.BasketService;
 @RestController
 public class BasketRestController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	private BasketService service;
+	private BasketService basketService;
 	@Autowired
-	public BasketRestController(BasketService service) {
-		this.service = service;
+	public BasketRestController(BasketService basketService) {
+		this.basketService = basketService;
 	}
 	
 	@GetMapping("/deleteRow")
 	public boolean getDeleteRow(@RequestParam("gidx") int gidx,@RequestParam("midx") int midx) {
 		boolean result = false; 
-		int cnt = service.getDeleteRowByGidx(gidx,midx);
+		int cnt = basketService.getDeleteRowByGidx(gidx,midx);
 		if(cnt > 0) {
 			logger.info("선택 상품이 삭제되었습니다.");
 			result = true;
@@ -36,12 +36,12 @@ public class BasketRestController {
 	
 	@GetMapping("/deleteAllByMidx/{midx}")
 	public void deleteAll(@PathVariable("midx") int midx) {
-		service.deleteAllByMidx(midx);
+		basketService.deleteAllByMidx(midx);
 	}
 	@GetMapping("/basket/changeAmount")
 	public boolean modifyAmount(BasketDto bDto) {
 		boolean result = false;
-		int check = service.changeBasketAmount(bDto);
+		int check = basketService.changeBasketAmount(bDto);
 		if(check == 1) {
 			result = true;
 		}
@@ -65,7 +65,7 @@ public class BasketRestController {
 		logger.info("받아온 midx 값 : " + midx);
 		// service에 반복문?
 		if(!gidxList.isEmpty()) {
-			result = service.getDeleteRowByGidx(gidxList, midx);
+			result = basketService.getDeleteRowByGidx(gidxList, midx);
 		}
 		if(result > 0) {
 			logger.info("삭제 성공");
