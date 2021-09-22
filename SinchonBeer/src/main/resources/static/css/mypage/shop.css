@@ -1,0 +1,44 @@
+body {
+	color: #55585b !important;
+}
+
+#profileImage {
+	width: 85px;
+	height: 85px;
+	object-fit: cover;
+}
+
+#sideBar {
+	display: block;
+}
+
+#scrollableNavBar {
+	display: none;
+}
+
+@media ( max-width : 992px) {
+	#sideBar {
+		display: none;
+	}
+	#scrollableNavBar {
+		display: block;
+		width: 90%;
+		align-items: center;
+		margin: 0 auto;
+	}
+	.table {
+		table-layout: fixed;
+	}
+}
+
+@media ( max-width : 768px) {
+	.profileContent {
+		font-size: 18px;
+	}
+}
+
+@media ( max-width : 576px) {
+	.profileContent {
+		font-size: 16px;
+	}
+}
