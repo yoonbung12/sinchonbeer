@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bitcamp.sc.member.memberService.EmailFindService;
-import com.bitcamp.sc.member.memberService.PwFindService;
+import com.bitcamp.sc.member.service.EmailFindService;
+import com.bitcamp.sc.member.service.PwFindService;
 
 @Controller
 public class FindAccountController {

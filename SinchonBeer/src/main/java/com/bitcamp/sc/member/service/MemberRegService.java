@@ -4,7 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bitcamp.sc.member.config.WebSecurityConfig;
+//import com.bitcamp.sc.member.config.WebSecurityConfig;
 import com.bitcamp.sc.member.domain.Member;
 import com.bitcamp.sc.member.domain.MemberAddress;
 import com.bitcamp.sc.member.domain.RegRequest;
@@ -16,11 +16,6 @@ public class MemberRegService {
 	@Autowired
 	private SqlSessionTemplate template;
 	
-	//스프링에서 제공하는 암호화 방식
-//	@Autowired
-//	private WebSecurityConfig webSecurityConfig; 
-	@Autowired
-	private WebSecurityConfig securityConfig;
 
 	private MemberDao memberDao;
 
@@ -34,6 +29,8 @@ public class MemberRegService {
 		
 			Member member = regRequest.getMemberRegRequest().toMember();
 
+			
+			
 			System.out.println("[regService에서] 회원가입 한 member 정보 :" + member);
 			System.out.println("[regService에서] email : " + member.getEmail());
 		
@@ -53,13 +50,6 @@ public class MemberRegService {
 			}
 			System.out.println("주소까지 회원가입에 입력 resultCnt :" + resultCnt);
 
-			
-			//암호화 처리하기
-			String securityPw = securityConfig.passwordEncoder().encode(member.getPw());
-			System.out.println(securityPw);
-			System.out.println(securityConfig.passwordEncoder().matches(member.getPw(), securityPw)); // 비밀번호를 rowdata로 받았을 경우
-							
-			
 		return resultCnt;
 	}
 }
