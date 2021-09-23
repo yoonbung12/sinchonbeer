@@ -83,27 +83,7 @@ public class ShopController {
 		
 	}
 	
-//	// Test
-//	@RequestMapping(value="/shop/FinalTest", method = RequestMethod.GET)
-//	public String getFinal(
-//
-//			
-////			@ModelAttribute GoodsToBuyNow buynow,
-//			
-//			
-//
-//			
-//			
-//			Model model
-//			
-//			
-//			) {
-//		System.out.println(buynow);
-//		
-//		model.addAttribute("buynow", buynow);
-//		
-//		return "/shop/FinalTest";
-//	}
+
 	
 }
 	
