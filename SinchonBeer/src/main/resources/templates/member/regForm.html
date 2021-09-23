@@ -76,6 +76,7 @@
                         </div>
                         <input type="text" id="detailAddress" name="MemberAddressRequest.address2" placeholder="상세주소">
                         <input type="hidden" id="extraAddress" placeholder="참고항목">
+                         <div class="msg"></div>
 
                         <!-- 카카오 주소 api source-->
                         <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -89,7 +90,13 @@
             <div><input type="submit" value="가입하기" class="submit_btn mt-4" id="submitBtn"></div>
         </form>
     </div>
+    <!-- // 여기까지 회원가입 영역 ---------------------------------------------------------------------->
 
+	<!-- footer 영역 -->
+	<th:block th:replace="frame/footer"></th:block>
+
+</body>
+</html>
 
 <script>
 
@@ -103,11 +110,13 @@ $(document).ready(function () {
     var repw = $('#repw');
     var name = $('#username');
     var phone = $('#phone');
+    var address1 = $('#address');
+    var address2 = $('#detailAddress');
 
     $('#submitBtn').on('click',function () {
 
         //이메일 공백일 경우 메시지 출력
-        if (email.val().trim().length < 1) {
+         if (email.val().trim().length < 1) {
             $('#email + div.msg').html('<p>필수항목입니다.</p>');
             $('#email + div.msg').css('display', 'block');
             email.addClass('red_outline');
@@ -186,8 +195,15 @@ $(document).ready(function () {
                 $('#phone+div.msg').css('display', 'block');
                 phone.addClass('red_outline');
                 return false;
-
             }
+        }
+         
+        if(address1.val().trim().length < 1){
+        	 $('#extraAddress+div.msg').html('<p>필수항목입니다.</p>');
+             $('#extraAddress+div.msg').css('display', 'block');
+             address1.addClass('red_outline');
+             address2.addClass('red_under_outline');
+             return false;
         }
         //return false;
     });
@@ -220,6 +236,12 @@ $(document).ready(function () {
         $('#phone+div.msg').html('');
         phone.removeClass('red_outline')
     });
+    $(address1||address2).focus(function () {
+        $('#extraAddress+div.msg').css('display', 'none');
+        $('#extraAddress+div.msg').html('');
+        address1.removeClass('red_outline')
+        address2.removeClass('red_under_outline')
+    });
 	
     // script (2) 아이디 중복 체크----------------------------------------------------------------
 	
@@ -230,7 +252,7 @@ $(document).ready(function () {
 			return false;
 		}
 		
-		$.ajax({
+		$.ajax({ 
 			url : '/emailCheck',
 			type : 'post',
 			contentType: 'application/json; charset=UTF-8;',
@@ -344,7 +366,7 @@ function execDaumPostcode() {
         },
         // 우편번호 찾기 화면 크기가 조정되었을때 실행할 코드를 작성하는 부분. iframe을 넣은 element의 높이값을 조정한다.
         onresize: function (size) {
-            element_wrap.style.height = 500 + 'px';
+            element_wrap.style.height = 300 + 'px';
         },
         width: '100%',
         height: '100%'
@@ -355,10 +377,4 @@ function execDaumPostcode() {
 }
 
 </script>
-    <!-- // 여기까지 회원가입 영역 ---------------------------------------------------------------------->
 
-	<!-- footer 영역 -->
-	<th:block th:replace="frame/footer"></th:block>
-
-</body>
-</html>

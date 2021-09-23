@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bitcamp.sc.member.domain.LoginInfo;
 import com.bitcamp.sc.member.domain.Member;
+import com.bitcamp.sc.member.domain.MemberAddress;
 import com.bitcamp.sc.member.repository.MemberDao;
 import com.bitcamp.sc.member.service.MemberService;
 
@@ -21,11 +22,11 @@ public class MemberServiceImpl implements MemberService{
 	HttpSession session;
 	
 	@Override
-	public LoginInfo getMember(String email) {
+	public LoginInfo getMember(int midx) {
 		
 		memberDao = template.getMapper(MemberDao.class);
 		
-		Member member = memberDao.selectByEmail(email);
+		Member member = memberDao.selectByMidx(midx);
 		LoginInfo loginInfo = member.toLoginInfo();
 		
 		return loginInfo;
@@ -35,5 +36,16 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int joinMember(Member member) {
 		return 0;
+	}
+	
+	
+
+	@Override
+	public MemberAddress getMemberAdd(int midx) {
+memberDao = template.getMapper(MemberDao.class);
+		
+		MemberAddress memAddress = memberDao.selectAddressByMidx(midx);
+		
+		return memAddress;
 	}
 }

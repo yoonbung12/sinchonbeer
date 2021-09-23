@@ -36,4 +36,9 @@ public interface MemberDao {
 	//비밀번호 찾기 - 비밀번호 재설정
 	int updatePw(String email, String pw);
 	
+	//멤버의 idx로 멤버 정보 조회하기
+	Member selectByMidx(int idx);
+	
+	//멤버의 idx로 주소 조회하기.
+	MemberAddress selectAddressByMidx(int idx);
 }
