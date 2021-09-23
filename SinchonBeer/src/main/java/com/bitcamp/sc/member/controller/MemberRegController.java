@@ -38,7 +38,7 @@ public class MemberRegController {
 			) {
 		//System.out.println("post 방식 진입 성공");
 		//System.out.println("service 가기 전 controller에서 regReqeust의 toString"+regRequest);
-		int result = regService.regMember(regRequest);
+		regService.regMember(regRequest);
 		//System.out.println("[controller]DB insert성공 했다면 1 반환, 못했다면 0 반환"+result);
 		
 		return new RedirectView("/join/success");

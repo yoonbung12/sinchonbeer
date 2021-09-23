@@ -19,7 +19,6 @@ public class Member {
 	private String name;
 	private String phone;
 	private String code;
-
 	
 	public LoginInfo toLoginInfo() {
 		return new LoginInfo(this.idx, this.email, this.name, this.phone);

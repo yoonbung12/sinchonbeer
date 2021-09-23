@@ -11,13 +11,16 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class MemberRegRequest {
+	
 	private String email;
 	private String pw;
 	private String name;
 	private String phone;
 	
 	
+	Member member;
 	public Member toMember() {
 		return new Member(0,this.email, this.pw, this.name, this.phone, null);
 	}
 }
+
