@@ -228,15 +228,18 @@
 								"tourPeople" : tourPeople
 							},
 							success : function(data) {
-
-								//	console.log(data);
-								alert('예약이 변경되었습니다.');
-								// 현재 페이지 다시로드	
-								location.reload();
+								console.log(data);
+								if(data == true){
+									alert('예약이 변경되었습니다.');
+									// 현재 페이지 다시로드	
+									location.reload();
+								}
+								
 
 							},
-							error : function(data){
-								// 에러처리 
+							error : function(request, status, error) {
+								alert('서버 통신에 문제가 발생했습니다. 다시 실행해주세요.');
+								console.log("code:" + request.status + "\n" + "error:" + error);
 							}
 						}); /* ajax 끝 */
 					}

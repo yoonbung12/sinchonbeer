@@ -2,6 +2,7 @@ package com.bitcamp.sc.tour.controller;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -31,15 +32,20 @@ public class ChangeTourController {
 	@RequestMapping(value = "/tour/change-info", method = RequestMethod.GET)
 	public String getChangePage(Model model, HttpServletRequest req) {
 
-		HttpSession session = req.getSession();
-		LoginInfo login = (LoginInfo) session.getAttribute("loginInfo");
+		
+		LoginInfo login = getLoginInfo(req);
+		logger.info("login: "+login);
 
 		// 로그인된 회원 중 예약 내역일 없을 경우도 예약 페이지로 이동
 		List<TourOrderInfo> list = changeTourService.getTourOrder(login.getIdx(), "tour");
-
+		logger.info(list.toString());
+		if(list.isEmpty()) {
+			logger.info("예약 정보가 없습니다.");
+			
+		}
 		// 로그인 상태이고 예약 정보가 있다면 모델에 저장
 		model.addAttribute("tourOrderList", list);
-		System.out.println(list);
+		
 		return "tour/changeReservation/change-info";
 	}
 	
@@ -48,10 +54,23 @@ public class ChangeTourController {
 	// 예약 변경 확정 버튼 클릭 처리 -> orders테이블 tidx 수정 -> tour 테이블 날짜 각각 인원 수정
 	@PostMapping("/tour/changeTour")
 	@ResponseBody
-	public boolean changeTour(@ModelAttribute("changeTour") ChangeTourDto changeDto) {
+	public boolean changeTour(@ModelAttribute("changeTour") ChangeTourDto changeDto, HttpServletRequest req ) {
 		boolean result = false;
 		logger.info(changeDto.toString());
-		return changeTourService.changeTourOrder(changeDto) == true ? true : result ;
+		
+		LoginInfo login = getLoginInfo(req);
+		
+		
+		return changeTourService.changeTourOrder(changeDto,login) == true ? true : result ;
 	}
+	
+	// 세션 정보 가져오기
+	private LoginInfo getLoginInfo(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		LoginInfo login = (LoginInfo) session.getAttribute("loginInfo");
+		return login;
+	}
+	
+	
 	
 }
