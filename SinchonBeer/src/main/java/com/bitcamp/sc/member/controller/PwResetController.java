@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bitcamp.sc.member.memberService.PwResetService;
+import com.bitcamp.sc.member.service.PwResetService;
 
 
 

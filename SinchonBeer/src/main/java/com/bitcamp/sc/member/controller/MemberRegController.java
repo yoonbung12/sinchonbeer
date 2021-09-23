@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.bitcamp.sc.member.domain.RegRequest;
-import com.bitcamp.sc.member.memberService.MemberRegService;
+import com.bitcamp.sc.member.service.MemberRegService;
 
 @Controller
 public class MemberRegController {

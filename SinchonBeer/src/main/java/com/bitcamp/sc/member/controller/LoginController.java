@@ -37,7 +37,7 @@ public class LoginController {
 		//LoginInfo loginInfo = (LoginInfo)getSession();
 		model.addAttribute("redirectUri", redirectUri);
 		model.addAttribute("reEmail", reEmail);
-		return "/member/loginForm";
+		return "member/loginForm";
 	}
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
