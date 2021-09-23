@@ -270,6 +270,7 @@
     	 $('#newDate'+idx).val(date);
     	 $('#myModal'+idx).modal('hide');
      }
+   
      
      // 예약 확정 버튼 클릭시
      function modify(idx){
@@ -280,30 +281,29 @@
 				alert('변경된 내역이 없습니다.');
 				return false;
 			} else {
-				// 에약된 인원
-				var tourPeople = $('#tourPeople'+idx).val();
-				// 변경된 날짜	
-				var newDate = $('#newDate'+idx).val();
-
-				// 현재 날짜
-				var resDate = $('#resDate'+idx).val();
 				
-				// 주문 번호 
-				var idx = idx;
+				let changeInfo = {
+						// 에약된 인원
+						 "tourPeople" : $('#tourPeople'+idx).val(),
+						// 변경된 날짜	
+						"newDate" : $('#newDate'+idx).val(),
+						// 현재 날짜
+						"resDate" : $('#resDate'+idx).val(),				
+						// 주문 번호 
+						"oidx" : idx	
+				};
+				
 				// 
 				$.ajax({
 					url : '/tour/changeTour',
 					type : 'post',
-					data : {
-						"newDate" : newDate,
-						"resDate" : resDate,						
-						"tourPeople" : tourPeople,
-						"oidx" : idx
-					},
+					contentType : "application/json",
+					data :JSON.stringify(changeInfo),			
 					success : function(data) {
 						console.log(data);
 						if(data == true){
 							alert('예약이 변경되었습니다.');
+							sendChangeMail(changeInfo);
 							// 현재 페이지 다시로드	
 							location.reload();
 						}
@@ -319,7 +319,20 @@
 			location.reload();
 			return false;
 		}		
-     }     
+     }
+     
+     function sendChangeMail(changeInfo){
+    	 console.log(changeInfo);
+    	 $.ajax({
+    		 url : '/tour/sendMailchange',
+    		 type : 'post',
+    		 contentType : "application/json",
+    		 data : JSON.stringify(changeInfo)
+    	 });
+     }
+     
+     
+     
      // 예약 취소 버튼 클릭시
      function reservationCancle(idx){
     	let people = $('#tourPeople'+idx).val();

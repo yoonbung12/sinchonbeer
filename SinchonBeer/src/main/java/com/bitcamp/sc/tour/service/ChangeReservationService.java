@@ -10,24 +10,23 @@ import org.springframework.stereotype.Service;
 import com.bitcamp.sc.member.domain.LoginInfo;
 import com.bitcamp.sc.tour.domain.ChangeTourDto;
 import com.bitcamp.sc.tour.repository.TourDao;
+import com.bitcamp.sc.tour.service.impl.MailServiceImpl;
 
 @Service
 public class ChangeReservationService {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private MailService mailService;
+	private MailServiceImpl mailService;
 
 	private TourDao tDao;
 
-	public ChangeReservationService(TourDao tDao, MailService service) {
+	public ChangeReservationService(TourDao tDao, MailServiceImpl service) {
 		this.tDao = tDao;
 		this.mailService = service;
 	}
 
-	
-
 	// 주문 테이블의 투어 날짜 변경
-	public boolean changeTourOrder(ChangeTourDto changeDto, LoginInfo loginInfo) {
+	public boolean changeTourOrder(ChangeTourDto changeDto) {
 		boolean result = false;
 		logger.info("changeDto: " + changeDto.toString());
 
@@ -37,12 +36,6 @@ public class ChangeReservationService {
 		if (result1 == 1) {
 			result = (modifyPeople(changeDto) == 2) ? true : false;
 			logger.info("인원 변경 결과  :" + result);
-
-	
-			sendMail(changeDto,loginInfo);
-
-		
-
 		}
 
 		return result;
@@ -54,7 +47,7 @@ public class ChangeReservationService {
 	}
 	
 	// 메일 서비스로 보내기
-	private void sendMail(ChangeTourDto changeDto, LoginInfo loginInfo)  {
+	public void sendMail(ChangeTourDto changeDto, LoginInfo loginInfo)  {
 		
 		Map<String,Object> params = new HashMap<>();
 		
