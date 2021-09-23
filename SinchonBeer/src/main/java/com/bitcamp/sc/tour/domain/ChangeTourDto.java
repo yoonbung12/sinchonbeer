@@ -10,8 +10,8 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ChangeTourDto {
+	private int oidx;
 	private int tourPeople;
-	private int midx;
 	private String resDate;
 	private String newDate;
 }
