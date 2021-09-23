@@ -1,4 +1,4 @@
-package com.bitcamp.sc.member.memberService;
+package com.bitcamp.sc.member.service;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
