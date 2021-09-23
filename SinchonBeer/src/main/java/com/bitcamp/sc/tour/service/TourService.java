@@ -1,5 +1,8 @@
 package com.bitcamp.sc.tour.service;
 
+import java.util.List;
+
+import com.bitcamp.sc.order.domain.OrderInfo;
 
 public interface TourService {
 	// 다른 패키지에서 사용되는 메서드 
@@ -13,6 +16,6 @@ public interface TourService {
 	// 투어예약 취소
 	int subTourPeopleByDate(int tourPeople,String tdate);
 	
-	
+	List<String> getDateToList(List<OrderInfo> list);
 
 }

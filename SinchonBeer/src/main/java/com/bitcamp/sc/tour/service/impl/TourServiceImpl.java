@@ -1,8 +1,12 @@
 package com.bitcamp.sc.tour.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bitcamp.sc.order.domain.OrderInfo;
 import com.bitcamp.sc.tour.repository.TourDao;
 import com.bitcamp.sc.tour.service.TourService;
 @Service
@@ -38,6 +42,19 @@ public class TourServiceImpl implements TourService {
 	@Override
 	public String getTourDateByTidx(int tidx) {
 		return dao.getTourDateByTidx(tidx);
+	}
+
+	// 날짜만 담긴 리스트 생성
+	@Override
+	public List<String> getDateToList(List<OrderInfo> list) {
+		List<String> dateList = new ArrayList<>();
+		for(int i=0; i<list.size(); i++) {
+			String  date =	dao.getTourDateByTidx(list.get(i).getTourIdx());
+			dateList.add(date);
+		}
+		
+		
+		return dateList;
 	}
 
 }

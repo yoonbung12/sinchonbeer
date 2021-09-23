@@ -1,6 +1,5 @@
 package com.bitcamp.sc.tour.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,24 +55,24 @@ public class ChangeTourController {
 
 		// 로그인된 회원 중 예약 내역일 없을 경우도 예약 페이지로 이동
 		List<OrderInfo> list = orderService.getOrderInfosByType("tour", login.getIdx());
-		List<String> list2 = new ArrayList<>();
 		
-		
-		for(int i=0; i<list.size(); i++) {
-			String  date =	service.getTourDateByTidx(list.get(i).getTourIdx());
-			list2.add(date);
-		}
-		logger.info("list2 size : "+list2.size());
-		logger.info("새롭게 생성된  list2 : "+list2);
 		logger.info("list : "+list);
-		if(list.isEmpty()) {
-			logger.info("예약 정보가 없습니다.");
-			
-		}
+		
 		// 로그인 상태이고 예약 정보가 있다면 모델에 저장
 		model.addAttribute("tourOrderList", list);
-		model.addAttribute("tourDate", list2);
 		
+		if(!list.isEmpty()) {
+			logger.info("예약 정보가 존재 합니다.");
+			
+			// 날짜가 담긴 리스트 
+			List<String> dateList= service.getDateToList(list);
+			
+			logger.info("list2 size : "+dateList.size());
+			logger.info("새롭게 생성된  dateList : "+dateList);
+			
+			model.addAttribute("tourDate", dateList);
+		}
+	
 		return "tour/changeReservation/change-info2";
 	}
 	

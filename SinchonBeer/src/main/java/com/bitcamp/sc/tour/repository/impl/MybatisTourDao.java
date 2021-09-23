@@ -58,9 +58,9 @@ public class MybatisTourDao implements TourDao {
 
 	// 주문 테이블의 예약 날짜를 변경 --> 현재는 test code
 	@Override
-	public int changeDateByMidx(int midx, String newDate) {
+	public int changeDateByMidx(int oidx, String newDate) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("midx", midx);
+		params.put("oidx", oidx);
 		params.put("tdate", newDate);
 		return template.update(NAME_SPACE + ".changeDateByMidx", params);
 		
