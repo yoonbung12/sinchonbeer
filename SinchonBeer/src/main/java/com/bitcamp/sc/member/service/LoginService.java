@@ -1,4 +1,4 @@
-package com.bitcamp.sc.member.memberService;
+package com.bitcamp.sc.member.service;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -33,9 +33,6 @@ public class LoginService {
 			session.setAttribute("loginInfo", member.toLoginInfo());
 			loginChk = true;
 		}
-		
-		
-		
 		
 		//이메일 기억하기 쿠키
 		if(reEmail != null && reEmail.length() > 0) {

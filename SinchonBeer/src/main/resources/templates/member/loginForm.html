@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>신촌 맥주 : 로그인</title>
@@ -47,8 +47,9 @@
 		var allData = {
 			"memail" : $('#memail').val(),
 			"mpw" : $('#mpw').val(),
-			"redirectUri" : $('#referer').val()
-		};
+			"redirectUri" : $('#referer').val(),
+			"reEmail" : ($("input:checkbox[id='emailChk']").is(":checked")) ? 'on': ''
+			};
 
 		$.ajax({
 			url : '/login',
@@ -112,15 +113,15 @@
 			<form id="loginForm">
 				<div class="form_box margin_top">
 					<input type="email" placeholder="이메일" id="memail"
-						class="loginLongBox" th:value="${cookie}"> <input
+						class="loginLongBox" th:value="${reEmail}"> <input
 						type="password" placeholder="비밀번호" id="mpw" class="loginLongBox">
 				</div>
 				<div class="msg_space">
 					<div class="msg display_none"></div>
 				</div>
 				<div class="cookie_chk margin_top">
-					<input type="checkbox" id="emailChk" value="on" [[${cookie.reEmail
-						ne null ? 'checked' : ''}]]> <label for="emailChk">이메일
+					<input type="checkbox" id="emailChk" value="on" th:checked="${reEmail != null}">
+					<label for="emailChk">이메일
 						기억하기</label> <input type="text" th:value="${redirectUri}" id="referer">
 				</div>
 

@@ -1,4 +1,4 @@
-package com.bitcamp.sc.member.memberService;
+package com.bitcamp.sc.member.service;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

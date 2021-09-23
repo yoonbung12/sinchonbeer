@@ -1,4 +1,4 @@
-package com.bitcamp.sc.member.memberService;
+package com.bitcamp.sc.member.service;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,21 +8,22 @@ import com.bitcamp.sc.member.domain.Member;
 import com.bitcamp.sc.member.repository.MemberDao;
 
 @Service
-public class PwFindService {
+public class EmailFindService {
 
 	@Autowired
 	private SqlSessionTemplate template;
 	
 	private MemberDao memberDao;
+
 	
-	public String pwSearch(String name, String email) {
+	public String emailSearch(String name, String phone) {
 		String resultEmail = null;
 		
 		memberDao = template.getMapper(MemberDao.class);
-		System.out.println("[pw check service ] dao mapper 생성");
+		System.out.println("[email check service ] dao mapper 생성");
 		
 		try {
-		Member member = memberDao.pwSearch(name, email);
+		Member member = memberDao.emailSearch(name, phone);
 		System.out.println("member 객체 : "+member);
 		
 		resultEmail = member.getEmail();
@@ -32,4 +33,6 @@ public class PwFindService {
 		}
 		return resultEmail;
 	}
+	
+	
 }
