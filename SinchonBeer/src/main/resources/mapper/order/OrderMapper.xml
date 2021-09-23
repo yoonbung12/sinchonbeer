@@ -27,7 +27,7 @@
 	</select>
 
 	<select id="findByCategoryAndMemberIdx" resultType="com.bitcamp.sc.order.domain.OrderInfo" resultMap="OrderDomain">
-		SELECT * FROM orders WHERE ocategory=#{category} and midx=#{memberIdx}
+		SELECT * FROM orders WHERE ocategory=#{category} and midx=#{memberIdx} and ostatus='confirmed'
 	</select>
 	
 	<delete id="deleteByIdx">

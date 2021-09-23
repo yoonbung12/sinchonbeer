@@ -55,6 +55,11 @@ public class OrderServiceImpl implements OrderService {
 	public int deleteOrder(int idx) {
 		return orderDao.deleteByIdx(idx);
 	}
+	
+	@Override
+	public int changeOrderStatus(int idx, String status) {
+		return orderDao.updateStatus(status, idx);
+	}
 
 	private void validateOrderInfo(String type, OrderInfo orderInfo) {
 		if (!type.isEmpty() && type.equals("tour")) {

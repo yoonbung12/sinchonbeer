@@ -37,7 +37,7 @@ public class PayServiceImpl implements PayService {
 	private void validatePayInfo(PayInfo payInfo) {
 		if (payInfo.getPrice() == 0 || payInfo.getWay().equals("") || payInfo.getStatus().equals("")
 				|| payInfo.getOrderIdx() == 0) {
-			throw new IllegalStateException("여행 주문 정보가 누락됐습니다. 다시 입력해주세요.");
+			throw new IllegalStateException("결제 정보가 누락됐습니다. 다시 입력해주세요.");
 		}
 	}
 
