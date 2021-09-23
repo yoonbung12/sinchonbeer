@@ -1,8 +1,6 @@
 package com.bitcamp.sc.tour.repository;
 
-import java.util.List;
 
-import com.bitcamp.sc.tour.domain.TourOrderInfo;
 
 public interface TourDao {
 	// 현재 인원 값을 가져오기
@@ -19,13 +17,11 @@ public interface TourDao {
 	
 	
 	// 주문테이블의 tidx 변경
-	int changeDateByMidx(int midx,String newDate);
+	int changeDateByMidx(int oidx,String newDate);
 	
 	// 예약 변경시 기존 날짜와 새롭게 예약한 날짜의 인원 처리
 	int modifyTour(int tourPeople, String newDate, String resDate);
 	
-	// 투어 예약 내역 가져오기
-	List<TourOrderInfo> getTourOrderByMidx(int midx,String category);
 	
 	
 	
