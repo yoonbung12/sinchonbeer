@@ -38,7 +38,7 @@ public class MypageController {
 		HttpSession session = req.getSession();
 		LoginInfo login = (LoginInfo) session.getAttribute("loginInfo");
 
-		String type = "tour";
+		String type = "shop";
 
 		List<PayInfo> payInfo = service.getPayInfosByType(type, login.getIdx());
 

@@ -1,17 +1,12 @@
 package com.bitcamp.sc.mypage.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.bitcamp.sc.member.domain.LoginInfo;
 import com.bitcamp.sc.member.domain.Member;
 import com.bitcamp.sc.mypage.service.MemberManagerService;
 
@@ -22,14 +17,10 @@ public class MemberManagerController {
 
 	// 정보 수정 페이지 이동(회원 정보 조회)
 	@GetMapping("/mypage/change-info")
-	public String changeInfoGet(Model model, HttpServletRequest req) {
-		HttpSession session = req.getSession();
-		LoginInfo login = (LoginInfo) session.getAttribute("loginInfo");
-
-		List<Member> memberInfo = service.readMember(login.getIdx());
-
-		model.addAttribute("memberInfoList", memberInfo);
-
+	public String changeInfoGet(HttpSession session) {
+		if (session.getAttribute("loginInfo") == null) {
+			return "main";
+		}
 		return "mypage/change-info";
 	}
 
