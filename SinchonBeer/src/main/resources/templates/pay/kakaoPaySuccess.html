@@ -5,14 +5,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+	<!-- 리다이렉트용 페이지 -->
 	<script th:inline="javascript">
 	/*<![CDATA[*/
-		document.location = "/kakaoPayComplete?payIdx=[[${payIdx}]]";
+		document.location.replace("/kakaoPayComplete?payIdx=[[${payIdx}]]");
 	/*]]>*/
 	</script>
-	
-	
-
 </body>
 </html>
