@@ -56,7 +56,7 @@
 				
 				<div class="form-group my-5 pb-3">
 					<label for="username" class="control-label required">신청자명</label>
-					<input type="text" class="form-control form-control-lg" id="username">
+					<div class=" pl-1 pt-1 text-22" th:text="${session.loginInfo.name}"></div>
 				</div>
 
 				<label for="userphone" class="control-label required">핸드폰 번호</label>
@@ -79,8 +79,7 @@
 
 				<div class="form-group mb-5 pb-3">
 					<label for="useremail" class="control-label required">이메일</label>
-					<span class="small m-1 d-inline-block">입력하신 메일주소로 결제정보가 발송됩니다.</span> 
-					<input type="text" class="form-control form-control-lg" id="useremail">
+					<div class=" pl-1 pt-1 text-22" th:text="${session.loginInfo.email}"></div>
 				</div>
 
 				<label for="usercoupon">쿠폰입력</label><span
@@ -202,7 +201,7 @@
 
 					<div class="mg-left-50 text-right pr-3">
 						<input type="radio" class="form-check-input" name="paymentType"
-							id="paymentTypeBank" value="bankTransfer"> <label for="paymentTypeBank"
+							id="paymentTypeBank" value="bankTransfer" disabled> <label for="paymentTypeBank"
 							class="form-check-label"> 실시간 계좌이체 </label>
 					</div>
 				</div>
@@ -334,47 +333,44 @@
 		console.log(payHow);
 		 
 		var reDate = $('#appendDate').text();
-			// 해당 날짜의 요일을 리턴하는 함수	
-			function day(reDate) {
-				var week=['월','화','수','목','금','토','일'];
-				var dayOfWeek = week[new Date(reDate).getDay()];
-				return dayOfWeek;
-			}
-			// 리턴된 요일을 날짜에 append로 추가 
-			var result = day(reDate);
-			$('#appendDate').append(' ('+result+')');
-				// 동의 후 확인 클릭
-				$('#modalButton').click(function() {
-					$('#agreementTermsOfUse').val('Y');
-					$('#agreementTermsOfUse').prop('checked', true);
-			});
-		    // 결제 수단 선택 시 약관 동의 버튼 체크 여부 확인
-			$('input[name=paymentType]').on('click',function() {
-				if (!$('input[name=agreementPrivacy]').is(':checked') || 
-					!$('input[name=agreementTermsOfUse]').is(':checked') ||
-					!$('input[name=agreementRefund]').is(':checked') ) {
+		// 해당 날짜의 요일을 리턴하는 함수	
+		function day(reDate) {
+			var week=['월','화','수','목','금','토','일'];
+			var dayOfWeek = week[new Date(reDate).getDay()];
+			return dayOfWeek;
+		}
+		// 리턴된 요일을 날짜에 append로 추가 
+		var result = day(reDate);
+		$('#appendDate').append(' ('+result+')');
+			// 동의 후 확인 클릭
+			$('#modalButton').click(function() {
+				$('#agreementTermsOfUse').val('Y');
+				$('#agreementTermsOfUse').prop('checked', true);
+		});
+	    // 결제 수단 선택 시 약관 동의 버튼 체크 여부 확인
+		$('input[name=paymentType]').on('click',function() {
+			if (!$('input[name=agreementPrivacy]').is(':checked') || 
+				!$('input[name=agreementTermsOfUse]').is(':checked') ||
+				!$('input[name=agreementRefund]').is(':checked') ) {
 
-					alert("동의 버튼을 클릭해주세요.");
-					$(this).focus();
-						return false;
-				} else {
-					console.log($('input[name=paymentType]:checked').val());
-					$('#payHow').val($('input[name=paymentType]:checked').val());
-					console.log($('#payHow').val());
-				}
-			});
-		    // 결제수단 체크 확인 후 orders로 보내기 위한 form 
-			$('#paySubmit').on('click',function(){
-				if($('#payHow').val()==''){
-				alert('결제 수단이 선택되지 않았습니다. \n 결제수단을 선택해주세요.');
-				$('input[name=paymentType]').focus();
-				return false;	
+				alert("동의 버튼을 클릭해주세요.");
+				$(this).focus();
+					return false;
+			} else {
+				console.log($('input[name=paymentType]:checked').val());
+				$('#payHow').val($('input[name=paymentType]:checked').val());
+				console.log($('#payHow').val());
 			}
-			$('#payForm').submit();
 		});
 	});
 	
 	function frmSubmit() {
+		if($('#payHow').val()=='') {
+			alert('결제 수단이 선택되지 않았습니다. \n 결제수단을 선택해주세요.');
+			$('input[name=paymentType]').focus();
+			return false;
+		}
+		
 		window.name = "opner_win";
 		var myForm = document.payForm;
 		var myWin = window.open("about:blank", "kakaoPayWin", "status=yes, scrollbars=yes, width=440, height=500, left=300, top=100");

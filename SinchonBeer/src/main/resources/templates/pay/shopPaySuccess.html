@@ -119,21 +119,11 @@
                 </div>
 
                 <div class="col-sm-8 p-4">
-                    <div id="userName">
-						채호연
-                    </div>
-                    <div id="userPhone" th:text="${memberInfo.phone}">
-                        010-1234-5678
-                    </div>
-                    <div id="userAddress" th:text="${addressInfo.address1}">
-						경기 화성시 00로 777(00동, 00마을000아파트)
-                    </div>
-                    <div id="userDetailAddress" th:text="${addressInfo.address2}">
-                        111동 222호
-                    </div>
-                    <div id="userZipcode">
-                        (123456)
-                    </div>
+                    <div id="userName" th:text="${memberInfo.name}"></div>
+                    <div id="userPhone" th:text="${memberInfo.phone}"></div>
+                    <div id="userAddress" th:text="${addressInfo.address1}"></div>
+                    <div id="userDetailAddress" th:text="${addressInfo.address2}"></div>
+                    <div id="userZipcode" th:text="${addressInfo.postcode}"></div>
                 </div>
             </div>
 
@@ -155,9 +145,7 @@
                 </div>
 
                 <div class="col-sm-8 p-4">
-                    <div id="orderNumber" th:text="${orderInfo.idx}">
-                        2021082712345
-                    </div>
+                    <div id="orderNumber" th:text="${orderInfo.idx}"></div>
                 </div>
             </div>
 
@@ -179,9 +167,7 @@
                 </div>
 
                 <div class="col-sm-8 text-sinchon p-4">
-                    <div id="amountOfPayment" th:text="${payInfo.price}" class="font-weight-bold">
-                        12,100원
-                    </div>
+                    <div id="amountOfPayment" th:text="${payInfo.price}" class="font-weight-bold"></div>
                 </div>
             </div>
 
@@ -190,7 +176,7 @@
                     <a th:href="@{/main}" class="btn btn-secondary btn-block btn-lg text-18 rounded-0">홈화면</a>
                 </div>
                 <div class="col-sm-6 p-0">
-                    <a th:href="@{/mypage}" class="btn btn-pay btn-block btn-lg text-white text-18 rounded-0">마이페이지</a>
+                    <a th:href="@{/mypage/shop}" class="btn btn-pay btn-block btn-lg text-white text-18 rounded-0">마이페이지</a>
                 </div>
             </div>
 
