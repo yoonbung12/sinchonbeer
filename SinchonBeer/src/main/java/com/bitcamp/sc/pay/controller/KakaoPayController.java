@@ -65,11 +65,13 @@ public class KakaoPayController {
 			Model model
 			) {
 		
+		MemberAddress memberAddress = memberService.getMemberAdd(shop.getMidx());
+		
 		OrderInfo orderInfo = OrderInfo.builder()
 									   .category("shop")
 									   .price(shop.getPrice())
-									   .addressIdx(17) // 멤버정보로 주소정보를 가져오는 findByMidx 메소드 필요
-									   .memberIdx(shop.getMidx()) // 주소 추가
+									   .addressIdx(memberAddress.getAidx())
+									   .memberIdx(shop.getMidx())
 									   .build();
 		
 		orderService.createOrder("shop", orderInfo);
@@ -131,17 +133,9 @@ public class KakaoPayController {
 	
 	private void addAddressToModel(OrderInfo orderInfo, Model model) {
 		if (orderInfo.getCategory().equals("shop")) {
-			// 모델에 주소 정보 추가, getAddressIdx -> 주소 정보를 가져옴
+			LoginInfo member = memberService.getMember(orderInfo.getMemberIdx());
 			
-//			model.addAttribute("addressInfo", orderInfo.getAddressIdx());
-			
-			// 테스트용 하드 코딩 수정 필요
-			LoginInfo member = memberService.getMember("test@naver.com");
-			
-			MemberAddress memberAddress = new MemberAddress();
-			
-			memberAddress.setAddress1("경기 성남시 분당구 판교역로10번길 3 (백현동)");
-			memberAddress.setAddress2("111동 111호");
+			MemberAddress memberAddress = memberService.getMemberAdd(orderInfo.getMemberIdx());
 			
 			model.addAttribute("addressInfo", memberAddress);
 			model.addAttribute("memberInfo", member);

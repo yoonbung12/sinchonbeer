@@ -21,9 +21,7 @@
                 <button class="btn btn-lg btn-sinchon btn-block" onclick="sucSubmit();">확인</button>
             </div>
         </div>
-		
 	</div>
-	
 	
 	<script>
 		function sucSubmit() {
@@ -31,9 +29,8 @@
 		}
 		
 		window.onunload = () => {
-			opener.location.href = "/paySuccess?payIdx=[[${payIdx}]]";
+			opener.location.replace("/paySuccess?payIdx=[[${payIdx}]]");
 		}
 	</script>
-
 </body>
 </html>
