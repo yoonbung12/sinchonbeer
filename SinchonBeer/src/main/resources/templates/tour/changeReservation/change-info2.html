@@ -55,7 +55,7 @@
 						<p>신청자명</p>
 					</div>
 					<div class="col-4 text-left outline_del">
-						<input type="text" th:value="${session.loginInfo.name}" readonly
+						<input type="text" th:value="${session.loginInfo.name}" id="name" readonly
 							class="border-0">
 						<input type="hidden" id="oidx" th:value="${list.idx}">	
 					</div>
@@ -147,7 +147,7 @@
 					</div>
 					<div class="col-12 col-sm-6 p-3">
 						<button id="cancleBtn" class="set_input color_cancle" 
-								th:onclick="|reservationCancle(${list.idx})|">예약 취소</button>
+								th:onclick="| reservationCancle(${list.idx})|">예약 취소</button>
 					</div>
 				</div>
 			</div>
@@ -223,7 +223,7 @@
 	    						maxDate : "+5y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
 	    						,
 	    						beforeShowDay : noBefore,
-	    						beforeShow : function() {},
+	    						
 	    						onSelect : function() {
 	    							var date = $('#datepicker'+idx).val();
 	
@@ -321,6 +321,7 @@
 		}		
      }
      
+     // 예약 변경 안내 메일 
      function sendChangeMail(changeInfo){
     	 console.log(changeInfo);
     	 $.ajax({
@@ -337,6 +338,7 @@
      function reservationCancle(idx){
     	let people = $('#tourPeople'+idx).val();
     	let tdate = $('#resDate'+idx).val();
+    	let oidx = idx;
     	
     	console.log(idx);
     	console.log(people+' : '+tdate);
@@ -354,6 +356,7 @@
 				success : function(data){
 					if(data == 1){
 						alert('예약이 취소되었습니다.');
+						cancleMail(idx);
 						location.reload();
 					}
 				},
@@ -362,18 +365,25 @@
 					console.log("code:" + request.status + "\n" + "error:" + error);
 				}
 			});
-			
-			
-			
+						
 		} else {
 			return false;
 		}
 		
      }
      
+     function cancleMail(idx){
+    	$.ajax({
+    		url : 'sendCancleMail/'+idx,
+    		type : 'get',
+    		success : function(){
+    		
+    				console.log('취소 메일 전송 성공');
+    			}
+    		});
+    	}   
+     
 	</script>
-
-
 
 
 </body>

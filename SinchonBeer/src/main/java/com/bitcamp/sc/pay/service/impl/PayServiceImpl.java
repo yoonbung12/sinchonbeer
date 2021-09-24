@@ -70,4 +70,10 @@ public class PayServiceImpl implements PayService {
 		return payInfo;
 	}
 
+	@Override
+	public PayInfo getPayInfoByOrderIdx(int orderIdx) {
+		PayInfo payInfo = payDao.findByOrderIdx(orderIdx);
+		return payInfo;
+	}
+
 }
