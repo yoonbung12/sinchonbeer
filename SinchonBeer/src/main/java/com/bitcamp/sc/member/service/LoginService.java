@@ -5,7 +5,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bitcamp.sc.member.domain.Member;
@@ -13,23 +16,31 @@ import com.bitcamp.sc.member.repository.MemberDao;
 
 @Service
 public class LoginService {
-	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private SqlSessionTemplate template;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	private MemberDao memberDao;
 
 	public boolean login(String email, String pw, String reEmail, HttpSession session, HttpServletResponse response) {
+	
+		
 		//로그인체크 기본 값은 false
 		boolean loginChk = false;
 		// MemberDao를 클래스로 만들어 구현
 		memberDao=template.getMapper(MemberDao.class);
 		System.out.println("인터페이스 member dao mapper 생성");
+			
+		Member member = memberDao.selectByEmail(email);
+		logger.info("member : "+member);
+												
+		logger.info("암호화 결과 : "+passwordEncoder.matches(pw,member.getPw()));
 		
-		Member member = memberDao.selectByEmailPw(email, pw);
 		//회원이 로그인 했다면 session 유지 시작, 로그인체크는 true로.
 		System.out.println(member);
-		if(member != null) {
+		if(member != null && passwordEncoder.matches(pw,member.getPw())) {
 			session.setAttribute("loginInfo", member.toLoginInfo());
 			loginChk = true;
 		}
