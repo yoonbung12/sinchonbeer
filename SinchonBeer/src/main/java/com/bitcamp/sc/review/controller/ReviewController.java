@@ -22,25 +22,31 @@ public class ReviewController {
 
 	
 	
-	/*
-	 * @RequestMapping(value="/writing", method=RequestMethod.GET) public
-	 * ModelAndView view (@RequestParam Integer idx, HttpSession session) throws
-	 * Exception { // 조회수 증가 처리 reviewService.increaseViewcnt(idx, session); //
-	 * 모델(데이터)+뷰(화면)를 함께 전달하는 객체 ModelAndView mav = new ModelAndView(); // 뷰의 이름
-	 * mav.setViewName("review/writing"); // 뷰에 전달할 데이터 mav.addObject("dto",
-	 * reviewService.read(idx); return mav; }
-	 */
+	
+	  @RequestMapping(value="/writing", method=RequestMethod.GET)
+	  public ModelAndView view (@RequestParam Integer idx, HttpSession session) throws Exception { 
+		  // 조회수 증가 처리 
+		  reviewService.increaseViewcnt(idx, session); 
+		  //모델(데이터)+뷰(화면)를 함께 전달하는 객체
+		  ModelAndView mav = new ModelAndView(); 
+		  // 뷰의 이름
+		  mav.setViewName("review/writing"); 
+		  // 뷰에 전달할 데이터 mav.addObject("dto",
+		  reviewService.read(idx); 
+		  return mav; 
+	  }
+	 
 	
 	
 	
 	
-	@RequestMapping(value="/writing",method=RequestMethod.GET)
+	@RequestMapping(value="/writing2",method=RequestMethod.GET)
 		public String createGET() throws Exception{
 			System.out.println("글쓰기. GET방식");
 			return "review/writing";
 		}
 	
-	@RequestMapping(value = "/writing",method=RequestMethod.POST )
+	@RequestMapping(value = "/writing2",method=RequestMethod.POST )
 		public String createPOST(ReviewVO review, Model model) throws Exception{
 			System.out.println("글쓰기. POST방식");
 			System.out.println(review.toString());
