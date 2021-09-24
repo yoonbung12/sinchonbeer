@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>리뷰 메인</title>
+
+<link rel="stylesheet" th:href="@{/css/review/reviewMain.css}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+<th:block th:replace="frame/metaheader"></th:block>
+</head>
+
+<body>
+	<th:block th:replace="frame/header"></th:block>
+	<th:block th:replace="frame/nav"></th:block>
+   
+    <!-- Content 영역 -->
+    <div class="my-5 text-center">
+        <h1 class="font-weight-bold">
+            리뷰
+        </h1>
+    </div>
+
+    <div class="container gallery-container">
+        <form action="">
+            <div class="gallery">
+            	<!-- <th:block th:each="reviewInfo : ${listAllPost}"> -->
+	                <div class="row">
+	                    <div class="col-lg border mx-2">
+	                        <div class="album py-5 bg-light">
+	                            <div class="container">
+	                                <div class="row row-cols-1 row-cols-sm-2 g-3">
+	                                    <div class="col">
+	                                        <div class="card shadow-sm">
+	                                            <div class="thumbnail">
+	                                                <div></div>
+	                                                <a class="lightbox" href="#">
+	                                                    <img src="images/김부각.png" alt="김부각">
+	                                                </a>
+	                                                <div class="card-body">
+	                                                    <a class="card-text" href="#">맛있네요. 바삭바삭</a>
+	                                                    <div class="d-flex justify-content-between align-items-center">
+	                                                        <div class="btn-group">
+	                                                            <button type="button" class="btn btn-sm btn-outline-secondary">좋아요</button>
+	                                                        </div>
+	                                                        <small class="text-muted">2021-08-30</small>
+	                                                    </div>
+	                                                </div>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+				<!-- </th:block> -->
+            </div>
+        </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+    <script>
+        baguetteBox.run('.gallery');
+    </script>
+
+
+   <th:block th:replace="frame/footer"></th:block>
+
+  
+</body>
+
+</html>
