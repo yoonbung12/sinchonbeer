@@ -1,34 +1,43 @@
 package com.bitcamp.sc.review.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.sc.review.domain.ReviewVO;
 import com.bitcamp.sc.review.service.ReviewService;
 
 @Controller
-@RequestMapping("/review/")
+@RequestMapping("/review")
 public class ReviewController {
 
 	@Autowired
 	ReviewService reviewService;
 
 	
+	
+	@RequestMapping(value="/writing", method=RequestMethod.GET)
+	public ModelAndView view (@RequestParam Integer idx, HttpSession session) throws Exception { // 조회수 증가 처리 
+		reviewService.increaseViewcnt(idx, session); // 모델(데이터)+뷰(화면)를 함께 전달하는 객체
+		ModelAndView mav = new ModelAndView(); // 뷰의 이름
+		mav.setViewName("review/writing"); // 뷰에 전달할 데이터 mav.addObject("dto",
+		reviewService.read(idx); 
+		return mav;
+	}
+	
+	
+	
+	
 	@RequestMapping(value="/writing",method=RequestMethod.GET)
-		public void createGET(ReviewVO review, Model model) throws Exception{
+		public String createGET() throws Exception{
 			System.out.println("글쓰기. GET방식");
-
+			return "review/writing";
 		}
 	
 	@RequestMapping(value = "/writing",method=RequestMethod.POST )
@@ -39,15 +48,17 @@ public class ReviewController {
 			reviewService.create(review);
 			model.addAttribute("result", "성공");
 	        
-			return "/review/view";
+			return "redirect:/reviewMain";
 		}
 	    
-	@RequestMapping(value = "/reviewMain", method=RequestMethod.GET)
-		public void listAll(Model model) throws Exception{
+	@RequestMapping(value = "/main", method=RequestMethod.GET)
+		public String listAll(Model model) throws Exception{
 
 		System.out.println("전체목록 페이지");
 
 		model.addAttribute("reviewMain", reviewService.listAll());
+		
+		return "review/reviewMain";
 		}
 
 	
@@ -64,7 +75,8 @@ public class ReviewController {
 		 * mav.addObject("list", list); // 데이터를 저장 return mav; // list.jsp로 List가 전달된다.
 		 * }
 		 * 
-		 * // 02_01. 게시글 작성화면 // @RequestMapping("board/write.do")
+		 * // 02_01. 게시글 작성화면 
+		 * // @RequestMapping("board/write.do")
 		 * 
 		 * @RequestMapping(value="write.do", method=RequestMethod.GET) public String
 		 * write(){ return "review/write"; // write.jsp로 이동 }
