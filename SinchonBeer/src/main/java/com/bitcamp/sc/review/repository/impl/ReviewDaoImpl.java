@@ -1,15 +1,12 @@
 package com.bitcamp.sc.review.repository.impl;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.bitcamp.sc.review.domain.Review;
 import com.bitcamp.sc.review.domain.ReviewVO;
 import com.bitcamp.sc.review.repository.ReviewDao;
 

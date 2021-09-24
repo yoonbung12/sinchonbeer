@@ -1,5 +1,6 @@
 package com.bitcamp.sc.review.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.bitcamp.sc.review.domain.ReviewVO;
 import com.bitcamp.sc.review.service.ReviewService;
 
 @Controller
@@ -30,42 +28,13 @@ public class ReviewController {
 		return "review/reviewMain";
 	}
 	
-	
-	@RequestMapping(value="/writing", method=RequestMethod.GET)
-	public ModelAndView view (@RequestParam Integer idx, HttpSession session) throws Exception { 
-		  /*
-		   * // 조회수 증가 처리 
-		   * reviewService.increaseViewcnt(idx, session);
-		   */
-			 
-		ModelAndView mav = new ModelAndView(); 
-		  
-		mav.setViewName("review/writing"); 
-		 
-		reviewService.read(idx); 
-		return mav; 
-	}
-	 
-	
-	
-	
-	
-	@RequestMapping(value="/writing2",method=RequestMethod.GET)
-		public String createGET() throws Exception{
-			System.out.println("글쓰기. GET방식");
-			return "review/writing";
-		}
-	
-	@RequestMapping(value = "/writing2",method=RequestMethod.POST )
-		public String createPOST(ReviewVO review, Model model) throws Exception{
-			System.out.println("글쓰기. POST방식");
-			System.out.println(review.toString());
+	@RequestMapping(value = "/write", method = RequestMethod.GET)
+    public String goToView() throws Exception {
 
-			reviewService.create(review);
-			model.addAttribute("result", "성공");
-	        
-			return "redirect:/reviewMain";
-		}
+    return "review/writing";
+  }
+
+	 
 	    
 	@RequestMapping(value = "/main", method=RequestMethod.GET)
 		public String listAll(Model model) throws Exception{
@@ -78,6 +47,19 @@ public class ReviewController {
 		}
 
 	
+	
+	
+	
+	
+	/*
+	 * @RequestMapping(value="/writing", method=RequestMethod.GET) public
+	 * ModelAndView view (HttpServletRequest request) throws Exception {
+	 * 
+	 * ModelAndView mav = new ModelAndView(); mav.setViewName("review/writing");
+	 * 
+	 * return mav; }
+	 * }
+	 */
 	
 	
 		/*
