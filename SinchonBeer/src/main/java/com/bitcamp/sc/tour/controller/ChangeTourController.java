@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +21,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bitcamp.sc.member.domain.LoginInfo;
 import com.bitcamp.sc.order.domain.OrderInfo;
 import com.bitcamp.sc.order.service.OrderService;
+import com.bitcamp.sc.pay.domain.PayInfo;
+import com.bitcamp.sc.pay.service.PayService;
 import com.bitcamp.sc.tour.domain.ChangeTourDto;
 import com.bitcamp.sc.tour.service.ChangeReservationService;
+import com.bitcamp.sc.tour.service.MailService;
 import com.bitcamp.sc.tour.service.TourService;
 
 @Controller
@@ -29,18 +33,22 @@ public class ChangeTourController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private ChangeReservationService changeTourService;
-
 	private OrderService orderService;
-
-	private TourService service;
+	private TourService service;	
+	private MailService mailService;
+	private PayService payService;
 
 	public ChangeTourController(ChangeReservationService changeTourService, 
 								OrderService orderService,
-								TourService service) {
-
+								TourService service,
+								MailService mailService,
+								PayService payService) {
+		
 		this.changeTourService = changeTourService;
 		this.orderService = orderService;
 		this.service = service;
+		this.mailService = mailService;
+		this.payService = payService;
 	}
 
 	// 투어 예약 변경/확인/취소 페이지 가져오기
@@ -92,7 +100,7 @@ public class ChangeTourController {
 		
 		logger.info("changeDto : "+changeDto);
 		if(changeDto != null && login != null) {
-			changeTourService.sendMail(changeDto, login);
+			mailService.changeMail(changeDto, login);
 		}
 		
 	}
@@ -109,6 +117,21 @@ public class ChangeTourController {
 		logger.info("주문 상태 변경 결과 : " + result);
 
 		return (result == 1) ? service.subTourPeopleByDate(people, tdate) : 0;
+	}
+	
+	// 예약 취소 메일 
+	@GetMapping("/tour/sendCancleMail/{oidx}")
+	@ResponseBody
+	public void sendCancleMail(@PathVariable("oidx") int idx,HttpServletRequest req) {
+		logger.info("취소 메일 컨트롤러 진입 oidx"+idx);
+		LoginInfo login = getLoginInfo(req);
+		PayInfo payInfo = payService.getPayInfoByOrderIdx(idx);
+		logger.info("payInfo 확인 : "+payInfo);
+		if(payInfo !=null) {
+			mailService.refundMail(payInfo,login);
+			
+		}
+	
 	}
 
 	// 세션 정보 가져오기

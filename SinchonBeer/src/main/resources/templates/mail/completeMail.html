@@ -2,7 +2,7 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8">
-<title>예약 날짜 변경 메일</title>
+<title>예약 완료 메일</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script
@@ -43,7 +43,7 @@
 						<tbody>
 							<tr>
 								<td></td>
-								<td style="text-align: center; height: 87px;">신촌 맥주 양조장 투어 예약이 변경 되었습니다.</td>
+								<td style="text-align: center; height: 87px;">신촌 맥주 양조장 투어 예약이 완료되었습니다.</td>
 								<td></td>
 							</tr>
 							<tr>
@@ -76,11 +76,11 @@
 										<tbody>
 											<tr >
 												<td style="display:inline-block; line-:12px; font-size:12px; color:#000; padding:17px 17px; background-color: #ffffff;border:1px solid #dfdfdf;text-decoration: none;">
-													<a>홈페이지 바로가기</a>
+													<a th:href="@{http://localhost:8081/tour}" >홈페이지 바로가기</a>
 												</td>
 												<td style="width: 5px;"></td>
 												<td style="background-color: #3bc1cd;">
-													<a th:href="@{http://localhost:8081/tour/pick-date}" style="display:inline-block; line-:12px; font-size:12px; color:#fff; padding:5px; background-color: #3bc1cd; text-decoration: none;" >수정 및 취소하기</a>
+													<a th:href="@{http://localhost:8081/tour/change-info}" style="display:inline-block; line-:12px; font-size:12px; color:#fff; padding:5px; background-color: #3bc1cd; text-decoration: none;" >예약 내역 확인</a>
 												</td>
 											</tr>
 										</tbody>
@@ -95,7 +95,7 @@
 		</tbody>
 
 	</table>
-	>
+	
 
 
 
