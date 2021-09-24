@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <title>리뷰 쓰기 및 수정</title>
 
-<link rel="stylesheet" th:href="@{/css/review/writingcss}">
+<!--<link rel="stylesheet" th:href="@{/css/review/writing.css}">-->
 <link rel="stylesheet" th:href="@{/css/default.css}">
 <th:block th:replace="frame/metaheader"></th:block>
 
 </head>
 
 <body>
-	<th:block th:replace="frame/header"></th:block>
-	<th:block th:replace="frame/nav"></th:block>
+  <th:block th:replace="frame/header"></th:block>
+  <th:block th:replace="frame/nav"></th:block>
 
     <!-- Content 영역 -->
     <div class="my-5 text-center">
@@ -21,8 +21,6 @@
         </h1>
     </div>
 
-
-    <header th:insert="common/header.html"></header>
     <div class="container">
         <form action="/post" method="post" enctype="multipart/form-data">
             <div class="form-group row">

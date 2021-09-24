@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.bitcamp.sc.review.domain.ReviewVO;
 import com.bitcamp.sc.review.repository.ReviewDao;
 import com.bitcamp.sc.review.service.ReviewService;
-import com.bitcamp.sc.tour.repository.TourDao;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
