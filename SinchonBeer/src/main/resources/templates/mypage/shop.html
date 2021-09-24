@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>마이페이지 주문 내역</title>
@@ -78,6 +78,7 @@
 								<th:block th:each="payInfo : ${payInfoList}">
 									<thead class="thead-light">
 										<th width="20%">
+											<!-- 결제 시간 년월일로 출력 -->
 											<div th:text="${payInfo.date}" style="height: 25px; overflow: hidden"/></th>
 										<th width="25%"><div th:text="${payInfo.orderIdx}"/></th>
 										<th width="35%"></th>
@@ -94,7 +95,7 @@
 												<div th:text="'결제 상태&nbsp&nbsp' + ${payInfo.status}"/>
 											</td>
 											<td class="pt-3">
-												<button class="btn btn-sinchon mb-2"
+												<button class="btn btn-sinchon mb-2" th:href="@{review}"
 													style="width: 100px; height: 30px; line-height: 100%;">후기</button>
 												<button class="btn btn-sinchon"
 													style="width: 100px; height: 30px; line-height: 100%;">결제취소</button>

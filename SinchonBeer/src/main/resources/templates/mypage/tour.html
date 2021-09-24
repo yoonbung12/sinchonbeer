@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>마이페이지 예약 내역</title>
@@ -67,15 +67,15 @@
 								</tr>
 								<tr>
 									<th scope="row">예약일</th>
-									<td><input type="text" th:value="${tourInfo.tdate}" class="border-0" readonly></td>
+									<td><div th:text="${tourInfo.tdate}"></td>
 								</tr>
 									<tr>
 									<th scope="row">인원</th>
-									<td><input type="text" th:value="${tourInfo.tpeople} + 명" class="border-0" readonly></td>
+									<td><div th:text="${tourInfo.tpeople} + '명'"></td>
 								</tr>
 								<tr>
 									<th scope="row">신청자</th>
-									<td><input type="text" th:value="${tourInfo.mname}" class="border-0" readonly>
+									<td><div th:text="${tourInfo.mname}"></td>
 								</tr>
 							</th:block>
 							<th:block th:each="payInfo : ${payInfoList}">
