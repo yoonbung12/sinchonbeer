@@ -3,6 +3,7 @@ package com.bitcamp.sc.member.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitcamp.sc.member.domain.LoginInfo;
 import com.bitcamp.sc.member.service.LoginService;
+import com.bitcamp.sc.util.interceptor.LoggerInterceptor;
 
 
 @Controller
@@ -32,12 +34,22 @@ public class LoginController {
 			@RequestHeader(value = "referer", required = false) String redirectUri,
 			@CookieValue(value="reEmail", required = false) String reEmail,
 			HttpSession session,
+			HttpServletRequest request,
 			Model model
 			) {
-		//LoginInfo loginInfo = (LoginInfo)getSession();
+		System.out.println((LoginInfo)request.getSession().getAttribute("loginInfo"));
+		String view = "member/loginForm";
+		if((LoginInfo)request.getSession().getAttribute("loginInfo") != null) {
+		
+			//세션이 없을 경우엔 여기 페이지에 들어오고, 세션이 있다고 하면은 여기 들어오지 못하게 막기.
+			//세션이 있어야 하는 페이지: mypage, 결제, ..등등
+			//경로는 홈으로 가기
+			
+			view = "main";
+		}
 		model.addAttribute("redirectUri", redirectUri);
 		model.addAttribute("reEmail", reEmail);
-		return "member/loginForm";
+		return view;
 	}
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
