@@ -20,21 +20,31 @@ public class ReviewController {
 	@Autowired
 	ReviewService reviewService;
 
+	@RequestMapping("")
+	public String reviewMain() {
+		return "review/reviewMain";
+	}
+	
+	@RequestMapping("/")
+	public String reviewMain2() {
+		return "review/reviewMain";
+	}
 	
 	
-	
-	  @RequestMapping(value="/writing", method=RequestMethod.GET)
-	  public ModelAndView view (@RequestParam Integer idx, HttpSession session) throws Exception { 
-		  // 조회수 증가 처리 
-		  reviewService.increaseViewcnt(idx, session); 
-		  //모델(데이터)+뷰(화면)를 함께 전달하는 객체
-		  ModelAndView mav = new ModelAndView(); 
-		  // 뷰의 이름
-		  mav.setViewName("review/writing"); 
-		  // 뷰에 전달할 데이터 mav.addObject("dto",
-		  reviewService.read(idx); 
-		  return mav; 
-	  }
+	@RequestMapping(value="/writing", method=RequestMethod.GET)
+	public ModelAndView view (@RequestParam Integer idx, HttpSession session) throws Exception { 
+		  /*
+		   * // 조회수 증가 처리 
+		   * reviewService.increaseViewcnt(idx, session);
+		   */
+			 
+		ModelAndView mav = new ModelAndView(); 
+		  
+		mav.setViewName("review/writing"); 
+		 
+		reviewService.read(idx); 
+		return mav; 
+	}
 	 
 	
 	
