@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>메인 화면</title>
 
 <link rel="stylesheet" th:href="@{/css/main.css}">
+<link rel="stylesheet" th:href="@{/css/default.css}">
 <th:block th:replace="frame/metaheader"></th:block>
 
 </head>
@@ -45,14 +46,6 @@
 	<th:block th:replace="frame/footer"></th:block>
 
 	<script>
-		const x = window.matchMedia("(min-width: 990px)")
-
-		x.addListener(function(a) {
-			$('#collapsibleNavbar').removeClass('show');
-		});
-	</script>
-
-	<script>
 		$(".top").hide();
 
 		$(function() {
@@ -66,5 +59,4 @@
 		});
 	</script>
 </body>
-
 </html>
