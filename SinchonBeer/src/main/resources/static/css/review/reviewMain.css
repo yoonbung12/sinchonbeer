@@ -23,6 +23,11 @@ body {
   overflow: hidden;
 }
 
+.gallery .col a {
+	margin : 10px 0 10px 10px;
+	font-size: 15px;
+}
+
 .gallery .thumbnail {
   padding: 0;
   margin-bottom: 30px;

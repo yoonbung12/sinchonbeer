@@ -29,9 +29,9 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
-    public String goToView() throws Exception {
+	public String goToView() throws Exception {
 
-    return "review/writing";
+	return "review/writing";
   }
 
 	 
