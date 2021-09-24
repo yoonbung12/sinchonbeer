@@ -5,14 +5,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="MypageMapper">
+	<resultMap type="com.bitcamp.sc.mypage.domain.OrderList" id="OrderListDomain">
+		<result property="pidx" column="pidx"/>
+		<result property="pprice" column="pprice"/>
+		<result property="pdate" column="pdate"/>
+		<result property="pstatus" column="pstatus"/>
+		<result property="oidx" column="oidx"/>
+		<result property="ncount" column="count"/>
+		<result property="gname" column="gname"/>
+		<result property="gphoto" column="gphoto"/>
+	</resultMap>
+	
+	<resultMap type="com.bitcamp.sc.mypage.domain.RezList" id="RezListDomain">
+		<result property="pidx" column="pidx"/>
+		<result property="pprice" column="pprice"/>
+		<result property="pway" column="pway"/>
+		<result property="otpeple" column="tpeple"/>
+		<result property="tdate" column="tdate"/>
+	</resultMap>
+
+	<!-- 주문 내역 조회 -->
+	<select id="getOrderList" resultType="com.bitcamp.sc.mypage.domain.OrderList" resultMap="OrderListDomain">
+		SELECT p.pidx, p.pprice, p.pdate, p.pstatus, o.oidx,  n.count, g.gname, g.gphoto 
+		FROM payment p, orders o, buynow n, goods g 
+		WHERE p.oidx=o.oidx AND o.oidx=n.oidx AND n.gidx=g.gidx AND o.midx=#{idx}
+	</select>
+	
+	<!-- 예약 내역 조회 -->
+	<select id="getRezList" resultType="com.bitcamp.sc.mypage.domain.RezList" resultMap="RezListDomain">
+		SELECT p.pidx, p.pprice, p.pway, o.tpeople, t.tdate FROM payment p, orders o, tour t
+		WHERE p.oidx=o.oidx AND o.tidx=t.tidx AND o.midx=#{idx}
+	</select>
 
 	<!-- 회원 정보 수정 -->
 	<update id="updateMember">
-		update member set mname=#{name}, mpw=#{newpw}, mphone=#{phone} where memail=#{email}
+		UPDATE member SET mname=#{name}, mpw=#{newpw}, mphone=#{phone} WHERE memail=#{email}
 	</update>
 
 	<!-- 회원 탈퇴 -->
 	<delete id="deleteMember">
-		delete from member where memail=#{email} and mpw=#{pw}
+		DELETE FROM member WHERE memail=#{email} AND mpw=#{pw}
 	</delete>
 </mapper>

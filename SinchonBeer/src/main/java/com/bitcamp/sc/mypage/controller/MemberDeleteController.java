@@ -8,42 +8,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.bitcamp.sc.member.domain.Member;
-import com.bitcamp.sc.mypage.service.MemberManagerService;
+import com.bitcamp.sc.mypage.service.MemberDeleteService;
 
 @Controller
-public class MemberManagerController {
+public class MemberDeleteController {
 	@Autowired
-	MemberManagerService service;
-
-	// 정보 수정 페이지 이동(회원 정보 조회)
-	@GetMapping("/mypage/change-info")
-	public String changeInfoGet(HttpSession session) {
-		if (session.getAttribute("loginInfo") == null) {
-			return "main";
-		}
-		return "mypage/change-info";
-	}
-
-	// 정보 수정 실행
-	@PostMapping("/mypage/change-info")
-	public String changeInfoPost(Member member) {
-		service.updateMember(member);
-
-		return "mypage/change-info";
-	}
+	MemberDeleteService service;
 
 	// 회원 탈퇴 페이지 이동
 	@GetMapping("/mypage/delete-id")
-	public String deleteId(HttpSession session) {
+	public String deleteIdGet(HttpSession session) {
 		if (session.getAttribute("loginInfo") == null) {
-			return "main";
+			return "member/loginForm";
 		}
 		return "mypage/delete-id";
 	}
 
 	// 회원 탈퇴 실행
 	@PostMapping("/mypage/delete-id")
-	public String deleteId(Member member, HttpSession session) {
+	public String deleteIdPost(Member member, HttpSession session) {
 		service.deleteMember(member);
 
 		// 세션 초기화
