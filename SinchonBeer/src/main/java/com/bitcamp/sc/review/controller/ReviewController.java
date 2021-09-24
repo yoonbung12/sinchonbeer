@@ -36,15 +36,16 @@ public class ReviewController {
 
 	 
 	    
-	@RequestMapping(value = "/main", method=RequestMethod.GET)
-		public String listAll(Model model) throws Exception{
-
-		System.out.println("전체목록 페이지");
-
-		model.addAttribute("reviewMain", reviewService.listAll());
-		
-		return "review/reviewMain";
-		}
+	/*
+	 * @RequestMapping(value = "/main", method=RequestMethod.GET) public String
+	 * listAll(Model model) throws Exception{
+	 * 
+	 * System.out.println("전체목록 페이지");
+	 * 
+	 * model.addAttribute("reviewMain", reviewService.listAll());
+	 * 
+	 * return "review/reviewMain"; }
+	 */
 
 	
 	
