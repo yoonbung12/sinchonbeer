@@ -1,5 +1,6 @@
 package com.bitcamp.sc.basket.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,12 +23,17 @@ import com.bitcamp.sc.basket.domain.BasketDto;
 import com.bitcamp.sc.basket.domain.BasketVo;
 import com.bitcamp.sc.basket.service.BasketService;
 import com.bitcamp.sc.member.domain.LoginInfo;
+import com.bitcamp.sc.order.domain.OrderInfo;
+import com.bitcamp.sc.shop.domain.GoodsVO;
+import com.bitcamp.sc.shop.service.ShopService;
 
 @Controller
 @RequestMapping("/basket")
 public class BasketController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	private BasketService basketService;
+	private ShopService shopService;
+	
 
 	@Autowired
 	public BasketController(BasketService basketService) {
@@ -67,43 +73,34 @@ public class BasketController {
 	
 //	responsebody
 	// 장바구니 결제 페이지로 (test)
-	@RequestMapping(value="/basket/final_test", method = RequestMethod.GET)
-	public String getTestPage(
+	@RequestMapping(value="/basket/test", method = RequestMethod.GET)
+	public String getTestPage(HttpServletRequest req, Model model) {
+		HttpSession session = req.getSession();
+		LoginInfo loginInfo = (LoginInfo) session.getAttribute("loginInfo");
+		if(loginInfo != null) {
 			
-			@ModelAttribute  BasketVo basketVo,
-			
-			@RequestParam("gphotoname") String gphotoname,
-			@RequestParam("gname") String gname,
-			@RequestParam("gidx") int gidx,
-			@RequestParam("bidx") int bidx,
-			@RequestParam("gprice") int gprice,
-			@RequestParam("count") int count,
-			@RequestParam("amount") int amount,
-			
-			Model model
-			
-			) {
-		
-			model.addAttribute("basketVo", basketVo);
-		
-			model.addAttribute("gphotoname", gphotoname);
-			model.addAttribute("gname", gname);
-			model.addAttribute("gidx", gidx);
-			model.addAttribute("bidx", bidx);
-			model.addAttribute("gprice", gprice);
-			model.addAttribute("count", count);
-			model.addAttribute("amount", amount);
-			
-			System.out.println(gphotoname);
-			System.out.println(gname);
-			System.out.println(gidx);
-			System.out.println(bidx);
-			System.out.println(gprice);
-			System.out.println(count);
-			
-			return "basket/final_test";
-		
+		}
+		return null;
+	
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
