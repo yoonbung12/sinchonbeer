@@ -32,11 +32,6 @@ public class MemberServiceImpl implements MemberService{
 		return loginInfo;
 	}
 
-	//회원가입에 필요한 메소드 - 아이디 중복방지 메소드. 회원 DB에 추가하는 메소드.
-	@Override
-	public int joinMember(Member member) {
-		return 0;
-	}
 	
 	
 
