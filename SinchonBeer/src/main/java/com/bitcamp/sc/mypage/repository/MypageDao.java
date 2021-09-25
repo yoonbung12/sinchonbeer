@@ -20,12 +20,12 @@ public class MypageDao {
 
 	// 주문 내역 조회
 	public List<OrderList> getOrderList(int idx) {
-		return template.selectOne(namespace + ".getOrderList", idx);
+		return template.selectList(namespace + ".getOrderList", idx);
 	}
 
 	// 예약 내역 조회
 	public List<RezList> getRezList(int idx) {
-		return template.selectOne(namespace + ".getRezList", idx);
+		return template.selectList(namespace + ".getRezList", idx);
 	}
 
 	// 회원 정보 수정

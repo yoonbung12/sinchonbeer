@@ -9,13 +9,6 @@
 
 </head>
 <body>
-	<div th:if="${#lists.isEmpty(tourOrderList)}">
-		<script>
-			alert('예약 정보가 존재하지 않습니다.\n예약 화면으로 이동합니다.');
-			location.href = '/tour/pick-date';
-		</script>
-	</div>
-
 	<th:block th:replace="frame/header"></th:block>
 	<th:block th:replace="frame/nav"></th:block>
 
@@ -34,7 +27,7 @@
 				<span class="pb-1 border-bottom border-sinchon text-sinchon">예약 내역</span></a>
 			</div>
 			<div class="col text-center text-14">
-				<a th:href="@{change-info}" class="link-unstyle">정보 수정</a>
+				<a th:href="@{edit-info}" class="link-unstyle">정보 수정</a>
 			</div>
 			<div class="col text-center text-14">
 				<a th:href="@{delete-id}" class="link-unstyle">회원 탈퇴</a>
@@ -51,52 +44,53 @@
 					<li class="mb-4"><a th:href="@{tour}" class="link-unstyle">
 						<span class="pb-1 border-bottom border-sinchon text-sinchon">예약 내역</span></a>
 					</li>
-					<li class="mb-4"><a th:href="@{change-info}" class="link-unstyle">정보 수정</a></li>
+					<li class="mb-4"><a th:href="@{edit-info}" class="link-unstyle">정보 수정</a></li>
 					<li class="mb-4"><a th:href="@{delete-id}" class="link-unstyle">회원 탈퇴</a></li>
 				</ul>
 			</div>
 
 			<div class="col-lg-8 pb-5">
 				<div class="row justify-content-center">
-					<div th:unless="${#lists.isEmpty(tourOrderList)}">
-						<table class="text-16" id="rezList">
-							<th:block th:each="tourInfo : ${tourOrderList}">
+					<th:block th:if="${rezList == null}">
+						<div class="text-center text-15 text-light-gray my-5 py-5">예약 내역이 없습니다.</div>
+					</th:block>
+					<th:block th:unless="${rezList == null}">
+						<th:block th:each="rezList : ${rezList}">
+							<table class="text-15" id="rezList">
 								<tr>
 									<th scope="row">프로그램</th>
 									<td>신촌맥주 양조장 투어</td>
 								</tr>
 								<tr>
-									<th scope="row">예약일</th>
-									<td><div th:text="${tourInfo.tdate}"></td>
+									<th scope="row">예약 번호</th>
+									<td><div th:text="${rezList.pidx}"/></td>
 								</tr>
-									<tr>
-									<th scope="row">인원</th>
-									<td><div th:text="${tourInfo.tpeople} + '명'"></td>
+								<tr>
+									<th scope="row">예약일</th>
+									<td><div th:text="${rezList.tdate}"/></td>
 								</tr>
 								<tr>
 									<th scope="row">신청자</th>
-									<td><div th:text="${tourInfo.mname}"></td>
-								</tr>
-							</th:block>
-							<th:block th:each="payInfo : ${payInfoList}">
-								<tr>
-									<th scope="row">예약 번호</th>
-									<td><input type="text" th:value="${payInfo.orderIdx}" class="border-0" readonly></td>
+									<td><div th:text="${session.loginInfo.name}"/></td>
 								</tr>
 								<tr>
-									<th scope="row">결제 정보</th>
-									<td><input type="text" th:value="${payInfo.way}" class="border-0" readonly></td>
+									<th scope="row">인원</th>
+									<td><div th:text="|${rezList.tpeople}명|"/></td>
 								</tr>
 								<tr>
 									<th scope="row">결제 금액</th>
-									<td><input type="text" th:value="${payInfo.price}" class="border-0" readonly></td>
+									<td><div th:text="${rezList.pprice}"/></td>
 								</tr>
-							</th:block>
-						</table>
+								<tr>
+									<th scope="row">결제 정보</th>
+									<td><div th:text="${rezList.pway}"/></td>
+								</tr>
+							</table>
+						</th:block>
 						<button class="btn btn-sinchon" id="rezChangeBtn">
 							<a th:href="@{/tour/change-info}" class="link-unstyle">예약일 변경</a>
 						</button>
-					</div>
+					</th:block>
 				</div>
 			</div>
 			<div class="col-lg-2"></div>
