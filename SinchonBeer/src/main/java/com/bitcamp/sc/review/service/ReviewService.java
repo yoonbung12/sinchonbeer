@@ -18,6 +18,8 @@ public interface ReviewService {
     public void delete(Integer idx) throws Exception;
     // 05. 게시글 전체 목록
     public List<ReviewVO> listAll() throws Exception;
-    // 06. 게시글 조회
-    public void increaseViewcnt(Integer idx, HttpSession session) throws Exception;
+	/*
+	 * // 06. 게시글 조회 
+	 * public void increaseViewcnt(Integer idx, HttpSession session) throws Exception;
+	 */
 }

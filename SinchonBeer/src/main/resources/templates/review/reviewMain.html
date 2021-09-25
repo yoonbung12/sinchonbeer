@@ -28,6 +28,7 @@
 						글쓰기
                     </a>
                 </div>
+                <!-- <input type="submit" class="btn btn-primary pull-right" value="글쓰기"> -->
             	<!-- <input type="submit" class="writingBtn" id="writingBtn" value="글쓰기"> -->
 	            	<!-- <th:block th:each="reviewInfo : ${listAllPost}"> -->
 		                <div class="row">
@@ -39,11 +40,11 @@
 		                                        <div class="card shadow-sm">
 		                                            <div class="thumbnail">
 		                                                <div></div>
-		                                                <a class="lightbox" href="#">
+		                                                <a class="lightbox" th:href="@{review/view}">
 		                                                    <img src="images/김부각.png" alt="김부각">
 		                                                </a>
 		                                                <div class="card-body">
-		                                                    <a class="card-text" href="#">맛있네요. 바삭바삭</a>
+		                                                    <a class="card-text" th:href="@{review/view}">맛있네요. 바삭바삭</a>
 		                                                    <div class="d-flex justify-content-between align-items-center">
 		                                                        <div class="btn-group">
 		                                                            <button type="button" class="btn btn-sm btn-outline-secondary">좋아요</button>

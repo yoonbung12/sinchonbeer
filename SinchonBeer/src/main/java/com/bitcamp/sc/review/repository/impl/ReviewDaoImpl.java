@@ -57,10 +57,15 @@ public class ReviewDaoImpl implements ReviewDao {
     public List<ReviewVO> listAll() throws Exception {
         return template.selectList(NAME_SPACE+".listAllPost");
     }
-    // 게시글 조회수 증가
-    @Override
-    public void increaseViewcnt(Integer idx) throws Exception {
-    	template.update(NAME_SPACE + ".increaseViewcnt", idx);
-    }
+	
+	/*
+	 * // 게시글 조회수 증가
+	 * 
+	 * @Override public void increaseViewcnt(Integer idx) throws Exception {
+	 * template.update(NAME_SPACE + ".increaseViewcnt", idx); }
+	 * 
+	 */
+    
+    
  
 }

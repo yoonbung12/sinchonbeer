@@ -18,9 +18,12 @@ public interface ReviewDao {
     public void delete(Integer idx) throws Exception;
     // 05. 게시글 전체 목록
     public List<ReviewVO> listAll() throws Exception;
-    // 06. 게시글 조회 증가
-    public void increaseViewcnt(Integer idx) throws Exception;
+	/*
+	 * // 06. 게시글 조회 증가 
+	 * public void increaseViewcnt(Integer idx) throws Exception;
+	 */
 	
+    
     
     
 	/* 

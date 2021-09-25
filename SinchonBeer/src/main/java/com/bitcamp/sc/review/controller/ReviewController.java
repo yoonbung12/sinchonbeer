@@ -31,7 +31,7 @@ public class ReviewController {
 	
 	// 쓰기화면
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
-	public String goToView() throws Exception {
+	public String goToWrite() throws Exception {
 
 	return "review/writing";
   }
@@ -42,7 +42,15 @@ public class ReviewController {
 	public void ajaxinsert_Review() throws Exception {
 
 	}
-	 
+	
+	// 보기화면
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	public String goToView() throws Exception {
+
+	return "review/view";
+  }
+	
+	
 	    
 	/*
 	 * @RequestMapping(value = "/main", method=RequestMethod.GET) public String
