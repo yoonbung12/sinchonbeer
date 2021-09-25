@@ -58,7 +58,7 @@
     outline: none;
 }
 #loginSection input[type=email], #loginSection input[type=password]{
-    width:330px;
+    width:338px;
     border:none;
     padding-left:10px;
     margin:0;
