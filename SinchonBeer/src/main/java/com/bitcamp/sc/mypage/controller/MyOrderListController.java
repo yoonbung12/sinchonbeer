@@ -21,20 +21,16 @@ public class MyOrderListController {
 
 	// 주문 내역 페이지 이동
 	@GetMapping("/mypage/shop")
-	public String mypageShop(Model model, HttpServletRequest req) {
-		HttpSession session = req.getSession();
+	public String mypageShop(Model model, HttpSession session) {
 		LoginInfo login = (LoginInfo) session.getAttribute("loginInfo");
 
 		if (session.getAttribute("loginInfo") == null) {
 			return "member/loginForm";
+		} else {
+			List<OrderList> orderList = service.getOrderList(login.getIdx());
+			model.addAttribute("orderList", orderList);
+
+			return "mypage/shop";
 		}
-
-		List<OrderList> orderList = service.getOrderList(login.getIdx());
-
-		model.addAttribute("orderList", orderList);
-
-		System.out.println("주문 내역 : " + orderList);
-		
-		return "mypage/shop";
 	}
 }
