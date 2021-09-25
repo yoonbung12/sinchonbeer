@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitcamp.sc.review.service.ReviewService;
 
@@ -18,33 +19,41 @@ public class ReviewController {
 	@Autowired
 	ReviewService reviewService;
 
+	// 메인화면
 	@RequestMapping("")
 	public String reviewMain() {
 		return "review/reviewMain";
-	}
-	
+	}	
 	@RequestMapping("/")
 	public String reviewMain2() {
 		return "review/reviewMain";
 	}
 	
+	// 쓰기화면
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
-    public String goToView() throws Exception {
+	public String goToView() throws Exception {
 
-    return "review/writing";
+	return "review/writing";
   }
 
+	// 쓰기 실행 컨트롤러
+	@ResponseBody
+	@RequestMapping(value = "/write.do", method = RequestMethod.POST)
+	public void ajaxinsert_Review() throws Exception {
+
+	}
 	 
 	    
-	@RequestMapping(value = "/main", method=RequestMethod.GET)
-		public String listAll(Model model) throws Exception{
-
-		System.out.println("전체목록 페이지");
-
-		model.addAttribute("reviewMain", reviewService.listAll());
-		
-		return "review/reviewMain";
-		}
+	/*
+	 * @RequestMapping(value = "/main", method=RequestMethod.GET) public String
+	 * listAll(Model model) throws Exception{
+	 * 
+	 * System.out.println("전체목록 페이지");
+	 * 
+	 * model.addAttribute("reviewMain", reviewService.listAll());
+	 * 
+	 * return "review/reviewMain"; }
+	 */
 
 	
 	
