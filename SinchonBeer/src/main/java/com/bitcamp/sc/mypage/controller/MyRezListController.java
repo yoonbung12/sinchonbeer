@@ -21,20 +21,16 @@ public class MyRezListController {
 
 	// 예약 내역 페이지 이동
 	@GetMapping("/mypage/tour")
-	public String mypageTour(Model model, HttpServletRequest req) {
-		HttpSession session = req.getSession();
+	public String mypageTour(Model model, HttpSession session) {
 		LoginInfo login = (LoginInfo) session.getAttribute("loginInfo");
-		
+
 		if (session.getAttribute("loginInfo") == null) {
 			return "member/loginForm";
+		} else {
+			List<RezList> rezList = service.getRezList(login.getIdx());
+			model.addAttribute("rezList", rezList);
+
+			return "mypage/tour";
 		}
-
-		List<RezList> rezList = service.getRezList(login.getIdx());
-
-		model.addAttribute("rezList", rezList);
-
-		System.out.println("예약 내역 : " + rezList);
-
-		return "mypage/tour";
 	}
 }
