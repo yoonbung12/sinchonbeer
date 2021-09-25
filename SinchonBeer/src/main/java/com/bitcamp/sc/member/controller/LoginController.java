@@ -34,12 +34,15 @@ public class LoginController {
 			@RequestHeader(value = "referer", required = false) String redirectUri,
 			@CookieValue(value="reEmail", required = false) String reEmail,
 			HttpSession session,
-			HttpServletRequest request,
+//			HttpServletRequest request,
 			Model model
 			) {
-		System.out.println((LoginInfo)request.getSession().getAttribute("loginInfo"));
+//		System.out.println((LoginInfo)request.getSession().getAttribute("loginInfo"));
 		String view = "member/loginForm";
-		if((LoginInfo)request.getSession().getAttribute("loginInfo") != null) {
+		LoginInfo login = (LoginInfo)session.getAttribute("loginInfo");
+		System.out.println(login);
+//		if((LoginInfo)request.getSession().getAttribute("loginInfo") != null) {
+		if(login != null) {
 		
 			//세션이 없을 경우엔 여기 페이지에 들어오고, 세션이 있다고 하면은 여기 들어오지 못하게 막기.
 			//세션이 있어야 하는 페이지: mypage, 결제, ..등등
@@ -59,10 +62,10 @@ public class LoginController {
 			HttpServletResponse response //쿠키를 받기위한 response
 			//Model model 
 			) {
-		System.out.println("reEmail : " + params.get("reEmail"));
-		System.out.println(params);
-		System.out.println(params.get("memail")+": "+params.get("mpw"));
-		System.out.println(params.get("redirectUri"));
+//		System.out.println("reEmail : " + params.get("reEmail"));
+//		System.out.println(params);
+//		System.out.println(params.get("memail")+": "+params.get("mpw"));
+//		System.out.println(params.get("redirectUri"));
 		Map<String,Object> map = new HashMap<>();
 		map.put("refererUri", (String)params.get("redirectUri"));
 		
