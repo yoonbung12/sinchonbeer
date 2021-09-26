@@ -27,14 +27,18 @@ public class ReviewServiceImpl implements ReviewService {
     // 01. 게시글쓰기
     @Override
     public int insertReview(ReviewVO vo) throws Exception {
+    	
     	int check = 0;
         try {
+        	
         	check = reviewDao.insertReview(vo);
+        	
         	
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
     	return check;
+    	
     }
     
     // 02. 게시글 상세보기

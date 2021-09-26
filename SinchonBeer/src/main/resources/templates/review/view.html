@@ -1,46 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>리뷰 수정</title>
-
-<link rel="stylesheet" th:href="@{/css/review/editing.css}">
-<link rel="stylesheet" th:href="@{/css/default.css}">
-<th:block th:replace="frame/metaheader"></th:block>
-
-<script type="text/javascript">
-	// 게시글 삭제
-    function deleteReview(idx) {
-		$.ajax({
-                url: "/review/delete.do",
-                type: "POST",
-                data: {"idx":idx},
-                dataType: "json",
-                success: function (data) {
-                	
-                console.log(data);
-                	
-                console.log(data);
-                   if(data == 1) {
-                	   alert("글 삭제가 완료되었습니다.");
-                       window.location = '/review';
-                   } else {
-                	   alert("글 삭제가 실패하였습니다.");
-                   }
-                },
-            });
-    }
+	<meta charset="UTF-8">
+	<title>리뷰 수정</title>
 	
+	<link rel="stylesheet" th:href="@{/css/review/editing.css}">
+	<link rel="stylesheet" th:href="@{/css/default.css}">
 	
- // 게시글 수정
-    function updateReview(idx) {
-    	console.log(idx);
-    	
-    	window.location ="modify?idx="+idx;
-    }
+	<script src="/js/summernote/summernote-lite.js"></script>
+	<script src="/js/summernote/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="/css/summernote/summernote-lite.css">
 	
+	<th:block th:replace="frame/metaheader"></th:block>
 	
-</script>
+	<script type="text/javascript">
+		// 게시글 삭제
+	    function deleteReview(idx) {
+			$.ajax({
+	                url: "/review/delete.do",
+	                type: "POST",
+	                data: {"idx":idx},
+	                dataType: "json",
+	                success: function (data) {
+	                	
+	                console.log(data);
+	                	
+	                console.log(data);
+	                   if(data == 1) {
+	                	   alert("글 삭제가 완료되었습니다.");
+	                       window.location = '/review';
+	                   } else {
+	                	   alert("글 삭제가 실패하였습니다.");
+	                   }
+	                },
+	            });
+	    }
+		
+		
+	 // 게시글 수정
+	    function updateReview(idx) {
+	    	console.log(idx);
+	    	
+	    	window.location ="modify?idx="+idx;
+	    }
+		
+		
+	</script>
 
 </head>
 
