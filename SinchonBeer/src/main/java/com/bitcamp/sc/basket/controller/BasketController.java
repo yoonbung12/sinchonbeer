@@ -73,16 +73,26 @@ public class BasketController {
 	
 //	responsebody
 	// 장바구니 결제 페이지로 (test)
-	@RequestMapping(value="/basket/test", method = RequestMethod.GET)
-	public String getTestPage(HttpServletRequest req, Model model) {
-		HttpSession session = req.getSession();
-		LoginInfo loginInfo = (LoginInfo) session.getAttribute("loginInfo");
-		if(loginInfo != null) {
-			
-		}
-		return null;
-	
-	}
+//	@RequestMapping(value="/basket")
+//	public String getTestPage(HttpServletRequest req, Model model) {
+//		
+//		String bidx = req.getParameter("bidx");
+//		String gphoto = req.getParameter("gphoto");
+//		String gname = req.getParameter("gname");
+//		String count = req.getParameter("count");
+//		String gprice = req.getParameter("gprice");
+//		
+//		model.addAttribute("bidx", bidx);
+//		model.addAttribute("gphoto", gphoto);
+//		model.addAttribute("gname",gname);
+//		model.addAttribute("count", count);
+//		model.addAttribute("gprice",gprice);
+//		
+//		
+//		
+//		return "basket/test";
+//	
+//	}
 	
 	
 	
