@@ -77,15 +77,15 @@ public class ReviewController {
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public String goToView(HttpServletRequest request, Model model) throws Exception {
 		System.out.println(request.getParameter("idx"));
+		System.out.println("asdasdasd");
 		int idx = 0;
 		ReviewVO vo = new ReviewVO();
 		if( request.getParameter("idx") != null) {
 			idx = Integer.parseInt(request.getParameter("idx"));
 		}
 		try {
-			System.out.println();
 			vo = reviewService.readReview(idx);
-			System.out.println(vo.toString());
+			String content = vo.getContents();
 			model.addAttribute("view", vo);
 		} catch (Exception e) {
 			e.printStackTrace();

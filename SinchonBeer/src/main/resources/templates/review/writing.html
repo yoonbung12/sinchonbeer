@@ -26,7 +26,12 @@
 $(document).ready(function() {
 	//여기 아래 부분
 	$('#summernote').summernote({
-		
+		 height: 300,                 // 에디터 높이
+		  minHeight: null,             // 최소 높이
+		  maxHeight: null,             // 최대 높이
+		  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+		  lang: "ko-KR",					// 한글 설정
+		  placeholder: ''	//placeholder 설정
           
 	});
 });
@@ -73,15 +78,7 @@ $(document).ready(function() {
             </div>
             
         </div>
-        <div class="form-group row">
-            <label for="inputFile" class="col-sm-2 col-form-label"><strong>첨부 파일</strong></label>
-            <div class="col-sm-10">
-                <div class="custom-file" id="inputFile">
-                    <input name="file" type="file" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile">파일을 선택해 주세요.</label>
-                </div>
-            </div>
-        </div>
+        
         <div class="row">
             <div class="col-auto mr-auto"></div>
             <div class="col-auto">

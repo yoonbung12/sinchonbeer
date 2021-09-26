@@ -16,6 +16,7 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 	
+	<th:block th:replace="frame/metaheader"></th:block>
 	
 	<script type="text/javascript">
 		// 게시글 삭제
@@ -47,14 +48,8 @@
 	    	
 	    	window.location ="modify?idx="+idx;
 	    }
-	    $(document).ready(function() {
-	    	//여기 아래 부분
-	    	$('#summernote').summernote({
-	    		
-	              
-	    	});
-	    });
-	    $('#summernote').summernote('insertText', 글내용);
+		
+		
 	</script>
 
 </head>
@@ -132,6 +127,7 @@ return null;
                         <td id="summernote" colspan="2" style="min-height:200px; text-align: Left; border: 1px solid #1ecad3;" th:utext="${view.contents}">
                         </td>
                     </tr>
+    
     
                 </tbody>
             </table>
