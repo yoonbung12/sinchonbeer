@@ -48,7 +48,7 @@
 	</select>
 	
 	<!-- 03. 게시글 수정처리 -->
-	<update id="updateReview" parameterType="Integer" >
+	<update id="updateReview" parameterType="com.bitcamp.sc.review.domain.ReviewVO" >
 		UPDATE 
 			project.review 
 		SET 

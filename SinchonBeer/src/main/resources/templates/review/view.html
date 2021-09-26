@@ -32,6 +32,13 @@
     }
 	
 	
+ // 게시글 수정
+    function updateReview(idx) {
+    	console.log(idx);
+    	
+    	window.location ="modify?idx="+idx;
+    }
+	
 	
 </script>
 
@@ -115,10 +122,10 @@ return null;
                 </tbody>
             </table>
 			<div style="width:100%;">
-                <a href="bbs.jsp" class="btn btn-primary" style="float:left;">목록</a>
+                <a href="bbs.jsp" class="btn-sinchon btn btn-sm-padding" style="float:left;">목록</a>
                 <!-- <% if(userID !=null && userID.equals(bbs.getUserID())) { %> -->
                 <a class="btn-sinchon btn btn-sm-padding" th:onclick="|deleteReview('${view.idx}')|" style="float:right;">삭제</a>
-                <a href="update.jsp?bbsID= <%=bbsID %>" class="btn btn-primary" style="float:right; margin-right:4px;">수정</a>
+                <a class="btn-sinchon btn btn-sm-padding" th:onclick="|updateReview('${view.idx}')|" style="float:right; margin-right:4px;">수정</a>
                 <!-- <% } %> -->
             </div>
     
