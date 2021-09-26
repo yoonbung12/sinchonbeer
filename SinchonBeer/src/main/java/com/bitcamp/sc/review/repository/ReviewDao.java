@@ -13,7 +13,7 @@ public interface ReviewDao {
     // 02. 게시글 상세보기
     public ReviewVO readReview(Integer idx) throws Exception;
     // 03. 게시글 수정
-    public void updateReview(ReviewVO vo) throws Exception;
+    public int updateReview(ReviewVO vo) throws Exception;
     // 04. 게시글 삭제
     public void deleteReview(Integer idx) throws Exception;
     // 05. 게시글 전체 목록

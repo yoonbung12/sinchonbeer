@@ -52,9 +52,17 @@ public class ReviewServiceImpl implements ReviewService {
    
     // 03. 게시글 수정
     @Override
-    public void updateReview(ReviewVO vo) throws Exception {
-    	reviewDao.updateReview(vo);
+    public int updateReview(ReviewVO vo) throws Exception {
+    	int check = 0;
+        try {
+        	check = reviewDao.updateReview(vo);
+        	
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+    	return check;
     }
+    
     // 04. 게시글 삭제
     @Override
     public void deleteReview(Integer idx) throws Exception {

@@ -43,8 +43,8 @@ public class ReviewDaoImpl implements ReviewDao {
     
 	// 03. 게시글 수정
 	@Override
-	public void updateReview(ReviewVO vo) throws Exception {
-		template.update(NAME_SPACE + ".updateReview", vo);
+	public int updateReview(ReviewVO vo) throws Exception {
+		return template.update(NAME_SPACE + ".updateReview", vo);
 
 	}
     // 04. 게시글 삭제

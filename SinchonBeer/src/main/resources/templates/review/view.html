@@ -8,6 +8,40 @@
 <link rel="stylesheet" th:href="@{/css/default.css}">
 <th:block th:replace="frame/metaheader"></th:block>
 
+<script type="text/javascript">
+	// 게시글 삭제
+    function deleteReview(idx) {
+		$.ajax({
+                url: "/review/delete.do",
+                type: "POST",
+                data: {"idx":idx},
+                dataType: "json",
+                success: function (data) {
+                	
+                console.log(data);
+                	
+                console.log(data);
+                   if(data == 1) {
+                	   alert("글 삭제가 완료되었습니다.");
+                       window.location = '/review';
+                   } else {
+                	   alert("글 삭제가 실패하였습니다.");
+                   }
+                },
+            });
+    }
+	
+	
+ // 게시글 수정
+    function updateReview(idx) {
+    	console.log(idx);
+    	
+    	window.location ="modify?idx="+idx;
+    }
+	
+	
+</script>
+
 </head>
 
 <body>
@@ -58,46 +92,42 @@ return null;
                 </thead> -->
                 <tbody>
                     <tr>
-                        <td style="width: 15%;">제목</td>
-                        <td colspan="2">
+                        <th style="background-color:#1ecad3; width: 15%; color:#FFF;">제목</th>
+                        <td colspan="2" th:text="${view.title}" style="text-align: left; border-left: 1px solid #dee2e6; background-color:#FFF;
+                            border-right: 1px solid #1ecad3; border-top: 1px solid #1ecad3; border-bottom: 1px solid #1ecad3;">
                             <!-- <%=bbs.getBbsTitle() %> -->
                         </td>
                     </tr>
                     <tr>
-                        <td>작성자</td>
-                        <td colspan="2">
+                        <th style="background-color:#1ecad3; width: 15%; color:#FFF;">작성자</th>
+                        <td colspan="2" th:text="${view.name}" style="text-align: left; border-left: 1px solid #dee2e6; background-color:#FFF;
+                        border-right: 1px solid #1ecad3; border-top: 1px solid #1ecad3; border-bottom: 1px solid #1ecad3;">
                             <!-- <%=bbs.getUserID() %> -->
                         </td>
                     </tr>
                     <tr>
-                        <td>작성일</td>
-                        <td colspan="2">
+                        <th style="background-color:#1ecad3; width: 15%; color:#FFF;">작성일</th>
+                        <td colspan="2" th:text="${view.date}" style="text-align: left; border-left: 1px solid #dee2e6;background-color:#FFF;
+                        border-right: 1px solid #1ecad3; border-top: 1px solid #1ecad3; border-bottom: 1px solid #1ecad3;">
                             <!-- <%=bbs.getBbsDate().substring(0, 11) + bbs.getBbsDate().substring(11, 13) + " 시 " +
                                 bbs.getBbsDate().substring(14, 16) +" 분" %> -->
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="min-height:200px; text-align: Left">
-                           <!--  <%=bbs.getBbsContent() %> -->
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-
-
+                        <td colspan="2" style="min-height:200px; text-align: Left; border: 1px solid #1ecad3;" th:text="${view.contents}">
                         </td>
                     </tr>
     
     
                 </tbody>
             </table>
-			<a href="bbs.jsp" class="btn btn-primary">목록</a>
-            <!-- <% if(userID !=null && userID.equals(bbs.getUserID())) { %> -->
-			<a href="update.jsp?bbsID= <%=bbsID %>" class="btn btn-primary">수정</a>
-			<a href="deleteAction.jsp?bbsID= <%=bbsID %>" class="btn btn-primary">삭제</a>
-            <!-- <% } %> -->
+			<div style="width:100%;">
+                <a href="bbs.jsp" class="btn-sinchon btn btn-sm-padding" style="float:left;">목록</a>
+                <!-- <% if(userID !=null && userID.equals(bbs.getUserID())) { %> -->
+                <a class="btn-sinchon btn btn-sm-padding" th:onclick="|deleteReview('${view.idx}')|" style="float:right;">삭제</a>
+                <a class="btn-sinchon btn btn-sm-padding" th:onclick="|updateReview('${view.idx}')|" style="float:right; margin-right:4px;">수정</a>
+                <!-- <% } %> -->
+            </div>
     
         </div>
     </div>
