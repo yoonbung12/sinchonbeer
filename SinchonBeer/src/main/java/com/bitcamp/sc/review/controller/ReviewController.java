@@ -51,7 +51,7 @@ public class ReviewController {
 	// 쓰기 실행 컨트롤러
 	@ResponseBody
 	@RequestMapping(value = "/write.do", method = RequestMethod.POST)
-	public int ajaxinsert_Review(MultipartHttpServletRequest request) throws Exception {
+	public int ajaxinsert_Review(HttpServletRequest request) throws Exception {
 		
 		System.out.println(request.getParameter("title"));
 		
@@ -77,15 +77,15 @@ public class ReviewController {
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public String goToView(HttpServletRequest request, Model model) throws Exception {
 		System.out.println(request.getParameter("idx"));
+		System.out.println("asdasdasd");
 		int idx = 0;
 		ReviewVO vo = new ReviewVO();
 		if( request.getParameter("idx") != null) {
 			idx = Integer.parseInt(request.getParameter("idx"));
 		}
 		try {
-			System.out.println();
 			vo = reviewService.readReview(idx);
-			System.out.println(vo.toString());
+			String content = vo.getContents();
 			model.addAttribute("view", vo);
 		} catch (Exception e) {
 			e.printStackTrace();
