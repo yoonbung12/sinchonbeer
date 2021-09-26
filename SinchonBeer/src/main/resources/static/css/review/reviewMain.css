@@ -23,9 +23,23 @@ body {
   overflow: hidden;
 }
 
+.gallery .col {
+	flex: 0 0 100%;
+    max-width: 100%;
+}
+
+.shadow-sm {
+    width: 49%;
+    margin-bottom: 15px;
+}
+
+
+
 .gallery .col a {
 	margin : 10px 0 10px 10px;
 	font-size: 15px;
+	flex: 0 0 100%;
+    max-width: 100%;
 }
 
 .gallery .thumbnail {
