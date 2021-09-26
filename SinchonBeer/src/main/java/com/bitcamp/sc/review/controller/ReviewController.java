@@ -77,13 +77,51 @@ public class ReviewController {
 	
 	// 보기화면
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public String goToView(HttpServletRequest request) throws Exception {
+	public String goToView(HttpServletRequest request, Model model) throws Exception {
 		System.out.println(request.getParameter("idx"));
+		int idx = 0;
+		ReviewVO vo = new ReviewVO();
+		if( request.getParameter("idx") != null) {
+			idx = Integer.parseInt(request.getParameter("idx"));
+		}
+		try {
+			System.out.println();
+			vo = reviewService.readReview(idx);
+			System.out.println(vo.toString());
+			model.addAttribute("view", vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+			
+		}
+		
 	return "review/view";
   }
 	
-	
     
+	// 05. 게시글 삭제
+	@ResponseBody
+	@RequestMapping("delete.do") 
+	public int delete(HttpServletRequest request, Model model) throws Exception { 
+		System.out.println("idx: " + request.getParameter("idx"));
+		int idx = 0;
+		int check = 0;
+		
+		if( request.getParameter("idx") != null) {
+			idx = Integer.parseInt(request.getParameter("idx"));
+		}
+		try {
+			reviewService.deleteReview(idx);
+			check = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+		return check; 
+	}
+
+	
+	
 	/*
 	 * @RequestMapping(value = "/main", method=RequestMethod.GET) public String
 	 * listAll(Model model) throws Exception{
