@@ -1,7 +1,6 @@
 package com.bitcamp.sc.review.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.bitcamp.sc.review.domain.ReviewVO;
 import com.bitcamp.sc.review.service.ReviewService;
 
 @Controller
@@ -21,39 +22,167 @@ public class ReviewController {
 
 	// 메인화면
 	@RequestMapping("")
-	public String reviewMain() {
+	public String reviewMain(Model model) {
+		try {
+			model.addAttribute("reviewMain", reviewService.listAllReview());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "review/reviewMain";
 	}	
 	@RequestMapping("/")
-	public String reviewMain2() {
+	public String reviewMain2(Model model) {
+		try {
+			model.addAttribute("reviewMain", reviewService.listAllReview());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "review/reviewMain";
 	}
 	
 	// 쓰기화면
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
-	public String goToView() throws Exception {
-
-	return "review/writing";
+	public String goToWrite(HttpServletRequest request, Model model) throws Exception {
+		return "review/writing";
   }
 
 	// 쓰기 실행 컨트롤러
 	@ResponseBody
 	@RequestMapping(value = "/write.do", method = RequestMethod.POST)
-	public void ajaxinsert_Review() throws Exception {
-
+	public int ajaxinsert_Review(HttpServletRequest request) throws Exception {
+		
+		System.out.println(request.getParameter("title"));
+		
+		int check  = 0;
+		
+		ReviewVO vo = new ReviewVO();
+		vo.setTitle(request.getParameter("title"));
+		vo.setName(request.getParameter("author"));
+		vo.setContents(request.getParameter("content"));
+		
+		try {
+			check = reviewService.insertReview(vo);
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+		}
+		
+		return check;
 	}
-	 
-	    
+	
+	
+	// 보기화면
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	public String goToView(HttpServletRequest request, Model model) throws Exception {
+		System.out.println(request.getParameter("idx"));
+		System.out.println("asdasdasd");
+		int idx = 0;
+		ReviewVO vo = new ReviewVO();
+		if( request.getParameter("idx") != null) {
+			idx = Integer.parseInt(request.getParameter("idx"));
+		}
+		try {
+			vo = reviewService.readReview(idx);
+			String content = vo.getContents();
+			model.addAttribute("view", vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+			
+		}
+		
+	return "review/view";
+  }
+	
+    
+	// 05. 게시글 삭제
+	@ResponseBody
+	@RequestMapping("delete.do") 
+	public int delete(HttpServletRequest request, Model model) throws Exception { 
+		System.out.println("idx: " + request.getParameter("idx"));
+		int idx = 0;
+		int check = 0;
+		
+		if( request.getParameter("idx") != null) {
+			idx = Integer.parseInt(request.getParameter("idx"));
+		}
+		try {
+			reviewService.deleteReview(idx);
+			check = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+		return check; 
+	}
+
+	
+	// 수정화면
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public String goToModify(HttpServletRequest request, Model model) throws Exception {
+		
+		int idx;
+		ReviewVO vo = new ReviewVO();
+		if(!"".equals(request.getParameter("idx")) && request.getParameterMap().containsKey("idx")) {
+			idx = Integer.parseInt(request.getParameter("idx"));
+			try {
+				System.out.println();
+				vo = reviewService.readReview(idx);
+				System.out.println("write : " + vo.toString());
+				model.addAttribute("view", vo);
+			} catch (Exception e) {
+				e.printStackTrace();
+				// TODO: handle exception
+				
+			}
+		}
+		
+		
+		
+	return "review/modify";
+  }
+	
+	
+	
+	// 수정 실행 컨트롤러
+		@ResponseBody
+		@RequestMapping(value = "/modify.do", method = RequestMethod.POST)
+		public int ajaxmodify_Review(HttpServletRequest request) throws Exception {
+			
+			System.out.println("__________________"+request.getParameter("title"));
+			
+			int check  = 0;
+			
+			ReviewVO vo = new ReviewVO();
+			vo.setIdx(Integer.parseInt(request.getParameter("idx")));
+			
+			vo.setTitle(request.getParameter("title"));
+			vo.setName(request.getParameter("author"));
+			vo.setContents(request.getParameter("content"));
+			
+			try {
+				check = reviewService.updateReview(vo);
+			} catch (Exception e) {
+				// TODO: handle exception
+				
+			}
+			
+			return check;
+		}
+		
 	/*
 	 * @RequestMapping(value = "/main", method=RequestMethod.GET) public String
 	 * listAll(Model model) throws Exception{
 	 * 
 	 * System.out.println("전체목록 페이지");
 	 * 
-	 * model.addAttribute("reviewMain", reviewService.listAll());
+	 * model.addAttribute("reviewMain", reviewService.listAllReview());
 	 * 
 	 * return "review/reviewMain"; }
 	 */
+	 
 
 	
 	

@@ -16,28 +16,55 @@
 
 
     <!-- 01. 게시글 작성 -->
-    <insert id="insertPost"
+    <insert id="insertReview"
 		parameterType="com.bitcamp.sc.review.domain.ReviewVO"
 		useGeneratedKeys="true"
 		keyProperty="idx"
 	>
-        INSERT INTO project.review (ridx, rtitle, rcontents, rname) 
-        VALUES ((SELECT NVL(MAX(ridx)+1, 1)FROM project.review), #{title}, #{contents}, #{name})
+	
+        INSERT INTO project.review 
+        (
+	         rtitle
+	        , rcontents
+	        , rname
+        ) 
+        VALUES 
+        (
+	   
+	         #{title}
+	        , #{contents}
+	        , #{name}
+        )
 	</insert>
 
 	<!--02. 게시글 상세보기 조회 -->
-	<select id="viewPost"  resultMap="ReviewDomain" parameterType="Integer" >
-		SELECT * FROM project.review WHERE ridx = #{idx}
+	<select id="readReview"  resultMap="ReviewDomain" parameterType="Integer" >
+		SELECT 
+			*
+		FROM 
+			project.review 
+		WHERE 
+			ridx = #{idx}
 	</select>
 	
 	<!-- 03. 게시글 수정처리 -->
-	<update id="updatePost" parameterType="Integer" >
-		UPDATE project.review SET rtitle = #{title}, rcontents = #{contents} WHERE ridx = #{idx}
+	<update id="updateReview" parameterType="com.bitcamp.sc.review.domain.ReviewVO" >
+		UPDATE 
+			project.review 
+		SET 
+			rtitle = #{title}
+			, rcontents = #{contents} 
+		WHERE 
+			ridx = #{idx}
 	</update>
     
 	<!-- 04. 게시글 삭제처리 -->
-	<delete id="deletePost"  parameterType="Integer" >
-		DELETE FROM project.review WHERE ridx = #{idx}
+	<delete id="deleteReview"  parameterType="Integer" >
+		DELETE 
+		FROM 
+			project.review 
+		WHERE 
+			ridx = #{idx}
 	</delete>
 	
 
@@ -56,9 +83,17 @@
             ridx desc, rdate desc
     </select> -->
     
-    <select id="listAllPost"  resultMap="ReviewDomain" >
+    <select id="listAllReview"  resultMap="ReviewDomain" >
         SELECT 
-            *
+        	ridx
+        	, rtitle
+        	, rname
+        	, rcontents
+        	, rrate
+        	, date_format(rdate,'%Y-%m-%d') as rdate
+        	, rcategory
+            , rlikes
+            , pidx
         FROM 
             review
         ORDER BY 
@@ -71,4 +106,6 @@
 	<update id="increaseViewcnt">
 		UPDATE review SET viewcnt = viewcnt + 1 WHERE ridx = #{idx}
 	</update>
+	
+	
 </mapper>
