@@ -65,29 +65,6 @@
     </div>
 
 
-<!-- public Bbs getBbs(int bbsID) {
-String SQL = "SELECT * FROM BBS WHERE bbsID = ?";
-try {
-PreparedStatement pstmt = conn.prepareStatement(SQL);
-pstmt.setInt(1, bbsID);
-rs = pstmt.executeQuery();
-if (rs.next()) {
-Bbs bbs = new Bbs();
-bbs.setBbsID(rs.getInt(1));
-bbs.setBbsTitle(rs.getString(2));
-bbs.setUserID(rs.getString(3));
-bbs.setBbsDate(rs.getString(4));
-bbs.setBbsContent(rs.getString(5));
-bbs.setBbsAvailable(rs.getInt(6));
-return bbs;
-}
-} catch (Exception e) {
-e.printStackTrace();
-}
-return null;
-
-} -->
-
     <!-- 게시판 -->
     <div class="container">
         <div class="row">
@@ -104,43 +81,35 @@ return null;
                         <th style="background-color:#1ecad3; width: 15%; color:#FFF;">제목</th>
                         <td colspan="2" th:text="${view.title}" style="text-align: left; border-left: 1px solid #dee2e6; background-color:#FFF;
                             border-right: 1px solid #1ecad3; border-top: 1px solid #1ecad3; border-bottom: 1px solid #1ecad3;">
-                            <!-- <%=bbs.getBbsTitle() %> -->
                         </td>
                     </tr>
                     <tr>
                         <th style="background-color:#1ecad3; width: 15%; color:#FFF;">작성자</th>
                         <td colspan="2" th:text="${view.name}" style="text-align: left; border-left: 1px solid #dee2e6; background-color:#FFF;
                         border-right: 1px solid #1ecad3; border-top: 1px solid #1ecad3; border-bottom: 1px solid #1ecad3;">
-                            <!-- <%=bbs.getUserID() %> -->
                         </td>
                     </tr>
                     <tr>
                         <th style="background-color:#1ecad3; width: 15%; color:#FFF;">작성일</th>
                         <td colspan="2" th:text="${view.date}" style="text-align: left; border-left: 1px solid #dee2e6;background-color:#FFF;
                         border-right: 1px solid #1ecad3; border-top: 1px solid #1ecad3; border-bottom: 1px solid #1ecad3;">
-                            <!-- <%=bbs.getBbsDate().substring(0, 11) + bbs.getBbsDate().substring(11, 13) + " 시 " +
-                                bbs.getBbsDate().substring(14, 16) +" 분" %> -->
                         </td>
                     </tr>
                     <tr>
                         <td id="summernote" colspan="2" style="min-height:200px; text-align: Left; border: 1px solid #1ecad3;" th:utext="${view.contents}">
                         </td>
                     </tr>
-    
-    
                 </tbody>
             </table>
 			<div style="width:100%;">
-                <a href="bbs.jsp" class="btn-sinchon btn btn-sm-padding" style="float:left;">목록</a>
-                <!-- <% if(userID !=null && userID.equals(bbs.getUserID())) { %> -->
+                <a class="btn-sinchon btn btn-sm-padding" href="/review" style="float:left;">목록</a>
                 <th:block th:if="${session.loginInfo.name == view.name}">
 						<a class="btn-sinchon btn btn-sm-padding" th:onclick="|deleteReview('${view.idx}')|" style="float:right;">삭제</a>
+				</th:block>
+				<th:block th:if="${session.loginInfo.name == view.name}">
                			<a class="btn-sinchon btn btn-sm-padding" th:onclick="|updateReview('${view.idx}')|" style="float:right; margin-right:4px;">수정</a>
 				</th:block>
-                <!-- <% } %> -->
             </div>
-            
-    
         </div>
     </div>
 
