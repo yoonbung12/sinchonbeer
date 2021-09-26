@@ -5,14 +5,7 @@
 <title>신촌 맥주 : 회원가입 약관</title>
 <!-- metaheader 영역 -->
 <th:block th:replace="frame/metaheader"></th:block>
-<!-- 내가 넣은 부분---------------------------------------------------- -->
-
 <link rel="stylesheet" th:href="@{/css/member/regAgree.css}">
-<script src="https://code.jquery.com/jquery-1.12.4.js"
-	integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
-	crossorigin="anonymous"></script>
-
-<!-- //내가 넣은 부분 ---------------------------------------------------------------->
 </head>
 <body>
 
@@ -22,7 +15,7 @@
 	<!-- nav 영역 -->
 	<th:block th:replace="frame/nav"></th:block>
 
-	<!-- content 영역 ---------------------------------------------------------->
+	<!-- content 영역 ----->
 	<script>
 		$(document).ready(function() {
 			
@@ -40,7 +33,6 @@
             var required2 = $('#requiredChk2');
             $('#accept_agree').on('click',function(){
                if((required1.is(':checked')  && required2.is(':checked'))==false){
-            //    if(((required1, required2).is(':checked'))==false){    -두 개의 선택자를 선택할 수는 있어도 두 개 모두 false일 떄 false라는 결과가 나오지는 않음.
                    alert('필수 항목에 동의를 해주세요.');
                    return false;
                 }
@@ -122,12 +114,10 @@
 		</div>
 
 		<div class="agree_buttons">
-			<a href="" id="cancel" class="agree_btn">취소</a> 
+			<a th:href="@{/main}" id="cancel" class="agree_btn">취소</a> 
 			<a th:href="@{/join}" id="accept_agree" class="agree_btn">가입하기</a>
 		</div>
 	</div>
-
-	<!-- // 내가만든 영역 ---------------------------------------------------------------------------------------->
 
 	<!-- footer 영역 -->
 	<th:block th:replace="frame/footer"></th:block>

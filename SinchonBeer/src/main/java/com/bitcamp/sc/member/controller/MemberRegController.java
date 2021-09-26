@@ -30,23 +30,20 @@ public class MemberRegController {
 		System.out.println("get 방식 진입 성공");
 		return "member/regForm";
 	}
-	//회원가입 성공 or 실패 화면
+	
+	//회원가입 폼 - ajax로 처리(회원가입 여부 결과)
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public RedirectView reg(
 			RegRequest regRequest
-			
 			) {
-		//System.out.println("post 방식 진입 성공");
-		//System.out.println("service 가기 전 controller에서 regReqeust의 toString"+regRequest);
 		regService.regMember(regRequest);
-		//System.out.println("[controller]DB insert성공 했다면 1 반환, 못했다면 0 반환"+result);
-		
 		return new RedirectView("/join/success");
 	}
 	
+	//회원가입 성공
 	@RequestMapping(value="/join/success", method=RequestMethod.GET)
 	public String regSuccess() {
-		return "member/reg";
+		return "member/regSuccess";
 	}
 	
 }

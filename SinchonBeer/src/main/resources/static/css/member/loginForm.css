@@ -108,7 +108,7 @@ label{
 /* '회원가입'과 '아이디/비밀번호 찾기' 부분 */
 #middle{
     height:30px;
-    border-bottom:1px solid  #ddd;
+    /* border-bottom:1px solid  #ddd; */
     margin-right:15px;
     margin-bottom:30px;
     padding-bottom:50px;

@@ -13,17 +13,10 @@ public class EmailFindService {
 	@Autowired
 	private SqlSessionTemplate template;
 	
-	private MemberDao memberDao;
-
-	
 	public String emailSearch(String name, String phone) {
 		String resultEmail = null;
-		
-		memberDao = template.getMapper(MemberDao.class);
-		System.out.println("[email check service ] dao mapper 생성");
-		
 		try {
-		Member member = memberDao.emailSearch(name, phone);
+		Member member = template.getMapper(MemberDao.class).emailSearch(name, phone);
 		System.out.println("member 객체 : "+member);
 		
 		resultEmail = member.getEmail();

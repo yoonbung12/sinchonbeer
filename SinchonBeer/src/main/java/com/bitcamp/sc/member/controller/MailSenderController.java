@@ -17,16 +17,11 @@ public class MailSenderController {
 	@Autowired
 	private MailSenderService service;
 	
+	
+	//인증번호 메일로 전송하기 - ajax로 처리 (인증번호를 메일로 보내는 작업)
 	@RequestMapping(value="/inquiry/pw/auth", method = RequestMethod.POST)
 	@ResponseBody
-	
-	//메일 보내는 controller
 	public String mailSend(@RequestBody Map<String, Object> param) {
-		
-		System.out.println("test 메일 보내기");
-		System.out.println(param);
-		System.out.println(param.get("userEmail"));
-		
 		String result = "N";
 		Boolean resultSaveCode = service.emailSender((String)param.get("userEmail"));
 		if(resultSaveCode) {

@@ -30,39 +30,18 @@ public class FindAccountController {
 		return "member/findEmailPwForm";
 	}
 
-//--- (1) 아이디 찾기 시작
-	//ajax에서 아이디 찾기 (요청)매핑
+	//(1) 아이디 찾기  - ajax에서 아이디 찾기 (요청)매핑
 	@RequestMapping(value = "/inquiry/email", method = RequestMethod.POST)
 	@ResponseBody
 	public String findEmailByNamePhone(@RequestBody Map<String, Object> params) {
-
-		System.out.println("아이디 찾기 test");
-		System.out.println(params);
-		System.out.println(params.get("name"));
-		System.out.println(params.get("phone"));
-		String emailSearch = emailFindService.emailSearch((String) params.get("name"), (String) params.get("phone"));
-
-		System.out.println("컨트롤러에서 DB 갔다 온 emailSearch? : " + emailSearch);
-
-		return emailSearch;
+		return emailFindService.emailSearch((String) params.get("name"), (String) params.get("phone"));
 	}
 	
-//--- (2) 비밀번호 찾기 시작 
-
-	// ajax에서 비밀번호 찾기 (요청) 매핑
+	//(2) 비밀번호 찾기  - ajax에서 비밀번호 찾기 (요청) 매핑
 	@RequestMapping(value = "/inquiry/pw", method = RequestMethod.POST)
 	@ResponseBody
 	public String findEmailByNameEmail(@RequestBody Map<String, Object> params) {
-
-		System.out.println("비밀번호 찾기 test");
-		System.out.println(params);
-		System.out.println(params.get("name"));
-		System.out.println(params.get("email"));
-		String pwSearch = pwFindService.pwSearch((String) params.get("name"), (String) params.get("email"));
-
-		System.out.println("컨트롤러에서 DB 갔다 온 pwSearch? : " + pwSearch);
-
-		return pwSearch;
+		return pwFindService.pwSearch((String) params.get("name"), (String) params.get("email"));
 	}
 
 }
