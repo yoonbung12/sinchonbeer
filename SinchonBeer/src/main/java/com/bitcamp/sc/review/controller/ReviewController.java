@@ -1,6 +1,7 @@
 package com.bitcamp.sc.review.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.bitcamp.sc.member.domain.LoginInfo;
 import com.bitcamp.sc.review.domain.ReviewVO;
 import com.bitcamp.sc.review.service.ReviewService;
 
@@ -22,9 +24,13 @@ public class ReviewController {
 
 	// 메인화면
 	@RequestMapping("")
-	public String reviewMain(Model model) {
+	public String reviewMain(Model model, HttpServletRequest req) {
 		try {
 			model.addAttribute("reviewMain", reviewService.listAllReview());
+			
+			HttpSession session = req.getSession();
+			LoginInfo loginInfo = (LoginInfo) session.getAttribute("loginInfo");
+			System.out.println("로그인정보 : " + loginInfo);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
