@@ -22,7 +22,7 @@
 </div>
 
 <div class="container">
-    <form id="boardForm" method="post" action="writeAction.jsp">
+    <form id="boardForm">
         <div class="form-group row">
             <label for="inputTitle" class="col-sm-2 col-form-label"><strong>제목</strong></label>
             <div class="col-sm-10">
@@ -54,7 +54,7 @@
         <div class="row">
             <div class="col-auto mr-auto"></div>
             <div class="col-auto">
-                <input class="btn btn-primary" type="button" onclick="insertBoard()" role="button" value="글쓰기">
+                <input class="btn-sinchon btn" type="button" onclick="insertReview()" role="button" value="저장">
             </div>
         </div>
     </form>
@@ -72,32 +72,32 @@
 
 
     // 게시글 삽입
-    function insertBoard() {
+    function insertReview() {
         let form = $("#boardForm").serialize();
         console.log(form);
-/*
-        if ($("#write_status").val() === "write") {
+
+/*         if ($("#write_status").val() === "write") { */
             $.ajax({
-                url: "/board/ajaxInsert",
+                url: "/review/write.do",
                 type: "POST",
-                enctype: "multipart/form-data", // 파일업로드처리 시 필수
-                processData: false,             // 파일업로드처리 시 필수
-                contentType: false,             // 파일업로드처리 시 필수
-                cache: false,
                 data: form,
                 dataType: "json",
-                success: function () {
-                    $('#kt_modal_loading').modal().hide();
-                    alert("글 등록이 완료되었습니다.");
-                    window.location = '/board/list/' + board_div_cd;
+                success: function (data) {
+                   console.log(data);
+                   if(data == 1) {
+                	   alert("글 작성이 완료되었습니다.");
+                       window.location = '/review';
+                   } else {
+                	   alert("글 등록이 실패하였습니다.");
+                   }
                 },
-                error: function (request, status, error) {
+               /*  error: function (request, status, error) {
                     console.clear();
                     console.log(request.responseText);
                     alert("code:" + request.status + "\n\n" + "error:" + error);
-                    }
+                    } */
             });
-        } else if ($("#write_status").val() === "modify") {
+       /*  } else if ($("#write_status").val() === "modify") {
             $.ajax({
                 url: "/board/ajaxModify",
                 type: "POST",
@@ -118,7 +118,7 @@
 
                 }
             });
-        }*/
+        } */
 
     }
 

@@ -26,31 +26,21 @@ public class ReviewServiceImpl implements ReviewService {
 	
     // 01. 게시글쓰기
     @Override
-    public void create(ReviewVO vo) throws Exception {
-        String rtitle = vo.getTitle();
-        String rContents = vo.getContents();
-        String pidx = vo.getName();
-        // *태그문자 처리 (< ==> &lt; > ==> &gt;)
-        // replace(A, B) A를 B로 변경
-        rtitle = rtitle.replace("<", "&lt;");
-        rtitle = rtitle.replace("<", "&gt;");
-        pidx = pidx.replace("<", "&lt;");
-        pidx = pidx.replace("<", "&gt;");
-        // *공백문자 처리
-        rtitle = rtitle.replace("  ", "&nbsp;&nbsp;");
-        pidx = pidx.replace("  ", "&nbsp;&nbsp;");
-        // *줄바꿈 문자처리
-        rContents = rContents.replace("\n", "<br>");
-        vo.setTitle(rtitle);
-        vo.setContents(rContents);
-        vo.setName(pidx); 
-        reviewDao.create(vo);
+    public int insertReview(ReviewVO vo) throws Exception {
+    	int check = 0;
+        try {
+        	check = reviewDao.insertReview(vo);
+        	
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+    	return check;
     }
     
     // 02. 게시글 상세보기
     @Override
-    public ReviewVO read(Integer idx) throws Exception {
-        return reviewDao.read(idx);
+    public ReviewVO readReview(Integer idx) throws Exception {
+        return reviewDao.readReview(idx);
     }
         
 	/*
@@ -62,18 +52,18 @@ public class ReviewServiceImpl implements ReviewService {
    
     // 03. 게시글 수정
     @Override
-    public void update(ReviewVO vo) throws Exception {
-    	reviewDao.update(vo);
+    public void updateReview(ReviewVO vo) throws Exception {
+    	reviewDao.updateReview(vo);
     }
     // 04. 게시글 삭제
     @Override
-    public void delete(Integer idx) throws Exception {
-    	reviewDao.delete(idx);
+    public void deleteReview(Integer idx) throws Exception {
+    	reviewDao.deleteReview(idx);
     }
 	// 05. 게시글 전체 목록
 	@Override
-	public List<ReviewVO> listAll() throws Exception {
-    	return reviewDao.listAll();
+	public List<ReviewVO> listAllReview() throws Exception {
+    	return reviewDao.listAllReview();
 	}
 
 /*	// 06. 게시글 조회수 증가

@@ -6,10 +6,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bitcamp.sc.review.domain.ReviewVO;
 import com.bitcamp.sc.review.service.ReviewService;
 
 @Controller
@@ -21,11 +23,23 @@ public class ReviewController {
 
 	// 메인화면
 	@RequestMapping("")
-	public String reviewMain() {
+	public String reviewMain(Model model) {
+		try {
+			model.addAttribute("reviewMain", reviewService.listAllReview());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "review/reviewMain";
 	}	
 	@RequestMapping("/")
-	public String reviewMain2() {
+	public String reviewMain2(Model model) {
+		try {
+			model.addAttribute("reviewMain", reviewService.listAllReview());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "review/reviewMain";
 	}
 	
@@ -39,29 +53,48 @@ public class ReviewController {
 	// 쓰기 실행 컨트롤러
 	@ResponseBody
 	@RequestMapping(value = "/write.do", method = RequestMethod.POST)
-	public void ajaxinsert_Review() throws Exception {
-
+	public int ajaxinsert_Review(HttpServletRequest request) throws Exception {
+		
+		System.out.println(request.getParameter("title"));
+		
+		int check  = 0;
+		
+		ReviewVO vo = new ReviewVO();
+		vo.setTitle(request.getParameter("title"));
+		vo.setName(request.getParameter("author"));
+		vo.setContents(request.getParameter("content"));
+		
+		try {
+			check = reviewService.insertReview(vo);
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+		}
+		
+		return check;
 	}
+	
 	
 	// 보기화면
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public String goToView() throws Exception {
-
+	public String goToView(HttpServletRequest request) throws Exception {
+		System.out.println(request.getParameter("idx"));
 	return "review/view";
   }
 	
 	
-	    
+    
 	/*
 	 * @RequestMapping(value = "/main", method=RequestMethod.GET) public String
 	 * listAll(Model model) throws Exception{
 	 * 
 	 * System.out.println("전체목록 페이지");
 	 * 
-	 * model.addAttribute("reviewMain", reviewService.listAll());
+	 * model.addAttribute("reviewMain", reviewService.listAllReview());
 	 * 
 	 * return "review/reviewMain"; }
 	 */
+	 
 
 	
 	

@@ -28,34 +28,35 @@ public class ReviewDaoImpl implements ReviewDao {
 	
 	// 01. 게시글 작성
 	@Override
-	public void create(ReviewVO vo) throws Exception {
-		template.insert(NAME_SPACE + ".insertPost", vo);
+	public int insertReview(ReviewVO vo) throws Exception {
+		
+		return template.insert(NAME_SPACE + ".insertReview", vo);
 	}
 	
 		
 	
 	// 02. 게시글 상세보기
 	@Override
-	public ReviewVO read(Integer idx) throws Exception {
-    	return template.selectOne(NAME_SPACE + ".viewPost", idx);
+	public ReviewVO readReview(Integer idx) throws Exception {
+    	return template.selectOne(NAME_SPACE + ".readReview", idx);
 	}
     
 	// 03. 게시글 수정
 	@Override
-	public void update(ReviewVO vo) throws Exception {
-		template.update(NAME_SPACE + ".updatePost", vo);
+	public void updateReview(ReviewVO vo) throws Exception {
+		template.update(NAME_SPACE + ".updateReview", vo);
 
 	}
     // 04. 게시글 삭제
     @Override
-    public void delete(Integer idx) throws Exception {
-    	template.delete(NAME_SPACE + ".deletePost",idx);
+    public void deleteReview(Integer idx) throws Exception {
+    	template.delete(NAME_SPACE + ".deleteReview",idx);
  
     }
     // 05. 게시글 전체 목록
     @Override
-    public List<ReviewVO> listAll() throws Exception {
-        return template.selectList(NAME_SPACE+".listAllPost");
+    public List<ReviewVO> listAllReview() throws Exception {
+        return template.selectList(NAME_SPACE+".listAllReview");
     }
 	
 	/*
