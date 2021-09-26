@@ -51,7 +51,7 @@ public class ReviewController {
 	// 쓰기 실행 컨트롤러
 	@ResponseBody
 	@RequestMapping(value = "/write.do", method = RequestMethod.POST)
-	public int ajaxinsert_Review(MultipartHttpServletRequest request) throws Exception {
+	public int ajaxinsert_Review(HttpServletRequest request) throws Exception {
 		
 		System.out.println(request.getParameter("title"));
 		
