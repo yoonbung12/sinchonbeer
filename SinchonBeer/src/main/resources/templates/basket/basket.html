@@ -250,46 +250,45 @@
 			});
 			
 			
-			// 선택된 row 값 가져오기
-/* 			$("#chooseOrder").on('click', function(){
-				var PayPrice = $('#payPrice');
-				var gphotoName = $('#gphotoName');
-				var num = $('#bidx');
-				var price = $('#gprice');
-				var gname = $('#gname');
-				var count = $('#count');
+			// 주문하기(선택된 row 값 가져오기)
+ 			$("#chooseOrder").on('click', function(){
+
 				
 				let list = []; 
+				
 				let check = $('input[name=checkRow]:checked');
 				if(check.length < 1){
+					
 					alert('선택된 상품이 없습니다.');
 					return false;
+					
 					
 				}
 				$.each(check,function(index, item){
 			
-					// next() 선택된 radio 박스의 형제 선택자(gidx)
+					// next() 선택된 radio 박스의 형제 선택자()
+					list.push($(this).nextAll("#bidx").val());
+					list.push($(this).nextAll("#gphoto").val());
+					list.push($(this).nextAll('#gname').val());
+					list.push($(this).nextAll("#count").val());
+					list.push($(this).nextAll("#gprice").val());					
 					
 					
-					list.push($(this).next().val());
+					//bidx번호
+					let num =$(this).nextAll('#bidx').val();
 					
- 					let num = $(this).nextAll('#bidx').val();	
-					let price = $(this).nextAll('#gprice').val();
-					let gname = $(this).nextAll('#gname').val();
-					let count = $(this).nextAll('#count').val(); 
+					console.log(num);
 					
-					// 장바구니번호, 상품가격, 상품이름, 상품수량
-					console.log(num + " : " + price + " : " + gname + " : " + count);
+					
 					
 					
 				});
-					// 리스트 출력
-					console.log(list);
 				
-				 
+				console.log(list);
+				$("form").submit();
 				 
 				
-			}); */
+			}); 
 			
 
 			
@@ -362,12 +361,13 @@
 	                            <div class="checkbox">
 	                                <label>
 	                                    <input type="checkbox" name="checkRow"  class="_cartItemCheckbox check"  checked th:value="${list.gprice}" >
-	                                    <input type="hidden" th:value ="${list.gphoto}" id="gphoto" name="gphotoname">
+	                                    <input type="hidden" th:value ="${list.gphoto}" id="gphoto" name="gphoto">
 	                                    <input type="hidden" th:value="${list.gidx}" id="gidx" name="gidx">
-
+										<input type="hidden" th:value="${list.bidx}" id="bidx" name="bidx">
 										<input type="hidden" th:value="${list.gprice}" id="gprice" name="gprice">
 										<input type="hidden" th:value="${list.gname}" id="gname" name= "gname">
-										<input type="hidden" th:value="${list.bcount}" id="count" name="count"> 	
+										<input type="hidden" th:value="${list.bcount}" id="count" name="count">
+										 	
 										
 	                                    
 	                                </label>
@@ -490,12 +490,7 @@
 	                </tfoot>
 	              </th:block>       
 	            </table>
-				
-				<form id="form1" name="form1" action="basket/final_test" method='get'>
-
-					<input type="submit" id="BasketBuy" value="주문하기" class="button_form1" style="color: #fff; margin-left:510px; background-color : #5ae5ec;">
-				</form>		
-	            
+					
 	            
 	        </div>      	
 	      	<div class="shoporbuy" >
@@ -504,21 +499,24 @@
 	               			 
 	                <th:block th:unless="${list == null or total == 0}">
 	             		<!-- <form action ="test" method="post" id= "orderform"> -->
-	             			<input type="hidden" name="bidx[]" id="order">
+	             			<!-- <input type="hidden" name="bidx[]" id="order"> -->
 	             		<!-- </form> --> 
 	            	</th:block>
 	            	
 	            	
 	            		<!-- 주문버튼 부분 -->
 
-	            		<button class="btn" style="margin-left: 650px; background-color:#ddd; color:#black;" id="chooseOrder" value="${list.bidx}" >선택상품 주문하기</button>
-	            		<!-- <a href="javascript:;" class="btn "  onclick="addOrder()" style="margin-left: 650px; background-color: #5ae5ec; color: #fff;">주문하기</a> -->
+					  
+					 <!--  <form name="from2" id="form2" action="/basket/test" method='get'>  --> 
+	            		<button class="btn" style="margin-left: 650px; background-color:#ddd; color:#black;" id="chooseOrder"  > 주문하기</button>						 
+					  <!-- </form>  -->	 
+									
+					 
+
+
 	     			       	
 	            	
-	            	<th:block th:if="${list == null or total == 0}">
-	            		<hr>
-	            		<a href="#"  class="btn" style="margin-left: 650px; background-color: #5ae5ec; color: #fff;">계속 쇼핑하기</a>
-	            	</th:block>       		
+       		
 	            </div>          	
 	       	</div>
 	      
@@ -528,3 +526,8 @@
 	
 </body>
 </html>
+
+	            	<!-- <th:block th:if="${list == null or total == 0}">
+	            		<hr>
+	            		<a href="#"  class="btn" style="margin-left: 650px; background-color: #5ae5ec; color: #fff;">계속 쇼핑하기</a>
+	            	</th:block> -->
