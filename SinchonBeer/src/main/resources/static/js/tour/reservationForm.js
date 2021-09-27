@@ -102,19 +102,24 @@
 			}
 		});
 	});
-	// 카카오 페이 결제 
-	function frmSubmit() {
-		if($('#payHow').val()=='') {
-			alert('결제 수단이 선택되지 않았습니다. \n 결제수단을 선택해주세요.');
-			$('input[name=paymentType]').focus();
-			return false;
+	
+	
+		// 카카오 페이 결제 
+
+		function frmSubmit() {
+			if ($('#payHow').val() == '') {
+				alert('결제 수단이 선택되지 않았습니다. \n 결제수단을 선택해주세요.');
+				$('input[name=paymentType]').focus();
+				return false;
+			}
+
+			window.name = "opner_win";
+			var myForm = document.payForm;
+			var myWin = window
+					.open("about:blank", "kakaoPayWin",
+							"status=yes, scrollbars=yes, width=440, height=500, left=300, top=100");
+			myForm.method = "post";
+			myForm.target = "kakaoPayWin";
+			myForm.action = "/kakaoPay/tour";
+			myForm.submit();
 		}
-		
-		window.name = "opner_win";
-		var myForm = document.payForm;
-		var myWin = window.open("about:blank", "kakaoPayWin", "status=yes, scrollbars=yes, width=440, height=500, left=300, top=100");
-		myForm.method = "post";
-		myForm.target = "kakaoPayWin";
-		myForm.action = "/kakaoPay/tour";
-		myForm.submit();
-	}
