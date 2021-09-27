@@ -13,7 +13,7 @@ public class OrderList {
 	private String pdate;
 	private String pstatus;
 	private int oidx;
-	private int count;
+	private int amount;
 	private String gtitle;
 	private String gname;
 	private String gphoto;

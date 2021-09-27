@@ -12,10 +12,12 @@
 		<result property="addressIdx" column="aidx"/>
 		<result property="price" column="oprice"/>
 		<result property="tourPeople" column="tpeople"/>
+		<result property="goodsIdx" column="gidx"/>
+		<result property="amount" column="amount"/>
 	</resultMap>
 
 	<insert id="save" parameterType="com.bitcamp.sc.order.domain.OrderInfo" useGeneratedKeys="true" keyProperty="idx">
-		INSERT INTO orders(ocategory, oprice, tidx, tpeople, midx, aidx) VALUES(#{category}, #{price}, #{tourIdx}, #{tourPeople}, #{memberIdx}, #{addressIdx})
+		INSERT INTO orders(ocategory, oprice, tidx, tpeople, midx, aidx, gidx, amount) VALUES(#{category}, #{price}, #{tourIdx}, #{tourPeople}, #{memberIdx}, #{addressIdx}, #{goodsIdx}, #{amount})
 	</insert>
 	
 	<select id="findByIdx" resultType="com.bitcamp.sc.order.domain.OrderInfo" resultMap="OrderDomain">
