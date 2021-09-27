@@ -41,4 +41,7 @@ public interface MemberDao {
 	
 	//멤버의 idx로 주소 조회하기.
 	MemberAddress selectAddressByMidx(int idx);
+	
+	//회원 수정 에서 기존 비밀번호 확인하기
+	String selectPw(int midx);
 }

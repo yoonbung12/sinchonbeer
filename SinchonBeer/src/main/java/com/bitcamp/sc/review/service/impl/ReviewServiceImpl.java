@@ -72,6 +72,25 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<ReviewVO> listAllReview() throws Exception {
     	return reviewDao.listAllReview();
 	}
+	
+	
+    // 06. 게시글 좋아요
+	@Override
+    public int likeReview(ReviewVO vo) throws Exception {
+		/*
+		 * int check = 0; 
+		 * try { 
+		 * check = reviewDao.likeReview(vo);
+		 * 
+		 * } catch (Exception e) { 
+		 * // TODO: handle exception 
+		 * }
+		 * return check;
+		 */
+		
+    	return reviewDao.likeReview(vo);
+    }
+	
 
 /*	// 06. 게시글 조회수 증가
 	@Override

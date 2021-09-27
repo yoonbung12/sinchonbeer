@@ -58,6 +58,14 @@ public class ReviewDaoImpl implements ReviewDao {
     public List<ReviewVO> listAllReview() throws Exception {
         return template.selectList(NAME_SPACE+".listAllReview");
     }
+    
+    
+    // 06. 게시글 좋아요
+    public int likeReview(ReviewVO vo) throws Exception {
+    	return template.update(NAME_SPACE + ".likeReview",vo);
+    	 
+    }
+    
 	
 	/*
 	 * // 게시글 조회수 증가

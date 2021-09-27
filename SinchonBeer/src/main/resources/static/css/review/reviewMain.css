@@ -29,8 +29,10 @@ body {
 }
 
 .shadow-sm {
-    width: 49%;
+    /* width: 48%; */
     margin-bottom: 15px;
+    border-bottom:  1px solid black;
+    border-bottom-color:  black;
 }
 
 
@@ -44,8 +46,8 @@ body {
 
 .gallery .thumbnail {
   padding: 0;
-  margin-bottom: 30px;
-  border: none;
+  margin-bottom: 50px;
+  border: 1px solid #1ecad3;
   border-radius: 4px;
   background-color: #fff;
   transition: 0.15s ease-in-out;
@@ -54,7 +56,7 @@ body {
   max-width: 100%;
   height: auto;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .gallery .thumbnail:hover {
@@ -68,7 +70,8 @@ body {
   margin-bottom: 5px;
   transition: 0.2s ease-in-out;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
-  object-fit: cover;
+  /* object-fit: cover; */
+  object-fit: contain;
 }
 
 .gallery .lightbox img:hover {
@@ -78,6 +81,11 @@ body {
 
 .gallery .card-body .card-text {
   margin-bottom: 5px;
+}
+
+.review-title {
+	font-size: 20px !important;
+	
 }
 
 .baguetteBox-button {
