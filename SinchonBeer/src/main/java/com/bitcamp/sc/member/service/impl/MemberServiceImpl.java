@@ -14,7 +14,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private SqlSessionTemplate template;
-
+	
 	// 회원의 midx로 회원 정보 조회하기.
 	@Override
 	public LoginInfo getMember(int midx) {
@@ -25,5 +25,10 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberAddress getMemberAdd(int midx) {
 		return template.getMapper(MemberDao.class).selectAddressByMidx(midx);
+	}
+	//회원 수정 에서 기존 비밀번호 확인하기
+	@Override
+	public String getPw(int midx) {
+		return template.getMapper(MemberDao.class).selectPw(midx);
 	}
 }

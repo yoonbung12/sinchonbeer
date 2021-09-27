@@ -1,7 +1,6 @@
 package com.bitcamp.sc.member.repository;
 
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
 
 import com.bitcamp.sc.member.domain.Member;
 import com.bitcamp.sc.member.domain.MemberAddress;
@@ -41,4 +40,7 @@ public interface MemberDao {
 	
 	//멤버의 idx로 주소 조회하기.
 	MemberAddress selectAddressByMidx(int idx);
+	
+	//회원 수정 에서 기존 비밀번호 확인하기
+	String selectPw(int midx);
 }

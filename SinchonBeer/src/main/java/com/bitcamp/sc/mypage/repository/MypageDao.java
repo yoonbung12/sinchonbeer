@@ -5,9 +5,9 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.bitcamp.sc.member.domain.Member;
 import com.bitcamp.sc.mypage.domain.OrderList;
 import com.bitcamp.sc.mypage.domain.RezList;
+import com.bitcamp.sc.mypage.domain.UpdateMember;
 
 @Repository
 public class MypageDao {
@@ -28,13 +28,18 @@ public class MypageDao {
 		return template.selectList(namespace + ".getRezList", idx);
 	}
 
+	// 회원 정보 조회
+	public List<UpdateMember> getMemberInfo(int idx) {
+		return template.selectList(namespace + ".getMemberInfo", idx);
+	}
+
 	// 회원 정보 수정
-	public void updateMember(Member member) {
-		template.update(namespace + ".updateMember", member);
+	public int updateMember(UpdateMember member) {
+		return template.update(namespace + ".updateMember", member);
 	}
 
 	// 회원 탈퇴
-	public void deleteMember(Member member) {
-		template.delete(namespace + ".deleteMember", member);
+	public void deleteMember(int idx) {
+		template.delete(namespace + ".deleteMember", idx);
 	}
 }

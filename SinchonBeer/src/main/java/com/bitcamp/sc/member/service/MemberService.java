@@ -1,7 +1,6 @@
 package com.bitcamp.sc.member.service;
 
 import com.bitcamp.sc.member.domain.LoginInfo;
-import com.bitcamp.sc.member.domain.Member;
 import com.bitcamp.sc.member.domain.MemberAddress;
 
 public interface MemberService {
@@ -11,5 +10,8 @@ public interface MemberService {
 	
 	//회원의 midx로 주소 정보 가지고 오기 
 	MemberAddress getMemberAdd(int midx);
+	
+	//회원 수정 에서 기존 비밀번호 확인하기
+	String getPw(int midx);
 	
 }
