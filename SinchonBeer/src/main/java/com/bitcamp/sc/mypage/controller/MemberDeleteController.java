@@ -7,13 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.bitcamp.sc.member.domain.LoginInfo;
 import com.bitcamp.sc.member.domain.Member;
-import com.bitcamp.sc.mypage.service.MemberDeleteService;
+import com.bitcamp.sc.mypage.service.MypageService;
 
 @Controller
 public class MemberDeleteController {
 	@Autowired
-	MemberDeleteService service;
+	MypageService service;
 
 	// 회원 탈퇴 페이지 이동
 	@GetMapping("/mypage/delete-id")
@@ -26,8 +27,9 @@ public class MemberDeleteController {
 
 	// 회원 탈퇴 실행
 	@PostMapping("/mypage/delete-id")
-	public String deleteIdPost(Member member, HttpSession session) {
-		service.deleteMember(member);
+	public String deleteIdPost(HttpSession session) {
+		LoginInfo login = (LoginInfo) session.getAttribute("loginInfo");
+		service.deleteMember(login.getIdx());
 
 		// 세션 초기화
 		session.invalidate();

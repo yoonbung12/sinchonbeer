@@ -56,35 +56,31 @@
 				<div class="row justify-content-center">
 					<form class="text-15" id="editInfoContent" method="post">
 						<th:block th:each="list : ${list}">
-							<fieldset class="mb-4">
+							<div class="mb-4">
 								<label for="memail">이메일</label>
-									<input type="text" id="memail" th:value="${list.memail}"readonly/>
-									<input type="hidden" th:value="${list.midx}" name="midx">
-							</fieldset>
-							<fieldset class="mb-4">
+								<input type="text" id="memail" th:value="${list.memail}"readonly/>
+								<input type="hidden" th:value="${list.midx}" name="midx">
+							</div>
+							<div class="mb-4">
 								<label for="mpw">비밀번호<i class="icon_orange"></i></label>
-									<input type="password" id="mpw" placeholder="기존 비밀번호 입력">
-									<input type="password" id="mnewPw" name="mnewPw"
-										placeholder="비밀번호를 변경하는 경우 입력하세요">
-									<input type="password" id="mrePw" placeholder="비밀번호 확인">
-									<div class="msg"></div>
-							</fieldset>
-							<fieldset class="mb-4">
-								<div>
+								<input type="password" id="mpw" placeholder="기존 비밀번호 입력">
+								<input type="password" id="mnewPw" name="mnewPw"
+									placeholder="비밀번호를 변경하는 경우 입력하세요">
+								<input type="password" id="mrePw" placeholder="비밀번호 확인">
+								<div class="msg"></div>
+							</div>
+							<div class="mb-4">
 								<label for="mname">이름<i class="icon_orange"></i></label>
-									<input type="text" id="mname" name="mname" th:value="${list.mname}">
-									<div class="msg"></div>
-								</div>
-							</fieldset>
-							<fieldset class="mb-4">
+								<input type="text" id="mname" name="mname" th:value="${list.mname}">
+								<div class="msg"></div>
+							</div>
+							<div class="mb-4">
 								<label for="mphone">연락처<i class="icon_orange"></i></label>
-								<div>
-									<input type="text" id="mphone" name="mphone" th:value="${list.mphone}">
-									<div class="msg"></div>
-								</div>
-							</fieldset>
+								<input type="text" id="mphone" name="mphone" th:value="${list.mphone}">
+								<div class="msg"></div>
+							</div>
 							<!-- 카카오 주소 API -->
-							<fieldset class="mb-4">
+							<div class="mb-4">
 								<label for="address">주소<i class="icon_orange"></i></label>
 								 <div class="couple_box ">
 									<input type="hidden" id="postcode"
@@ -99,7 +95,7 @@
 									name="address2" placeholder="상세주소">
 								<input type="hidden" id="extraAddress" placeholder="참고항목">
 								<div class="msg"></div>
-							</fieldset>
+							</div>
 						</th:block>
 						<input type="submit" class="btn btn-sinchon" id="submitBtn" value="확인">
 					</form>
@@ -211,7 +207,7 @@ var element_wrap;
 $(document).ready(function () {
     //script(1) submit : 주소를 제외하고 빈칸 없이 입력해야만 회원가입이 넘어감. 
     var email = $('#memail');
-    var oldpw = $('#mpw');
+    var oldpw = $('#mpw')}
     var pw = $('#mnewPw');
     var repw = $('#mrePw');
     var name = $('#mname');
@@ -222,7 +218,7 @@ $(document).ready(function () {
     $('#submitBtn').on('click',function () {
         //비번 정규식: 대/소문자 포함하여 8~16자 , 숫자나 특수기호 포함.
         //비밀번호의 공백문자 확인
-        if (oldpw.val().trim().length < 1) {
+        if (pw.val().trim().length < 1) {
             $('#mrePw + div.msg').html('<p>필수항목입니다.</p>');
             $('#mrePw + div.msg').css('display', 'block');
             oldpw.addClass('red_outline');
@@ -243,38 +239,6 @@ $(document).ready(function () {
             }
         }
 
-        $('#mpw').focusout(function() {
-    		console.log($(this).val());
-    		if($(this).val() == null || $(this).val() == ''||$(this).val() == undefined){
-    			return false;
-    		}
-    		
-    		$.ajax({ 
-    			url : '/pwCheck',
-    			type : 'post',
-    			contentType: 'application/json; charset=UTF-8;',
-    			data : $(this).val(),
-    			success : function(data) {
-    				console.log(data);
-    				// data : Y / N
-    				console.log('data success 접근 성공');
-    				if (data == 'N') {
-    					$('#mpw + div.msg').html('<p>기존 비밀번호와 일치하지 않습니다.</p>');
-    		            $('#mpw + div.msg').css('display', 'block');
-    		            $('#mpw').addClass('red_outline');
-    		            return false;
-    				}else{
-    					
-    				}
-    			},
-    			error : function(request, status, error) {
-    				alert('서버 통신에 문제가 발생했습니다. 다시 실행해주세요.');
-    			}
-    		});
-
-    	});
-
-    
         // //비밀번호 일치 여부 확인하기
         if (pw.val().trim() != repw.val().trim()) {
             $('#mrePw+div.msg').html('<p>비밀번호가 일치하지 않습니다.</p>');
