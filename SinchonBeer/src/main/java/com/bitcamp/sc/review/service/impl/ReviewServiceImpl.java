@@ -29,11 +29,9 @@ public class ReviewServiceImpl implements ReviewService {
     public int insertReview(ReviewVO vo) throws Exception {
     	
     	int check = 0;
+    	
         try {
-        	
         	check = reviewDao.insertReview(vo);
-        	
-        	
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -47,12 +45,6 @@ public class ReviewServiceImpl implements ReviewService {
         return reviewDao.readReview(idx);
     }
         
-	/*
-	 * @Override
-	 * public Review read(int ridx) throws Exception { 
-	 * return reviewDao.read(ridx); 
-	 * }
-	 * */
    
     // 03. 게시글 수정
     @Override
@@ -67,11 +59,14 @@ public class ReviewServiceImpl implements ReviewService {
     	return check;
     }
     
+    
     // 04. 게시글 삭제
     @Override
     public void deleteReview(Integer idx) throws Exception {
     	reviewDao.deleteReview(idx);
     }
+    
+    
 	// 05. 게시글 전체 목록
 	@Override
 	public List<ReviewVO> listAllReview() throws Exception {
