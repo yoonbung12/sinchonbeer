@@ -69,14 +69,15 @@
 		                            <div class="container">
 		                                <div class="row row-cols-1 g-3">
 		                                    <div class="col">
-			                                    <th:block th:each="reviewInfo : ${reviewMain}">
-			                                        <div class="card shadow-sm">
+		                                        <div class="card shadow-sm">
+		                                        
+			                                        <th:block th:each="reviewInfo : ${reviewMain}">
 			                                            <div class="thumbnail">
 			                                                <a class="lightbox" th:onclick="|goToView('${reviewInfo.idx}')|">
 			                                                    <img src="images/review/scbeer.png" alt="SinChonbeer">
 			                                                </a>
 			                                                <div class="card-body">
-			                                                    <a class="card-text" th:text="${reviewInfo.title}" th:onclick="|goToView('${reviewInfo.idx}')|"></a>
+			                                                    <a class="card-text review-title" th:text="${reviewInfo.title}" th:onclick="|goToView('${reviewInfo.idx}')|" style="font-size:30px;"></a>
 			                                                    <div class="d-flex justify-content-between align-items-center">
 			                                                        <div class="btn-group">
 			                                                            <button type="button" class="btn btn-sm btn-outline-secondary" id="likeBtn">좋아요</button>
@@ -86,9 +87,9 @@
 			                                                    </div>
 			                                                </div>
 			                                            </div>
-			                                        </div>
-												</th:block>
-		                                        
+		                                            </th:block>
+		                                            
+		                                        </div>
 		                                    </div>
 		                                </div>
 		                            </div>
