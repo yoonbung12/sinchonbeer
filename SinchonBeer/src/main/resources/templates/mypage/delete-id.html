@@ -20,18 +20,18 @@
 	<div id="scrollableNavBar">
 		<div class="row justify-content-between mb-5 pb-3">
 			<div class="col text-center text-14">
-				<a th:href="@{shop}" class="link-unstyle">주문 내역</a>
+				<a th:href="@{/mypage/orderList}" class="link-unstyle">주문 내역</a>
 			</div>
 			<div class="col text-center text-14">
-				<a th:href="@{tour}" class="link-unstyle">예약 내역</a>
+				<a th:href="@{/mypage/rezList}" class="link-unstyle">예약 내역</a>
 			</div>
 			<div class="col text-center text-14">
-				<a th:href="@{change-info}" class="link-unstyle">정보 수정</a>
-			</div>
-			<div class="col text-center text-14">
-				<a th:href="@{delete-id}" class="link-unstyle">
-					<span class="pb-1 border-bottom border-sinchon text-sinchon">회원 탈퇴</span>
+				<a th:href="@{/mypage/edit-info}" class="link-unstyle">
+					<span class="pb-1 border-bottom border-sinchon text-sinchon">정보 수정</span>
 				</a>
+			</div>
+			<div class="col text-center text-14">
+				<a th:href="@{/mypage/delete-id}" class="link-unstyle">회원 탈퇴</a>
 			</div>
 		</div>
 	</div>

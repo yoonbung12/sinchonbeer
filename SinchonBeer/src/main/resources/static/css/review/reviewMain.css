@@ -28,6 +28,11 @@ body {
     max-width: 100%;
 }
 
+.card {
+	height: 415px;
+	
+}
+
 .shadow-sm {
     /* width: 48%; */
     margin-bottom: 15px;
@@ -74,18 +79,22 @@ body {
   object-fit: contain;
 }
 
-.gallery .lightbox img:hover {
+/* .gallery .lightbox img:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-}
+} */
 
 .gallery .card-body .card-text {
   margin-bottom: 5px;
 }
 
+.title-box {
+	margin : -20px 0 0 0 !important;
+}
+
 .review-title {
 	font-size: 20px !important;
-	
+	margin : 0 0 15px 0 !important;
 }
 
 .baguetteBox-button {
