@@ -1,9 +1,5 @@
 package com.bitcamp.sc.tour.service.impl;
 
-
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -39,7 +35,6 @@ public class MailServiceImpl implements MailService {
 	public void changeMail(ChangeTourDto changeDto, LoginInfo loginInfo)  {
 		
 			// 메일 서비스로 보내기
-	
 	
 			logger.info("변경 메일 서비스 진입");
 			MimeMessage message = mailSender.createMimeMessage();
@@ -81,7 +76,6 @@ public class MailServiceImpl implements MailService {
 	public void refundMail(PayInfo payInfo,LoginInfo loginInfo) {
 		logger.info("취소 메일 서비스 진입");
 		
-		
 		MimeMessage message = mailSender.createMimeMessage();
 		// 파일 첨부 가능 
 		MimeMessageHelper helper;
@@ -114,7 +108,6 @@ public class MailServiceImpl implements MailService {
         mailSender.send(message);
         logger.info("취소 메일 전송 완료");
 	}
-
 
 
 	// 예약 완료

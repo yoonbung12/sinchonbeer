@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>사회적 거리두기</title>
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" th:href="@{/css/tour/tourNotice-desc.css}">
 <th:block th:include="frame/metaheader"></th:block>
-
 
 </head>
 <body>
@@ -18,20 +17,19 @@
 	<!-- submenu 영역 -->
 	<div class="submenu_wrap">
 		<ul>
-			<li><a href="/tour/info">투어 안내</a></li>
-			<li><a href="/tour/pick-date">예약</a></li>
-			<li><a href="/tour/notice" id="currentPage">투어 공지</a></li>
+			<li><a th:href="@{/tour/info}">투어 안내</a></li>
+			<li><a th:href="@{/tour/pick-date}">예약</a></li>
+			<li><a th:href="@{/tour/notice}" id="currentPage">투어 공지</a></li>
 		</ul>
 	</div>
 	<div class="detail_menu">
 		<ul>
-			<li><a href="/tour/notice" id="selectPage" class="active">양조장
-					소식</a></li>
+			<li>
+				<a href="/tour/notice" id="selectPage" class="active">양조장소식</a>
+			</li>
 		</ul>
 	</div>
 	<div class="inline-row"></div>
-
-
 
 	<div class="container">
 		<div class="row">
@@ -78,21 +76,12 @@
 						</span> 동시 가능 입장 안내
 						</a>
 					</div>
-
 					<a class="mb-5" href="/tour/notice"><button class="bt">목록</button></a>
 				</div>
 			</div>
 		</div>
 	</div>
 	<th:block th:include="frame/footer"></th:block>
-
-
-
-
-
-
-
-
 
 </body>
 </html>

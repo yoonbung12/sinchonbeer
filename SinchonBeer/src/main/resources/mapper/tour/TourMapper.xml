@@ -37,9 +37,7 @@
                         END
              WHERE tdate IN ( #{newDate}, #{resDate} );
 	</update>
-
-		
-	
+			
 	<!-- 주문테이블의 예약날짜 변경 : test code  -->
 	<update id="changeDateByMidx">
 		update orders set tidx = (select tidx from tour where tdate = date_format(#{tdate},'%Y-%m-%d')) where oidx=#{oidx};

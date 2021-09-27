@@ -1,25 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>투어 안내</title>
 
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<!-- 카카오 api 사용하기위한 script -->
-	<script type="text/javascript"
-		src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=1c6823dddf58df305357ce46aadf5bbf">
-		
-	</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- 카카오 api 사용하기위한 script -->
+<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=1c6823dddf58df305357ce46aadf5bbf">	</script>
 
 <th:block th:include="frame/metaheader"></th:block>
 
-
 <link rel="stylesheet" th:href="@{/css/tour/tourInfo.css}">
-
-
 
 </head>
 <body>
@@ -29,15 +23,17 @@
 	<div class="submenu_wrap">
 		<ul>
 			<li><a th:href="@{/tour/info}" id="currentPage">투어 안내</a></li>
-			<li><a href="/tour/pick-date">예약</a></li>
-			<li><a href="/tour/notice">투어 공지</a></li>
+			<li><a th:href="@{/tour/pick-date}">예약</a></li>
+			<li><a th:href="@{/tour/notice}">투어 공지</a></li>
 		</ul>
 	</div>
 	<div class="detail_menu">
 		<ul>
-			<li><a href="/tour/info" id="selectPage" class="active">FAQ
+			<li>
+				<a th:href="@{/tour/info}" id="selectPage" class="active">FAQ
 					<hr>
-			</a></li>
+				</a>
+			</li>
 		</ul>
 	</div>
 	<div class="inline-row"></div>
@@ -51,9 +47,10 @@
 		<div class="card border-0 mt-5">
 			<div class="card-header">
 				<a class="card-link" data-toggle="collapse" href="#Q1"
-					aria-expanded="true"> Q.투어 프로그램은 언제부터 예약 가능한가요? <span
-					class="r-p icon"> <i class="fa fa-angle-down float-right"></i>
-				</span>
+					aria-expanded="true"> Q.투어 프로그램은 언제부터 예약 가능한가요? 
+					<span class="r-p icon"> 
+						<i class="fa fa-angle-down float-right"></i>
+					</span>
 				</a>
 			</div>
 			<div id="Q1" class="collapse">
@@ -62,7 +59,6 @@
 						매 월 첫째 주 목요일에 다음 달 투어 프로그램이 오픈됩니다.<br> 예를 들어, 10월 투어 프로그램 예약을
 						원하시면 9월 첫째 주 목요일부터 예약 하실 수 있습니다.
 					</p>
-
 				</div>
 			</div>
 		</div>
@@ -70,9 +66,8 @@
 		<div class="card border-0">
 			<div class="card-header">
 				<a class="collapsed card-link" data-toggle="collapse" href="#Q2">
-					Q.프로그램 참여 제한이 있나요? <span class="r-p icon"> <i
-						class="fa fa-angle-down float-right"></i>
-				</span>
+					Q.프로그램 참여 제한이 있나요? 
+					<span class="r-p icon"> <i class="fa fa-angle-down float-right"></i></span>
 				</a>
 			</div>
 			<div id="Q2" class="collapse">
@@ -89,9 +84,8 @@
 		<div class="card border-0">
 			<div class="card-header">
 				<a class="collapsed card-link" data-toggle="collapse" href="#Q3">
-					Q.프로그램 취소 및 환불규정은 어떻게 되나요? <span class="r-p icon"> <i
-						class="fa fa-angle-down float-right"></i>
-				</span>
+					Q.프로그램 취소 및 환불규정은 어떻게 되나요? 
+					<span class="r-p icon"> <i class="fa fa-angle-down float-right"></i></span>
 				</a>
 			</div>
 			<div id="Q3" class="collapse">
@@ -110,9 +104,8 @@
 		<div class="card border-0">
 			<div class="card-header">
 				<a class="collapsed card-link" data-toggle="collapse" href="#Q4">
-					Q.맥주 외에 마실 음료나 먹을거리가 있나요? <span class="r-p icon"> <i
-						class="fa fa-angle-down float-right"></i>
-				</span>
+					Q.맥주 외에 마실 음료나 먹을거리가 있나요? 
+					<span class="r-p icon"> <i class="fa fa-angle-down float-right"></i></span>
 				</a>
 			</div>
 			<div id="Q4" class="collapse">
@@ -128,9 +121,8 @@
 			<div class="card border-0">
 				<div class="card-header">
 					<a class="collapsed card-link" data-toggle="collapse" href="#Q5">
-						Q.양조장 오시는길 <span class="r-p icon"> <i
-							class="fa fa-angle-down float-right"></i>
-					</span>
+						Q.양조장 오시는길 
+						<span class="r-p icon"> <i class="fa fa-angle-down float-right"></i></span>
 					</a>
 				</div>
 				<div id="Q5" class="collapse">
@@ -156,21 +148,6 @@
 	<th:block th:include="frame/footer"></th:block>
 
 	<script th:src="@{/js/tour/info.js}"></script>
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>
