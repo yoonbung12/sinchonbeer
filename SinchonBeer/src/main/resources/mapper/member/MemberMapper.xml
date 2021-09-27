@@ -101,6 +101,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		>
 		select * from address where midx=#{midx}
 	</select>
-		
 	
+	<!-- 회원 수정 에서 기존 비밀번호 확인하기 -->
+	<select id="selectPw"
+		parameterType="int"
+		resultType="String"
+		>
+		select mpw from member where midx=#{midx}	
+	</select>	
 </mapper>
