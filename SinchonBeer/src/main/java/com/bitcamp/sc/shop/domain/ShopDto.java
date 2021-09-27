@@ -11,5 +11,6 @@ public class ShopDto {
 	private String name;
 	private int amount;
 	private int price;
+	private int gidx;
 
 }

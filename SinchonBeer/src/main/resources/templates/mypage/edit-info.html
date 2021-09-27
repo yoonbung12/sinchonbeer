@@ -101,7 +101,7 @@
 								<div class="msg"></div>
 							</fieldset>
 						</th:block>
-						<input type="submit" class="btn btn-sinchon" id="submitBtn" value="확인">
+						<input type="submit" class="btn btn-sinchon btn-block" id="submitBtn" value="확인">
 					</form>
 				</div>
 			</div>
@@ -219,6 +219,37 @@ $(document).ready(function () {
     var address1 = $('#address');
     var address2 = $('#detailAddress');
 
+    $('#mpw').focusout(function() {
+		console.log($(this).val());
+		if($(this).val() == null || $(this).val() == ''||$(this).val() == undefined){
+			return false;
+		}
+		
+		$.ajax({ 
+			url : '/pwCheck',
+			type : 'post',
+			contentType: 'application/json; charset=UTF-8;',
+			data : $(this).val(),
+			success : function(data) {
+				console.log(data);
+				// data : Y / N
+				console.log('data success 접근 성공');
+				if (data == 'N') {
+					$('#mpw + div.msg').html('<p>기존 비밀번호와 일치하지 않습니다.</p>');
+		            $('#mpw + div.msg').css('display', 'block');
+		            $('#mpw').addClass('red_outline');
+		            return false;
+				}else{
+					
+				}
+			},
+			error : function(request, status, error) {
+				alert('서버 통신에 문제가 발생했습니다. 다시 실행해주세요.');
+			}
+		});
+
+	});
+
     $('#submitBtn').on('click',function () {
         //비번 정규식: 대/소문자 포함하여 8~16자 , 숫자나 특수기호 포함.
         //비밀번호의 공백문자 확인
@@ -242,37 +273,6 @@ $(document).ready(function () {
                 return false;
             }
         }
-
-        $('#mpw').focusout(function() {
-    		console.log($(this).val());
-    		if($(this).val() == null || $(this).val() == ''||$(this).val() == undefined){
-    			return false;
-    		}
-    		
-    		$.ajax({ 
-    			url : '/pwCheck',
-    			type : 'post',
-    			contentType: 'application/json; charset=UTF-8;',
-    			data : $(this).val(),
-    			success : function(data) {
-    				console.log(data);
-    				// data : Y / N
-    				console.log('data success 접근 성공');
-    				if (data == 'N') {
-    					$('#mpw + div.msg').html('<p>기존 비밀번호와 일치하지 않습니다.</p>');
-    		            $('#mpw + div.msg').css('display', 'block');
-    		            $('#mpw').addClass('red_outline');
-    		            return false;
-    				}else{
-    					
-    				}
-    			},
-    			error : function(request, status, error) {
-    				alert('서버 통신에 문제가 발생했습니다. 다시 실행해주세요.');
-    			}
-    		});
-
-    	});
 
     
         // //비밀번호 일치 여부 확인하기
@@ -334,9 +334,15 @@ $(document).ready(function () {
         $('#memail+div.msg').html('');
         email.removeClass('red_outline')
     });
+    $(oldpw).focus(function () {
+        $('#mpw+div.msg').css('display', 'none');
+        $('#mpw+div.msg').html('');
+        oldpw.removeClass('red_outline');
+        repw.removeClass('red_under_outline');
+    });
     $(pw).focus(function () {
-        $('#mrePw+div.msg').css('display', 'none');
-        $('#mrePw+div.msg').html('');
+        $('#mnewPw+div.msg').css('display', 'none');
+        $('#mnewPw+div.msg').html('');
         pw.removeClass('red_outline');
         repw.removeClass('red_under_outline');
     });
