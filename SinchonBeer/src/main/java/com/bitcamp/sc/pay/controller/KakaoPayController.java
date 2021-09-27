@@ -70,8 +70,10 @@ public class KakaoPayController {
 		OrderInfo orderInfo = OrderInfo.builder()
 									   .category("shop")
 									   .price(shop.getPrice())
+									   .goodsIdx(shop.getGidx())
 									   .addressIdx(memberAddress.getAidx())
 									   .memberIdx(shop.getMidx())
+									   .amount(shop.getAmount())
 									   .build();
 		
 		orderService.createOrder("shop", orderInfo);

@@ -39,13 +39,13 @@
 	<div class="container">
 		<input type="hidden" th:value="${session.loginInfo.idx}" name="idx">
 		<p class="text-center text-32 mb-5">회원 탈퇴</p>
-		<div class="row justify-content-center">
+		<div class="row">
 			<div class="col-lg-2" id="sideBar">
 				<ul class="text-14 list-unstyled">
-					<li class="mb-4"><a th:href="@{/mypage/orderList}" class="link-unstyle">주문 내역</a></li>
-					<li class="mb-4"><a th:href="@{/mypage/rezList}" class="link-unstyle">예약 내역</a></li>
-					<li class="mb-4"><a th:href="@{/mypage/edit-info}" class="link-unstyle">정보 수정</a></li>
-					<li class="mb-4"><a th:href="@{/mypage/delete-id}" class="link-unstyle">
+					<li class="mb-4"><a th:href="@{orderList}" class="link-unstyle">주문 내역</a></li>
+					<li class="mb-4"><a th:href="@{rezList}" class="link-unstyle">예약 내역</a></li>
+					<li class="mb-4"><a th:href="@{edit-info}" class="link-unstyle">정보 수정</a></li>
+					<li class="mb-4"><a th:href="@{delete-id}" class="link-unstyle">
 						<span class="pb-1 border-bottom border-sinchon text-sinchon">회원 탈퇴</span></a>
 					</li>
 				</ul>
@@ -62,7 +62,7 @@
                                 회원 탈퇴를 진행하시겠습니까?
                             </p>
                             <!-- <div class="row justify-content-center"> -->
-                            <input type="submit" class="btn btn-sinchon m-2" value="탈퇴하기">
+                            <input type="submit" class="btn btn-sinchon btn-block m-2" value="탈퇴하기">
                             <!-- </div> -->
                         </div>
                     </div>

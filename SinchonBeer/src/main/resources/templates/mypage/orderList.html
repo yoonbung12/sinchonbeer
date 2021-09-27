@@ -92,7 +92,7 @@
 														     	  <div class="font-nanum" th:text="${list.gname}"></div>
 											</td>
 											<td class="pt-3">
-												<div class="font-nanum" th:text="|구매 수량 : ${list.count}|"></div>
+												<div class="font-nanum" th:text="|구매 수량 : ${list.amount}|"></div>
 												<div class="font-nanum" th:text="|결제 금액 : ${list.pprice}|"></div>
 												<th:block th:if="${list.pstatus == 'complete'}">
 													<div class="font-nanum" th:text="|결제 상태 : 완료|"></div>

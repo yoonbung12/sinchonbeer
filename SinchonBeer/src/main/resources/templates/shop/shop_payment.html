@@ -138,6 +138,7 @@
 			<input type="hidden" th:value="${gname}" name="name">
 			<input type="hidden" th:value="${amount}" name="amount">
 			<input type="hidden" th:value="${amount * gprice}" name="price">
+			<input type="hidden" th:value="${gidx}" name="gidx">
 			
             <div class="row justify-content-center">
                 <div class="col-lg-6">
@@ -178,6 +179,12 @@
                             </div>
                             <div class="text-14 text-gray font-weight-bold mb-1">
                                 <span th:text="${session.loginInfo.email}" ></span>
+                            </div>
+                            <div class="text-14 text-gray font-weight-bold mb-1">
+                                <span th:text="${address1}" ></span>
+                            </div>
+                            <div class="text-14 text-gray font-weight-bold mb-1">
+                                <span th:text="${address2}" ></span>
                             </div>
 
                             <a th:href="@{/mypage/change-info}" class="btn-sinchon btn btn-sm-padding text-13 btn_top_right" id="btn-orderer-edit" role="button">
