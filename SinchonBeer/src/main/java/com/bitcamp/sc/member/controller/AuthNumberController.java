@@ -15,18 +15,17 @@ public class AuthNumberController {
 
 	@Autowired
 	private AuthNumberService service;
-	//인증번호가 사용자입력한 번호랑 같은지 체크하기.
+
+	// 인증번호가 사용자가 입력한 번호와 같은지 체크하는 메소드.
 	@RequestMapping("/inquiry/pw/input-code")
 	@ResponseBody
-	public String CheckAuthNum(
-			@RequestBody Map<String, Object> param
-			) {
+	public String CheckAuthNum(@RequestBody Map<String, Object> param) {
 		String result = "N";
-		System.out.println("넘어온 inputNum의 값 : "+(String)param.get("inputNum"));
-		System.out.println("넘어온 inputNum의 값 : "+(String)param.get("userEmail"));
-		Boolean checkedAuthNum = service.checkAuthNum((String)param.get("inputNum"), (String)param.get("userEmail")); 
-		System.out.println("checkedAuthNum : "+checkedAuthNum);
-		if(checkedAuthNum) {
+		Boolean checkedAuthNum = service.checkAuthNum((String) param.get("inputNum"), (String) param.get("userEmail"));
+		System.out.println("checkedAuthNum : " + checkedAuthNum);
+		
+		//서비스클래스에서 인증번호를 보냈다면 문자열 Y를 이 메소드에서 반환. 그렇지 않으면 N을 반환하도록 한다.
+		if (checkedAuthNum) {
 			result = "Y";
 		}
 		System.out.println(result);

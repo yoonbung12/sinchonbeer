@@ -1,51 +1,29 @@
 package com.bitcamp.sc.member.service.impl;
 
-import javax.servlet.http.HttpSession;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bitcamp.sc.member.domain.LoginInfo;
-import com.bitcamp.sc.member.domain.Member;
 import com.bitcamp.sc.member.domain.MemberAddress;
 import com.bitcamp.sc.member.repository.MemberDao;
 import com.bitcamp.sc.member.service.MemberService;
 
 @Service
-public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private SqlSessionTemplate template;
-	
-	private MemberDao memberDao;
-	HttpSession session;
-	
+
+	// 회원의 midx로 회원 정보 조회하기.
 	@Override
 	public LoginInfo getMember(int midx) {
-		
-		memberDao = template.getMapper(MemberDao.class);
-		
-		Member member = memberDao.selectByMidx(midx);
-		LoginInfo loginInfo = member.toLoginInfo();
-		
-		return loginInfo;
+		return template.getMapper(MemberDao.class).selectByMidx(midx).toLoginInfo();
 	}
 
-	//회원가입에 필요한 메소드 - 아이디 중복방지 메소드. 회원 DB에 추가하는 메소드.
-	@Override
-	public int joinMember(Member member) {
-		return 0;
-	}
-	
-	
-
+	// 회원의 midx로 주소 정보 가지고 오기
 	@Override
 	public MemberAddress getMemberAdd(int midx) {
-memberDao = template.getMapper(MemberDao.class);
-		
-		MemberAddress memAddress = memberDao.selectAddressByMidx(midx);
-		
-		return memAddress;
+		return template.getMapper(MemberDao.class).selectAddressByMidx(midx);
 	}
 }

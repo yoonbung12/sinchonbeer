@@ -15,35 +15,31 @@ import org.springframework.stereotype.Service;
 
 import com.bitcamp.sc.member.repository.MemberDao;
 
-
 @Service
 public class MailSenderService {
-	
+
 	@Autowired
 	private JavaMailSender sender;
-	
+
 	@Autowired
 	private SqlSessionTemplate template;
-	
-	private MemberDao memberDao;
-	
-	//메일 전송 여부 반환
+
+	// 메일 전송 여부 반환
 	public Boolean emailSender(String userEmail) {
-		 
-		Boolean result=true;
-		
+
+		Boolean result = true;
+
 		String authNum = randomNum();
-		System.out.println("[메일service에서 ] 만들어진 인증번호 : "+authNum);
+		System.out.println("[메일service] 만들어진 인증번호 : " + authNum);
 		MimeMessage message = sender.createMimeMessage();
-		//MimeMessage에는 메일 내용이 들어가게 됨. 제목, 내용, 발신, 수신, 첨부
+		// MimeMessage에는 메일 내용이 들어가게 됨. 제목, 내용, 발신, 수신, 첨부
 		try {
 
 			// 메일 제목
-			message.setSubject("인증번호를 보내드립니다.", "UTF-8");
+			message.setSubject("신촌맥주에서 인증번호를 보내드립니다.", "UTF-8");
 
 			// 메일 내용 컨텐츠 html
-			String html = "<h1>인증번호 : <span>"+ authNum +"</span></h1>";
-			//html += "<a href=\"https://www.naver.com\">네이버로 갈까요?!!!</a>";
+			String html = "<h1>인증번호 : " + authNum + "</h1>";
 
 			// message에 내용 적용
 			message.setText(html, "utf-8", "html");
@@ -52,28 +48,25 @@ public class MailSenderService {
 			message.setFrom(new InternetAddress("watersun326@gmail.com"));
 
 			// to 설정 (받는 사람 설정.)
-			message.addRecipient(RecipientType.TO, 
-					new InternetAddress(userEmail, userEmail + " 님", "UTF-8"));
-								//괄호 내용 (보낼 이메일 주소 String address, String personal, String charset)  
+			message.addRecipient(RecipientType.TO, new InternetAddress(userEmail, userEmail + " 님", "UTF-8"));
+			// 괄호 내용 (보낼 이메일 주소 String address, String personal, String charset)
 			// 메일 발송
 			sender.send(message);
-			
-			//인증번호를 db에 저장하기.
-			memberDao = template.getMapper(MemberDao.class);
-			 memberDao.updateCode(authNum, userEmail);
-			
+
+			// 인증번호를 db에 저장하기.
+			template.getMapper(MemberDao.class).updateCode(authNum, userEmail);
+
 		} catch (MessagingException e) {
-			result=false;
+			result = false;
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
-			result=false;
+			result = false;
 			e.printStackTrace();
 		}
 		return result;
 	}
 
-
-
+	//랜덤 숫자로 된 인증번호 만들기
 	private String randomNum() {
 		Random rand = new Random();
 		String numStr = "";

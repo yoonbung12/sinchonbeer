@@ -16,21 +16,13 @@ public class PwResetService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	private MemberDao memberDao;
-	
 	public Boolean updateNewPw(String userEmail, String newPw) {
 		
 		Boolean result = false;
-		
-		memberDao=template.getMapper(MemberDao.class);
-		String securityPw = passwordEncoder.encode(newPw);
-		
-		
-		int resultCnt = memberDao.updatePw(userEmail, securityPw);
+		int resultCnt = template.getMapper(MemberDao.class).updatePw(userEmail, passwordEncoder.encode(newPw));
 		if(resultCnt==1) {
 			result = true;
 		}
-		
 		return result;
 	}
 	
