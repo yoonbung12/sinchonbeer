@@ -83,9 +83,13 @@ body {
   margin-bottom: 5px;
 }
 
+.title-box {
+	margin : -20px 0 0 0 !important;
+}
+
 .review-title {
 	font-size: 20px !important;
-	
+	margin : 0 0 15px 0 !important;
 }
 
 .baguetteBox-button {
