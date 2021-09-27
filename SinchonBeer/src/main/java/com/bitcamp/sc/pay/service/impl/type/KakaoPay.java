@@ -21,7 +21,7 @@ import com.bitcamp.sc.pay.domain.KakaoPayReady;
 public class KakaoPay {
 
 //	private static final String HOST = "http://localhost:8081/";
-	private static final String HOST = "http://3.35.0.242:8081";
+	private static final String HOST = "http://3.35.0.242:8081/";
 	
 	private KakaoPayReady kakaoPayReady;
 	private KakaoPayApproval kakaoPayApproval;
