@@ -15,9 +15,6 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private SqlSessionTemplate template;
 	
-	@Autowired
-	private MemberDao memberDao;
-
 	// 회원의 midx로 회원 정보 조회하기.
 	@Override
 	public LoginInfo getMember(int midx) {
