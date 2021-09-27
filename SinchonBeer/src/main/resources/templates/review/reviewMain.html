@@ -71,8 +71,13 @@
                                 <div class="card shadow-sm">
                                     <div class="thumbnail">
                                         <a class="lightbox" th:onclick="|goToView('${reviewInfo.idx}')|">
-                                            <img src="images/review/scbeer.png" alt="SinChonbeer">
-                                        </a>
+										  <th:block th:if="${reviewInfo.gphoto == ''}">
+										      <img src="images/review/scbeer.png" alt="SinChonbeer">
+										  </th:block>
+										  <th:block th:unless="${reviewInfo.gphoto == ''}">
+										      <img th:src="@{|/images/shop/${reviewInfo.gphoto}.png|}" alt="SinChonbeer">
+										  </th:block>
+										</a>
                                         <div class="card-body">
                                             <a class="card-text review-title" th:text="${reviewInfo.title}"
                                                th:onclick="|goToView('${reviewInfo.idx}')|"

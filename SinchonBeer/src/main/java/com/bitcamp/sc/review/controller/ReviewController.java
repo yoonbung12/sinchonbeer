@@ -57,6 +57,8 @@ public class ReviewController {
 	// 02-1. 쓰기 화면
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public String goToWrite(HttpServletRequest request, Model model) throws Exception {
+		
+		model.addAttribute("order_idx", request.getParameter("order_idx"));
 		return "review/writing";
   }
 
@@ -73,6 +75,7 @@ public class ReviewController {
 		vo.setTitle(request.getParameter("title"));
 		vo.setName(request.getParameter("author"));
 		vo.setContents(request.getParameter("content"));
+		vo.setOidx(Integer.parseInt(request.getParameter("order_idx")));
 		
 		try {
 			check = reviewService.insertReview(vo);
