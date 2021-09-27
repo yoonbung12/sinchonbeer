@@ -8,8 +8,6 @@ import com.bitcamp.sc.member.repository.MemberDao;
 
 @Service
 public class EmailCheckService {
-
-	private MemberDao memberDao;
 	
 	@Autowired
 	private SqlSessionTemplate template;
