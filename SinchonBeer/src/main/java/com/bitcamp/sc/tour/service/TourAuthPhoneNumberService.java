@@ -3,6 +3,8 @@ package com.bitcamp.sc.tour.service;
 import java.util.HashMap;
 
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import net.nurigo.java_sdk.api.Message;
@@ -10,6 +12,7 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Service
 public class TourAuthPhoneNumberService {
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public void authNumberByPhone(String ph,String certifyCode) {
 		final String  api_key = "NCSHXS0WSAB8HQY2";
@@ -28,10 +31,10 @@ public class TourAuthPhoneNumberService {
 		try {
 			JSONObject obj = (JSONObject) coolsms.send(params);
 			
-			System.out.println(obj.toString());
+			logger.info("json obj : "+obj);
 		} catch (CoolsmsException e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCode());
+			logger.info("message : "+e.getMessage());
+			logger.info("e.getCode : "+e.getCode());
 		}
 
 

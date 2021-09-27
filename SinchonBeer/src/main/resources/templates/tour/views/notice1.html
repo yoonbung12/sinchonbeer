@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>투어 명절 휴무 안내</title>
 
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <th:block th:include="frame/metaheader"></th:block>
 <link rel="stylesheet" th:href="@{/css/tour/tourNotice-desc.css}">
 
@@ -18,19 +18,19 @@
 	<!-- submenu 영역 -->
 	<div class="submenu_wrap">
 		<ul>
-			<li><a href="/tour/info">투어 안내</a></li>
-			<li><a href="/tour/pick-date">예약</a></li>
-			<li><a href="/tour/notice" id="currentPage">투어 공지</a></li>
+			<li><a th:href="@{/tour/info}">투어 안내</a></li>
+			<li><a th:href="@{/tour/pick-date}">예약</a></li>
+			<li><a th:href="@{/tour/notice}" id="currentPage">투어 공지</a></li>
 		</ul>
 	</div>
 	<div class="detail_menu">
 		<ul>
-			<li><a href="/tour/notice" id="selectPage" class="active">양조장
-					소식</a></li>
+			<li>
+				<a th:href="@{/tour/notice}" id="selectPage" class="active">양조장소식</a>
+			</li>
 		</ul>
 	</div>
 	<div class="inline-row"></div>
-
 
 	<div class="container">
 		<div class="row">
@@ -47,8 +47,7 @@
 					<hr>
 				</div>
 				<div class="mt-5 mb-5">
-					<img class="c-img "
-						src="https://cdn.imweb.me/upload/S20200702f03eaee38b16e/f95f5ccd1ae7c.png">
+					<img class="c-img" src="https://cdn.imweb.me/upload/S20200702f03eaee38b16e/f95f5ccd1ae7c.png">
 				</div>
 				<div>
 					<p>
@@ -61,9 +60,10 @@
 				<div class="inline-row1"></div>
 				<div class="com-section mt-5">
 					<div class="list">
-						<a href="/tour/notice/2" class="b-b"> <span class="mr-3">
+						<a href="/tour/notice/2" class="b-b"> 
+							<span class="mr-3">
 								<i class="fa fa-angle-down"></i>
-						</span> 미취학 아동 입장 안내
+							</span> 미취학 아동 입장 안내
 						</a>
 					</div>
 
@@ -72,18 +72,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- footer  -->
 	<th:block th:include="frame/footer"></th:block>
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
 </html>

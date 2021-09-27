@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.bitcamp.sc.tour.repository.TourDao;
@@ -11,6 +13,8 @@ import com.bitcamp.sc.tour.repository.TourDao;
 @Repository
 public class MybatisTourDao implements TourDao {
 
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	private static final String NAME_SPACE = "TourMapper";
 
 	private final SqlSessionTemplate template;
@@ -44,17 +48,15 @@ public class MybatisTourDao implements TourDao {
 	// 예약 취소 , 예약 변경시 기존 날짜
 	@Override
 	public int subTourPeople(int tourPeople, String currnetDate) {
-		System.out.println("인원 감소");
+		logger.info("인원 감소");
 		Map<String, Object> params = new HashMap<>();
-		System.out.println(tourPeople+" : "+currnetDate);
+		logger.info(tourPeople+" : "+currnetDate);
 		params.put("tourPeople", tourPeople);
 		params.put("tdate", currnetDate);
 		
 		return template.update(NAME_SPACE + ".subTourPeople", params);
 
 	}
-
-
 
 	// 주문 테이블의 예약 날짜를 변경 --> 현재는 test code
 	@Override
@@ -78,9 +80,4 @@ public class MybatisTourDao implements TourDao {
 		params.put("resDate",resDate);
 	return	template.update(NAME_SPACE+".changeTour", params);
 	}
-
-	
-
-	//
-
 }

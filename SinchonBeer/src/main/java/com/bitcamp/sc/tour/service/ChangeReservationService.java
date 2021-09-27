@@ -20,7 +20,7 @@ public class ChangeReservationService {
 	
 	}
 
-	// 주문 테이블의 투어 날짜 변경
+	// 주문 테이블의 투어 날짜 변경 후 투어 날짜별 현재인원 증가 / 감소 변경
 	public boolean changeTourOrder(ChangeTourDto changeDto) {
 		boolean result = false;
 		logger.info("changeDto: " + changeDto.toString());
