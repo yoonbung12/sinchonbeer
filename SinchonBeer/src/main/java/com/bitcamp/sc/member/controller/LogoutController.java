@@ -2,12 +2,8 @@ package com.bitcamp.sc.member.controller;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.maven.model.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.bitcamp.sc.member.domain.LoginInfo;
 
 @Controller
 public class LogoutController {

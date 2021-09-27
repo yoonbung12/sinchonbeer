@@ -1,7 +1,6 @@
 package com.bitcamp.sc.member.repository;
 
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
 
 import com.bitcamp.sc.member.domain.Member;
 import com.bitcamp.sc.member.domain.MemberAddress;
