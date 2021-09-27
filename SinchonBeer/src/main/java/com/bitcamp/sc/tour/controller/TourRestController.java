@@ -40,10 +40,10 @@ public class TourRestController {
 		String result ="";
 		if(login.getPhone().equals(ph)) {
 			result = "Y";
-			System.out.println("휴대전화 번호 일치");
+			logger.info("휴대전화 번호 일치");
 		}else {
 			result = "N";
-			System.out.println("휴대전화 번호 불일치");
+			logger.info("휴대전화 번호 불일치");
 		}
 			
 		return result;
@@ -60,8 +60,8 @@ public class TourRestController {
 			numStr += ran;
 		}
 
-		System.out.println("수신자 번호 : " + ph);
-		System.out.println("인증번호 : " + numStr);
+		logger.info("수신자 번호 : " + ph);
+		logger.info("인증번호 : " + numStr);
 		authNumberService.authNumberByPhone(ph, numStr);
 
 		return numStr;

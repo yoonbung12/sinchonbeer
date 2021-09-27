@@ -15,8 +15,4 @@ public class TourDto {
 	private int tourPeople;
 	private int price;
 	private String category;
-	
-	
-	
-
 }

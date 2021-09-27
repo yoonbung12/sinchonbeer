@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,15 +16,16 @@
 	<!-- submenu 영역 -->
 	<div class="submenu_wrap">
 		<ul>
-			<li><a href="/tour/info">투어 안내</a></li>
-			<li><a href="/tour/pick-date">예약</a></li>
-			<li><a href="/tour/notice" id="currentPage">투어 공지</a></li>
+			<li><a th:href="@{/tour/info}">투어 안내</a></li>
+			<li><a th:href="@{/tour/pick-date}">예약</a></li>
+			<li><a th:href="@{/tour/notice}" id="currentPage">투어 공지</a></li>
 		</ul>
 	</div>
 	<div class="detail_menu">
 		<ul>
-			<li><a href="/tour/notice" id="selectPage" class="active">양조장
-					소식</a></li>
+			<li>
+				<a th:href="@{/tour/notice}" id="selectPage" class="active">양조장소식</a>
+			</li>
 		</ul>
 	</div>
 	<div class="inline-row"></div>
@@ -38,8 +40,7 @@
 		<div class="row mt-5">
 			<div class="col-md-6 mt-3">
 				<div class="content">
-					<a href="/tour/notice/1">
-						
+					<a th:href="@{/tour/notice/1}">
 						<div class="content-overlay"></div> 
 						<img class="content-image"
 						src="https://cdn.imweb.me/upload/S20200702f03eaee38b16e/f95f5ccd1ae7c.png">
@@ -56,7 +57,7 @@
 
 			<div class="col-md-6 mt-3">
 				<div class="content">
-					<a href="/tour/notice/2">
+					<a th:href="@{/tour/notice/2}">
 						<div class="content-overlay"></div> <img class="content-image"
 						src="https://cdn.imweb.me/upload/S20200702f03eaee38b16e/bacc312b6e8de.png">
 						<div class="content-details-date">
@@ -71,7 +72,7 @@
 			</div>
 			<div class="col-md-6 mt-3">
 				<div class="content">
-					<a href="/tour/notice/3">
+					<a th:href="@{/tour/notice/3}">
 						<div class="content-overlay"></div> <img class="content-image"
 						src="https://cdn.imweb.me/upload/S20200702f03eaee38b16e/0d5d9e98b8965.png">
 						<div class="content-details-date">
@@ -86,7 +87,7 @@
 			</div>
 			<div class="col-md-6 mt-3">
 				<div class="content">
-					<a href="/tour/notice/4">
+					<a th:href="@{/tour/notice/4}">
 						<div class="content-overlay"></div> <img class="content-image"
 						src="https://cdn.imweb.me/upload/S20200702f03eaee38b16e/9b8bf069c739e.png">
 						<div class="content-details-date">
@@ -104,26 +105,7 @@
 	</div>
 	<!-- content 영역 끝 -->
 	<div class="inline-row2"></div>
-		<th:block th:include="frame/footer"></th:block>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	<!-- footer -->
+	<th:block th:include="frame/footer"></th:block>
 </body>
 </html>

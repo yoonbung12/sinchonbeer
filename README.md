@@ -51,7 +51,7 @@ ovenapp을 사용해 UI / UX 목업을 제작
 
 * 로그인 / 회원가입
 * 결제
-* 양조장 투어 예약
+* 양조장 투어 예약- [서버](https://github.com/seongdeokjo/sinchonbeer/tree/main/SinchonBeer/src/main/java/com/bitcamp/sc/tour) / [프론트](https://github.com/seongdeokjo/sinchonbeer/tree/main/SinchonBeer/src/main/resources/templates/tour)
 * 상품 구매
 * 장바구니
 * 1:1 상담 채팅
