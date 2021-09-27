@@ -54,7 +54,8 @@ body {
   max-width: 100%;
   height: auto;
   display: block;
-  object-fit: cover;
+  /* object-fit: cover; */
+  object-fit: contain;
 }
 
 .gallery .thumbnail:hover {
@@ -68,7 +69,8 @@ body {
   margin-bottom: 5px;
   transition: 0.2s ease-in-out;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
-  object-fit: cover;
+  /* object-fit: cover; */
+  object-fit: contain;
 }
 
 .gallery .lightbox img:hover {

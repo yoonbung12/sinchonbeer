@@ -154,7 +154,6 @@ public class ReviewController {
 		@RequestMapping(value = "/modify.do", method = RequestMethod.POST)
 		public int ajaxmodify_Review(HttpServletRequest request) throws Exception {
 			
-			System.out.println("title : "+request.getParameter("title"));
 			int check  = 0;
 			
 			ReviewVO vo = new ReviewVO();
@@ -170,4 +169,24 @@ public class ReviewController {
 			}
 			return check;
 		}
+		
+		
+	// 06. 게시글 좋아요
+	@ResponseBody
+	@RequestMapping("like.do") 
+	public int like(HttpServletRequest request, Model model) throws Exception { 
+		System.out.println("idx: " + request.getParameter("idx"));
+		int idx = 0;
+		int check = 0;
+		
+		/*
+		 * ReviewVO vo = new ReviewVO();
+		 * 
+		 * if( request.getParameter("idx") != null) { idx =
+		 * Integer.parseInt(request.getParameter("idx")); } try {
+		 * reviewService.likeReview(idx); check = 1; } catch (Exception e) {
+		 * e.printStackTrace(); // TODO: handle exception }
+		 */
+		return check; 
+	}
 }

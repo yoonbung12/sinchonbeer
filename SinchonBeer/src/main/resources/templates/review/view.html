@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>리뷰 수정</title>
 	
-	<link rel="stylesheet" th:href="@{/css/review/editing.css}">
+	<link rel="stylesheet" th:href="@{/css/review/view.css}">
 	<link rel="stylesheet" th:href="@{/css/default.css}">
 	
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
@@ -29,7 +29,6 @@
 	                	
 	                console.log(data);
 	                	
-	                console.log(data);
 	                   if(data == 1) {
 	                	   alert("글 삭제가 완료되었습니다.");
 	                       window.location = '/review';
@@ -48,9 +47,7 @@
 	    	window.location ="modify?idx="+idx;
 	    }
 		
-		
 	</script>
-
 </head>
 
 <body>
@@ -68,7 +65,7 @@
     <!-- 게시판 -->
     <div class="container">
         <div class="row">
-            <table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+            <table class="table table-striped">
                 <!-- <thead>
                     <tr>
                         <th colspan="3" style="background-color: #eeeeee; text-align: center;">
@@ -78,42 +75,40 @@
                 </thead> -->
                 <tbody>
                     <tr>
-                        <th style="background-color:#1ecad3; width: 15%; color:#FFF;">제목</th>
-                        <td colspan="2" th:text="${view.title}" style="text-align: left; border-left: 1px solid #dee2e6; background-color:#FFF;
-                            border-right: 1px solid #1ecad3; border-top: 1px solid #1ecad3; border-bottom: 1px solid #1ecad3;">
+                        <th class="listTag">제목</th>
+                        <td class="listContents" th:text="${view.title}" colspan="2">
                         </td>
                     </tr>
                     <tr>
-                        <th style="background-color:#1ecad3; width: 15%; color:#FFF;">작성자</th>
-                        <td colspan="2" th:text="${view.name}" style="text-align: left; border-left: 1px solid #dee2e6; background-color:#FFF;
-                        border-right: 1px solid #1ecad3; border-top: 1px solid #1ecad3; border-bottom: 1px solid #1ecad3;">
+                        <th class="listTag">작성자</th>
+                        <td class="listContents" th:text="${view.name}" colspan="2">
                         </td>
                     </tr>
                     <tr>
-                        <th style="background-color:#1ecad3; width: 15%; color:#FFF;">작성일</th>
-                        <td colspan="2" th:text="${view.date}" style="text-align: left; border-left: 1px solid #dee2e6;background-color:#FFF;
-                        border-right: 1px solid #1ecad3; border-top: 1px solid #1ecad3; border-bottom: 1px solid #1ecad3;">
+                        <th class="listTag">작성일</th>
+                        <td class="listContents" th:text="${view.date}" colspan="2">
                         </td>
                     </tr>
                     <tr>
-                        <td id="summernote" colspan="2" style="min-height:200px; text-align: Left; border: 1px solid #1ecad3;" th:utext="${view.contents}">
+                        <td id="summernote" class="contents_writing" th:utext="${view.contents}" colspan="2">
                         </td>
+                        
                     </tr>
                 </tbody>
             </table>
-			<div style="width:100%;">
-                <a class="btn-sinchon btn btn-sm-padding" href="/review" style="float:left;">목록</a>
-                <th:block th:if="${session.loginInfo.name == view.name}">
-						<a class="btn-sinchon btn btn-sm-padding" th:onclick="|deleteReview('${view.idx}')|" style="float:right;">삭제</a>
-				</th:block>
-				<th:block th:if="${session.loginInfo.name == view.name}">
-               			<a class="btn-sinchon btn btn-sm-padding" th:onclick="|updateReview('${view.idx}')|" style="float:right; margin-right:4px;">수정</a>
+            <div class="btn_div">
+				<a class="btn btn-sm-padding btn_list" href="/review">목록</a>
+				<th:block th:if="${session.loginInfo != null && session.loginInfo.name == view.name}">
+					<a class="btn btn-sm-padding btn_del" th:onclick="|deleteReview('${view.idx}')|">삭제</a>
+					<a class="btn btn-sm-padding btn_modf" th:onclick="|updateReview('${view.idx}')|">수정</a>
 				</th:block>
             </div>
+            
+            
+            
         </div>
     </div>
-
-   <th:block th:replace="frame/footer"></th:block>
+	<th:block th:replace="frame/footer"></th:block>
 </body>
 
 </html>

@@ -9,12 +9,33 @@
 <th:block th:replace="frame/metaheader"></th:block>
 
 <script type="text/javascript">
+
+	// 해당 상세 게시글 가기
 	function goToView(idx) {
 		console.log("상세 view로 갑니다");
 		console.log(idx);
 		window.location ="review/view?idx="+idx;
 	}
 
+	/* 
+	// 해당 게시글 좋아요
+    function likeReview(idx) {
+		$.ajax({
+                url: "/review/like.do",
+                type: "POST",
+                data: {"idx":idx},
+                dataType: "json",
+                success: function (data) {
+                	
+	                console.log(data);
+	                    if(data == 1) {
+	                	   
+	                   } else {
+	                   } 
+                }
+		);
+    } 
+		*/
 </script>
 
 
@@ -58,7 +79,8 @@
 			                                                    <a class="card-text" th:text="${reviewInfo.title}" th:onclick="|goToView('${reviewInfo.idx}')|"></a>
 			                                                    <div class="d-flex justify-content-between align-items-center">
 			                                                        <div class="btn-group">
-			                                                            <button type="button" class="btn btn-sm btn-outline-secondary">좋아요</button>
+			                                                            <button type="button" class="btn btn-sm btn-outline-secondary" id="likeBtn">좋아요</button>
+			                                                            <!-- <a class="btn-sinchon btn btn-sm-padding" th:onclick="|likeReview('${view.idx}')|" >좋아요</a> -->
 			                                                        </div>
 			                                                        <small class="text-muted" th:text="${reviewInfo.date}"></small>
 			                                                    </div>

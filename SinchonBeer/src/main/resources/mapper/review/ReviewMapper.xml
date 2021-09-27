@@ -101,11 +101,32 @@
     </select>
     
     
+<!--     06-1. 게시글 좋아요 증가 처리
+	<update id="likeReview" parameterType="com.bitcamp.sc.review.domain.ReviewVO" >
+		UPDATE 
+			project.review 
+		SET 
+			rlikes = #{likes} + 1
+		WHERE 
+			ridx = #{idx}
+	</update>
+	
+	06-2. 게시글 좋아요 감소 처리
+	<update id="likeReview" parameterType="com.bitcamp.sc.review.domain.ReviewVO" >
+		UPDATE 
+			project.review 
+		SET 
+			rlikes = #{likes} - 1
+		WHERE 
+			ridx = #{idx}
+	</update> -->
     
-	<!-- 06. 게시글 조회수 증가처리 -->
+    
+    
+<!--	// 07. 게시글 조회수 증가처리
 	<update id="increaseViewcnt">
 		UPDATE review SET viewcnt = viewcnt + 1 WHERE ridx = #{idx}
 	</update>
-	
+-->
 	
 </mapper>
