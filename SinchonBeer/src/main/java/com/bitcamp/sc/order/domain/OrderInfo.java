@@ -20,6 +20,8 @@ public class OrderInfo {
 	private Integer tourPeople;
 	private int memberIdx;
 	private Integer addressIdx;
+	private Integer goodsIdx;
+	private Integer amount;
 
 	public OrderInfo(String category, int price, Integer tourIdx, Integer tourPeople, int memberIdx, Integer addressIdx) {
 		this.category = category;

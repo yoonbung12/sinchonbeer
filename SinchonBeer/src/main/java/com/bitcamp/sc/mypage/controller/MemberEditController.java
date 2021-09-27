@@ -50,11 +50,11 @@ public class MemberEditController {
 	@PostMapping("/mypage/edit-info")
 	public String editInfoPost(UpdateMember member) {
 		service.updateMember(member);
-		return "mypage/edit-info";
+		return "redirect:/mypage/edit-info";
 	}
 
 	// 비밀번호 DB 일치 여부 확인
-	@PostMapping("/mypage/pwCheck")
+	@PostMapping("/pwCheck")
 	@ResponseBody
 	public String pwCheckPost(@RequestBody String oldPw, HttpSession session) {
 		LoginInfo login = (LoginInfo) session.getAttribute("loginInfo");

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bitcamp.sc.member.domain.LoginInfo;
+import com.bitcamp.sc.member.domain.MemberAddress;
 import com.bitcamp.sc.member.service.MemberService;
 
 import com.bitcamp.sc.shop.domain.GoodsToBuyNow;
@@ -63,6 +66,8 @@ public class ShopController {
 			@RequestParam("gprice") int gprice,
 			@RequestParam("amount") int amount,
 			
+			HttpSession session,
+			
 			Model model
 			) {
 			
@@ -78,6 +83,13 @@ public class ShopController {
 			System.out.println("입력한 idx : " + gidx);
 			System.out.println("입력한 gprice : " + gprice);
 			System.out.println("입력한 amount : " + amount);
+			
+			LoginInfo loginInfo = (LoginInfo)session.getAttribute("loginInfo");
+			
+			MemberAddress memberAddress = memberService.getMemberAdd(loginInfo.getIdx());
+			
+			model.addAttribute("address1", memberAddress.getAddress1());
+			model.addAttribute("address2", memberAddress.getAddress2());
 			
 			return "shop/shop_payment";
 		
