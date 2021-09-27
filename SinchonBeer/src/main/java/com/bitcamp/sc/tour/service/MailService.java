@@ -11,5 +11,5 @@ public interface MailService {
 	// 예약 변경 안내 메일 
 	void changeMail(ChangeTourDto changeDto, LoginInfo loginInfo);
 	// 예약 완료 메일 
-	void completeMail();
+	void completeMail(PayInfo payInfo,LoginInfo member);
 }

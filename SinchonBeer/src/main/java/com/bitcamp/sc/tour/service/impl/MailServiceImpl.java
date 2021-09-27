@@ -112,8 +112,42 @@ public class MailServiceImpl implements MailService {
 
 	// 예약 완료
 	@Override
-	public void completeMail() {
+	public void completeMail(PayInfo payInfo,LoginInfo member) {
+		logger.info("결제 완료 메일 서비스 진입");
 		
+		MimeMessage message = mailSender.createMimeMessage();
+		// 파일 첨부 가능 
+		MimeMessageHelper helper;
+		try {
+			helper = new MimeMessageHelper(message, true);
+		 
+		// 메일 제목 
+		helper.setSubject("신촌맥주 양조장 투어 예약이 완료되었습니다.");
+		// 받는 사람
+		helper.setTo(member.getEmail());
+		// 보내는 사람 
+		helper.setFrom(FROM_EMAIL);
+		// 내용 
+		Context context = new Context();
+		context.setVariable("name",member.getName());
+		context.setVariable("phone",member.getPhone());
+		context.setVariable("pway", payInfo.getWay());
+		context.setVariable("pprice", payInfo.getPrice());
+		context.setVariable("pdate", payInfo.getDate());
+		
+		// html 경로 가져오기
+		String html = templateEngine.process("mail/completeMail", context);
+		
+		// 가져온 메시지 내용저장
+		helper.setText(html, true);
+		}catch (MessagingException e) {
+			
+			e.printStackTrace();
+		}
+	
+		// 메일 전송
+        mailSender.send(message);
+        logger.info("결제  메일 전송 완료");
 	}
 
 }
