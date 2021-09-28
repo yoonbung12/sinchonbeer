@@ -37,10 +37,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<!-- 주문 내역 조회 -->
-    <select id="getOrderList" resultType="com.bitcamp.sc.mypage.domain.OrderList" resultMap="OrderListDomain">
-	    SELECT p.pidx, p.pprice, DATE_FORMAT(p.pdate,'%Y-%m-%d') AS pdate, p.pstatus, o.oidx, n.count, g.gtitle, g.gname, g.gphoto
-	    FROM payment p, orders o, buynow n, goods g
-	    WHERE p.oidx=o.oidx AND o.oidx=n.oidx AND n.gidx=g.gidx AND o.ostatus='confirmed' AND o.midx=#{idx}
+	<select id="getOrderList" resultType="com.bitcamp.sc.mypage.domain.OrderList" resultMap="OrderListDomain">
+		SELECT p.pidx, p.pprice, date_format(p.pdate,'%Y-%m-%d') as pdate, p.pstatus, o.oidx, g.gtitle, g.gname, g.gphoto, o.ostatus, o.amount
+		FROM payment p, orders o, goods g 
+		WHERE p.oidx=o.oidx AND o.gidx=g.gidx AND o.midx=#{idx};
 	</select>
 	
 	<!-- 예약 내역 조회 -->
