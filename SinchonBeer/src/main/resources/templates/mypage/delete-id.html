@@ -64,7 +64,7 @@
 							<div class="row justify-content-center mx-auto" style="width: 300px;">
 								<label for="mpw">비밀번호<i class="icon_orange"></i></label> <input type="password" id="mpw"
 									placeholder="기존 비밀번호 입력"> 
-								<a href="javascript:void(0); onclick="frmSubmit();" id="submitBtn" class="btn btn-sinchon btn-block mt-2">탈퇴하기</a>
+								<a href="javascript:void(0);" onclick="frmSubmit();" id="submitBtn" class="btn btn-sinchon btn-block mt-2">탈퇴하기</a>
 								<!-- <input type="submit" id="submitBtn" class="btn btn-sinchon btn-block mt-2" value="탈퇴하기"> -->
 							</div>
 						</div>
@@ -131,13 +131,11 @@
 			}
 		});
 	    
-	    var myForm = document.submitBtn;
+	    var myForm = document.withdrawContent;
 	    myForm.method = "post";
 	    myForm.action = "/mypage/delete-id";
 	    myForm.submit();
-    });
-    
-    
+    }
     </script>
 </body>
 </html>
