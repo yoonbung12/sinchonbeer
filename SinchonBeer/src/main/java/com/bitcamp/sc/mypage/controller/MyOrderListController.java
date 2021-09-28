@@ -1,7 +1,6 @@
 package com.bitcamp.sc.mypage.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -29,6 +28,8 @@ public class MyOrderListController {
 		} else {
 			List<OrderList> list = service.getOrderList(login.getIdx());
 			model.addAttribute("list", list);
+			
+			System.out.println(list);
 
 			return "mypage/orderList";
 		}

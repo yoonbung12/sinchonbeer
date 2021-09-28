@@ -23,6 +23,8 @@
     
 
 <script type="text/javascript" >
+
+// 썸머노트 웹 에디터 함수
 $(document).ready(function() {
 	//여기 아래 부분
 	$('#summernote').summernote({
@@ -35,8 +37,8 @@ $(document).ready(function() {
           
 	});
 });
-
 </script>
+
 <style>
 .modal-backdrop {
     position: inherit;
@@ -57,7 +59,7 @@ $(document).ready(function() {
 </div>
 
 <div class="container">
-    <form id="boardForm">
+    <form id="boardForm" name="boardForm">
         <div class="form-group row">
             <label for="inputTitle" class="col-sm-2 col-form-label"><strong>제목</strong></label>
             <div class="col-sm-10">
@@ -85,8 +87,8 @@ $(document).ready(function() {
                 <input class="btn btn_write" type="button" onclick="insertReview()" role="button" value="저장">
             </div>
         </div>
+        <input type="hidden" name="order_idx" id="order_idx" th:value="${order_idx}">
     </form>
-    <!-- <input type="hidden" id="write_status" value="write"> -->
 </div>
 
 <script th:inline="javascript">
@@ -98,58 +100,69 @@ $(document).ready(function() {
     });
 
 
-    // 게시글 삽입
+ // 게시글 작성
     function insertReview() {
+        let title = $("#inputTitle").val();
+        let pattern = /^\s/;
+        if(title == ''){
+            alert("제목을 입력해 주세요");
+            $("#inputTitle").focus();
+            return false;
+        }
+        else if(title.match(pattern)){
+            alert("제목은 공백으로 시작 할 수 없습니다.");
+            $("#inputTitle").focus();
+            return false;
+        }
+
         let form = $("#boardForm").serialize();
         console.log(form);
-        /* let form = new FormData(document.getElementById('boardForm')); */
-        
 
-/*         if ($("#write_status").val() === "write") { */
-            $.ajax({
-                url: "/review/write.do",
-                type: "POST",
-                data: form,
-                dataType: "json",
-                success: function (data) {
-                   console.log(data);
-                   if(data == 1) {
-                	   alert("글 작성이 완료되었습니다.");
-                       window.location = '/review';
-                   } else {
-                	   alert("글 등록이 실패하였습니다.");
-                   }
-                },
-               /*  error: function (request, status, error) {
-                    console.clear();
-                    console.log(request.responseText);
-                    alert("code:" + request.status + "\n\n" + "error:" + error);
-                    } */
-            });
-       /*  } else if ($("#write_status").val() === "modify") {
-            $.ajax({
-                url: "/board/ajaxModify",
-                type: "POST",
-                enctype: "multipart/form-data", // 파일업로드처리 시 필수
-                processData: false,             // 파일업로드처리 시 필수
-                contentType: false,             // 파일업로드처리 시 필수
-                cache: false,
-                data: form,
-                dataType: "json",
-                success: function () {
-                    alert("글 수정이 완료되었습니다.");
-                    window.location = '/board/list/' + board_div_cd;
-                },
-                error: function (request, status, error) {
-                    console.clear();
-                    console.log(request.responseText);
-                    alert("code:" + request.status + "\n\n" + "error:" + error);
-
+        $.ajax({
+            url: "/review/write.do",
+            type: "POST",
+            data: form,
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                if (data == 1) {
+                    alert("글 작성이 완료되었습니다.");
+                    window.location = '/review';
+                } else {
+                    alert("글 등록이 실패하였습니다.");
                 }
-            });
-        } */
-
+            },
+            error: function (request, status, error) {
+                console.clear();
+                console.log(request.responseText);
+                alert("code:" + request.status + "\n\n" + "error:" + error);
+            }
+        });
     }
+        /*  else if ($("#write_status").val() === "modify") {
+             $.ajax({
+                 url: "/board/ajaxModify",
+                 type: "POST",
+                 enctype: "multipart/form-data", // 파일업로드처리 시 필수
+                 processData: false,             // 파일업로드처리 시 필수
+                 contentType: false,             // 파일업로드처리 시 필수
+                 cache: false,
+                 data: form,
+                 dataType: "json",
+                 success: function () {
+                     alert("글 수정이 완료되었습니다.");
+                     window.location = '/board/list/' + board_div_cd;
+                 },
+                 error: function (request, status, error) {
+                     console.clear();
+                     console.log(request.responseText);
+                     alert("code:" + request.status + "\n\n" + "error:" + error);
+				}
+			});
+		} 
+	}*/
+
+
 
 </script>
 

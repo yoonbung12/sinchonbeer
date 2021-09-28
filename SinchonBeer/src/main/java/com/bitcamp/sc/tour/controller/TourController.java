@@ -40,7 +40,7 @@ public class TourController {
 	// 투어 예약 페이지 이동
 	@RequestMapping(value = "/pick-date", method = RequestMethod.GET)
 	public String getPickDate() {
-
+		
 		return "tour/makeReservation/pick-date";
 	}
 

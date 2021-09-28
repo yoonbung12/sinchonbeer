@@ -11,3 +11,8 @@
 	background-color: white !important;
 	border-color: #1ecad3 !important;
 }
+
+.modal-backdrop {
+	position: relative !important;
+
+}
