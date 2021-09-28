@@ -1,7 +1,5 @@
 package com.bitcamp.sc.shop.repository;
 
-import java.util.List;
-
 import com.bitcamp.sc.shop.domain.GoodsVO;
 
 public interface GoodsDao {

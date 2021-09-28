@@ -1,8 +1,6 @@
 package com.bitcamp.sc.basket.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,28 +10,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitcamp.sc.basket.domain.BasketDto;
 import com.bitcamp.sc.basket.domain.BasketVo;
 import com.bitcamp.sc.basket.service.BasketService;
 import com.bitcamp.sc.member.domain.LoginInfo;
-import com.bitcamp.sc.order.domain.OrderInfo;
-import com.bitcamp.sc.shop.domain.GoodsVO;
-import com.bitcamp.sc.shop.service.ShopService;
 
 @Controller
 @RequestMapping("/basket")
 public class BasketController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	private BasketService basketService;
-	private ShopService shopService;
-	
 
 	@Autowired
 	public BasketController(BasketService basketService) {
