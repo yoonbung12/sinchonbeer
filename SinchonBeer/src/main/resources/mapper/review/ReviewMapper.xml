@@ -87,7 +87,7 @@
 			, DATE_FORMAT(rdate,'%Y-%m-%d') AS rdate
 			, rlikes
 			, A.oidx
-			, IFNULL((SELECT gphoto FROM goods WHERE gidx = (SELECT gidx FROM buynow WHERE A.oidx = oidx)), '') AS gphoto
+			, IFNULL((SELECT gphoto FROM goods WHERE gidx = (SELECT gidx FROM orders WHERE A.oidx = oidx)), '') AS gphoto
 		FROM
 			review A
 		ORDER BY
