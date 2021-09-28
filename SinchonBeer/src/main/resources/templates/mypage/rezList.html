@@ -51,10 +51,10 @@
 
 			<div class="col-lg-8 pb-5">
 				<div class="row justify-content-center">
-					<th:block th:if="${list == null}">
+					<th:block th:if="${list.empty}">
 						<div class="text-center text-15 text-light-gray my-5 py-5">예약 내역이 없습니다.</div>
 					</th:block>
-					<th:block th:unless="${list == null}">
+					<th:block th:unless="${list.empty}">
 						<th:block th:each="list : ${list}">
 							<table class="text-15 table" style="width: 80%;">
 								<thead class="thead-light">

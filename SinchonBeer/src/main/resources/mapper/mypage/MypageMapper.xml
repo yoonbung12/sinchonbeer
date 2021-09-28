@@ -64,6 +64,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 회원 탈퇴 -->
 	<delete id="deleteMember">
-		DELETE FROM member WHERE m.midx=#{idx};
+		DELETE FROM member WHERE midx=#{idx};
 	</delete>
 </mapper>
