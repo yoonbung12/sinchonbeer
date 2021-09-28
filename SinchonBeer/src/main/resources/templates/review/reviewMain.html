@@ -72,7 +72,7 @@
                                     <div class="thumbnail">
                                         <a class="lightbox" th:onclick="|goToView('${reviewInfo.idx}')|">
 										  <th:block th:if="${reviewInfo.gphoto == ''}">
-										      <img src="images/review/scbeer.png" alt="SinChonbeer">
+										      <img th:src="@{/images/review/scbeer.png}" alt="SinChonbeer">
 										  </th:block>
 										  <th:block th:unless="${reviewInfo.gphoto == ''}">
 										      <img th:src="@{|/images/shop/${reviewInfo.gphoto}.png|}" alt="SinChonbeer">
