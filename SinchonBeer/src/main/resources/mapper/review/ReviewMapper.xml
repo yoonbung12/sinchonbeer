@@ -9,10 +9,10 @@
 	<result property="contents" column="rcontents"/>
 	<result property="rate" column="rrate"/>
 	<result property="date" column="rdate"/>
-	<result property="category" column="rcategory"/>
 	<result property="likes" column="rlikes"/>
 	<result property="viewcnt" column="rviewcnt"/>
 	<result property="gphoto" column="gphoto"/>
+	<result property="oidx" column="oidx"/>
 </resultMap>
 
 
@@ -22,7 +22,7 @@
 		useGeneratedKeys="true"
 		keyProperty="idx"
 	>
-        INSERT INTO project.review 
+        INSERT INTO review 
         (
 	         rtitle
 	        , rcontents
@@ -31,7 +31,6 @@
         ) 
         VALUES 
         (
-	   
 	         #{title}
 	        , #{contents}
 	        , #{name}
@@ -48,11 +47,10 @@
         	, rcontents
         	, rrate
         	, date_format(rdate,'%Y-%m-%d') as rdate
-        	, rcategory
             , rlikes
             , oidx
 		FROM
-			project.review
+			review
 		WHERE
 			ridx = #{idx}
 	</select>
@@ -60,7 +58,7 @@
 	<!-- 03. 게시글 수정처리 -->
 	<update id="updateReview" parameterType="com.bitcamp.sc.review.domain.ReviewVO" >
 		UPDATE 
-			project.review 
+			review 
 		SET 
 			rtitle = #{title}
 			, rcontents = #{contents} 
@@ -72,7 +70,7 @@
 	<delete id="deleteReview"  parameterType="Integer" >
 		DELETE 
 		FROM 
-			project.review 
+			review 
 		WHERE 
 			ridx = #{idx}
 	</delete>
@@ -87,7 +85,6 @@
 			, rcontents
 			, rrate
 			, DATE_FORMAT(rdate,'%Y-%m-%d') AS rdate
-			, rcategory
 			, rlikes
 			, A.oidx
 			, IFNULL((SELECT gphoto FROM goods WHERE gidx = (SELECT gidx FROM buynow WHERE A.oidx = oidx)), '') AS gphoto
@@ -101,7 +98,7 @@
 <!--     06-1. 게시글 좋아요 증가 처리
 	<update id="likeReview" parameterType="com.bitcamp.sc.review.domain.ReviewVO" >
 		UPDATE 
-			project.review 
+			review 
 		SET 
 			rlikes = #{likes} + 1
 		WHERE 
@@ -111,7 +108,7 @@
 	06-2. 게시글 좋아요 감소 처리
 	<update id="likeReview" parameterType="com.bitcamp.sc.review.domain.ReviewVO" >
 		UPDATE 
-			project.review 
+			review 
 		SET 
 			rlikes = #{likes} - 1
 		WHERE 
