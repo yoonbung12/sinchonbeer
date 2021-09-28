@@ -8,17 +8,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.bitcamp.sc.member.domain.LoginInfo;
-import com.bitcamp.sc.member.domain.Member;
 import com.bitcamp.sc.mypage.service.MypageService;
 
 @Controller
 public class MemberDeleteController {
-	@Autowired
 	MypageService service;
+
+	@Autowired
+	public MemberDeleteController(MypageService service) {
+		this.service = service;
+	}
 
 	// 회원 탈퇴 페이지 이동
 	@GetMapping("/mypage/delete-id")
 	public String deleteIdGet(HttpSession session) {
+
 		if (session.getAttribute("loginInfo") == null) {
 			return "member/loginForm";
 		}
@@ -29,11 +33,12 @@ public class MemberDeleteController {
 	@PostMapping("/mypage/delete-id")
 	public String deleteIdPost(HttpSession session) {
 		LoginInfo login = (LoginInfo) session.getAttribute("loginInfo");
-		service.deleteMember(login.getIdx());
 
+		service.deleteMember(login.getIdx());
+		System.out.println("삭제 : " + login.getIdx());
 		// 세션 초기화
 		session.invalidate();
 
-		return "main";
+		return "redirect:/main";
 	}
 }
