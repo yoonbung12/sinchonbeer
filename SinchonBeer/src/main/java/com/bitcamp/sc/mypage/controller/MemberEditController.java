@@ -54,7 +54,7 @@ public class MemberEditController {
 	}
 
 	// 비밀번호 DB 일치 여부 확인
-	@PostMapping("/pwCheck")
+	@PostMapping("/pwCheckEdit")
 	@ResponseBody
 	public String pwCheckPost(@RequestBody String oldPw, HttpSession session) {
 		LoginInfo login = (LoginInfo) session.getAttribute("loginInfo");
