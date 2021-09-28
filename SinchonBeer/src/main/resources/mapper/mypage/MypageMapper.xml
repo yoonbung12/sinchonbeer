@@ -40,13 +40,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getOrderList" resultType="com.bitcamp.sc.mypage.domain.OrderList" resultMap="OrderListDomain">
 		SELECT p.pidx, p.pprice, date_format(p.pdate,'%Y-%m-%d') as pdate, p.pstatus, o.oidx, g.gtitle, g.gname, g.gphoto, o.ostatus, o.amount
 		FROM payment p, orders o, goods g 
-		WHERE p.oidx=o.oidx AND o.gidx=g.gidx AND o.midx=#{idx};
+		WHERE p.oidx=o.oidx AND o.gidx=g.gidx AND o.midx=#{idx} ORDER BY p.pdate desc;
 	</select>
 	
 	<!-- 예약 내역 조회 -->
 	<select id="getRezList" resultType="com.bitcamp.sc.mypage.domain.RezList" resultMap="RezListDomain">
 		SELECT p.pidx, p.pprice, p.pway, o.tpeople, t.tdate FROM payment p, orders o, tour t
-		WHERE p.oidx=o.oidx AND o.tidx=t.tidx AND o.ostatus='confirmed' AND o.midx=#{idx}
+		WHERE p.oidx=o.oidx AND o.tidx=t.tidx AND o.ostatus='confirmed' AND o.midx=#{idx} ORDER BY t.tdate;
 	</select>
 
 	<!-- 회원 정보 조회 -->
