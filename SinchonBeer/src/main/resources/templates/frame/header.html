@@ -50,7 +50,7 @@
 		<!-- 로그인 세션 있을 때 보이는 메뉴 -->
 		<th:block th:unless="${session.loginInfo == null}">
 		<li><a th:href="@{/logout}">LOGOUT</a></li>
-		<li><a th:href="@{/mypage/shop}">MYPAGE</a></li>
+		<li><a th:href="@{/mypage/orderList}">MYPAGE</a></li>
 		<li><a th:href="@{/cart}">CART</a></li>
 		</th:block>
 		<a th:href="@{/tour/pick-date}"><button class="rez-btn-icon">양조장 예약</button></a>

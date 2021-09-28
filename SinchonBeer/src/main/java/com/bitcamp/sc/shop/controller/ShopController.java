@@ -1,10 +1,6 @@
 package com.bitcamp.sc.shop.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -20,10 +16,6 @@ import com.bitcamp.sc.member.domain.MemberAddress;
 import com.bitcamp.sc.member.service.MemberService;
 
 import com.bitcamp.sc.shop.domain.GoodsToBuyNow;
-import com.bitcamp.sc.shop.service.ShopService;
-
-	
-import org.springframework.web.servlet.ModelAndView;
 
 
 
