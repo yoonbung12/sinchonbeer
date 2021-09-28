@@ -53,7 +53,7 @@
 						>회원 탈퇴</span></a></li>
 				</ul>
 			</div>
-			<form th:action="@{/mypage/delete-id}" id="withdrawContent" class="col-lg-8" method="post">
+			<form id="withdrawContent" name="withdrawContent" class="col-lg-8">
 				<div class="row justify-content-center mt-2 p-5 border border-sinchon">
 					<div class="col-10">
 						<div class="text-16">
@@ -118,6 +118,10 @@
 								alert('비밀번호가 일치하지 않습니다. ');
 					            return false;
 							}else{
+							    var myForm = document.withdrawContent;
+							    myForm.method = "post";
+							    myForm.action = "/mypage/delete-id";
+							    myForm.submit();
 							}
 						},
 						error : function(request, status, error) {
@@ -130,11 +134,6 @@
 				alert('서버 통신에 문제가 발생했습니다. 다시 실행해주세요.');
 			}
 		});
-	    
-	    var myForm = document.withdrawContent;
-	    myForm.method = "post";
-	    myForm.action = "/mypage/delete-id";
-	    myForm.submit();
     }
     </script>
 </body>
