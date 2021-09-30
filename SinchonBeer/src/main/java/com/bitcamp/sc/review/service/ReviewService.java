@@ -2,8 +2,6 @@ package com.bitcamp.sc.review.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import com.bitcamp.sc.review.domain.ReviewVO;
 
 public interface ReviewService {
@@ -19,7 +17,7 @@ public interface ReviewService {
     // 05. 게시글 전체 목록
     public List<ReviewVO> listAllReview() throws Exception;
     // 06. 게시글 좋아요
-    public int likeReview(ReviewVO vo) throws Exception;	
+    public int likeReview(Integer idx) throws Exception;	
     
     
 	/*

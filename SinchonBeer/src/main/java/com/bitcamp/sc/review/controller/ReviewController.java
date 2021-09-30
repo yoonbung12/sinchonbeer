@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bitcamp.sc.member.domain.LoginInfo;
 import com.bitcamp.sc.review.domain.ReviewVO;
@@ -182,14 +181,19 @@ public class ReviewController {
 		int idx = 0;
 		int check = 0;
 		
-		/*
-		 * ReviewVO vo = new ReviewVO();
-		 * 
-		 * if( request.getParameter("idx") != null) { idx =
-		 * Integer.parseInt(request.getParameter("idx")); } try {
-		 * reviewService.likeReview(idx); check = 1; } catch (Exception e) {
-		 * e.printStackTrace(); // TODO: handle exception }
-		 */
+		ReviewVO vo = new ReviewVO();
+		vo.setLikes(Integer.parseInt(request.getParameter("likes")));
+		
+		if( request.getParameter("idx") != null) { 
+			idx = Integer.parseInt(request.getParameter("idx")); 
+		} try {
+			reviewService.likeReview(idx);
+			check = 1; 
+		} catch (Exception e) {
+			e.printStackTrace(); 
+			// TODO: handle exception 
+		}
+		 
 		return check; 
 	}
 }
