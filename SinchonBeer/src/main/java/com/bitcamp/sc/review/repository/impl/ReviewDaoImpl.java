@@ -61,8 +61,8 @@ public class ReviewDaoImpl implements ReviewDao {
     
     
     // 06. 게시글 좋아요
-    public int likeReview(ReviewVO vo) throws Exception {
-    	return template.update(NAME_SPACE + ".likeReview",vo);
+    public int likeReview(Integer idx) throws Exception {
+    	return template.update(NAME_SPACE + ".likeReview",idx);
     	 
     }
     

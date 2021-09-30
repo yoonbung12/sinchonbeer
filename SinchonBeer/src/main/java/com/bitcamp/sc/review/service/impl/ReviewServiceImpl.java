@@ -2,8 +2,6 @@ package com.bitcamp.sc.review.service.impl;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -76,19 +74,16 @@ public class ReviewServiceImpl implements ReviewService {
 	
     // 06. 게시글 좋아요
 	@Override
-    public int likeReview(ReviewVO vo) throws Exception {
-		/*
-		 * int check = 0; 
-		 * try { 
-		 * check = reviewDao.likeReview(vo);
-		 * 
-		 * } catch (Exception e) { 
-		 * // TODO: handle exception 
-		 * }
-		 * return check;
-		 */
+    public int likeReview(Integer idx) throws Exception {
 		
-    	return reviewDao.likeReview(vo);
+		  int check = 0; 
+		  try { 
+			  check = reviewDao.likeReview(idx);
+		  
+		  } catch (Exception e) { 
+			  // TODO: handle exception 
+		  }
+		  return check;
     }
 	
 
